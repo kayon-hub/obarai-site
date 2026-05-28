@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>御祓智能 OBARAI INTELLIGENCE | ERP・POS・AI 整合解決方案</title>
+<meta name="description" content="御祓智能 OBARAI INTELLIGENCE — 為企業提供 ERP、POS、AI 整合、軟體設計與自動化解決方案。由 AI 語言設計師主導，質感超越同級。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Syne:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --ink-2: #1a1a24;
+    --ink-3: #2a2a38;
+    --mist: #f5f4f0;
+    --mist-2: #eeece6;
+    --gold: #c8a96e;
+    --gold-light: #e8d4a8;
+    --gold-dim: #7a6240;
+    --white: #fefefe;
+    --red-torii: #c0392b;
+    --text-primary: #fefefe;
+    --text-secondary: #a8a49c;
+    --text-dim: #5a5650;
+    --border: rgba(200,169,110,0.15);
+    --border-strong: rgba(200,169,110,0.35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--text-primary);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .nav-sigil {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.6rem 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.3s;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 6rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Torii gate SVG background */
+  .hero-bg svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.04;
+    width: 900px;
+  }
+
+  /* Radial glow */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-kamon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 2.5rem;
+    opacity: 0.9;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-subtitle-en {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid var(--border-strong);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .hero-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden;
+    padding: 1.2rem 0;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    background: rgba(200,169,110,0.03);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .marquee-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .marquee-dot {
+    color: var(--border-strong);
+    margin: 0 1rem;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 0.5px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── CORE PRODUCT ── */
+  .product-section {
+    padding: 8rem 0;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 5rem;
+    align-items: start;
+  }
+
+  .product-main {
+    grid-column: 1 / -1;
+  }
+
+  .orbit-card {
+    background: var(--ink-2);
+    border: 0.5px solid var(--border-strong);
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .orbit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .orbit-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 0.5px solid var(--border-strong);
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 2rem;
+    background: rgba(200,169,110,0.05);
+  }
+
+  .orbit-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .orbit-name span {
+    color: var(--gold);
+  }
+
+  .orbit-tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .orbit-modules {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .orbit-module {
+    background: rgba(200,169,110,0.04);
+    border: 0.5px solid var(--border);
+    padding: 1.25rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .orbit-module:hover {
+    border-color: var(--border-strong);
+    background: rgba(200,169,110,0.08);
+  }
+
+  .orbit-module-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .orbit-module-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+
+  .orbit-module-desc {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .orbit-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    max-width: 700px;
+  }
+
+  /* ── SERVICE CARDS ── */
+  .service-card {
+    background: var(--ink-2);
+    border: 0.5px solid var(--border);
+    padding: 2.5rem;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .service-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .service-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .service-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-icon-wrap {
+    width: 48px;
+    height: 48px;
+    background: rgba(200,169,110,0.06);
+    border: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-icon {
+    width: 22px;
+    height: 22px;
+    opacity: 0.8;
+  }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-section {
+    padding: 8rem 0;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+  .philosophy-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--white);
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .philosophy-quote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 1px;
+    background: var(--gold);
+  }
+
+  .philosophy-quote em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .philosophy-body {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.95;
+  }
+
+  .philosophy-body p + p {
+    margin-top: 1.2rem;
+  }
+
+  .philosophy-sig {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sig-avatar {
+    width: 44px;
+    height: 44px;
+    background: rgba(200,169,110,0.1);
+    border: 0.5px solid var(--border-strong);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .sig-info {
+    font-size: 0.82rem;
+  }
+
+  .sig-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.08em;
+  }
+
+  .sig-title {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+  }
+
+  /* ── PROCESS ── */
+  .process-section {
+    padding: 8rem 0;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .process-list {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .process-step {
+    padding: 2.5rem;
+    border: 0.5px solid var(--border);
+    border-right: none;
+    position: relative;
+  }
+
+  .process-step:last-child {
+    border-right: 0.5px solid var(--border);
+  }
+
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: transparent;
+    transition: background 0.4s;
+  }
+
+  .process-step:hover::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(200,169,110,0.12);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 8rem 0;
+    border-top: 0.5px solid var(--border);
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-kamon {
+    width: 48px;
+    margin: 0 auto 2rem;
+    opacity: 0.5;
+  }
+
+  .cta-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .cta-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+
+  .cta-contact {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--border-strong);
+    padding-bottom: 0.2rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .cta-contact:hover {
+    color: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .footer-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  .footer-right {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-copy {
+    margin-top: 0.25rem;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.9s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-kamon { animation-delay: 0.1s; }
+  .hero-eyebrow { animation-delay: 0.25s; }
+  .hero-title { animation-delay: 0.4s; }
+  .hero-subtitle-en { animation-delay: 0.55s; }
+  .hero-desc { animation-delay: 0.65s; }
+  .hero-actions { animation-delay: 0.75s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .section-inner { padding: 0 2rem; }
+    .product-grid { grid-template-columns: 1fr; }
+    .orbit-modules { grid-template-columns: repeat(2, 1fr); }
+    .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .process-list { grid-template-columns: repeat(2, 1fr); }
+    .process-step { border-right: none; }
+    .process-step:nth-child(2n) { border-right: 0.5px solid var(--border); }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-actions { flex-direction: column; align-items: center; }
+    .orbit-modules { grid-template-columns: 1fr; }
+    .process-list { grid-template-columns: 1fr; }
+    .process-step { border-right: 0.5px solid var(--border) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="nav-sigil" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#c8a96e" stroke-width="0.5"/>
+      <circle cx="18" cy="18" r="11" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="18" cy="18" r="3" fill="#c8a96e"/>
+      <line x1="18" y1="1" x2="18" y2="7" stroke="#c8a96e" stroke-width="0.5"/>
+      <line x1="18" y1="29" x2="18" y2="35" stroke="#c8a96e" stroke-width="0.5"/>
+      <line x1="1" y1="18" x2="7" y2="18" stroke="#c8a96e" stroke-width="0.5"/>
+      <line x1="29" y1="18" x2="35" y2="18" stroke="#c8a96e" stroke-width="0.5"/>
+    </svg>
+    <div>
+      <div class="nav-name">OBARAI</div>
+      <div class="nav-jp">御祓智能</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#product">產品</a></li>
+    <li><a href="#services">服務</a></li>
+    <li><a href="#philosophy">關於</a></li>
+    <li><a href="#contact">聯絡</a></li>
+  </ul>
+  <a href="mailto:kayon@obarai.com" class="nav-cta">開始合作</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+      <!-- Torii gate silhouette -->
+      <rect x="50" y="80" width="800" height="18" rx="9" fill="white"/>
+      <rect x="80" y="50" width="740" height="12" rx="6" fill="white"/>
+      <rect x="180" y="98" width="40" height="502" fill="white"/>
+      <rect x="680" y="98" width="40" height="502" fill="white"/>
+      <rect x="180" y="220" width="540" height="14" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <!-- Kamon -->
+    <svg class="hero-kamon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" stroke="#c8a96e" stroke-width="0.75"/>
+      <circle cx="32" cy="32" r="20" stroke="#c8a96e" stroke-width="0.5" opacity="0.6"/>
+      <circle cx="32" cy="32" r="10" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="32" cy="32" r="3.5" fill="#c8a96e"/>
+      <line x1="32" y1="2" x2="32" y2="12" stroke="#c8a96e" stroke-width="0.75"/>
+      <line x1="32" y1="52" x2="32" y2="62" stroke="#c8a96e" stroke-width="0.75"/>
+      <line x1="2" y1="32" x2="12" y2="32" stroke="#c8a96e" stroke-width="0.75"/>
+      <line x1="52" y1="32" x2="62" y2="32" stroke="#c8a96e" stroke-width="0.75"/>
+      <line x1="9.4" y1="9.4" x2="16.5" y2="16.5" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/>
+      <line x1="47.5" y1="47.5" x2="54.6" y2="54.6" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/>
+      <line x1="54.6" y1="9.4" x2="47.5" y2="16.5" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/>
+      <line x1="16.5" y1="47.5" x2="9.4" y2="54.6" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/>
+    </svg>
+
+    <p class="hero-eyebrow">御祓智能 ／ OBARAI INTELLIGENCE</p>
+
+    <h1 class="hero-title">
+      為企業帶來<br>
+      <em>潔淨、精準</em>的<br>
+      智能系統
+    </h1>
+
+    <p class="hero-subtitle-en">ERP · POS · AI Integration · Software Design</p>
+
+    <p class="hero-desc">
+      從 ERP 到 POS，從 AI 自動化到全端軟體設計——<br>
+      OBARAI INTELLIGENCE 以最高質感的工藝，<br>
+      為您的企業打造不妥協的數位基礎設施。
+    </p>
+
+    <div class="hero-actions">
+      <a href="mailto:kayon@obarai.com" class="btn-primary">預約顧問諮詢</a>
+      <a href="#product" class="btn-ghost">探索 ORBIT 系統</a>
+    </div>
+  </div>
+
+  <div class="hero-divider"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">ERP 企業資源規劃</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">POS 銷售管理系統</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">AI 語言設計</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">CRM 客戶關係管理</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">商業智能 BI</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">N8N 工作流程自動化</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">LINE Bot 整合</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">軟體客製開發</span><span class="marquee-dot">·</span>
+    <!-- repeat for seamless loop -->
+    <span class="marquee-item">ERP 企業資源規劃</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">POS 銷售管理系統</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">AI 語言設計</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">CRM 客戶關係管理</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">商業智能 BI</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">N8N 工作流程自動化</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">LINE Bot 整合</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">軟體客製開發</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- PRODUCT -->
+<section class="product-section" id="product">
+  <div class="section-inner">
+    <p class="section-label">核心產品</p>
+    <h2 class="section-title">ORBIT — 企業智能作業系統</h2>
+
+    <div class="product-grid">
+      <div class="orbit-card product-main">
+        <div class="orbit-tag">
+          <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#c8a96e"/></svg>
+          旗艦產品 · FLAGSHIP SYSTEM
+        </div>
+        <div class="orbit-name">ORBIT <span>ERP+POS</span></div>
+        <p class="orbit-tagline">御祓智能旗艦企業管理平台 · 為現代企業而生</p>
+
+        <div class="orbit-modules">
+          <div class="orbit-module">
+            <div class="orbit-module-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="13" y="1" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="1" y="13" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="13" y="13" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/></svg>
+            </div>
+            <div class="orbit-module-name">ERP</div>
+            <div class="orbit-module-desc">企業資源全覆蓋，報價到交付一體管理</div>
+          </div>
+          <div class="orbit-module">
+            <div class="orbit-module-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="4" width="18" height="14" rx="1" stroke="#c8a96e" stroke-width="0.75"/><line x1="2" y1="8" x2="20" y2="8" stroke="#c8a96e" stroke-width="0.75"/><line x1="7" y1="4" x2="7" y2="18" stroke="#c8a96e" stroke-width="0.75" opacity="0.4"/></svg>
+            </div>
+            <div class="orbit-module-name">POS</div>
+            <div class="orbit-module-desc">實體 + 線上銷售，多點即時同步</div>
+          </div>
+          <div class="orbit-module">
+            <div class="orbit-module-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#c8a96e" stroke-width="0.75"/><path d="M7 11 Q11 6 15 11 Q11 16 7 11Z" stroke="#c8a96e" stroke-width="0.75" fill="none"/></svg>
+            </div>
+            <div class="orbit-module-name">CRM</div>
+            <div class="orbit-module-desc">客戶關係管理，完整互動記錄</div>
+          </div>
+          <div class="orbit-module">
+            <div class="orbit-module-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><polyline points="2,16 7,9 12,13 17,5 20,8" stroke="#c8a96e" stroke-width="0.75" fill="none"/><line x1="2" y1="18" x2="20" y2="18" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/></svg>
+            </div>
+            <div class="orbit-module-name">BI</div>
+            <div class="orbit-module-desc">商業智能儀表板，決策即時視覺化</div>
+          </div>
+        </div>
+
+        <p class="orbit-desc">
+          ORBIT 是 OBARAI INTELLIGENCE 自主研發的企業作業系統，架構於雲端，整合報價管理、庫存控管、銷售 POS、客戶關係與商業數據分析。無論是單店零售、多點連鎖或 B2B 服務型企業，ORBIT 均可客製化部署，開箱即用。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding: 0 0 8rem; border-top: 0.5px solid var(--border);">
+  <div class="section-inner" style="padding-top: 8rem;">
+    <p class="section-label">服務項目</p>
+    <h2 class="section-title">全端解決方案</h2>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 4rem; background: var(--border);">
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">01</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="13" y="1" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="1" y="13" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/><rect x="13" y="13" width="8" height="8" stroke="#c8a96e" stroke-width="0.75"/></svg>
+        </div>
+        <div class="service-name">ERP + POS 導入</div>
+        <div class="service-desc">ORBIT 系統全套部署與客製化設定。從需求訪談到上線，由顧問全程陪跑。</div>
+      </div>
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">02</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7" r="4" stroke="#c8a96e" stroke-width="0.75"/><path d="M4 19c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#c8a96e" stroke-width="0.75" fill="none"/><circle cx="17" cy="5" r="3" fill="#c8a96e" fill-opacity="0.3" stroke="#c8a96e" stroke-width="0.5"/></svg>
+        </div>
+        <div class="service-name">AI 語言與代理設計</div>
+        <div class="service-desc">由專業 AI 語言設計師主導，為您的品牌打造客製化 AI Agent、Prompt 系統與 LLM 整合方案。</div>
+      </div>
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">03</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><path d="M4 5h14M4 9h10M4 13h12M4 17h8" stroke="#c8a96e" stroke-width="0.75" stroke-linecap="round"/></svg>
+        </div>
+        <div class="service-name">N8N 工作流程自動化</div>
+        <div class="service-desc">整合您現有工具，打通 LINE、CRM、財務系統，讓重複性工作完全自動化運行。</div>
+      </div>
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">04</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="12" rx="1" stroke="#c8a96e" stroke-width="0.75"/><line x1="8" y1="19" x2="14" y2="19" stroke="#c8a96e" stroke-width="0.75"/><line x1="11" y1="15" x2="11" y2="19" stroke="#c8a96e" stroke-width="0.75"/></svg>
+        </div>
+        <div class="service-name">企業網站與前端開發</div>
+        <div class="service-desc">高質感品牌官網、產品頁、Landing Page，設計與技術兼具，質感遠超市場平均。</div>
+      </div>
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">05</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><rect x="5" y="2" width="12" height="18" rx="1" stroke="#c8a96e" stroke-width="0.75"/><line x1="8" y1="6" x2="14" y2="6" stroke="#c8a96e" stroke-width="0.5"/><line x1="8" y1="9" x2="14" y2="9" stroke="#c8a96e" stroke-width="0.5"/><circle cx="11" cy="14" r="2" stroke="#c8a96e" stroke-width="0.5"/></svg>
+        </div>
+        <div class="service-name">App 與 LINE 整合</div>
+        <div class="service-desc">LINE LIFF、LINE Bot、行動端 App 開發，將您的服務延伸至客戶的日常通訊工具。</div>
+      </div>
+
+      <div class="service-card" style="background: var(--ink);">
+        <div class="service-number">06</div>
+        <div class="service-icon-wrap">
+          <svg class="service-icon" viewBox="0 0 22 22" fill="none"><polyline points="2,16 7,9 12,13 17,5 20,8" stroke="#c8a96e" stroke-width="0.75" fill="none"/><rect x="2" y="2" width="18" height="18" stroke="#c8a96e" stroke-width="0.5" opacity="0.3"/></svg>
+        </div>
+        <div class="service-name">商業智能 BI 儀表板</div>
+        <div class="service-desc">將原始數據轉化為即時決策依據，可視化呈現銷售趨勢、庫存狀態與財務健康度。</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-section" id="philosophy">
+  <div class="section-inner">
+    <p class="section-label">關於我們</p>
+    <div class="philosophy-grid">
+      <div>
+        <blockquote class="philosophy-quote">
+          不只是軟體，<br>
+          是為企業<em>除去混亂</em>、<br>
+          帶來清晰的儀式。
+        </blockquote>
+        <div class="philosophy-sig">
+          <div class="sig-avatar">K</div>
+          <div class="sig-info">
+            <div class="sig-name">KAYON</div>
+            <div class="sig-title">創辦人 · AI 語言設計師 · 新竹</div>
+          </div>
+        </div>
+      </div>
+      <div class="philosophy-body">
+        <p>
+          OBARAI INTELLIGENCE 的名字源自日文「お祓い」——神道的潔淨除穢儀式。我們相信，好的系統不只是工具，而是一種秩序的重建：讓企業從混亂的流程中解脫，回歸清晰與專注。
+        </p>
+        <p>
+          創辦人 KAYON 是 AI 語言設計師，同時也是 KAYON STUDIO 的製作人與 KARBØN X GAIA ENTERTAINMENT 的創辦人。跨越音樂製作與科技開發的獨特視角，讓 OBARAI 的產品在功能之外，擁有極少數軟體公司才有的美學質感。
+        </p>
+        <p>
+          我們的旗艦產品 ORBIT ERP+POS，是從真實業務需求中生長出來的系統，而非套件拼湊。每個模組都經過實際商業場景的驗證，以新竹為基地，服務全台。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-inner">
+    <p class="section-label">合作流程</p>
+    <h2 class="section-title">從需求到上線，四步到位</h2>
+
+    <div class="process-list">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-name">需求訪談</div>
+        <div class="step-desc">深度了解您的業務流程、痛點與目標，確認系統範疇與預算。</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-name">方案設計</div>
+        <div class="step-desc">提供客製化系統架構提案、UI 設計稿與完整報價，透明無隱藏費用。</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-name">開發部署</div>
+        <div class="step-desc">敏捷開發，定期同步進度，確保每個模組符合實際使用需求。</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-name">上線維運</div>
+        <div class="step-desc">系統上線後持續陪跑，提供教育訓練、維護更新與功能迭代支援。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-inner">
+    <div class="cta-inner">
+      <svg class="cta-kamon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c8a96e" stroke-width="0.5"/><circle cx="24" cy="24" r="14" stroke="#c8a96e" stroke-width="0.5" opacity="0.5"/><circle cx="24" cy="24" r="3" fill="#c8a96e"/><line x1="24" y1="2" x2="24" y2="10" stroke="#c8a96e" stroke-width="0.5"/><line x1="24" y1="38" x2="24" y2="46" stroke="#c8a96e" stroke-width="0.5"/><line x1="2" y1="24" x2="10" y2="24" stroke="#c8a96e" stroke-width="0.5"/><line x1="38" y1="24" x2="46" y2="24" stroke="#c8a96e" stroke-width="0.5"/></svg>
+
+      <h2 class="cta-title">準備好讓系統<br>為您的企業服務了嗎？</h2>
+      <p class="cta-desc">無論您是想導入 ORBIT ERP+POS、整合 AI 自動化，<br>或是需要全新的數位基礎設施規劃——<br>歡迎直接與我們聯繫，第一次諮詢完全免費。</p>
+      <a href="mailto:kayon@obarai.com" class="cta-contact">kayon@obarai.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="#7a6240" stroke-width="0.5"/><circle cx="18" cy="18" r="11" stroke="#7a6240" stroke-width="0.5" opacity="0.5"/><circle cx="18" cy="18" r="3" fill="#7a6240"/><line x1="18" y1="1" x2="18" y2="7" stroke="#7a6240" stroke-width="0.5"/><line x1="18" y1="29" x2="18" y2="35" stroke="#7a6240" stroke-width="0.5"/><line x1="1" y1="18" x2="7" y2="18" stroke="#7a6240" stroke-width="0.5"/><line x1="29" y1="18" x2="35" y2="18" stroke="#7a6240" stroke-width="0.5"/></svg>
+    <div>
+      <div class="footer-logo-text">OBARAI INTELLIGENCE</div>
+      <div class="footer-jp">御祓智能 · 新竹，台灣</div>
+    </div>
+  </div>
+  <div style="text-align: right;">
+    <div class="footer-right">kayon@obarai.com</div>
+    <div class="footer-copy">© 2026 OBARAI INTELLIGENCE. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
