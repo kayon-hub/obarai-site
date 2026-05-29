@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORBIT — Enterprise Intelligence System</title>
-  <meta name="description" content="ORBIT unifies point of sale, inventory, reservations, and operations into a single enterprise intelligence platform — built for restaurants, retail brands, and multi-store businesses.">
+  <title>ORBIT — 企業智慧管理系統</title>
+  <meta name="description" content="ORBIT 將銷售、庫存、訂位與日常營運整合為單一智慧平台，專為餐飲業、零售品牌與多店型企業打造。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,300&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,8 +25,8 @@
       --gold-60:      rgba(200,169,110,0.60);
       --gold-20:      rgba(200,169,110,0.20);
       --gold-08:      rgba(200,169,110,0.08);
-      --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-      --tc:           'Noto Sans TC', sans-serif;
+      --sans:         'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --tc:           'Noto Sans TC', 'PingFang TC', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -34,7 +34,7 @@
     body {
       background: var(--black);
       color: var(--white);
-      font-family: var(--sans);
+      font-family: var(--tc);
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -58,14 +58,12 @@
     }
 
     .nav-logo {
+      font-family: var(--sans);
       font-size: 17px;
       font-weight: 600;
       letter-spacing: 0.14em;
       color: var(--white);
       text-decoration: none;
-      display: flex;
-      align-items: baseline;
-      gap: 2px;
     }
     .nav-logo-dot { color: var(--gold); }
 
@@ -78,7 +76,6 @@
     .nav-links a {
       font-size: 13px;
       font-weight: 400;
-      letter-spacing: 0.02em;
       color: var(--white-40);
       text-decoration: none;
       transition: color 0.2s;
@@ -88,14 +85,13 @@
     .nav-cta {
       font-size: 12.5px !important;
       font-weight: 500 !important;
-      letter-spacing: 0.06em !important;
       color: var(--gold) !important;
       border: 1px solid var(--gold-60);
       padding: 9px 22px;
       border-radius: 6px;
       transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--gold-08) !important; color: var(--gold) !important; }
+    .nav-cta:hover { background: var(--gold-08) !important; }
 
     /* ─── LAYOUT ─── */
     .wrap {
@@ -120,19 +116,17 @@
     .fi.d2 { transition-delay: 0.16s; }
     .fi.d3 { transition-delay: 0.24s; }
     .fi.d4 { transition-delay: 0.32s; }
-    .fi.d5 { transition-delay: 0.40s; }
-    .fi.d6 { transition-delay: 0.48s; }
 
     /* ─── BUTTONS ─── */
     .btn-gold {
       display: inline-flex;
       align-items: center;
+      font-family: var(--tc);
       font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.05em;
       color: #0c0c0c;
       background: var(--gold);
-      padding: 14px 34px;
+      padding: 13px 32px;
       border-radius: 6px;
       text-decoration: none;
       transition: opacity 0.2s, transform 0.2s;
@@ -142,11 +136,11 @@
     .btn-outline {
       display: inline-flex;
       align-items: center;
+      font-family: var(--tc);
       font-size: 13px;
       font-weight: 400;
-      letter-spacing: 0.04em;
       color: var(--white-70);
-      padding: 14px 34px;
+      padding: 13px 32px;
       border-radius: 6px;
       border: 1px solid var(--border);
       text-decoration: none;
@@ -154,21 +148,22 @@
     }
     .btn-outline:hover { border-color: rgba(255,255,255,0.16); color: var(--white); }
 
-    /* ─── SECTION LABELS ─── */
+    /* ─── LABELS ─── */
     .eyebrow {
+      font-family: var(--sans);
       font-size: 10.5px;
       font-weight: 600;
-      letter-spacing: 0.20em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 20px;
     }
 
     .h2 {
-      font-size: clamp(30px, 4vw, 46px);
+      font-size: clamp(28px, 3.8vw, 44px);
       font-weight: 500;
-      letter-spacing: -0.022em;
-      line-height: 1.12;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
       color: var(--white);
     }
 
@@ -176,7 +171,7 @@
       font-size: 15px;
       font-weight: 300;
       color: var(--white-70);
-      line-height: 1.8;
+      line-height: 1.85;
       max-width: 520px;
       margin-top: 18px;
     }
@@ -193,18 +188,13 @@
 
     .hero-glow {
       position: absolute;
-      top: 10%;
-      right: -5%;
-      width: 55%;
-      height: 65%;
-      background: radial-gradient(ellipse at 60% 40%, rgba(200,169,110,0.035) 0%, transparent 65%);
+      top: 10%; right: -5%;
+      width: 55%; height: 65%;
+      background: radial-gradient(ellipse at 60% 40%, rgba(200,169,110,0.04) 0%, transparent 65%);
       pointer-events: none;
     }
 
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-inner { position: relative; z-index: 1; }
 
     .hero-rule {
       display: flex;
@@ -212,38 +202,38 @@
       gap: 14px;
       margin-bottom: 36px;
     }
-    .hero-rule span {
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
     .hero-rule::before {
       content: '';
       display: block;
-      width: 36px;
-      height: 1px;
+      width: 36px; height: 1px;
       background: var(--gold);
       opacity: 0.55;
     }
+    .hero-rule span {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
 
     .hero-title {
-      font-size: clamp(54px, 9vw, 100px);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 0.98;
+      font-size: clamp(52px, 8.5vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
       color: var(--white);
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .hero-title em { font-style: normal; color: var(--gold); }
 
     .hero-sub {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 300;
       color: var(--white-70);
-      max-width: 500px;
-      line-height: 1.75;
+      max-width: 480px;
+      line-height: 1.85;
       margin-bottom: 52px;
     }
 
@@ -256,24 +246,23 @@
 
     .hero-metrics {
       display: flex;
-      gap: 64px;
-      margin-top: 96px;
-      padding-top: 48px;
+      gap: 60px;
+      margin-top: 88px;
+      padding-top: 44px;
       border-top: 1px solid var(--border-light);
     }
     .metric-num {
-      font-size: 36px;
+      font-family: var(--sans);
+      font-size: 34px;
       font-weight: 500;
       letter-spacing: -0.03em;
       color: var(--white);
     }
     .metric-label {
       font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
+      font-weight: 300;
       color: var(--white-40);
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     /* ─── ECOSYSTEM ─── */
@@ -286,11 +275,12 @@
       margin-bottom: 72px;
       align-items: end;
     }
+
     .eco-desc {
       font-size: 15px;
       font-weight: 300;
       color: var(--white-70);
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
     .eco-grid {
@@ -305,32 +295,32 @@
 
     .eco-cell {
       background: var(--surface);
-      padding: 44px 36px;
+      padding: 44px 32px;
       transition: background 0.3s;
     }
     .eco-cell:hover { background: var(--surface-2); }
 
     .eco-num {
+      font-family: var(--sans);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.14em;
       color: var(--gold);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .eco-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 500;
       color: var(--white);
-      letter-spacing: -0.01em;
       margin-bottom: 10px;
     }
 
     .eco-text {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 300;
       color: var(--white-40);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     /* ─── MODULES ─── */
@@ -358,27 +348,28 @@
     }
 
     .mod-tag {
+      font-family: var(--sans);
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .mod-name {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 500;
-      letter-spacing: -0.015em;
       color: var(--white);
       margin-bottom: 10px;
+      letter-spacing: -0.005em;
     }
 
     .mod-desc {
       font-size: 13.5px;
       font-weight: 300;
       color: var(--white-70);
-      line-height: 1.75;
+      line-height: 1.8;
       margin-bottom: 28px;
       flex: 1;
     }
@@ -389,7 +380,7 @@
       flex-direction: column;
       gap: 8px;
       border-top: 1px solid var(--border-light);
-      padding-top: 24px;
+      padding-top: 22px;
     }
     .mod-list li {
       font-size: 12.5px;
@@ -402,8 +393,7 @@
     .mod-list li::before {
       content: '';
       display: block;
-      width: 3px;
-      height: 3px;
+      width: 3px; height: 3px;
       border-radius: 50%;
       background: var(--gold);
       opacity: 0.55;
@@ -437,10 +427,9 @@
     }
 
     .scen-name {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 500;
       color: var(--white);
-      letter-spacing: -0.01em;
     }
 
     .scen-icon {
@@ -454,9 +443,8 @@
       font-size: 13.5px;
       font-weight: 300;
       color: var(--white-40);
-      line-height: 1.75;
+      line-height: 1.8;
       margin-top: 10px;
-      max-width: 480px;
     }
 
     .scen-panel {
@@ -469,21 +457,21 @@
     }
 
     .panel-tag {
+      font-family: var(--sans);
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .panel-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 500;
-      letter-spacing: -0.015em;
       color: var(--white);
       margin-bottom: 28px;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
     .panel-list {
@@ -499,14 +487,14 @@
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .panel-list li::before {
       content: '—';
       color: var(--gold);
       opacity: 0.65;
       flex-shrink: 0;
-      margin-top: 0;
+      font-family: var(--sans);
     }
 
     /* ─── ABOUT ─── */
@@ -523,14 +511,13 @@
       font-size: 15px;
       font-weight: 300;
       color: var(--white-70);
-      line-height: 1.85;
+      line-height: 1.9;
       margin-top: 22px;
     }
     .about-body p:first-of-type {
       font-size: 17px;
       font-weight: 400;
       color: var(--white);
-      line-height: 1.75;
     }
 
     .pillars {
@@ -549,7 +536,6 @@
       font-size: 13.5px;
       font-weight: 600;
       color: var(--white);
-      letter-spacing: 0.02em;
       margin-bottom: 6px;
     }
 
@@ -557,7 +543,7 @@
       font-size: 13px;
       font-weight: 300;
       color: var(--white-40);
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     /* ─── CONTACT ─── */
@@ -566,19 +552,19 @@
     .contact-inner { max-width: 640px; }
 
     .contact-title {
-      font-size: clamp(38px, 5vw, 58px);
+      font-size: clamp(36px, 5vw, 56px);
       font-weight: 500;
-      letter-spacing: -0.025em;
-      line-height: 1.08;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
       color: var(--white);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .contact-sub {
       font-size: 16px;
       font-weight: 300;
       color: var(--white-70);
-      line-height: 1.75;
+      line-height: 1.85;
       margin-bottom: 48px;
     }
 
@@ -586,7 +572,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 60px;
+      margin-bottom: 56px;
     }
 
     .contact-details {
@@ -602,13 +588,10 @@
     }
     .contact-label {
       color: var(--white-20);
-      width: 72px;
+      width: 56px;
       flex-shrink: 0;
-      letter-spacing: 0.03em;
     }
-    .contact-val {
-      color: var(--white-40);
-    }
+    .contact-val { color: var(--white-40); }
     .contact-val a {
       color: var(--white-40);
       text-decoration: none;
@@ -629,6 +612,7 @@
     }
 
     .footer-brand {
+      font-family: var(--sans);
       font-size: 13.5px;
       font-weight: 600;
       letter-spacing: 0.12em;
@@ -644,7 +628,6 @@
       font-size: 12px;
       color: var(--white-20);
       text-decoration: none;
-      letter-spacing: 0.02em;
       transition: color 0.2s;
     }
     .footer-nav a:hover { color: var(--white-40); }
@@ -652,7 +635,6 @@
     .footer-copy {
       font-size: 11.5px;
       color: var(--white-20);
-      letter-spacing: 0.02em;
     }
 
     /* ─── RESPONSIVE ─── */
@@ -689,11 +671,11 @@
 <nav>
   <a href="#" class="nav-logo">ORBIT<span class="nav-logo-dot">.</span></a>
   <ul class="nav-links">
-    <li><a href="#ecosystem">System</a></li>
-    <li><a href="#modules">Modules</a></li>
-    <li><a href="#scenarios">Solutions</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact" class="nav-cta">Book a Demo</a></li>
+    <li><a href="#ecosystem">系統概覽</a></li>
+    <li><a href="#modules">產品模組</a></li>
+    <li><a href="#scenarios">適用場景</a></li>
+    <li><a href="#about">關於我們</a></li>
+    <li><a href="#contact" class="nav-cta">預約展示</a></li>
   </ul>
 </nav>
 
@@ -709,35 +691,35 @@
       </div>
 
       <h1 class="hero-title fi d1">
-        Every operation.<br>
-        One <em>system</em>.
+        每一個環節，<br>
+        <em>一套系統</em>掌管。
       </h1>
 
       <p class="hero-sub fi d2">
-        ORBIT unifies point of sale, inventory, reservations, and operations into a single intelligent platform — built for restaurants, retail brands, and multi-store businesses.
+        ORBIT 將銷售、庫存、訂位與日常營運整合為單一智慧平台，專為餐飲業、零售品牌與多店型企業設計。
       </p>
 
       <div class="hero-actions fi d3">
-        <a href="#contact" class="btn-gold">Book a Demo</a>
-        <a href="#modules" class="btn-outline">Explore Modules</a>
+        <a href="#contact" class="btn-gold">預約展示</a>
+        <a href="#modules" class="btn-outline">瀏覽模組</a>
       </div>
 
       <div class="hero-metrics fi d4">
         <div>
           <div class="metric-num">6</div>
-          <div class="metric-label">Core Modules</div>
+          <div class="metric-label">核心模組</div>
         </div>
         <div>
           <div class="metric-num">∞</div>
-          <div class="metric-label">Stores Supported</div>
+          <div class="metric-label">支援店鋪數</div>
         </div>
         <div>
           <div class="metric-num">1</div>
-          <div class="metric-label">Platform</div>
+          <div class="metric-label">整合平台</div>
         </div>
         <div>
           <div class="metric-num">0</div>
-          <div class="metric-label">Sync Issues</div>
+          <div class="metric-label">資料同步錯誤</div>
         </div>
       </div>
 
@@ -754,34 +736,34 @@
 
     <div class="eco-head">
       <div class="fi">
-        <p class="eyebrow">The ORBIT Ecosystem</p>
-        <h2 class="h2">Designed for the way businesses actually operate</h2>
+        <p class="eyebrow">ORBIT Ecosystem</p>
+        <h2 class="h2">貼合企業真實運作方式而設計</h2>
       </div>
       <p class="eco-desc fi d1">
-        Most enterprise software adds complexity. ORBIT removes it — replacing disconnected tools with a unified intelligence layer that spans your entire operation, from the first transaction to year-end reporting.
+        大多數企業軟體只會讓流程更複雜。ORBIT 做的恰好相反——用一個統一的智慧層，取代那些各自為政的工具，從第一筆交易到年度報表，全面整合。
       </p>
     </div>
 
     <div class="eco-grid">
       <div class="eco-cell fi">
         <p class="eco-num">01</p>
-        <h3 class="eco-title">Unified Data Layer</h3>
-        <p class="eco-text">Sales, inventory, staff, and reservations share one data source. No imports, no sync errors, no data silos.</p>
+        <h3 class="eco-title">統一資料架構</h3>
+        <p class="eco-text">銷售、庫存、員工、訂位，所有資料共用同一個來源。不需匯入、不會同步錯誤、沒有資訊孤島。</p>
       </div>
       <div class="eco-cell fi d1">
         <p class="eco-num">02</p>
-        <h3 class="eco-title">Multi-Store Ready</h3>
-        <p class="eco-text">Manage one location or fifty from a single dashboard. Each store operates independently while headquarters sees everything.</p>
+        <h3 class="eco-title">多店連鎖支援</h3>
+        <p class="eco-text">單一儀表板管理一家或五十家門市。各店獨立運作，總部掌握全局，不妥協。</p>
       </div>
       <div class="eco-cell fi d2">
         <p class="eco-num">03</p>
-        <h3 class="eco-title">Modular by Design</h3>
-        <p class="eco-text">Deploy only what you need today. As your business grows, ORBIT grows with it — each module integrates natively with the others.</p>
+        <h3 class="eco-title">模組化設計</h3>
+        <p class="eco-text">今天只需要哪個功能，就部署哪個模組。隨著業務成長，ORBIT 跟著擴充——每個模組原生整合，無縫銜接。</p>
       </div>
       <div class="eco-cell fi d3">
         <p class="eco-num">04</p>
-        <h3 class="eco-title">LINE Native</h3>
-        <p class="eco-text">Built for markets where LINE is the operating system. Reservations, notifications, and CRM — all through LINE.</p>
+        <h3 class="eco-title">LINE 原生整合</h3>
+        <p class="eco-text">為以 LINE 為日常工具的市場而生。訂位、通知、會員 CRM，全部透過 LINE 完成。</p>
       </div>
     </div>
 
@@ -797,86 +779,86 @@
 
     <div class="fi">
       <p class="eyebrow">Product Modules</p>
-      <h2 class="h2">Purpose-built modules.<br>Seamlessly connected.</h2>
+      <h2 class="h2">各司其職的模組，<br>無縫整合的系統。</h2>
     </div>
 
     <div class="mod-grid">
 
       <div class="mod-card fi d1">
         <p class="mod-tag">ORBIT POS</p>
-        <h3 class="mod-name">Point of Sale</h3>
-        <p class="mod-desc">A fast, elegant checkout experience for dine-in, takeaway, and retail — with real-time sync across all terminals and stores.</p>
+        <h3 class="mod-name">銷售終端</h3>
+        <p class="mod-desc">快速、流暢的結帳體驗，適用內用、外帶與零售場景，跨終端、跨門市即時同步。</p>
         <ul class="mod-list">
-          <li>Multi-terminal, multi-store</li>
-          <li>Split payments &amp; discounts</li>
-          <li>Real-time inventory deduction</li>
-          <li>Member loyalty integration</li>
-          <li>ECPay payment gateway</li>
+          <li>多終端、多店鋪管理</li>
+          <li>分帳付款與折扣設定</li>
+          <li>即時庫存扣減</li>
+          <li>會員積點整合</li>
+          <li>ECPay 金流串接</li>
         </ul>
       </div>
 
       <div class="mod-card fi d2">
         <p class="mod-tag">ORBIT ERP</p>
-        <h3 class="mod-name">Resource Planning</h3>
-        <p class="mod-desc">Complete operational visibility — inventory tracking, purchase orders, supplier management, and cost analysis unified.</p>
+        <h3 class="mod-name">資源規劃</h3>
+        <p class="mod-desc">完整的營運可視性——庫存追蹤、採購單、供應商管理與成本分析，全部集中一處。</p>
         <ul class="mod-list">
-          <li>Inventory &amp; stock alerts</li>
-          <li>Purchase order management</li>
-          <li>Supplier tracking</li>
-          <li>COGS &amp; margin reporting</li>
-          <li>Multi-warehouse support</li>
+          <li>庫存管理與補貨警示</li>
+          <li>採購單流程管理</li>
+          <li>供應商資料追蹤</li>
+          <li>銷貨成本與毛利報表</li>
+          <li>多倉庫支援</li>
         </ul>
       </div>
 
       <div class="mod-card fi d3">
         <p class="mod-tag">ORBIT RSVP</p>
-        <h3 class="mod-name">Reservations</h3>
-        <p class="mod-desc">A reservation system built for F&amp;B and hospitality — online booking, walk-in queue management, and capacity control.</p>
+        <h3 class="mod-name">訂位管理</h3>
+        <p class="mod-desc">為餐飲與接待業設計的訂位系統——線上訂位、現場候位管理與座位容量控制，一體整合。</p>
         <ul class="mod-list">
-          <li>Online public booking page</li>
-          <li>Walk-in queue management</li>
-          <li>Calendar &amp; floor view</li>
-          <li>Automated SMS &amp; LINE reminders</li>
-          <li>Capacity controls</li>
+          <li>公開線上訂位頁面</li>
+          <li>現場候位排隊管理</li>
+          <li>行事曆與平面圖視角</li>
+          <li>自動簡訊與 LINE 提醒</li>
+          <li>容量上限控管</li>
         </ul>
       </div>
 
       <div class="mod-card fi d1">
         <p class="mod-tag">ORBIT LINE</p>
-        <h3 class="mod-name">LINE Integration</h3>
-        <p class="mod-desc">Connect your business to LINE — the platform your customers already use daily. LIFF apps, messaging, and CRM in one module.</p>
+        <h3 class="mod-name">LINE 整合</h3>
+        <p class="mod-desc">將您的業務接上顧客每天使用的平台。LIFF 應用、訊息推播與 CRM，整合在同一個模組。</p>
         <ul class="mod-list">
-          <li>LINE LIFF integration</li>
-          <li>Automated order notifications</li>
-          <li>Reservation confirmation via LINE</li>
-          <li>Customer broadcast messaging</li>
-          <li>LINE Login member sync</li>
+          <li>LINE LIFF 應用整合</li>
+          <li>訂單自動通知</li>
+          <li>訂位確認訊息</li>
+          <li>顧客群發訊息</li>
+          <li>LINE Login 會員同步</li>
         </ul>
       </div>
 
       <div class="mod-card fi d2">
         <p class="mod-tag">ORBIT FLOW</p>
-        <h3 class="mod-name">Operations</h3>
-        <p class="mod-desc">Staff scheduling, shift management, and task workflows — so operations run smoothly whether you're on-site or remote.</p>
+        <h3 class="mod-name">營運管理</h3>
+        <p class="mod-desc">員工排班、班次管理與任務工作流——無論在場或遠端，都能讓日常營運順暢運行。</p>
         <ul class="mod-list">
-          <li>Staff scheduling &amp; shifts</li>
-          <li>Role-based access control</li>
-          <li>Task &amp; checklist management</li>
-          <li>Sales performance by staff</li>
-          <li>Shift handover reports</li>
+          <li>員工排班與班次管理</li>
+          <li>角色權限存取控管</li>
+          <li>任務與查核清單</li>
+          <li>個人業績追蹤</li>
+          <li>交班報告</li>
         </ul>
       </div>
 
       <div class="mod-card fi d3">
         <p class="mod-tag">ORBIT AUTH</p>
-        <h3 class="mod-name">Access Control</h3>
-        <p class="mod-desc">Enterprise-grade permission management. Define exactly who can see, do, and approve — down to individual store locations.</p>
+        <h3 class="mod-name">權限管控</h3>
+        <p class="mod-desc">企業級權限管理。精確定義誰能查看、操作與審批——細緻到個別門市層級。</p>
         <ul class="mod-list">
-          <li>Role-based permissions</li>
-          <li>Store-level access control</li>
-          <li>Manager PIN authentication</li>
-          <li>Audit logs</li>
-          <li>SSO ready</li>
+          <li>角色基礎權限設定</li>
+          <li>店鋪層級存取控制</li>
+          <li>主管 PIN 碼驗證</li>
+          <li>操作稽核日誌</li>
+          <li>SSO 單一登入支援</li>
         </ul>
       </div>
 
@@ -893,7 +875,7 @@
 
     <div class="fi">
       <p class="eyebrow">Business Scenarios</p>
-      <h2 class="h2">Built for businesses that<br>can't afford to stop moving</h2>
+      <h2 class="h2">專為停不下來的企業而建。</h2>
     </div>
 
     <div class="scen-layout">
@@ -902,68 +884,68 @@
 
         <div class="scen-item fi">
           <div class="scen-row">
-            <h3 class="scen-name">Restaurants &amp; F&amp;B</h3>
+            <h3 class="scen-name">餐飲業</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">Table management, kitchen tickets, reservation flow, and LINE ordering — unified from the moment a guest arrives to checkout.</p>
+          <p class="scen-body">桌位管理、廚房出單、訂位流程與 LINE 點餐——從客人到店到結帳離開，全程整合無斷點。</p>
         </div>
 
         <div class="scen-item fi d1">
           <div class="scen-row">
-            <h3 class="scen-name">Retail Brands</h3>
+            <h3 class="scen-name">零售品牌</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">Inventory visibility across all SKUs, member loyalty programs, and seamless checkout — one boutique or a national chain.</p>
+          <p class="scen-body">跨所有 SKU 的庫存透明度、會員積點計畫與流暢結帳體驗——一間精品店或全國連鎖都適用。</p>
         </div>
 
         <div class="scen-item fi d2">
           <div class="scen-row">
-            <h3 class="scen-name">Multi-Store Operations</h3>
+            <h3 class="scen-name">多店連鎖營運</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">Headquarters dashboard with consolidated reporting, store-level autonomy, and real-time alerts — scale without losing visibility.</p>
+          <p class="scen-body">總部整合報表儀表板、各店獨立自主運作、即時異常警示——規模擴張，可視性不打折。</p>
         </div>
 
         <div class="scen-item fi d3">
           <div class="scen-row">
-            <h3 class="scen-name">Entertainment &amp; Hospitality</h3>
+            <h3 class="scen-name">娛樂與接待產業</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">Venue booking, capacity management, ticketing, and guest experience tools — designed for businesses where every detail matters.</p>
+          <p class="scen-body">場地預約、容量管理、票務與賓客體驗工具——專為每一個細節都至關重要的業務設計。</p>
         </div>
 
         <div class="scen-item fi d4">
           <div class="scen-row">
-            <h3 class="scen-name">SMEs &amp; Growing Companies</h3>
+            <h3 class="scen-name">中小企業與成長型公司</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">Start with one module. Deploy more as you grow. ORBIT scales with your business — no migrations, no new vendors, no disruption.</p>
+          <p class="scen-body">從一個模組開始，隨業務成長持續擴充。不需要搬移資料、更換廠商，也不會中斷營運。</p>
         </div>
 
       </div>
 
       <div class="fi d2">
         <div class="scen-panel">
-          <p class="panel-tag">Why ORBIT</p>
-          <h3 class="panel-title">One system.<br>Zero compromise.</h3>
+          <p class="panel-tag">為何選擇 ORBIT</p>
+          <h3 class="panel-title">一套系統，<br>零妥協。</h3>
           <ul class="panel-list">
-            <li>No more switching between disconnected apps</li>
-            <li>Real-time data across every touchpoint</li>
-            <li>LINE-native for Taiwan &amp; Southeast Asia</li>
-            <li>Modular: start with one or deploy all six</li>
-            <li>Enterprise-grade security and access control</li>
-            <li>Built by a team that runs businesses on it</li>
-            <li>Local payment gateways, local workflows</li>
+            <li>告別在多個不整合的系統之間切換</li>
+            <li>每個觸點的資料都即時同步</li>
+            <li>LINE 原生，專為台灣與東南亞設計</li>
+            <li>模組化：從一個開始，或一次部署六個</li>
+            <li>企業級資安與存取控管</li>
+            <li>由真正在用它經營業務的團隊打造</li>
+            <li>本地金流、本地化工作流程</li>
           </ul>
         </div>
       </div>
@@ -983,31 +965,31 @@
       <div>
         <div class="fi">
           <p class="eyebrow">About ORBIT</p>
-          <h2 class="h2">Enterprise software, built from the inside out</h2>
+          <h2 class="h2">從實際營運中<br>淬鍊出的企業軟體</h2>
         </div>
         <div class="about-body fi d1">
-          <p>ORBIT is developed by OBARAI — a technology company building enterprise intelligence systems for businesses across Taiwan and Asia-Pacific.</p>
-          <p>We don't design for hypothetical operations. ORBIT is deployed internally across our own businesses — every feature is validated against real operational demands before it reaches clients.</p>
-          <p>Our team brings cross-industry depth spanning F&amp;B, retail, media, and enterprise technology — giving ORBIT the range to serve businesses at every stage of growth.</p>
+          <p>ORBIT 由 OBARAI 開發——一家為台灣與亞太地區企業打造智慧管理系統的科技公司，法人主體為鎧洋聲影科技工作室。</p>
+          <p>我們不針對假設性的業務場景設計功能。ORBIT 首先部署在我們自己的業務中，每一個功能都在真實營運壓力下驗證過，才會交到客戶手上。</p>
+          <p>團隊橫跨餐飲、零售、媒體與企業科技等多個產業的實戰背景，讓 ORBIT 有足夠的深度，服務處於各個成長階段的企業。</p>
         </div>
       </div>
 
       <div class="pillars fi d2">
         <div class="pillar">
-          <h4 class="pillar-title">Internal-First Development</h4>
-          <p class="pillar-text">Every module ships in our own operations before client release. Real pressure, real validation — not a staging environment.</p>
+          <h4 class="pillar-title">內部優先開發</h4>
+          <p class="pillar-text">每個模組都在對外發布前先跑在我們自己的業務上。真實壓力，真實驗證——不是測試環境。</p>
         </div>
         <div class="pillar">
-          <h4 class="pillar-title">Asia-Pacific Focused</h4>
-          <p class="pillar-text">LINE integration, ECPay, and localized workflows. Built for how businesses operate here — not adapted from software designed elsewhere.</p>
+          <h4 class="pillar-title">亞太市場深耕</h4>
+          <p class="pillar-text">LINE 整合、ECPay 金流、本地化工作流程。為這裡的業務運作方式而生，不是從其他地方的軟體移植過來。</p>
         </div>
         <div class="pillar">
-          <h4 class="pillar-title">Long-Term Partnership</h4>
-          <p class="pillar-text">We don't disappear after deployment. ORBIT clients work with our team directly — from onboarding through scaling to new markets.</p>
+          <h4 class="pillar-title">長期夥伴關係</h4>
+          <p class="pillar-text">部署完成後不會消失。ORBIT 客戶直接與我們的團隊合作——從導入、成長，到拓展新市場。</p>
         </div>
         <div class="pillar">
-          <h4 class="pillar-title">Precision Engineering</h4>
-          <p class="pillar-text">Built on modern infrastructure with obsessive attention to reliability, performance, and data integrity at scale.</p>
+          <h4 class="pillar-title">精工工程品質</h4>
+          <p class="pillar-text">建立在現代基礎設施上，對可靠性、效能與大規模資料完整性有近乎執著的要求。</p>
         </div>
       </div>
 
@@ -1023,27 +1005,27 @@
   <div class="wrap">
     <div class="contact-inner fi">
 
-      <p class="eyebrow">Get in Touch</p>
-      <h2 class="contact-title">Ready to see ORBIT in action?</h2>
-      <p class="contact-sub">Book a private demo with our team. We'll walk you through the system and show you exactly how ORBIT maps to your operation.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title">準備好親眼<br>看 ORBIT 了嗎？</h2>
+      <p class="contact-sub">預約與我們團隊的私人展示。我們會帶您走過整套系統，並實際對應您的業務場景。</p>
 
       <div class="contact-ctas">
-        <a href="mailto:hello@obarai.com" class="btn-gold">Book a Demo</a>
-        <a href="mailto:hello@obarai.com" class="btn-outline">Contact Sales</a>
+        <a href="mailto:hello@obarai.com" class="btn-gold">預約展示</a>
+        <a href="mailto:hello@obarai.com" class="btn-outline">聯絡業務</a>
       </div>
 
       <div class="contact-details">
         <div class="contact-row">
-          <span class="contact-label">Email</span>
+          <span class="contact-label">信箱</span>
           <span class="contact-val"><a href="mailto:hello@obarai.com">hello@obarai.com</a></span>
         </div>
         <div class="contact-row">
-          <span class="contact-label">Company</span>
+          <span class="contact-label">公司</span>
           <span class="contact-val">OBARAI｜鎧洋聲影科技工作室</span>
         </div>
         <div class="contact-row">
-          <span class="contact-label">Location</span>
-          <span class="contact-val">Taiwan</span>
+          <span class="contact-label">地區</span>
+          <span class="contact-val">台灣</span>
         </div>
       </div>
 
@@ -1058,11 +1040,11 @@
     <div class="footer-row">
       <span class="footer-brand">ORBIT</span>
       <ul class="footer-nav">
-        <li><a href="#ecosystem">System</a></li>
-        <li><a href="#modules">Modules</a></li>
-        <li><a href="#scenarios">Solutions</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#ecosystem">系統概覽</a></li>
+        <li><a href="#modules">產品模組</a></li>
+        <li><a href="#scenarios">適用場景</a></li>
+        <li><a href="#about">關於我們</a></li>
+        <li><a href="#contact">聯絡我們</a></li>
       </ul>
       <span class="footer-copy">© 2026 OBARAI｜鎧洋聲影科技工作室</span>
     </div>
