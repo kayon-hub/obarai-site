@@ -526,6 +526,101 @@
       font-family: var(--sans);
     }
 
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { padding: 120px 0; background: var(--surface); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 72px;
+    }
+
+    .testi-card {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 40px 36px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: border-color 0.25s;
+      position: relative;
+    }
+    .testi-card:hover { border-color: var(--gold-20); }
+
+    .testi-openquote {
+      font-size: 64px;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.45;
+      font-family: Georgia, 'Times New Roman', serif;
+      margin-bottom: -8px;
+      display: block;
+    }
+
+    .testi-quote {
+      font-size: 14.5px;
+      font-weight: 300;
+      color: var(--white-70);
+      line-height: 1.9;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .testi-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .testi-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold-08);
+      border: 1px solid var(--gold-20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .testi-role {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--white-40);
+      margin-top: 2px;
+    }
+
+    .testi-tag {
+      margin-left: auto;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-08);
+      border: 1px solid var(--gold-20);
+      border-radius: 4px;
+      padding: 4px 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     /* ─── ABOUT ─── */
     #about { padding: 120px 0; background: var(--surface); }
 
@@ -679,6 +774,7 @@
       .mod-grid { grid-template-columns: repeat(2, 1fr); }
       .scen-layout { grid-template-columns: 1fr; }
       .scen-panel { position: static; margin-top: 40px; }
+      .testi-grid { grid-template-columns: 1fr; }
       .about-layout { grid-template-columns: 1fr; gap: 56px; }
       .hero-metrics { gap: 40px; }
       .footer-row { flex-direction: column; gap: 20px; text-align: center; }
@@ -703,6 +799,7 @@
     <li><a href="#ecosystem">系統概覽</a></li>
     <li><a href="#modules">產品模組</a></li>
     <li><a href="#scenarios">適用場景</a></li>
+    <li><a href="#testimonials">客戶推薦</a></li>
     <li><a href="#about">關於我們</a></li>
     <li><a href="#contact" class="nav-cta">預約展示</a></li>
   </ul>
@@ -1036,6 +1133,99 @@
             <li>由真正在用它經營業務的團隊打造</li>
             <li>本地金流、本地化工作流程</li>
           </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="wrap">
+    <p class="eyebrow fi">Testimonials</p>
+    <h2 class="h2 fi d1">各行各業老闆<br>用時間說話</h2>
+
+    <div class="testi-grid">
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">以前手寫訂單廚房要猜字，客訴每個禮拜都有。員工手機裝了 ORBIT 之後，廚房螢幕直接跳出來——錯誤率掉到幾乎零。最誇張的是一個月後回頭客自動多了三成，根本沒花廣告費。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">M</div>
+          <div>
+            <p class="testi-name">Mike Chen</p>
+            <p class="testi-role">珈心咖啡 · 老闆</p>
+          </div>
+          <span class="testi-tag">咖啡廳</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">LINE 預約真的管不住。同一個時段雙訂、客人站在門口等我還在翻記錄——這些情況每個月都在發生。ORBIT RSVP 上線後客人自己選時間，衝突直接擋掉。設計師現在可以專心做頭髮了。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">T</div>
+          <div>
+            <p class="testi-name">Tina Huang</p>
+            <p class="testi-role">T Studio 美髮 · 負責人</p>
+          </div>
+          <span class="testi-tag">美髮沙龍</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">月底對帳以前要花半天。學生出勤要翻紙本、家長問請假要一筆一筆找、費用還要手算。HR 加 CRM 串起來之後，同樣的事情 20 分鐘就跑完，我還以為自己弄錯了。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">J</div>
+          <div>
+            <p class="testi-name">Jason Wang</p>
+            <p class="testi-role">星橋學院 · 主任</p>
+          </div>
+          <span class="testi-tag">補習班</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">客製蛋糕每張訂單都是特殊備注，取貨當天找不到是常態，客人失望我也很無奈。CRM 裡訂單備注永遠在，不管隔多久都能找到。導入之後就沒有再發生取錯蛋糕的事了。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">A</div>
+          <div>
+            <p class="testi-name">Amy Lin</p>
+            <p class="testi-role">碎花甜點工作室 · 創辦人</p>
+          </div>
+          <span class="testi-tag">甜點工作室</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">教練排班 Excel、學員預約 LINE、收費靠記憶，月底這三個根本對不起來。ORBIT 把 HR、預約、CRM 全串在一起。現在教練不再每天問我「我這週上幾班」了，這對我來說是最大的解脫。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">K</div>
+          <div>
+            <p class="testi-name">Kevin Liu</p>
+            <p class="testi-role">FORMA 健身工作室 · 創辦人</p>
+          </div>
+          <span class="testi-tag">健身工作室</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">我們診所每天下班前都要整理紙本簽到表，遇到假日補班更是一團亂。HR 出勤模組導入之後，出勤紀錄自動匯整，一鍵就看報表。行政同事說現在下班準時多了。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">V</div>
+          <div>
+            <p class="testi-name">Vivian Wu</p>
+            <p class="testi-role">安康牙醫診所 · 行政主管</p>
+          </div>
+          <span class="testi-tag">診所</span>
         </div>
       </div>
 
