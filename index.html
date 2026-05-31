@@ -81,8 +81,8 @@
       align-items: center;
       justify-content: space-between;
       background: rgba(12,12,12,0.82);
-      backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border-light);
     }
 
@@ -590,6 +590,13 @@
       font-weight: 600;
       color: var(--gold);
       flex-shrink: 0;
+      overflow: hidden;
+    }
+    .testi-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .testi-name {
@@ -1155,7 +1162,7 @@
         <span class="testi-openquote">"</span>
         <p class="testi-quote">以前手寫訂單廚房根本看不懂，客人等很久還是拿到錯的，每次道歉都覺得很丟臉。現在員工手機直接點，廚房螢幕跳出來就做了。那種每天下班還要跟客人善後的壓力，不見了。終於可以準時關店，回去陪我老婆吃飯。</p>
         <div class="testi-meta">
-          <div class="testi-avatar">M</div>
+          <div class="testi-avatar"><img src="images/mike.jpg" alt="Mike Chen"></div>
           <div>
             <p class="testi-name">Mike Chen</p>
             <p class="testi-role">珈心咖啡 · 老闆</p>
@@ -1168,7 +1175,7 @@
         <span class="testi-openquote">"</span>
         <p class="testi-quote">用 LINE 管預約真的把自己逼瘋了。一邊在燙頭髮一邊要回訊息，搞錯時間客人直接殺過來——那種當場尷尬到不知道說什麼的感覺。現在客人自己選時間，我手機靜音都沒問題。連放假都不用擔心漏掉什麼，睡得比以前好多了。</p>
         <div class="testi-meta">
-          <div class="testi-avatar">T</div>
+          <div class="testi-avatar"><img src="images/tina.jpg" alt="Tina Huang"></div>
           <div>
             <p class="testi-name">Tina Huang</p>
             <p class="testi-role">T Studio 美髮 · 負責人</p>
@@ -1207,7 +1214,7 @@
         <span class="testi-openquote">"</span>
         <p class="testi-quote">我有三個教練，每個人排班不一樣、學員預約各自在 LINE 談、收費靠我自己記。月底對不起來的時候大家都很有意見，搞得氣氛很差。串在一起之後，帳清楚了，爭議少了。我們現在終於有心思去想怎麼把課程做得更好，而不是每天在解決後勤問題。</p>
         <div class="testi-meta">
-          <div class="testi-avatar">K</div>
+          <div class="testi-avatar"><img src="images/kevin.jpg" alt="Kevin Liu"></div>
           <div>
             <p class="testi-name">Kevin Liu</p>
             <p class="testi-role">FORMA 健身工作室 · 創辦人</p>
