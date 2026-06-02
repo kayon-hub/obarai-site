@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORBIT — 企業客戶管理系統 | ERP・POS・CRM・預約・人事出勤</title>
-  <meta name="description" content="ORBIT 是整合 ERP、POS、CRM、預約管理、人事出勤的智慧企業管理平台，適用餐飲、零售、補習班、美容、診所等任何有顧客服務需求的行業。模組化設計，一套系統全面整合。">
-  <meta name="keywords" content="ERP系統,POS系統,CRM顧客管理,補習班管理系統,門市管理,會員管理系統,預約系統,企業管理系統,進銷存系統,人事出勤系統,LINE整合,ORBIT,餐飲管理,零售管理,美容管理系統,診所管理,健身房管理,服務業管理,台灣ERP,業務管理系統">
+  <title>ORBIT — 企業智慧營運平台 | ERP・POS・CRM・AI 自動化</title>
+  <meta name="description" content="ORBIT 是模組化的企業智慧營運平台，整合 ERP、POS、CRM、預約、人事出勤與 AI 自動化。一人公司用得順，百人企業撐得住。">
+  <meta name="keywords" content="ERP系統,POS系統,CRM顧客管理,企業管理系統,AI自動化,會員管理系統,預約系統,進銷存系統,人事出勤系統,LINE整合,ORBIT,台灣ERP,模組化系統,營運自動化">
   <meta name="robots" content="index, follow">
   <meta name="author" content="OBARAI｜鎧洋聲影科技工作室">
   <link rel="canonical" href="https://orbit.obarai.com">
-  <meta property="og:title" content="ORBIT — 企業客戶管理系統 | ERP・POS・CRM">
-  <meta property="og:description" content="整合 ERP、POS、CRM、預約、人事出勤的智慧平台，適用餐飲、零售、補習班、美容、診所等任何以顧客為核心的行業。">
+  <meta property="og:title" content="ORBIT — 企業智慧營運平台">
+  <meta property="og:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。規模改變，系統不換。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://orbit.obarai.com">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ORBIT — 企業客戶管理系統">
-  <meta name="twitter:description" content="整合 ERP、POS、CRM、預約、人事出勤的智慧平台，適用任何以顧客為核心的行業。">
+  <meta name="twitter:title" content="ORBIT — 企業智慧營運平台">
+  <meta name="twitter:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。規模改變，系統不換。">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,7 +24,7 @@
     "name": "ORBIT",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
-    "description": "整合 ERP、POS、CRM、預約管理、人事出勤的智慧企業管理平台，適用餐飲、零售、補習班、美容、診所等任何有顧客服務需求的行業。",
+    "description": "模組化企業智慧營運平台，整合 ERP、POS、CRM、預約管理、人事出勤與 AI 自動化。適用任何以顧客為核心的組織。",
     "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" },
     "publisher": {
       "@type": "Organization",
@@ -37,769 +37,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black:        #0c0c0c;
-      --surface:      #141414;
-      --surface-2:    #1c1c1c;
-      --border:       rgba(255,255,255,0.07);
-      --border-light: rgba(255,255,255,0.04);
-      --white:        #ece9e0;
-      --white-70:     rgba(236,233,224,0.70);
-      --white-40:     rgba(236,233,224,0.40);
-      --white-20:     rgba(236,233,224,0.20);
-      --gold:         #c8a96e;
-      --gold-60:      rgba(200,169,110,0.60);
-      --gold-20:      rgba(200,169,110,0.20);
-      --gold-08:      rgba(200,169,110,0.08);
-      --sans:         'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --tc:           'Noto Sans TC', 'PingFang TC', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--tc);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 68px;
-      padding: 0 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(12,12,12,0.82);
-      -webkit-backdrop-filter: blur(24px);
-      backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .nav-logo {
-      font-family: var(--sans);
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .nav-logo-dot { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--white-40);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--white-70); }
-
-    .nav-cta {
-      font-size: 12.5px !important;
-      font-weight: 500 !important;
-      color: var(--gold) !important;
-      border: 1px solid var(--gold-60);
-      padding: 9px 22px;
-      border-radius: 6px;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--gold-08) !important; }
-
-    /* ─── LAYOUT ─── */
-    .wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    hr.divide {
-      border: none;
-      border-top: 1px solid var(--border-light);
-    }
-
-    /* ─── FADE-IN ─── */
-    .fi {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .fi.on { opacity: 1; transform: none; }
-    .fi.d1 { transition-delay: 0.08s; }
-    .fi.d2 { transition-delay: 0.16s; }
-    .fi.d3 { transition-delay: 0.24s; }
-    .fi.d4 { transition-delay: 0.32s; }
-
-    /* ─── BUTTONS ─── */
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--tc);
-      font-size: 13px;
-      font-weight: 500;
-      color: #0c0c0c;
-      background: var(--gold);
-      padding: 13px 32px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .btn-gold:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--tc);
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--white-70);
-      padding: 13px 32px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.16); color: var(--white); }
-
-    /* ─── LABELS ─── */
-    .eyebrow {
-      font-family: var(--sans);
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .h2 {
-      font-size: clamp(28px, 3.8vw, 44px);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-      color: var(--white);
-    }
-
-    .lead {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.85;
-      max-width: 520px;
-      margin-top: 18px;
-    }
-
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 128px 0 96px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-glow {
-      position: absolute;
-      top: 10%; right: -5%;
-      width: 55%; height: 65%;
-      background: radial-gradient(ellipse at 60% 40%, rgba(200,169,110,0.04) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-inner { position: relative; z-index: 1; }
-
-    .hero-rule {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 36px;
-    }
-    .hero-rule::before {
-      content: '';
-      display: block;
-      width: 36px; height: 1px;
-      background: var(--gold);
-      opacity: 0.55;
-    }
-    .hero-rule span {
-      font-family: var(--sans);
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .hero-title {
-      font-size: clamp(52px, 8.5vw, 96px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 32px;
-    }
-    .hero-title em { font-style: normal; color: var(--gold); }
-
-    .hero-sub {
-      font-size: 17px;
-      font-weight: 300;
-      color: var(--white-70);
-      max-width: 480px;
-      line-height: 1.85;
-      margin-bottom: 52px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .hero-metrics {
-      display: flex;
-      gap: 60px;
-      margin-top: 88px;
-      padding-top: 44px;
-      border-top: 1px solid var(--border-light);
-    }
-    .metric-num {
-      font-family: var(--sans);
-      font-size: 34px;
-      font-weight: 500;
-      letter-spacing: -0.03em;
-      color: var(--white);
-    }
-    .metric-label {
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--white-40);
-      margin-top: 5px;
-    }
-
-    /* ─── ECOSYSTEM ─── */
-    #ecosystem { padding: 120px 0; }
-
-    .eco-head {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      margin-bottom: 72px;
-      align-items: end;
-    }
-
-    .eco-desc {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.85;
-    }
-
-    .eco-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border-light);
-      border: 1px solid var(--border-light);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .eco-cell {
-      background: var(--surface);
-      padding: 44px 32px;
-      transition: background 0.3s;
-    }
-    .eco-cell:hover { background: var(--surface-2); }
-
-    .eco-num {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-
-    .eco-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-
-    .eco-text {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--white-40);
-      line-height: 1.8;
-    }
-
-    /* ─── MODULES ─── */
-    #modules { padding: 120px 0; background: var(--surface); }
-
-    .mod-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 72px;
-    }
-
-    .mod-card {
-      background: var(--black);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px 32px 40px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-    .mod-card:hover {
-      border-color: var(--gold-20);
-      transform: translateY(-3px);
-    }
-
-    .mod-tag {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-
-    .mod-name {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: -0.005em;
-    }
-
-    .mod-desc {
-      font-size: 13.5px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.8;
-      margin-bottom: 28px;
-      flex: 1;
-    }
-
-    .mod-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-top: 1px solid var(--border-light);
-      padding-top: 22px;
-    }
-    .mod-list li {
-      font-size: 12.5px;
-      font-weight: 300;
-      color: var(--white-40);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .mod-list li::before {
-      content: '';
-      display: block;
-      width: 3px; height: 3px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: 0.55;
-      flex-shrink: 0;
-    }
-
-    /* ─── SCENARIOS ─── */
-    #scenarios { padding: 120px 0; }
-
-    .scen-layout {
-      display: grid;
-      grid-template-columns: 5fr 4fr;
-      gap: 80px;
-      align-items: start;
-      margin-top: 72px;
-    }
-
-    .scen-list { display: flex; flex-direction: column; }
-
-    .scen-item {
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .scen-item:first-child { border-top: 1px solid var(--border-light); }
-
-    .scen-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .scen-name {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--white);
-    }
-
-    .scen-icon {
-      color: var(--white-20);
-      flex-shrink: 0;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .scen-item:hover .scen-icon { color: var(--gold); transform: translateX(4px); }
-
-    .scen-body {
-      font-size: 13.5px;
-      font-weight: 300;
-      color: var(--white-40);
-      line-height: 1.8;
-      margin-top: 10px;
-    }
-
-    .scen-panel {
-      position: sticky;
-      top: 100px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 48px 40px;
-    }
-
-    .panel-tag {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .panel-title {
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 28px;
-      line-height: 1.4;
-    }
-
-    .panel-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .panel-list li {
-      font-size: 13.5px;
-      font-weight: 300;
-      color: var(--white-70);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      line-height: 1.65;
-    }
-    .panel-list li::before {
-      content: '—';
-      color: var(--gold);
-      opacity: 0.65;
-      flex-shrink: 0;
-      font-family: var(--sans);
-    }
-
-    /* ─── TESTIMONIALS ─── */
-    #testimonials { padding: 120px 0; background: var(--surface); }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 72px;
-    }
-
-    .testi-card {
-      background: var(--black);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 40px 36px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      transition: border-color 0.25s;
-      position: relative;
-    }
-    .testi-card:hover { border-color: var(--gold-20); }
-
-    .testi-openquote {
-      font-size: 64px;
-      line-height: 1;
-      color: var(--gold);
-      opacity: 0.45;
-      font-family: Georgia, 'Times New Roman', serif;
-      margin-bottom: -8px;
-      display: block;
-    }
-
-    .testi-quote {
-      font-size: 14.5px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.9;
-      flex: 1;
-      margin-bottom: 28px;
-    }
-
-    .testi-meta {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .testi-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--gold-08);
-      border: 1px solid var(--gold-20);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--sans);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--gold);
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .testi-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .testi-name {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--white);
-    }
-
-    .testi-role {
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--white-40);
-      margin-top: 2px;
-    }
-
-    .testi-tag {
-      margin-left: auto;
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--gold-08);
-      border: 1px solid var(--gold-20);
-      border-radius: 4px;
-      padding: 4px 10px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ─── ABOUT ─── */
-    #about { padding: 120px 0; background: var(--surface); }
-
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: start;
-    }
-
-    .about-body p {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.9;
-      margin-top: 22px;
-    }
-    .about-body p:first-of-type {
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--white);
-    }
-
-    .pillars {
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-      margin-top: 8px;
-    }
-
-    .pillar {
-      padding-left: 24px;
-      border-left: 1px solid var(--gold-60);
-    }
-
-    .pillar-title {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-
-    .pillar-text {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--white-40);
-      line-height: 1.8;
-    }
-
-    /* ─── CONTACT ─── */
-    #contact { padding: 120px 0 160px; }
-
-    .contact-inner { max-width: 640px; }
-
-    .contact-title {
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 500;
-      letter-spacing: -0.015em;
-      line-height: 1.15;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-
-    .contact-sub {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--white-70);
-      line-height: 1.85;
-      margin-bottom: 48px;
-    }
-
-    .contact-ctas {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 56px;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .contact-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-    }
-    .contact-label {
-      color: var(--white-20);
-      width: 56px;
-      flex-shrink: 0;
-    }
-    .contact-val { color: var(--white-40); }
-    .contact-val a {
-      color: var(--white-40);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .contact-val a:hover { color: var(--gold); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border-light);
-      padding: 36px 0;
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-brand {
-      font-family: var(--sans);
-      font-size: 13.5px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--white-20);
-    }
-
-    .footer-nav {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    .footer-nav a {
-      font-size: 12px;
-      color: var(--white-20);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-nav a:hover { color: var(--white-40); }
-
-    .footer-copy {
-      font-size: 11.5px;
-      color: var(--white-20);
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .eco-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 900px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .wrap { padding: 0 24px; }
-      .eco-head { grid-template-columns: 1fr; gap: 24px; }
-      .mod-grid { grid-template-columns: repeat(2, 1fr); }
-      .scen-layout { grid-template-columns: 1fr; }
-      .scen-panel { position: static; margin-top: 40px; }
-      .testi-grid { grid-template-columns: 1fr; }
-      .about-layout { grid-template-columns: 1fr; gap: 56px; }
-      .hero-metrics { gap: 40px; }
-      .footer-row { flex-direction: column; gap: 20px; text-align: center; }
-      .footer-nav { justify-content: center; }
-    }
-
-    @media (max-width: 600px) {
-      .mod-grid { grid-template-columns: 1fr; }
-      .eco-grid { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
-      .contact-ctas { flex-direction: column; }
-      .hero-metrics { flex-wrap: wrap; gap: 32px; }
-    }
-  </style>
+  <style>*,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--black:#0c0c0c;--surface:#141414;--surface-2:#1c1c1c;--border:rgba(255,255,255,0.07);--border-light:rgba(255,255,255,0.04);--white:#ece9e0;--white-70:rgba(236,233,224,0.70);--white-40:rgba(236,233,224,0.40);--white-20:rgba(236,233,224,0.20);--gold:#c8a96e;--gold-60:rgba(200,169,110,0.60);--gold-20:rgba(200,169,110,0.20);--gold-08:rgba(200,169,110,0.08);--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--tc:'Noto Sans TC','PingFang TC',sans-serif}html{scroll-behavior:smooth}body{background:var(--black);color:var(--white);font-family:var(--tc);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(12,12,12,.82);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border-bottom:1px solid var(--border-light)}.nav-logo{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:.14em;color:var(--white);text-decoration:none}.nav-logo-dot{color:var(--gold)}.nav-links{display:flex;align-items:center;gap:36px;list-style:none}.nav-links a{font-size:13px;font-weight:400;color:var(--white-40);text-decoration:none;transition:color .2s}.nav-links a:hover{color:var(--white-70)}.nav-cta{font-size:12.5px!important;font-weight:500!important;color:var(--gold)!important;border:1px solid var(--gold-60);padding:9px 22px;border-radius:6px;transition:background .2s!important}.nav-cta:hover{background:var(--gold-08)!important}.wrap{max-width:1200px;margin:0 auto;padding:0 48px}hr.divide{border:none;border-top:1px solid var(--border-light)}.fi{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.fi.on{opacity:1;transform:none}.fi.d1{transition-delay:80ms}.fi.d2{transition-delay:0.16s}.fi.d3{transition-delay:0.24s}.fi.d4{transition-delay:0.32s}.btn-gold{display:inline-flex;align-items:center;font-family:var(--tc);font-size:13px;font-weight:500;color:#0c0c0c;background:var(--gold);padding:13px 32px;border-radius:6px;text-decoration:none;transition:opacity .2s,transform .2s}.btn-gold:hover{opacity:.85;transform:translateY(-1px)}.btn-outline{display:inline-flex;align-items:center;font-family:var(--tc);font-size:13px;font-weight:400;color:var(--white-70);padding:13px 32px;border-radius:6px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s,color .2s}.btn-outline:hover{border-color:rgba(255,255,255,.16);color:var(--white)}.eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.h2{font-size:clamp(28px, 3.8vw, 44px);font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--white)}.lead{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.85;max-width:520px;margin-top:18px}#hero{min-height:100vh;display:flex;align-items:center;padding:128px 0 96px;position:relative;overflow:hidden}.hero-glow{position:absolute;top:10%;right:-5%;width:55%;height:65%;background:radial-gradient(ellipse at 60% 40%,rgba(200,169,110,.04) 0,transparent 65%);pointer-events:none}.hero-inner{position:relative;z-index:1}.hero-rule{display:flex;align-items:center;gap:14px;margin-bottom:36px}.hero-rule::before{content:'';display:block;width:36px;height:1px;background:var(--gold);opacity:.55}.hero-rule span{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}.hero-title{font-size:clamp(52px, 8.5vw, 96px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--white);margin-bottom:32px}.hero-title em{font-style:normal;color:var(--gold)}.hero-sub{font-size:17px;font-weight:300;color:var(--white-70);max-width:480px;line-height:1.85;margin-bottom:52px}.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.hero-metrics{display:flex;gap:60px;margin-top:88px;padding-top:44px;border-top:1px solid var(--border-light)}.metric-num{font-family:var(--sans);font-size:34px;font-weight:500;letter-spacing:-.03em;color:var(--white)}.metric-label{font-size:11px;font-weight:300;color:var(--white-40);margin-top:5px}#ecosystem{padding:120px 0}.eco-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:72px;align-items:end}.eco-desc{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.85}.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-light);border:1px solid var(--border-light);border-radius:14px;overflow:hidden}.eco-cell{background:var(--surface);padding:44px 32px;transition:background .3s}.eco-cell:hover{background:var(--surface-2)}.eco-num{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--gold);margin-bottom:16px}.eco-title{font-size:16px;font-weight:500;color:var(--white);margin-bottom:10px}.eco-text{font-size:13px;font-weight:300;color:var(--white-40);line-height:1.8}#modules{padding:120px 0;background:var(--surface)}.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:72px}.mod-card{background:var(--black);border:1px solid var(--border);border-radius:12px;padding:36px 32px 40px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}.mod-card:hover{border-color:var(--gold-20);transform:translateY(-3px)}.mod-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.mod-name{font-size:20px;font-weight:500;color:var(--white);margin-bottom:10px;letter-spacing:-.005em}.mod-desc{font-size:13.5px;font-weight:300;color:var(--white-70);line-height:1.8;margin-bottom:28px;flex:1}.mod-list{list-style:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border-light);padding-top:22px}.mod-list li{font-size:12.5px;font-weight:300;color:var(--white-40);display:flex;align-items:center;gap:10px}.mod-list li::before{content:'';display:block;width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.55;flex-shrink:0}.ai-banner{margin-top:48px;border:1px solid var(--gold-20);border-radius:14px;padding:44px 48px;background:var(--gold-08);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.ai-banner-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.ai-banner-title{font-size:clamp(22px, 2.8vw, 32px);font-weight:500;color:var(--white);line-height:1.3;margin-bottom:16px;letter-spacing:-.01em}.ai-banner-body{font-size:14px;font-weight:300;color:var(--white-70);line-height:1.85}.ai-levels{display:flex;flex-direction:column;gap:20px}.ai-level{display:flex;gap:16px;align-items:flex-start}.ai-level-num{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--gold);opacity:.6;padding-top:3px;flex-shrink:0;width:20px}.ai-level-title{font-size:13.5px;font-weight:500;color:var(--white);margin-bottom:3px}.ai-level-desc{font-size:12.5px;font-weight:300;color:var(--white-40);line-height:1.7}#scenarios{padding:120px 0}.scen-layout{display:grid;grid-template-columns:5fr 4fr;gap:80px;align-items:start;margin-top:72px}.scen-list{display:flex;flex-direction:column}.scen-item{padding:32px 0;border-bottom:1px solid var(--border-light)}.scen-item:first-child{border-top:1px solid var(--border-light)}.scen-row{display:flex;align-items:center;justify-content:space-between;gap:16px}.scen-name{font-size:18px;font-weight:500;color:var(--white)}.scen-icon{color:var(--white-20);flex-shrink:0;transition:color .2s,transform .2s}.scen-item:hover .scen-icon{color:var(--gold);transform:translateX(4px)}.scen-body{font-size:13.5px;font-weight:300;color:var(--white-40);line-height:1.8;margin-top:10px}.scen-panel{position:sticky;top:100px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:48px 40px}.panel-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.panel-title{font-size:22px;font-weight:500;color:var(--white);margin-bottom:28px;line-height:1.4}.panel-list{list-style:none;display:flex;flex-direction:column;gap:14px}.panel-list li{font-size:13.5px;font-weight:300;color:var(--white-70);display:flex;gap:12px;align-items:flex-start;line-height:1.65}.panel-list li::before{content:'—';color:var(--gold);opacity:.65;flex-shrink:0;font-family:var(--sans)}#testimonials{padding:120px 0;background:var(--surface)}.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:72px}.testi-card{background:var(--black);border:1px solid var(--border);border-radius:14px;padding:40px 36px 36px;display:flex;flex-direction:column;gap:0;transition:border-color .25s;position:relative}.testi-card:hover{border-color:var(--gold-20)}.testi-openquote{font-size:64px;line-height:1;color:var(--gold);opacity:.45;font-family:Georgia,'Times New Roman',serif;margin-bottom:-8px;display:block}.testi-quote{font-size:14.5px;font-weight:300;color:var(--white-70);line-height:1.9;flex:1;margin-bottom:28px}.testi-meta{display:flex;align-items:center;gap:14px;padding-top:22px;border-top:1px solid var(--border-light)}.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold-08);border:1px solid var(--gold-20);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--gold);flex-shrink:0;overflow:hidden}.testi-avatar img{width:100%;height:100%;object-fit:cover;display:block}.testi-name{font-size:13.5px;font-weight:500;color:var(--white)}.testi-role{font-size:12px;font-weight:300;color:var(--white-40);margin-top:2px}.testi-tag{margin-left:auto;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-08);border:1px solid var(--gold-20);border-radius:4px;padding:4px 10px;white-space:nowrap;flex-shrink:0}#about{padding:120px 0}.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.about-body p{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.9;margin-top:22px}.about-body p:first-of-type{font-size:17px;font-weight:400;color:var(--white)}.about-philosophy{margin-top:40px;padding:28px 32px;border-left:1px solid var(--gold-60);background:var(--gold-08);border-radius:0 8px 8px 0}.about-philosophy-quote{font-size:18px;font-weight:500;color:var(--white);line-height:1.6;letter-spacing:-.005em}.about-philosophy-attr{font-size:11.5px;font-weight:300;color:var(--gold);margin-top:10px;letter-spacing:.06em}.pillars{display:flex;flex-direction:column;gap:36px;margin-top:8px}.pillar{padding-left:24px;border-left:1px solid var(--gold-60)}.pillar-title{font-size:13.5px;font-weight:600;color:var(--white);margin-bottom:6px}.pillar-text{font-size:13px;font-weight:300;color:var(--white-40);line-height:1.8}#contact{padding:120px 0 160px}.contact-inner{max-width:640px}.contact-title{font-size:clamp(36px, 5vw, 56px);font-weight:500;letter-spacing:-.015em;line-height:1.15;color:var(--white);margin-bottom:20px}.contact-sub{font-size:16px;font-weight:300;color:var(--white-70);line-height:1.85;margin-bottom:48px}.contact-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}.contact-details{display:flex;flex-direction:column;gap:10px}.contact-row{display:flex;align-items:center;gap:10px;font-size:13px}.contact-label{color:var(--white-20);width:56px;flex-shrink:0}.contact-val{color:var(--white-40)}.contact-val a{color:var(--white-40);text-decoration:none;transition:color .2s}.contact-val a:hover{color:var(--gold)}footer{border-top:1px solid var(--border-light);padding:36px 0}.footer-row{display:flex;align-items:center;justify-content:space-between}.footer-brand{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.12em;color:var(--white-20)}.footer-nav{display:flex;gap:28px;list-style:none}.footer-nav a{font-size:12px;color:var(--white-20);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--white-40)}.footer-copy{font-size:11.5px;color:var(--white-20)}@media (max-width:1024px){.eco-grid{grid-template-columns:repeat(2,1fr)}.ai-banner{grid-template-columns:1fr;gap:40px}}@media (max-width:900px){nav{padding:0 24px}.nav-links{display:none}.wrap{padding:0 24px}.eco-head{grid-template-columns:1fr;gap:24px}.mod-grid{grid-template-columns:repeat(2,1fr)}.scen-layout{grid-template-columns:1fr}.scen-panel{position:static;margin-top:40px}.testi-grid{grid-template-columns:1fr}.about-layout{grid-template-columns:1fr;gap:56px}.hero-metrics{gap:40px}.footer-row{flex-direction:column;gap:20px;text-align:center}.footer-nav{justify-content:center}.ai-banner{padding:32px 28px}}@media (max-width:600px){.mod-grid{grid-template-columns:1fr}.eco-grid{grid-template-columns:1fr}.hero-actions{flex-direction:column;align-items:flex-start}.contact-ctas{flex-direction:column}.hero-metrics{flex-wrap:wrap;gap:32px}}</style>
 </head>
 <body>
-
-<!-- ═══ NAV ═══ -->
 <nav>
   <a href="#" class="nav-logo">ORBIT<span class="nav-logo-dot">.</span></a>
   <ul class="nav-links">
@@ -811,9 +51,6 @@
     <li><a href="#contact" class="nav-cta">預約展示</a></li>
   </ul>
 </nav>
-
-
-<!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="wrap">
@@ -824,12 +61,13 @@
       </div>
 
       <h1 class="hero-title fi d1">
-        每一個環節<br>
-        <em>一套系統</em>掌管
+        規模改變<br>
+        <em>系統不換</em>
       </h1>
 
       <p class="hero-sub fi d2">
-        ORBIT 將銷售、預約、顧客關係與日常營運整合為單一智慧平台，適用任何以顧客為核心的行業——餐飲、零售、補習班、美容、診所、服務業，以及更多。
+        從一人公司到跨國組織，ORBIT 是同一套系統。
+        模組化架構，AI 內建其中，從第一個顧客到年度報表，全面整合。
       </p>
 
       <div class="hero-actions fi d3">
@@ -844,7 +82,7 @@
         </div>
         <div>
           <div class="metric-num">∞</div>
-          <div class="metric-label">支援店鋪數</div>
+          <div class="metric-label">支援規模</div>
         </div>
         <div>
           <div class="metric-num">1</div>
@@ -861,19 +99,16 @@
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ ECOSYSTEM ═══ -->
 <section id="ecosystem">
   <div class="wrap">
 
     <div class="eco-head">
       <div class="fi">
         <p class="eyebrow">ORBIT Ecosystem</p>
-        <h2 class="h2">貼合企業真實運作方式而設計</h2>
+        <h2 class="h2">貼合真實營運方式<br>而設計</h2>
       </div>
       <p class="eco-desc fi d1">
-        大多數企業軟體只會讓流程更複雜。ORBIT 做的恰好相反——用一個統一的智慧層，取代那些各自為政的工具。無論你經營的是餐廳、補習班、美容院還是連鎖品牌，從第一個顧客到年度報表，全面整合。
+        大多數企業軟體只會讓流程更複雜。ORBIT 做的恰好相反——用一個統一的智慧層，取代那些各自為政的工具。無論你的規模是一人還是千人，ORBIT 讓你從第一天就用同一套系統長大。
       </p>
     </div>
 
@@ -885,8 +120,8 @@
       </div>
       <div class="eco-cell fi d1">
         <p class="eco-num">02</p>
-        <h3 class="eco-title">多店連鎖支援</h3>
-        <p class="eco-text">單一儀表板管理一家或五十家門市。各店獨立運作，總部掌握全局，不妥協。</p>
+        <h3 class="eco-title">任意規模支援</h3>
+        <p class="eco-text">單店、連鎖或跨國組織，同一個儀表板掌管全局。各單位獨立運作，總部即時可視，不妥協。</p>
       </div>
       <div class="eco-cell fi d2">
         <p class="eco-num">03</p>
@@ -904,9 +139,6 @@
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ MODULES ═══ -->
 <section id="modules">
   <div class="wrap">
 
@@ -920,7 +152,7 @@
       <div class="mod-card fi d1">
         <p class="mod-tag">ORBIT POS</p>
         <h3 class="mod-name">銷售終端</h3>
-        <p class="mod-desc">快速、流暢的結帳體驗，適用內用、外帶與零售場景，跨終端、跨門市即時同步。</p>
+        <p class="mod-desc">快速、流暢的結帳體驗，跨終端、跨門市即時同步。</p>
         <ul class="mod-list">
           <li>多終端、多店鋪管理</li>
           <li>分帳付款與折扣設定</li>
@@ -946,7 +178,7 @@
       <div class="mod-card fi d3">
         <p class="mod-tag">ORBIT RSVP</p>
         <h3 class="mod-name">訂位管理</h3>
-        <p class="mod-desc">為餐飲與接待業設計的訂位系統——線上訂位、現場候位管理與座位容量控制，一體整合。</p>
+        <p class="mod-desc">線上訂位、現場候位管理與座位容量控制，一體整合。</p>
         <ul class="mod-list">
           <li>公開線上訂位頁面</li>
           <li>現場候位排隊管理</li>
@@ -959,7 +191,7 @@
       <div class="mod-card fi d1">
         <p class="mod-tag">ORBIT LINE</p>
         <h3 class="mod-name">LINE 整合</h3>
-        <p class="mod-desc">將您的業務接上顧客每天使用的平台。LIFF 應用、訊息推播與 CRM，整合在同一個模組。</p>
+        <p class="mod-desc">將業務接上顧客每天使用的平台。LIFF 應用、訊息推播與 CRM，整合在同一個模組。</p>
         <ul class="mod-list">
           <li>LINE LIFF 應用整合</li>
           <li>訂單自動通知</li>
@@ -972,7 +204,7 @@
       <div class="mod-card fi d2">
         <p class="mod-tag">ORBIT FLOW</p>
         <h3 class="mod-name">營運管理</h3>
-        <p class="mod-desc">員工排班、班次管理與任務工作流——無論在場或遠端，都能讓日常營運順暢運行。</p>
+        <p class="mod-desc">員工排班、班次管理與任務工作流——無論在場或遠端，日常營運順暢運行。</p>
         <ul class="mod-list">
           <li>員工排班與班次管理</li>
           <li>角色權限存取控管</li>
@@ -985,7 +217,7 @@
       <div class="mod-card fi d3">
         <p class="mod-tag">ORBIT AUTH</p>
         <h3 class="mod-name">權限管控</h3>
-        <p class="mod-desc">企業級權限管理。精確定義誰能查看、操作與審批——細緻到個別門市層級。</p>
+        <p class="mod-desc">企業級權限管理。精確定義誰能查看、操作與審批——細緻到個別單位層級。</p>
         <ul class="mod-list">
           <li>角色基礎權限設定</li>
           <li>店鋪層級存取控制</li>
@@ -998,7 +230,7 @@
       <div class="mod-card fi d1">
         <p class="mod-tag">ORBIT HR</p>
         <h3 class="mod-name">人事出勤</h3>
-        <p class="mod-desc">手機就是打卡機。不需要任何硬體設備，員工用系統上下班打卡，出缺勤自動統計，薪資計算基礎資料一鍵匯出。</p>
+        <p class="mod-desc">手機就是打卡機。出缺勤自動統計，薪資計算基礎資料一鍵匯出。</p>
         <ul class="mod-list">
           <li>手機上下班打卡，無需硬體</li>
           <li>出缺勤、遲到、早退自動統計</li>
@@ -1011,7 +243,7 @@
       <div class="mod-card fi d2">
         <p class="mod-tag">ORBIT CRM</p>
         <h3 class="mod-name">顧客關係</h3>
-        <p class="mod-desc">將每一次互動轉化為長期關係。集中管理顧客資料、消費記錄與行銷溝通，驅動回購與忠誠度。</p>
+        <p class="mod-desc">將每一次互動轉化為長期關係。集中管理顧客資料、消費記錄與行銷溝通。</p>
         <ul class="mod-list">
           <li>顧客資料與消費歷程統一檢視</li>
           <li>會員分級與積點制度</li>
@@ -1023,8 +255,8 @@
 
       <div class="mod-card fi d3">
         <p class="mod-tag">ORBIT AI</p>
-        <h3 class="mod-name">智慧分析</h3>
-        <p class="mod-desc">讓數據替你做決策。AI 自動分析銷售趨勢、預測庫存需求、提示異常，讓每一個營運判斷都有根據。</p>
+        <h3 class="mod-name">智慧自動化</h3>
+        <p class="mod-desc">不是選配，是基礎建設。AI 內建於每個組合，讓系統替你工作——從洞察到建議到全自動執行。</p>
         <ul class="mod-list">
           <li>銷售趨勢預測與異常偵測</li>
           <li>智慧補貨建議</li>
@@ -1035,19 +267,48 @@
       </div>
 
     </div>
+
+    <div class="ai-banner fi">
+      <div>
+        <p class="ai-banner-eyebrow">ORBIT AI — 內建於每個組合</p>
+        <h3 class="ai-banner-title">每個組合都有 AI<br>差別只在介入的深度</h3>
+        <p class="ai-banner-body">資料量夠了，AI 替你看。模式出現了，AI 替你想。決定該做了，AI 替你動。你的角色是確認方向，不是執行每一個環節。</p>
+      </div>
+      <div class="ai-levels">
+        <div class="ai-level">
+          <span class="ai-level-num">01</span>
+          <div>
+            <p class="ai-level-title">洞察</p>
+            <p class="ai-level-desc">系統告訴你發生了什麼。異常偵測、趨勢報告、自動摘要。</p>
+          </div>
+        </div>
+        <div class="ai-level">
+          <span class="ai-level-num">02</span>
+          <div>
+            <p class="ai-level-title">建議</p>
+            <p class="ai-level-desc">系統告訴你該做什麼。補貨建議、人力配置、行銷時機。</p>
+          </div>
+        </div>
+        <div class="ai-level">
+          <span class="ai-level-num">03</span>
+          <div>
+            <p class="ai-level-title">執行</p>
+            <p class="ai-level-desc">系統直接做，你只需要知道結果。自動化工作流，麻煩的事做一次。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ SCENARIOS ═══ -->
 <section id="scenarios">
   <div class="wrap">
 
     <div class="fi">
       <p class="eyebrow">Business Scenarios</p>
-      <h2 class="h2">任何以顧客為核心的行業<br>都能用 ORBIT 運作</h2>
+      <h2 class="h2">任何以顧客為核心的組織<br>都能用 ORBIT 運作</h2>
     </div>
 
     <div class="scen-layout">
@@ -1056,72 +317,72 @@
 
         <div class="scen-item fi">
           <div class="scen-row">
-            <h3 class="scen-name">餐飲業</h3>
+            <h3 class="scen-name">餐飲與接待業</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">桌位管理、廚房出單、訂位流程與 LINE 點餐——從客人到店到結帳離開，全程整合無斷點。</p>
+          <p class="scen-body">從點單到結帳，從訂位到廚房，全程整合無斷點。</p>
         </div>
 
         <div class="scen-item fi d1">
           <div class="scen-row">
-            <h3 class="scen-name">補習班與教育機構</h3>
+            <h3 class="scen-name">教育與培訓機構</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">學員管理、課程預約、出缺席紀錄、家長通知、繳費追蹤——補習班、才藝班、語言中心全適用。</p>
+          <p class="scen-body">學員管理、課程預約、出缺席、繳費追蹤，一套搞定。</p>
         </div>
 
         <div class="scen-item fi d2">
           <div class="scen-row">
-            <h3 class="scen-name">美容美髮 &amp; 健康產業</h3>
+            <h3 class="scen-name">健康美容產業</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">預約排程、設計師班表、服務紀錄、顧客偏好管理——美髮、美甲、SPA、健身房，一套搞定。</p>
+          <p class="scen-body">預約排程、服務紀錄、顧客偏好，自動化管理每一個環節。</p>
         </div>
 
         <div class="scen-item fi d3">
           <div class="scen-row">
-            <h3 class="scen-name">零售品牌</h3>
+            <h3 class="scen-name">零售與品牌通路</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">跨所有 SKU 的庫存透明度、會員積點計畫與流暢結帳體驗——一間精品店或全國連鎖都適用。</p>
+          <p class="scen-body">庫存透明、會員積點、流暢結帳，一間精品店或全國連鎖都適用。</p>
         </div>
 
         <div class="scen-item fi d4">
           <div class="scen-row">
-            <h3 class="scen-name">診所與醫療服務</h3>
+            <h3 class="scen-name">醫療與專業服務</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">線上掛號、候診管理、患者資料紀錄、回診提醒自動發送——讓診所團隊專注在服務，不在行政。</p>
+          <p class="scen-body">預約、候診、患者紀錄、自動提醒，讓團隊專注在服務本身。</p>
         </div>
 
         <div class="scen-item fi d1">
           <div class="scen-row">
-            <h3 class="scen-name">多店連鎖營運</h3>
+            <h3 class="scen-name">多單位連鎖組織</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">總部整合報表儀表板、各店獨立自主運作、即時異常警示——規模擴張，可視性不打折。</p>
+          <p class="scen-body">總部整合儀表板，各單位獨立運作，即時異常警示，規模擴張可視性不打折。</p>
         </div>
 
         <div class="scen-item fi d2">
           <div class="scen-row">
-            <h3 class="scen-name">中小企業與成長型服務業</h3>
+            <h3 class="scen-name">成長型企業與新創</h3>
             <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
             </svg>
           </div>
-          <p class="scen-body">從一個模組開始，隨業務成長持續擴充。不需要搬移資料、更換廠商，也不會中斷營運。</p>
+          <p class="scen-body">從一個模組開始，隨業務成長持續擴充。不搬資料、不換廠商、不中斷營運。</p>
         </div>
 
       </div>
@@ -1134,9 +395,9 @@
             <li>告別在多個不整合的系統之間切換</li>
             <li>每個顧客觸點的資料都即時同步</li>
             <li>LINE 原生，專為台灣與東南亞設計</li>
-            <li>模組化：從一個開始，或一次部署九個</li>
+            <li>模組化：從一個開始，或一次部署全套</li>
+            <li>AI 內建，自動化程度隨業務成長</li>
             <li>企業級資安與角色存取控管</li>
-            <li>適用任何有顧客服務需求的行業</li>
             <li>由真正在用它經營業務的團隊打造</li>
             <li>本地金流、本地化工作流程</li>
           </ul>
@@ -1148,9 +409,6 @@
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ TESTIMONIALS ═══ -->
 <section id="testimonials">
   <div class="wrap">
     <p class="eyebrow fi">Testimonials</p>
@@ -1241,9 +499,6 @@
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ ABOUT ═══ -->
 <section id="about">
   <div class="wrap">
     <div class="about-layout">
@@ -1251,20 +506,23 @@
       <div>
         <div class="fi">
           <p class="eyebrow">About ORBIT</p>
-          <h2 class="h2">從實際營運中<br>淬鍊出的企業軟體</h2>
+          <h2 class="h2">麻煩的事簡單做<br>簡單的事做一次</h2>
         </div>
         <div class="about-body fi d1">
-          <p>ORBIT 由 OBARAI 開發——一家為台灣與亞太地區企業打造智慧管理系統的科技公司，法人主體為鎧洋聲影科技。</p>
-          <p>我們不針對假設性的業務場景設計功能。ORBIT 首先部署在我們自己的業務中，每一個功能都在真實營運壓力下驗證過，才會交到客戶手上。</p>
-          <p>ORBIT 的設計核心只有一個原則：只要你有顧客，你就需要 ORBIT。無論是餐廳、補習班、美容院、零售門市、診所或任何服務業，底層的顧客管理、預約、出勤與銷售邏輯是共通的——ORBIT 讓你不必為每個行業買一套系統。</p>
-          <p>團隊橫跨餐飲、教育、零售、美容、媒體與企業科技等多個產業的實戰背景，讓 ORBIT 有足夠的深度，服務處於各個成長階段的企業。</p>
+          <p>ORBIT 的終極目標只有一個：讓系統替你工作，而不是讓你替系統工作。</p>
+          <p>ORBIT 由 OBARAI 開發，法人主體為鎧洋聲影科技工作室。每個模組都先在我們自己的業務中部署，承受真實營運壓力之後，才交到客戶手上。</p>
+          <p>我們相信一個好的系統應該讓你愈用愈輕鬆。AI 內建在每一套組合裡，從第一天就開始學習你的業務，最終走向全自動執行——你只需要知道結果。</p>
+        </div>
+        <div class="about-philosophy fi d2">
+          <p class="about-philosophy-quote">一人公司用得順<br>百人企業撐得住</p>
+          <p class="about-philosophy-attr">OBARAI — 鎧洋聲影科技工作室</p>
         </div>
       </div>
 
       <div class="pillars fi d2">
         <div class="pillar">
           <h4 class="pillar-title">內部優先開發</h4>
-          <p class="pillar-text">每個模組都在對外發布前先跑在我們自己的業務上。真實壓力，真實驗證——不是測試環境。</p>
+          <p class="pillar-text">每個模組都在對外發布前先跑在我們自己的業務上。真實壓力，真實驗證，不是測試環境。</p>
         </div>
         <div class="pillar">
           <h4 class="pillar-title">亞太市場深耕</h4>
@@ -1272,7 +530,7 @@
         </div>
         <div class="pillar">
           <h4 class="pillar-title">長期夥伴關係</h4>
-          <p class="pillar-text">部署完成後不會消失。ORBIT 客戶直接與我們的團隊合作——從導入、成長，到拓展新市場。</p>
+          <p class="pillar-text">部署完成後不消失。從導入、成長到拓展新市場，我們都在。</p>
         </div>
         <div class="pillar">
           <h4 class="pillar-title">精工工程品質</h4>
@@ -1285,16 +543,13 @@
 </section>
 
 <hr class="divide">
-
-
-<!-- ═══ CONTACT ═══ -->
 <section id="contact">
   <div class="wrap">
     <div class="contact-inner fi">
 
       <p class="eyebrow">Contact</p>
-      <h2 class="contact-title">準備好親眼<br>看 ORBIT 了嗎</h2>
-      <p class="contact-sub">預約與我們團隊的私人展示。我們會帶您走過整套系統，並實際對應您的業務場景。</p>
+      <h2 class="contact-title">準備好<br>親眼看 ORBIT 了</h2>
+      <p class="contact-sub">預約與我們團隊的私人展示。我們會帶你走過整套系統，並實際對應你的業務場景。</p>
 
       <div class="contact-ctas">
         <a href="mailto:hello@obarai.com" class="btn-gold">預約展示</a>
@@ -1319,9 +574,6 @@
     </div>
   </div>
 </section>
-
-
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="wrap">
     <div class="footer-row">
@@ -1337,8 +589,562 @@
     </div>
   </div>
 </footer>
+<script>function a0_0x5816(_0x485edd,_0x345c66){_0x485edd=_0x485edd-0xe0;const _0x148ef6=a0_0x1ce6();let _0x533985=_0x148ef6[_0x485edd];if(a0_0x5816['LjcGog']===undefined){var _0x332bc0=function(_0x205c42){const _0x3bd5c6='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x480e96='',_0x3055d5='',_0x48bb98=_0x480e96+_0x332bc0,_0x4c4f3c=(''+function(){return 0x0;})['indexOf']('\x0a')!==-0x1;for(let _0x229d11=0x0,_0x17d6ea,_0x3458ea,_0x3adc7e=0x0;_0x3458ea=_0x205c42['charAt'](_0x3adc7e++);~_0x3458ea&&(_0x17d6ea=_0x229d11%0x4?_0x17d6ea*0x40+_0x3458ea:_0x3458ea,_0x229d11++%0x4)?_0x480e96+=_0x4c4f3c||_0x48bb98['charCodeAt'](_0x3adc7e+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x17d6ea>>(-0x2*_0x229d11&0x6)):_0x229d11:0x0){_0x3458ea=_0x3bd5c6['indexOf'](_0x3458ea);}for(let _0x56465e=0x0,_0x3a30db=_0x480e96['length'];_0x56465e<_0x3a30db;_0x56465e++){_0x3055d5+='%'+('00'+_0x480e96['charCodeAt'](_0x56465e)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x3055d5);};a0_0x5816['DgrqmG']=_0x332bc0,a0_0x5816['mshOof']={},a0_0x5816['LjcGog']=!![];}const _0x1ce6a4=_0x148ef6[0x0],_0x5816ff=_0x485edd+_0x1ce6a4,_0x1cc210=a0_0x5816['mshOof'][_0x5816ff];if(!_0x1cc210){const _0x57eeec=function(_0x35c902){this['QJXNWA']=_0x35c902,this['XwfqKx']=[0x1,0x0,0x0],this['dMQcwa']=function(){return'newState';},this['HiQdaF']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*',this['OfRDHj']='[\x27|\x22].+[\x27|\x22];?\x20*}';};_0x57eeec['prototype']['bzcGrF']=function(){const _0x17ee2a=new RegExp(this['HiQdaF']+this['OfRDHj']),_0x343813=_0x17ee2a['test'](this['dMQcwa']['toString']())?--this['XwfqKx'][0x1]:--this['XwfqKx'][0x0];return this['ilkjMn'](_0x343813);},_0x57eeec['prototype']['ilkjMn']=function(_0xd7f2b5){if(!Boolean(~_0xd7f2b5))return _0xd7f2b5;return this['dBrAch'](this['QJXNWA']);},_0x57eeec['prototype']['dBrAch']=function(_0x227f0a){for(let _0x15f77d=0x0,_0x34e8a5=this['XwfqKx']['length'];_0x15f77d<_0x34e8a5;_0x15f77d++){this['XwfqKx']['push'](Math['round'](Math['random']())),_0x34e8a5=this['XwfqKx']['length'];}return _0x227f0a(this['XwfqKx'][0x0]);},(''+function(){return 0x0;})['indexOf']('\x0a')===-0x1&&new _0x57eeec(a0_0x5816)['bzcGrF'](),_0x533985=a0_0x5816['DgrqmG'](_0x533985),a0_0x5816['mshOof'][_0x5816ff]=_0x533985;}else _0x533985=_0x1cc210;return _0x533985;}const a0_0x31a699=a0_0x5816;(function(_0x230337,_0xfb80e9){const _0x36f084=a0_0x5816,_0x19eb4e=_0x230337();while(!![]){try{const _0x390b8=parseInt(_0x36f084(0xf6))/0x1*(-parseInt(_0x36f084(0xe6))/0x2)+parseInt(_0x36f084(0xe9))/0x3*(parseInt(_0x36f084(0xef))/0x4)+parseInt(_0x36f084(0xe0))/0x5*(-parseInt(_0x36f084(0xe2))/0x6)+parseInt(_0x36f084(0xf7))/0x7*(-parseInt(_0x36f084(0xe7))/0x8)+-parseInt(_0x36f084(0xf2))/0x9*(parseInt(_0x36f084(0xf3))/0xa)+parseInt(_0x36f084(0xec))/0xb+parseInt(_0x36f084(0xf1))/0xc*(parseInt(_0x36f084(0xe5))/0xd);if(_0x390b8===_0xfb80e9)break;else _0x19eb4e['push'](_0x19eb4e['shift']());}catch(_0xafee25){_0x19eb4e['push'](_0x19eb4e['shift']());}}}(a0_0x1ce6,0x94536));const a0_0x332bc0=(function(){let _0x4c4f3c=!![];return function(_0x229d11,_0x17d6ea){const _0x3458ea=_0x4c4f3c?function(){const _0x224c1c=a0_0x5816;if(_0x17d6ea){const _0x3adc7e=_0x17d6ea[_0x224c1c(0xeb)](_0x229d11,arguments);return _0x17d6ea=null,_0x3adc7e;}}:function(){};return _0x4c4f3c=![],_0x3458ea;};}()),a0_0x533985=a0_0x332bc0(this,function(){const _0x53d157=a0_0x5816;return a0_0x533985['toString']()[_0x53d157(0xee)](_0x53d157(0xe1))['toString']()['constructor'](a0_0x533985)['search']('(((.+)+)+)+$');});a0_0x533985();function a0_0x1ce6(){const _0x8ffeac=['kcGOlISPkYKRksSK','nZq2odG2AxDzyuTS','DgfYz2v0','AxnjBNrLCNnLy3rPBMC','ndu5ndGZn3HpuvncCW','mti2oenervPnzG','mJy4otyWBhjQrgHi','B2jZzxj2zq','mJC2uwftB2zR','CxvLCNLtzwXLy3rVCKfSBa','yxbWBhK','mtq2mZqXohHlsu5AtG','lMzP','C2vHCMnO','ntaYmfjcDg1LrG','zM9YrwfJAa','otzlA0HIDu8','ntG5otu5oujTyxz6BW','mtbsvxDgzNO','mhb4idbWEcaTmZjWEcaWChG','ywrK','otu1y1zZwNDj','nZblvhn4vwS','mZvOz2XkCMe'];a0_0x1ce6=function(){return _0x8ffeac;};return a0_0x1ce6();}const observer=new IntersectionObserver(_0x56465e=>_0x56465e[a0_0x31a699(0xf0)](_0x3a30db=>{const _0x33b299=a0_0x31a699;_0x3a30db[_0x33b299(0xe4)]&&(_0x3a30db['target']['classList'][_0x33b299(0xf5)]('on'),observer['unobserve'](_0x3a30db[_0x33b299(0xe3)]));}),{'threshold':0.08,'rootMargin':a0_0x31a699(0xf4)});document[a0_0x31a699(0xea)](a0_0x31a699(0xed))['forEach'](_0x57eeec=>observer[a0_0x31a699(0xe8)](_0x57eeec));</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>*,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--black:#0c0c0c;--surface:#141414;--surface-2:#1c1c1c;--border:rgba(255,255,255,0.07);--border-light:rgba(255,255,255,0.04);--white:#ece9e0;--white-70:rgba(236,233,224,0.70);--white-40:rgba(236,233,224,0.40);--white-20:rgba(236,233,224,0.20);--gold:#c8a96e;--gold-60:rgba(200,169,110,0.60);--gold-20:rgba(200,169,110,0.20);--gold-08:rgba(200,169,110,0.08);--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--tc:'Noto Sans TC','PingFang TC',sans-serif}html{scroll-behavior:smooth}body{background:var(--black);color:var(--white);font-family:var(--tc);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(12,12,12,.82);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border-bottom:1px solid var(--border-light)}.nav-logo{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:.14em;color:var(--white);text-decoration:none}.nav-logo-dot{color:var(--gold)}.nav-links{display:flex;align-items:center;gap:36px;list-style:none}.nav-links a{font-size:13px;font-weight:400;color:var(--white-40);text-decoration:none;transition:color .2s}.nav-links a:hover{color:var(--white-70)}.nav-cta{font-size:12.5px!important;font-weight:500!important;color:var(--gold)!important;border:1px solid var(--gold-60);padding:9px 22px;border-radius:6px;transition:background .2s!important}.nav-cta:hover{background:var(--gold-08)!important}.wrap{max-width:1200px;margin:0 auto;padding:0 48px}hr.divide{border:none;border-top:1px solid var(--border-light)}.fi{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.fi.on{opacity:1;transform:none}.fi.d1{transition-delay:80ms}.fi.d2{transition-delay:0.16s}.fi.d3{transition-delay:0.24s}.fi.d4{transition-delay:0.32s}.btn-gold{display:inline-flex;align-items:center;font-family:var(--tc);font-size:13px;font-weight:500;color:#0c0c0c;background:var(--gold);padding:13px 32px;border-radius:6px;text-decoration:none;transition:opacity .2s,transform .2s}.btn-gold:hover{opacity:.85;transform:translateY(-1px)}.btn-outline{display:inline-flex;align-items:center;font-family:var(--tc);font-size:13px;font-weight:400;color:var(--white-70);padding:13px 32px;border-radius:6px;border:1px solid var(--border);text-decoration:none;transition:border-color .2s,color .2s}.btn-outline:hover{border-color:rgba(255,255,255,.16);color:var(--white)}.eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.h2{font-size:clamp(28px, 3.8vw, 44px);font-weight:500;letter-spacing:-.01em;line-height:1.25;color:var(--white)}.lead{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.85;max-width:520px;margin-top:18px}#hero{min-height:100vh;display:flex;align-items:center;padding:128px 0 96px;position:relative;overflow:hidden}.hero-glow{position:absolute;top:10%;right:-5%;width:55%;height:65%;background:radial-gradient(ellipse at 60% 40%,rgba(200,169,110,.04) 0,transparent 65%);pointer-events:none}.hero-inner{position:relative;z-index:1}.hero-rule{display:flex;align-items:center;gap:14px;margin-bottom:36px}.hero-rule::before{content:'';display:block;width:36px;height:1px;background:var(--gold);opacity:.55}.hero-rule span{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}.hero-title{font-size:clamp(52px, 8.5vw, 96px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--white);margin-bottom:32px}.hero-title em{font-style:normal;color:var(--gold)}.hero-sub{font-size:17px;font-weight:300;color:var(--white-70);max-width:480px;line-height:1.85;margin-bottom:52px}.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.hero-metrics{display:flex;gap:60px;margin-top:88px;padding-top:44px;border-top:1px solid var(--border-light)}.metric-num{font-family:var(--sans);font-size:34px;font-weight:500;letter-spacing:-.03em;color:var(--white)}.metric-label{font-size:11px;font-weight:300;color:var(--white-40);margin-top:5px}#ecosystem{padding:120px 0}.eco-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:72px;align-items:end}.eco-desc{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.85}.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-light);border:1px solid var(--border-light);border-radius:14px;overflow:hidden}.eco-cell{background:var(--surface);padding:44px 32px;transition:background .3s}.eco-cell:hover{background:var(--surface-2)}.eco-num{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--gold);margin-bottom:16px}.eco-title{font-size:16px;font-weight:500;color:var(--white);margin-bottom:10px}.eco-text{font-size:13px;font-weight:300;color:var(--white-40);line-height:1.8}#modules{padding:120px 0;background:var(--surface)}.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:72px}.mod-card{background:var(--black);border:1px solid var(--border);border-radius:12px;padding:36px 32px 40px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}.mod-card:hover{border-color:var(--gold-20);transform:translateY(-3px)}.mod-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.mod-name{font-size:20px;font-weight:500;color:var(--white);margin-bottom:10px;letter-spacing:-.005em}.mod-desc{font-size:13.5px;font-weight:300;color:var(--white-70);line-height:1.8;margin-bottom:28px;flex:1}.mod-list{list-style:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border-light);padding-top:22px}.mod-list li{font-size:12.5px;font-weight:300;color:var(--white-40);display:flex;align-items:center;gap:10px}.mod-list li::before{content:'';display:block;width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.55;flex-shrink:0}.ai-banner{margin-top:48px;border:1px solid var(--gold-20);border-radius:14px;padding:44px 48px;background:var(--gold-08);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.ai-banner-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.ai-banner-title{font-size:clamp(22px, 2.8vw, 32px);font-weight:500;color:var(--white);line-height:1.3;margin-bottom:16px;letter-spacing:-.01em}.ai-banner-body{font-size:14px;font-weight:300;color:var(--white-70);line-height:1.85}.ai-levels{display:flex;flex-direction:column;gap:20px}.ai-level{display:flex;gap:16px;align-items:flex-start}.ai-level-num{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--gold);opacity:.6;padding-top:3px;flex-shrink:0;width:20px}.ai-level-title{font-size:13.5px;font-weight:500;color:var(--white);margin-bottom:3px}.ai-level-desc{font-size:12.5px;font-weight:300;color:var(--white-40);line-height:1.7}#scenarios{padding:120px 0}.scen-layout{display:grid;grid-template-columns:5fr 4fr;gap:80px;align-items:start;margin-top:72px}.scen-list{display:flex;flex-direction:column}.scen-item{padding:32px 0;border-bottom:1px solid var(--border-light)}.scen-item:first-child{border-top:1px solid var(--border-light)}.scen-row{display:flex;align-items:center;justify-content:space-between;gap:16px}.scen-name{font-size:18px;font-weight:500;color:var(--white)}.scen-icon{color:var(--white-20);flex-shrink:0;transition:color .2s,transform .2s}.scen-item:hover .scen-icon{color:var(--gold);transform:translateX(4px)}.scen-body{font-size:13.5px;font-weight:300;color:var(--white-40);line-height:1.8;margin-top:10px}.scen-panel{position:sticky;top:100px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:48px 40px}.panel-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.panel-title{font-size:22px;font-weight:500;color:var(--white);margin-bottom:28px;line-height:1.4}.panel-list{list-style:none;display:flex;flex-direction:column;gap:14px}.panel-list li{font-size:13.5px;font-weight:300;color:var(--white-70);display:flex;gap:12px;align-items:flex-start;line-height:1.65}.panel-list li::before{content:'—';color:var(--gold);opacity:.65;flex-shrink:0;font-family:var(--sans)}#testimonials{padding:120px 0;background:var(--surface)}.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:72px}.testi-card{background:var(--black);border:1px solid var(--border);border-radius:14px;padding:40px 36px 36px;display:flex;flex-direction:column;gap:0;transition:border-color .25s;position:relative}.testi-card:hover{border-color:var(--gold-20)}.testi-openquote{font-size:64px;line-height:1;color:var(--gold);opacity:.45;font-family:Georgia,'Times New Roman',serif;margin-bottom:-8px;display:block}.testi-quote{font-size:14.5px;font-weight:300;color:var(--white-70);line-height:1.9;flex:1;margin-bottom:28px}.testi-meta{display:flex;align-items:center;gap:14px;padding-top:22px;border-top:1px solid var(--border-light)}.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold-08);border:1px solid var(--gold-20);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--gold);flex-shrink:0;overflow:hidden}.testi-avatar img{width:100%;height:100%;object-fit:cover;display:block}.testi-name{font-size:13.5px;font-weight:500;color:var(--white)}.testi-role{font-size:12px;font-weight:300;color:var(--white-40);margin-top:2px}.testi-tag{margin-left:auto;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-08);border:1px solid var(--gold-20);border-radius:4px;padding:4px 10px;white-space:nowrap;flex-shrink:0}#about{padding:120px 0}.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.about-body p{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.9;margin-top:22px}.about-body p:first-of-type{font-size:17px;font-weight:400;color:var(--white)}.about-philosophy{margin-top:40px;padding:28px 32px;border-left:1px solid var(--gold-60);background:var(--gold-08);border-radius:0 8px 8px 0}.about-philosophy-quote{font-size:18px;font-weight:500;color:var(--white);line-height:1.6;letter-spacing:-.005em}.about-philosophy-attr{font-size:11.5px;font-weight:300;color:var(--gold);margin-top:10px;letter-spacing:.06em}.pillars{display:flex;flex-direction:column;gap:36px;margin-top:8px}.pillar{padding-left:24px;border-left:1px solid var(--gold-60)}.pillar-title{font-size:13.5px;font-weight:600;color:var(--white);margin-bottom:6px}.pillar-text{font-size:13px;font-weight:300;color:var(--white-40);line-height:1.8}#contact{padding:120px 0 160px}.contact-inner{max-width:640px}.contact-title{font-size:clamp(36px, 5vw, 56px);font-weight:500;letter-spacing:-.015em;line-height:1.15;color:var(--white);margin-bottom:20px}.contact-sub{font-size:16px;font-weight:300;color:var(--white-70);line-height:1.85;margin-bottom:48px}.contact-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}.contact-details{display:flex;flex-direction:column;gap:10px}.contact-row{display:flex;align-items:center;gap:10px;font-size:13px}.contact-label{color:var(--white-20);width:56px;flex-shrink:0}.contact-val{color:var(--white-40)}.contact-val a{color:var(--white-40);text-decoration:none;transition:color .2s}.contact-val a:hover{color:var(--gold)}footer{border-top:1px solid var(--border-light);padding:36px 0}.footer-row{display:flex;align-items:center;justify-content:space-between}.footer-brand{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.12em;color:var(--white-20)}.footer-nav{display:flex;gap:28px;list-style:none}.footer-nav a{font-size:12px;color:var(--white-20);text-decoration:none;transition:color .2s}.footer-nav a:hover{color:var(--white-40)}.footer-copy{font-size:11.5px;color:var(--white-20)}@media (max-width:1024px){.eco-grid{grid-template-columns:repeat(2,1fr)}.ai-banner{grid-template-columns:1fr;gap:40px}}@media (max-width:900px){nav{padding:0 24px}.nav-links{display:none}.wrap{padding:0 24px}.eco-head{grid-template-columns:1fr;gap:24px}.mod-grid{grid-template-columns:repeat(2,1fr)}.scen-layout{grid-template-columns:1fr}.scen-panel{position:static;margin-top:40px}.testi-grid{grid-template-columns:1fr}.about-layout{grid-template-columns:1fr;gap:56px}.hero-metrics{gap:40px}.footer-row{flex-direction:column;gap:20px;text-align:center}.footer-nav{justify-content:center}.ai-banner{padding:32px 28px}}@media (max-width:600px){.mod-grid{grid-template-columns:1fr}.eco-grid{grid-template-columns:1fr}.hero-actions{flex-direction:column;align-items:flex-start}.contact-ctas{flex-direction:column}.hero-metrics{flex-wrap:wrap;gap:32px}}</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">ORBIT<span class="nav-logo-dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#ecosystem">系統概覽</a></li>
+    <li><a href="#modules">產品模組</a></li>
+    <li><a href="#scenarios">適用場景</a></li>
+    <li><a href="#testimonials">客戶推薦</a></li>
+    <li><a href="#about">關於我們</a></li>
+    <li><a href="#contact" class="nav-cta">預約展示</a></li>
+  </ul>
+</nav>
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-inner">
 
+      <div class="hero-rule fi">
+        <span>Enterprise Intelligence System</span>
+      </div>
 
+      <h1 class="hero-title fi d1">
+        規模改變<br>
+        <em>系統不換</em>
+      </h1>
+
+      <p class="hero-sub fi d2">
+        從一人公司到跨國組織，ORBIT 是同一套系統。
+        模組化架構，AI 內建其中，從第一個顧客到年度報表，全面整合。
+      </p>
+
+      <div class="hero-actions fi d3">
+        <a href="#contact" class="btn-gold">預約展示</a>
+        <a href="#modules" class="btn-outline">瀏覽模組</a>
+      </div>
+
+      <div class="hero-metrics fi d4">
+        <div>
+          <div class="metric-num">9</div>
+          <div class="metric-label">核心模組</div>
+        </div>
+        <div>
+          <div class="metric-num">∞</div>
+          <div class="metric-label">支援規模</div>
+        </div>
+        <div>
+          <div class="metric-num">1</div>
+          <div class="metric-label">整合平台</div>
+        </div>
+        <div>
+          <div class="metric-num">0</div>
+          <div class="metric-label">資料同步錯誤</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+<section id="ecosystem">
+  <div class="wrap">
+
+    <div class="eco-head">
+      <div class="fi">
+        <p class="eyebrow">ORBIT Ecosystem</p>
+        <h2 class="h2">貼合真實營運方式<br>而設計</h2>
+      </div>
+      <p class="eco-desc fi d1">
+        大多數企業軟體只會讓流程更複雜。ORBIT 做的恰好相反——用一個統一的智慧層，取代那些各自為政的工具。無論你的規模是一人還是千人，ORBIT 讓你從第一天就用同一套系統長大。
+      </p>
+    </div>
+
+    <div class="eco-grid">
+      <div class="eco-cell fi">
+        <p class="eco-num">01</p>
+        <h3 class="eco-title">統一資料架構</h3>
+        <p class="eco-text">銷售、庫存、員工、訂位，所有資料共用同一個來源。不需匯入、不會同步錯誤、沒有資訊孤島。</p>
+      </div>
+      <div class="eco-cell fi d1">
+        <p class="eco-num">02</p>
+        <h3 class="eco-title">任意規模支援</h3>
+        <p class="eco-text">單店、連鎖或跨國組織，同一個儀表板掌管全局。各單位獨立運作，總部即時可視，不妥協。</p>
+      </div>
+      <div class="eco-cell fi d2">
+        <p class="eco-num">03</p>
+        <h3 class="eco-title">模組化設計</h3>
+        <p class="eco-text">今天只需要哪個功能，就部署哪個模組。隨著業務成長，ORBIT 跟著擴充——每個模組原生整合，無縫銜接。</p>
+      </div>
+      <div class="eco-cell fi d3">
+        <p class="eco-num">04</p>
+        <h3 class="eco-title">LINE 原生整合</h3>
+        <p class="eco-text">為以 LINE 為日常工具的市場而生。訂位、通知、會員 CRM，全部透過 LINE 完成。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divide">
+<section id="modules">
+  <div class="wrap">
+
+    <div class="fi">
+      <p class="eyebrow">Product Modules</p>
+      <h2 class="h2">各司其職的模組<br>無縫整合的系統</h2>
+    </div>
+
+    <div class="mod-grid">
+
+      <div class="mod-card fi d1">
+        <p class="mod-tag">ORBIT POS</p>
+        <h3 class="mod-name">銷售終端</h3>
+        <p class="mod-desc">快速、流暢的結帳體驗，跨終端、跨門市即時同步。</p>
+        <ul class="mod-list">
+          <li>多終端、多店鋪管理</li>
+          <li>分帳付款與折扣設定</li>
+          <li>即時庫存扣減</li>
+          <li>會員積點整合</li>
+          <li>ECPay 金流串接</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d2">
+        <p class="mod-tag">ORBIT ERP</p>
+        <h3 class="mod-name">資源規劃</h3>
+        <p class="mod-desc">完整的營運可視性——庫存追蹤、採購單、供應商管理與成本分析，全部集中一處。</p>
+        <ul class="mod-list">
+          <li>庫存管理與補貨警示</li>
+          <li>採購單流程管理</li>
+          <li>供應商資料追蹤</li>
+          <li>銷貨成本與毛利報表</li>
+          <li>多倉庫支援</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d3">
+        <p class="mod-tag">ORBIT RSVP</p>
+        <h3 class="mod-name">訂位管理</h3>
+        <p class="mod-desc">線上訂位、現場候位管理與座位容量控制，一體整合。</p>
+        <ul class="mod-list">
+          <li>公開線上訂位頁面</li>
+          <li>現場候位排隊管理</li>
+          <li>行事曆與平面圖視角</li>
+          <li>自動簡訊與 LINE 提醒</li>
+          <li>容量上限控管</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d1">
+        <p class="mod-tag">ORBIT LINE</p>
+        <h3 class="mod-name">LINE 整合</h3>
+        <p class="mod-desc">將業務接上顧客每天使用的平台。LIFF 應用、訊息推播與 CRM，整合在同一個模組。</p>
+        <ul class="mod-list">
+          <li>LINE LIFF 應用整合</li>
+          <li>訂單自動通知</li>
+          <li>訂位確認訊息</li>
+          <li>顧客群發訊息</li>
+          <li>LINE Login 會員同步</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d2">
+        <p class="mod-tag">ORBIT FLOW</p>
+        <h3 class="mod-name">營運管理</h3>
+        <p class="mod-desc">員工排班、班次管理與任務工作流——無論在場或遠端，日常營運順暢運行。</p>
+        <ul class="mod-list">
+          <li>員工排班與班次管理</li>
+          <li>角色權限存取控管</li>
+          <li>任務與查核清單</li>
+          <li>個人業績追蹤</li>
+          <li>交班報告</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d3">
+        <p class="mod-tag">ORBIT AUTH</p>
+        <h3 class="mod-name">權限管控</h3>
+        <p class="mod-desc">企業級權限管理。精確定義誰能查看、操作與審批——細緻到個別單位層級。</p>
+        <ul class="mod-list">
+          <li>角色基礎權限設定</li>
+          <li>店鋪層級存取控制</li>
+          <li>主管 PIN 碼驗證</li>
+          <li>操作稽核日誌</li>
+          <li>SSO 單一登入支援</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d1">
+        <p class="mod-tag">ORBIT HR</p>
+        <h3 class="mod-name">人事出勤</h3>
+        <p class="mod-desc">手機就是打卡機。出缺勤自動統計，薪資計算基礎資料一鍵匯出。</p>
+        <ul class="mod-list">
+          <li>手機上下班打卡，無需硬體</li>
+          <li>出缺勤、遲到、早退自動統計</li>
+          <li>排班與班表管理</li>
+          <li>請假與加班申請流程</li>
+          <li>薪資計算基礎資料匯出</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d2">
+        <p class="mod-tag">ORBIT CRM</p>
+        <h3 class="mod-name">顧客關係</h3>
+        <p class="mod-desc">將每一次互動轉化為長期關係。集中管理顧客資料、消費記錄與行銷溝通。</p>
+        <ul class="mod-list">
+          <li>顧客資料與消費歷程統一檢視</li>
+          <li>會員分級與積點制度</li>
+          <li>精準分眾行銷活動</li>
+          <li>自動化再行銷訊息</li>
+          <li>顧客滿意度追蹤</li>
+        </ul>
+      </div>
+
+      <div class="mod-card fi d3">
+        <p class="mod-tag">ORBIT AI</p>
+        <h3 class="mod-name">智慧自動化</h3>
+        <p class="mod-desc">不是選配，是基礎建設。AI 內建於每個組合，讓系統替你工作——從洞察到建議到全自動執行。</p>
+        <ul class="mod-list">
+          <li>銷售趨勢預測與異常偵測</li>
+          <li>智慧補貨建議</li>
+          <li>顧客行為洞察報告</li>
+          <li>自然語言查詢數據</li>
+          <li>跨模組 AI 摘要儀表板</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ai-banner fi">
+      <div>
+        <p class="ai-banner-eyebrow">ORBIT AI — 內建於每個組合</p>
+        <h3 class="ai-banner-title">每個組合都有 AI<br>差別只在介入的深度</h3>
+        <p class="ai-banner-body">資料量夠了，AI 替你看。模式出現了，AI 替你想。決定該做了，AI 替你動。你的角色是確認方向，不是執行每一個環節。</p>
+      </div>
+      <div class="ai-levels">
+        <div class="ai-level">
+          <span class="ai-level-num">01</span>
+          <div>
+            <p class="ai-level-title">洞察</p>
+            <p class="ai-level-desc">系統告訴你發生了什麼。異常偵測、趨勢報告、自動摘要。</p>
+          </div>
+        </div>
+        <div class="ai-level">
+          <span class="ai-level-num">02</span>
+          <div>
+            <p class="ai-level-title">建議</p>
+            <p class="ai-level-desc">系統告訴你該做什麼。補貨建議、人力配置、行銷時機。</p>
+          </div>
+        </div>
+        <div class="ai-level">
+          <span class="ai-level-num">03</span>
+          <div>
+            <p class="ai-level-title">執行</p>
+            <p class="ai-level-desc">系統直接做，你只需要知道結果。自動化工作流，麻煩的事做一次。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divide">
+<section id="scenarios">
+  <div class="wrap">
+
+    <div class="fi">
+      <p class="eyebrow">Business Scenarios</p>
+      <h2 class="h2">任何以顧客為核心的組織<br>都能用 ORBIT 運作</h2>
+    </div>
+
+    <div class="scen-layout">
+
+      <div class="scen-list">
+
+        <div class="scen-item fi">
+          <div class="scen-row">
+            <h3 class="scen-name">餐飲與接待業</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">從點單到結帳，從訂位到廚房，全程整合無斷點。</p>
+        </div>
+
+        <div class="scen-item fi d1">
+          <div class="scen-row">
+            <h3 class="scen-name">教育與培訓機構</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">學員管理、課程預約、出缺席、繳費追蹤，一套搞定。</p>
+        </div>
+
+        <div class="scen-item fi d2">
+          <div class="scen-row">
+            <h3 class="scen-name">健康美容產業</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">預約排程、服務紀錄、顧客偏好，自動化管理每一個環節。</p>
+        </div>
+
+        <div class="scen-item fi d3">
+          <div class="scen-row">
+            <h3 class="scen-name">零售與品牌通路</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">庫存透明、會員積點、流暢結帳，一間精品店或全國連鎖都適用。</p>
+        </div>
+
+        <div class="scen-item fi d4">
+          <div class="scen-row">
+            <h3 class="scen-name">醫療與專業服務</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">預約、候診、患者紀錄、自動提醒，讓團隊專注在服務本身。</p>
+        </div>
+
+        <div class="scen-item fi d1">
+          <div class="scen-row">
+            <h3 class="scen-name">多單位連鎖組織</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">總部整合儀表板，各單位獨立運作，即時異常警示，規模擴張可視性不打折。</p>
+        </div>
+
+        <div class="scen-item fi d2">
+          <div class="scen-row">
+            <h3 class="scen-name">成長型企業與新創</h3>
+            <svg class="scen-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M3.5 9h11M9 3.5L14.5 9 9 14.5"/>
+            </svg>
+          </div>
+          <p class="scen-body">從一個模組開始，隨業務成長持續擴充。不搬資料、不換廠商、不中斷營運。</p>
+        </div>
+
+      </div>
+
+      <div class="fi d2">
+        <div class="scen-panel">
+          <p class="panel-tag">為何選擇 ORBIT</p>
+          <h3 class="panel-title">一套系統<br>零妥協</h3>
+          <ul class="panel-list">
+            <li>告別在多個不整合的系統之間切換</li>
+            <li>每個顧客觸點的資料都即時同步</li>
+            <li>LINE 原生，專為台灣與東南亞設計</li>
+            <li>模組化：從一個開始，或一次部署全套</li>
+            <li>AI 內建，自動化程度隨業務成長</li>
+            <li>企業級資安與角色存取控管</li>
+            <li>由真正在用它經營業務的團隊打造</li>
+            <li>本地金流、本地化工作流程</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+<section id="testimonials">
+  <div class="wrap">
+    <p class="eyebrow fi">Testimonials</p>
+    <h2 class="h2 fi d1">各行各業老闆<br>用時間說話</h2>
+
+    <div class="testi-grid">
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">以前手寫訂單廚房根本看不懂，客人等很久還是拿到錯的，每次道歉都覺得很丟臉。現在員工手機直接點，廚房螢幕跳出來就做了。那種每天下班還要跟客人善後的壓力，不見了。終於可以準時關店，回去陪我老婆吃飯。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar"><img src="images/mike.jpg" alt="Mike Chen"></div>
+          <div>
+            <p class="testi-name">Mike Chen</p>
+            <p class="testi-role">珈心咖啡 · 老闆</p>
+          </div>
+          <span class="testi-tag">咖啡廳</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">用 LINE 管預約真的把自己逼瘋了。一邊在燙頭髮一邊要回訊息，搞錯時間客人直接殺過來——那種當場尷尬到不知道說什麼的感覺。現在客人自己選時間，我手機靜音都沒問題。連放假都不用擔心漏掉什麼，睡得比以前好多了。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar"><img src="images/tina.jpg" alt="Tina Huang"></div>
+          <div>
+            <p class="testi-name">Tina Huang</p>
+            <p class="testi-role">T Studio 美髮 · 負責人</p>
+          </div>
+          <span class="testi-tag">美髮沙龍</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">每個月底對帳要搞到半夜，翻紙本、算費用、打電話確認請假，一個人搞三四個小時是常態。我太太說我那幾天像換了個人，回到家就坐著發呆。現在同樣的東西二十分鐘跑完。月底終於可以正常下班，這件事對我來說比任何功能都重要。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">J</div>
+          <div>
+            <p class="testi-name">Jason Wang</p>
+            <p class="testi-role">星橋學院 · 主任</p>
+          </div>
+          <span class="testi-tag">補習班</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">做客製蛋糕最怕的就是取貨當天找不到備注，客人特地說不要什麼口味、寫什麼字，到時候全忘了。那種看著客人失望的臉，真的很想找個洞鑽進去。用了 CRM 之後每筆訂單備注都在，再也不靠記憶了。現在接訂單變成一件開心的事，不是壓力。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar"><img src="images/amy.jpg" alt="Amy Lin"></div>
+          <div>
+            <p class="testi-name">Amy Lin</p>
+            <p class="testi-role">碎花甜點工作室 · 創辦人</p>
+          </div>
+          <span class="testi-tag">甜點工作室</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d1">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">我有三個教練，每個人排班不一樣、學員預約各自在 LINE 談、收費靠我自己記。月底對不起來的時候大家都很有意見，搞得氣氛很差。串在一起之後，帳清楚了，爭議少了。我們現在終於有心思去想怎麼把課程做得更好，而不是每天在解決後勤問題。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar"><img src="images/kevin.jpg" alt="Kevin Liu"></div>
+          <div>
+            <p class="testi-name">Kevin Liu</p>
+            <p class="testi-role">FORMA 健身工作室 · 創辦人</p>
+          </div>
+          <span class="testi-tag">健身工作室</span>
+        </div>
+      </div>
+
+      <div class="testi-card fi d2">
+        <span class="testi-openquote">"</span>
+        <p class="testi-quote">以前每天下班多留一小時整理出勤表，遇到補班或請假就更亂，有時候算錯了薪水還要重來。那種「今天終於可以早點走」的念頭，每天都有但每天都做不到。導入之後，整理的事情系統自己做了。我現在六點就可以走，這一個小時我拿去運動，整個人狀態好很多。</p>
+        <div class="testi-meta">
+          <div class="testi-avatar"><img src="images/vivian.jpg" alt="Vivian Wu"></div>
+          <div>
+            <p class="testi-name">Vivian Wu</p>
+            <p class="testi-role">安康牙醫診所 · 行政主管</p>
+          </div>
+          <span class="testi-tag">診所</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+<section id="about">
+  <div class="wrap">
+    <div class="about-layout">
+
+      <div>
+        <div class="fi">
+          <p class="eyebrow">About ORBIT</p>
+          <h2 class="h2">麻煩的事簡單做<br>簡單的事做一次</h2>
+        </div>
+        <div class="about-body fi d1">
+          <p>ORBIT 的終極目標只有一個：讓系統替你工作，而不是讓你替系統工作。</p>
+          <p>ORBIT 由 OBARAI 開發，法人主體為鎧洋聲影科技工作室。每個模組都先在我們自己的業務中部署，承受真實營運壓力之後，才交到客戶手上。</p>
+          <p>我們相信一個好的系統應該讓你愈用愈輕鬆。AI 內建在每一套組合裡，從第一天就開始學習你的業務，最終走向全自動執行——你只需要知道結果。</p>
+        </div>
+        <div class="about-philosophy fi d2">
+          <p class="about-philosophy-quote">一人公司用得順<br>百人企業撐得住</p>
+          <p class="about-philosophy-attr">OBARAI — 鎧洋聲影科技工作室</p>
+        </div>
+      </div>
+
+      <div class="pillars fi d2">
+        <div class="pillar">
+          <h4 class="pillar-title">內部優先開發</h4>
+          <p class="pillar-text">每個模組都在對外發布前先跑在我們自己的業務上。真實壓力，真實驗證，不是測試環境。</p>
+        </div>
+        <div class="pillar">
+          <h4 class="pillar-title">亞太市場深耕</h4>
+          <p class="pillar-text">LINE 整合、ECPay 金流、本地化工作流程。為這裡的業務運作方式而生，不是從其他地方的軟體移植過來。</p>
+        </div>
+        <div class="pillar">
+          <h4 class="pillar-title">長期夥伴關係</h4>
+          <p class="pillar-text">部署完成後不消失。從導入、成長到拓展新市場，我們都在。</p>
+        </div>
+        <div class="pillar">
+          <h4 class="pillar-title">精工工程品質</h4>
+          <p class="pillar-text">建立在現代基礎設施上，對可靠性、效能與大規模資料完整性有近乎執著的要求。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner fi">
+
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-title">準備好<br>親眼看 ORBIT 了</h2>
+      <p class="contact-sub">預約與我們團隊的私人展示。我們會帶你走過整套系統，並實際對應你的業務場景。</p>
+
+      <div class="contact-ctas">
+        <a href="mailto:hello@obarai.com" class="btn-gold">預約展示</a>
+        <a href="mailto:hello@obarai.com" class="btn-outline">聯絡業務</a>
+      </div>
+
+      <div class="contact-details">
+        <div class="contact-row">
+          <span class="contact-label">信箱</span>
+          <span class="contact-val"><a href="mailto:hello@obarai.com">hello@obarai.com</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">公司</span>
+          <span class="contact-val">OBARAI｜鎧洋聲影科技工作室</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">地區</span>
+          <span class="contact-val">台灣</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <span class="footer-brand">ORBIT</span>
+      <ul class="footer-nav">
+        <li><a href="#ecosystem">系統概覽</a></li>
+        <li><a href="#modules">產品模組</a></li>
+        <li><a href="#scenarios">適用場景</a></li>
+        <li><a href="#about">關於我們</a></li>
+        <li><a href="#contact">聯絡我們</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 OBARAI｜鎧洋聲影科技工作室</span>
+    </div>
+  </div>
+</footer>
 <script>
   const observer = new IntersectionObserver(
     (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); observer.unobserve(e.target); } }),
