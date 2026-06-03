@@ -201,6 +201,32 @@
     .mod-tab.active { color: var(--gold); border-color: var(--gold-60); background: var(--gold-08); }
 
 
+
+    /* ─── LEDGER OS SECTION ─── */
+    #ledger { padding: 120px 0; }
+    .ledger-head { display:grid; grid-template-columns:1fr auto; gap:60px; align-items:end; margin-bottom:72px; }
+    .ledger-sub { font-size:15px; font-weight:300; color:var(--white-70); line-height:1.85; max-width:480px; margin-top:18px; }
+    .ledger-badge-wrap { text-align:right; }
+    .ledger-badge { display:inline-block; font-family:var(--sans); font-size:10.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-60); background:var(--gold-08); padding:8px 18px; border-radius:50px; }
+    .ledger-badge-sub { font-size:11.5px; font-weight:300; color:var(--white-40); margin-top:10px; }
+    .ledger-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .ledger-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:36px 32px 40px; display:flex; flex-direction:column; transition:border-color 0.25s,transform 0.25s; }
+    .ledger-card:hover { border-color:var(--gold-20); transform:translateY(-3px); }
+    .ledger-card-top { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .ledger-num { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:0.14em; color:var(--gold); opacity:0.5; }
+    .ledger-card-tag { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); }
+    .ledger-card-name { font-size:20px; font-weight:500; color:var(--white); margin-bottom:10px; letter-spacing:-0.005em; }
+    .ledger-card-desc { font-size:13.5px; font-weight:300; color:var(--white-70); line-height:1.8; margin-bottom:24px; flex:1; }
+    .ledger-list { list-style:none; display:flex; flex-direction:column; gap:8px; border-top:1px solid var(--border-light); padding-top:20px; }
+    .ledger-list li { font-size:12.5px; font-weight:300; color:var(--white-40); display:flex; align-items:center; gap:10px; }
+    .ledger-list li::before { content:''; display:block; width:3px; height:3px; border-radius:50%; background:var(--gold); opacity:0.55; flex-shrink:0; }
+    .ledger-cta-card { background:var(--gold-08); border:1px solid var(--gold-20); border-radius:12px; padding:36px 32px 40px; display:flex; flex-direction:column; }
+    .ledger-cta-eyebrow { font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+    .ledger-cta-title { font-size:22px; font-weight:500; color:var(--white); line-height:1.35; margin-bottom:14px; letter-spacing:-0.01em; }
+    .ledger-cta-body { font-size:13.5px; font-weight:300; color:var(--white-70); line-height:1.8; flex:1; }
+    @media (max-width:900px) { .ledger-head{grid-template-columns:1fr;gap:24px;} .ledger-badge-wrap{text-align:left;} .ledger-grid{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:600px) { .ledger-grid{grid-template-columns:1fr;} }
+
     /* ─── OBARAI CONSULT FLOAT CTA ─── */
     .consult-float {
       position: fixed;
@@ -550,6 +576,115 @@
         <div class="ai-level"><span class="ai-level-num">03</span><div><p class="ai-level-title">執行</p><p class="ai-level-desc">系統直接做，你只需要知道結果。自動化工作流，麻煩的事做一次。</p></div></div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<hr class="divide">
+
+
+<!-- ═══ LEDGER OS ═══ -->
+<section id="ledger">
+  <div class="wrap">
+
+    <div class="ledger-head fi">
+      <div>
+        <p class="eyebrow">ORBIT Ledger OS</p>
+        <h2 class="h2">專為會計師與記帳士<br>打造的作業系統</h2>
+        <p class="ledger-sub">從憑證收件、缺件追蹤、申報包到請款，全流程整合在一套系統裡。客製化導入，專屬你的事務所。</p>
+      </div>
+      <div class="ledger-badge-wrap">
+        <span class="ledger-badge">客製化專業版</span>
+        <p class="ledger-badge-sub">依事務所規模與需求量身規劃</p>
+      </div>
+    </div>
+
+    <div class="ledger-grid">
+
+      <div class="ledger-card fi d1">
+        <div class="ledger-card-top">
+          <span class="ledger-num">01</span>
+          <p class="ledger-card-tag">ORBIT LEDGER OS</p>
+        </div>
+        <h3 class="ledger-card-name">帳務作業系統</h3>
+        <p class="ledger-card-desc">從憑證收件到請款，完整的事務所 workflow operating system。</p>
+        <ul class="ledger-list">
+          <li>憑證收件（LINE / Email / Drive）</li>
+          <li>缺件追蹤與自動提醒</li>
+          <li>申報包與工作底稿</li>
+          <li>請款與收款管理</li>
+        </ul>
+      </div>
+
+      <div class="ledger-card fi d2">
+        <div class="ledger-card-top">
+          <span class="ledger-num">02</span>
+          <p class="ledger-card-tag">ORBIT TAX OS</p>
+        </div>
+        <h3 class="ledger-card-name">稅務申報</h3>
+        <p class="ledger-card-desc">稅務申報、稅額試算、申報進度追蹤與稅務風險控管。</p>
+        <ul class="ledger-list">
+          <li>營業稅試算與銷進明細</li>
+          <li>申報進度即時追蹤</li>
+          <li>稅務風險提示</li>
+          <li>申報包自動摘要</li>
+        </ul>
+      </div>
+
+      <div class="ledger-card fi d3">
+        <div class="ledger-card-top">
+          <span class="ledger-num">03</span>
+          <p class="ledger-card-tag">ORBIT CLIENT PORTAL</p>
+        </div>
+        <h3 class="ledger-card-name">客戶補件入口</h3>
+        <p class="ledger-card-desc">客戶透過 LINE 或網頁自助補件、查詢進度，減少人工追件。</p>
+        <ul class="ledger-list">
+          <li>LINE 問卷收件</li>
+          <li>補件授權與進度查詢</li>
+          <li>缺件回覆自動同步</li>
+          <li>Email 授權通知</li>
+        </ul>
+      </div>
+
+      <div class="ledger-card fi d1">
+        <div class="ledger-card-top">
+          <span class="ledger-num">04</span>
+          <p class="ledger-card-tag">ORBIT WORKFLOW OS</p>
+        </div>
+        <h3 class="ledger-card-name">內部工作流</h3>
+        <p class="ledger-card-desc">工作分派、覆核、提醒與 approval gate，事務所流程透明可控。</p>
+        <ul class="ledger-list">
+          <li>任務分派與覆核機制</li>
+          <li>Approval gate 管控</li>
+          <li>Event log 完整記錄</li>
+          <li>提醒與截止日管理</li>
+        </ul>
+      </div>
+
+      <div class="ledger-card fi d2">
+        <div class="ledger-card-top">
+          <span class="ledger-num">05</span>
+          <p class="ledger-card-tag">ORBIT AI OPS</p>
+        </div>
+        <h3 class="ledger-card-name">AI 自動化</h3>
+        <p class="ledger-card-desc">AI 自動摘要、缺件提醒草稿、LINE automation 與 n8n 串接。</p>
+        <ul class="ledger-list">
+          <li>缺件提醒草稿自動生成</li>
+          <li>申報包 AI 摘要</li>
+          <li>LINE automation 整合</li>
+          <li>n8n 工作流串接</li>
+        </ul>
+      </div>
+
+      <div class="ledger-cta-card fi d3">
+        <p class="ledger-cta-eyebrow">客製化導入</p>
+        <h3 class="ledger-cta-title">為你的事務所<br>量身規劃</h3>
+        <p class="ledger-cta-body">ORBIT Ledger OS 不是套裝軟體，是根據你的流程、規模與工具現況客製建置的作業系統。</p>
+        <a href="mailto:hello@obarai.com" class="btn-gold" style="margin-top:28px;">預約顧問諮詢</a>
+      </div>
+
+    </div>
+
   </div>
 </section>
 
