@@ -174,12 +174,16 @@
     .contact-val a{color:var(--white-40);text-decoration:none;transition:color 0.2s;}
     .contact-val a:hover{color:var(--gold);}
     footer{border-top:1px solid var(--border-light);padding:36px 0;}
-    .footer-row{display:flex;align-items:center;justify-content:space-between;}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
     .footer-brand{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:0.12em;color:var(--white-20);}
     .footer-nav{display:flex;gap:28px;list-style:none;}
     .footer-nav a{font-size:12px;color:var(--white-20);text-decoration:none;transition:color 0.2s;}
     .footer-nav a:hover{color:var(--white-40);}
     .footer-copy{font-size:11.5px;color:var(--white-20);}
+    .footer-brands{display:flex;align-items:center;gap:16px;margin-top:16px;width:100%;justify-content:center;}
+    .footer-brands a{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:0.1em;color:var(--white-20);text-decoration:none;transition:color 0.2s;}
+    .footer-brands a:hover{color:var(--white-40);}
+    .footer-brands-dot{color:var(--white-20);font-size:10px;}
 
 
     /* ─── MODULE TABS ─── */
@@ -800,13 +804,13 @@
       <ul class="footer-nav">
         <li><a href="#ecosystem">系統概覽</a></li>
         <li><a href="#modules">產品模組</a></li>
-        <li><a href="#ledger">Ledger OS</a></li><li><a href="#ledger">Ledger OS</a></li>
+        <li><a href="#ledger">Ledger OS</a></li>
         <li><a href="#scenarios">適用場景</a></li>
         <li><a href="#about">關於我們</a></li>
         <li><a href="#contact">聯絡我們</a></li>
       </ul>
       <span class="footer-copy">© 2026 OBARAI Intelligence｜鎧洋聲影科技工作室 · 統編 61210989</span>
-        <div class="contact-row"><span class="contact-label" style="width:auto;margin-right:10px;">統編</span><span class="contact-val">61210989</span></div>
+      <div class="footer-brands"><a href="https://karbonxgaiaentertainment.com/kxgent-artist.html" target="_blank" rel="noopener">KARBØN X GAIA ENTERTAINMENT</a><span class="footer-brands-dot">·</span><a href="https://karbonxgaiaentertainment.com/kayon-studio.html" target="_blank" rel="noopener">KAYON STUDIO</a></div>
     </div>
   </div>
 </footer>
