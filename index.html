@@ -33,7 +33,19 @@
       "contactPoint": { "@type": "ContactPoint", "email": "hello@obarai.com", "contactType": "sales" }
     }
   }
-  </script>
+  
+  // Module tabs
+  document.querySelectorAll('.mod-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      document.querySelectorAll('.mod-cat').forEach(grid => {
+        grid.style.display = grid.dataset.cat === cat ? 'grid' : 'none';
+      });
+    });
+  });
+</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -168,6 +180,25 @@
     .footer-nav a{font-size:12px;color:var(--white-20);text-decoration:none;transition:color 0.2s;}
     .footer-nav a:hover{color:var(--white-40);}
     .footer-copy{font-size:11.5px;color:var(--white-20);}
+
+
+    /* ─── MODULE TABS ─── */
+    .mod-tab {
+      font-family: var(--sans);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-40);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 9px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mod-tab:hover { color: var(--white-70); border-color: rgba(255,255,255,0.12); }
+    .mod-tab.active { color: var(--gold); border-color: var(--gold-60); background: var(--gold-08); }
 
     /* ─── LINE FLOAT CTA ─── */
     .line-float {
@@ -425,6 +456,18 @@
     { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
   );
   document.querySelectorAll('.fi').forEach(el => observer.observe(el));
+
+  // Module tabs
+  document.querySelectorAll('.mod-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      document.querySelectorAll('.mod-cat').forEach(grid => {
+        grid.style.display = grid.dataset.cat === cat ? 'grid' : 'none';
+      });
+    });
+  });
 </script>
 
 </body>
