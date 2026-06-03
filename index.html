@@ -200,6 +200,53 @@
     .mod-tab:hover { color: var(--white-70); border-color: rgba(255,255,255,0.12); }
     .mod-tab.active { color: var(--gold); border-color: var(--gold-60); background: var(--gold-08); }
 
+
+    /* ─── OBARAI CONSULT FLOAT CTA ─── */
+    .consult-float {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px 13px 18px;
+      background: var(--gold);
+      color: #0c0c0c;
+      font-family: var(--tc);
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      white-space: nowrap;
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+    .consult-float:hover {
+      animation: none;
+      opacity: 0.88;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(200,169,110,0.55);
+    }
+    @keyframes breathe {
+      0%   { box-shadow: 0 0 0px 0px rgba(200,169,110,0.0); transform: translateY(0); }
+      40%  { box-shadow: 0 0 18px 8px rgba(200,169,110,0.45); transform: translateY(-2px); }
+      100% { box-shadow: 0 0 0px 0px rgba(200,169,110,0.0); transform: translateY(0); }
+    }
+    .consult-float-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .consult-float {
+        bottom: 20px;
+        left: 20px;
+        padding: 12px 16px 12px 14px;
+        font-size: 11.5px;
+      }
+    }
+
     /* ─── LINE FLOAT CTA ─── */
     .line-float {
       position: fixed;
@@ -441,6 +488,14 @@
     </div>
   </div>
 </footer>
+
+<!-- ═══ OBARAI CONSULT FLOAT CTA ═══ -->
+<a href="https://script.google.com/macros/s/AKfycbzLx15dzLE1GxgCoHMpxYMH_IYqaAYr6u05yb7rT5lNEg-djWCmd2gBvnOYWL-ZIS8X_Q/exec" target="_blank" rel="noopener" class="consult-float" aria-label="準備好與 OBARAI 見面了嗎">
+  <svg class="consult-float-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span>準備好與 OBARAI 見面了嗎</span>
+</a>
 
 <!-- ═══ LINE FLOAT CTA ═══ -->
 <a href="https://lin.ee/yjUWCM8" target="_blank" rel="noopener" class="line-float" aria-label="LINE 洽詢">
