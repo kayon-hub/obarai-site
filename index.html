@@ -166,7 +166,7 @@
     .contact-inner{max-width:640px;}
     .contact-title{font-size:clamp(36px,5vw,56px);font-weight:500;letter-spacing:-0.015em;line-height:1.15;color:var(--white);margin-bottom:20px;}
     .contact-sub{font-size:16px;font-weight:300;color:var(--white-70);line-height:1.85;margin-bottom:48px;}
-    .contact-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px;}
+    .contact-ctas{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:56px;} .contact-ctas a{flex-shrink:0;width:auto!important;align-self:flex-start;}
     .contact-details{display:flex;flex-direction:column;gap:10px;}
     .contact-row{display:flex;align-items:center;gap:10px;font-size:13px;}
     .contact-label{color:var(--white-20);width:56px;flex-shrink:0;}
@@ -226,6 +226,14 @@
     .ledger-cta-body { font-size:13.5px; font-weight:300; color:var(--white-70); line-height:1.8; flex:1; }
     @media (max-width:900px) { .ledger-head{grid-template-columns:1fr;gap:24px;} .ledger-badge-wrap{text-align:left;} .ledger-grid{grid-template-columns:repeat(2,1fr);} }
     @media (max-width:600px) { .ledger-grid{grid-template-columns:1fr;} }
+
+    .contact-sub-link {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-20);
+      transition: border-color 0.2s;
+    }
+    .contact-sub-link:hover { border-color: var(--gold); }
 
     /* ─── OBARAI CONSULT FLOAT CTA ─── */
     .consult-float {
@@ -487,7 +495,7 @@
     }
     @media (max-width:600px){
       .mod-grid{grid-template-columns:1fr;}.eco-grid{grid-template-columns:1fr;}
-      .hero-actions{flex-direction:column;align-items:flex-start;}.contact-ctas{flex-direction:column;}
+      .hero-actions{flex-direction:column;align-items:flex-start;}
       .hero-metrics{flex-wrap:wrap;gap:32px;}
       .line-float{bottom:20px;right:20px;padding:12px 18px 12px 14px;font-size:12.5px;}
     }
@@ -755,7 +763,7 @@
       </div>
       <div class="pillars fi d2">
         <div class="pillar"><h4 class="pillar-title">內部優先開發</h4><p class="pillar-text">每個模組都在對外發布前先跑在我們自己的業務上。真實壓力，真實驗證，不是測試環境。</p></div>
-        <div class="pillar"><h4 class="pillar-title">亞太市場深耕</h4><p class="pillar-text">LINE 整合、金流、本地化工作流程。為這裡的業務運作方式而生，不是從其他地方的軟體移植過來。</p></div>
+        <div class="pillar"><h4 class="pillar-title">亞太市場深耕</h4><p class="pillar-text">LINE 整合、ECPay 金流、本地化工作流程。為這裡的業務運作方式而生，不是從其他地方的軟體移植過來。</p></div>
         <div class="pillar"><h4 class="pillar-title">長期夥伴關係</h4><p class="pillar-text">部署完成後不消失。從導入、成長到拓展新市場，我們都在。</p></div>
         <div class="pillar"><h4 class="pillar-title">精工工程品質</h4><p class="pillar-text">建立在現代基礎設施上，對可靠性、效能與大規模資料完整性有近乎執著的要求。</p></div>
       </div>
@@ -769,15 +777,16 @@
   <div class="wrap">
     <div class="contact-inner fi">
       <p class="eyebrow">Contact</p>
-      <h2 class="contact-title">準備好<br>親眼看 ORBIT 了</h2>
-      <p class="contact-sub">預約與我們團隊的私人展示。我們會帶你走過整套系統，並實際對應你的業務場景。</p>
+      <h2 class="contact-title">準備好<br>親眼看 ORBIT 了嗎</h2>
+      <p class="contact-sub">選擇最適合你的下一步——<a href="https://script.google.com/macros/s/AKfycbzLx15dzLE1GxgCoHMpxYMH_IYqaAYr6u05yb7rT5lNEg-djWCmd2gBvnOYWL-ZIS8X_Q/exec" target="_blank" rel="noopener" class="contact-sub-link">預約私人展示</a>，或<a href="https://lin.ee/yjUWCM8" target="_blank" rel="noopener" class="contact-sub-link">聯絡業務</a>聊聊你的需求。</p>
       <div class="contact-ctas">
-        <a href="mailto:hello@obarai.com" class="btn-gold">預約展示</a>
-        <a href="mailto:hello@obarai.com" class="btn-outline">聯絡業務</a>
+        <a href="https://script.google.com/macros/s/AKfycbzLx15dzLE1GxgCoHMpxYMH_IYqaAYr6u05yb7rT5lNEg-djWCmd2gBvnOYWL-ZIS8X_Q/exec" target="_blank" rel="noopener" class="btn-gold">預約展示</a>
+        <a href="https://lin.ee/yjUWCM8" target="_blank" rel="noopener" class="btn-outline">聯絡業務</a>
       </div>
       <div class="contact-details">
         <div class="contact-row"><span class="contact-label">信箱</span><span class="contact-val"><a href="mailto:hello@obarai.com">hello@obarai.com</a></span></div>
-        <div class="contact-row"><span class="contact-label">公司</span><span class="contact-val">OBARAI｜鎧洋聲影科技工作室</span></div>
+        <div class="contact-row"><span class="contact-label">公司</span><span class="contact-val">OBARAI｜鎧洋聲影科技工作室</span>
+        <div class="contact-row"><span class="contact-label" style="width:auto;margin-right:10px;">統編</span><span class="contact-val">61210989</span></div></div>
         <div class="contact-row"><span class="contact-label">地區</span><span class="contact-val">台灣</span></div>
       </div>
     </div>
@@ -796,7 +805,8 @@
         <li><a href="#about">關於我們</a></li>
         <li><a href="#contact">聯絡我們</a></li>
       </ul>
-      <span class="footer-copy">© 2026 OBARAI｜鎧洋聲影科技工作室</span>
+      <span class="footer-copy">© 2026 OBARAI Intelligence｜鎧洋聲影科技工作室 · 統編 61210989</span>
+        <div class="contact-row"><span class="contact-label" style="width:auto;margin-right:10px;">統編</span><span class="contact-val">61210989</span></div>
     </div>
   </div>
 </footer>
