@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ORBIT — 企業智慧營運平台 | ERP・POS・CRM・AI 自動化</title>
-  <meta name="description" content="ORBIT 是模組化的企業智慧營運平台，整合 ERP、POS、CRM、預約、人事出勤與 AI 自動化。一人公司用得順，百人企業撐得住。">
-  <meta name="keywords" content="ERP系統,POS系統,CRM顧客管理,企業管理系統,AI自動化,會員管理系統,預約系統,進銷存系統,人事出勤系統,LINE整合,ORBIT,台灣ERP,模組化系統,營運自動化">
+  <meta name="description" content="ORBIT 是模組化的企業智慧營運平台，整合 ERP、POS、CRM、預約、人事出勤與 AI 自動化。KARBØN X GAIA 旗下男團 NÄXER 也在用。一人公司用得順，百人企業撐得住。">
+  <meta name="keywords" content="ERP系統,POS系統,CRM顧客管理,企業管理系統,AI自動化,會員管理系統,預約系統,進銷存系統,人事出勤系統,LINE整合,ORBIT,台灣ERP,模組化系統,營運自動化,NÄXER,KARBØN X GAIA ENTERTAINMENT,鎧洋聲影科技,男團後台管理,演出管理系統,藝人營運系統,OBARAI">
   <meta name="robots" content="index, follow">
   <meta name="author" content="OBARAI｜鎧洋聲影科技">
   <link rel="canonical" href="https://www.obarai.com">
   <meta property="og:title" content="ORBIT — 企業智慧營運平台">
-  <meta property="og:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。規模改變，系統不換。">
+  <meta property="og:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。KARBØN X GAIA 旗下男團 NÄXER 也在用。規模改變，系統不換。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.obarai.com">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ORBIT — 企業智慧營運平台">
-  <meta name="twitter:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。規模改變，系統不換。">
+  <meta name="twitter:title" content="ORBIT — 企業智慧營運平台｜NÄXER 也在用">
+  <meta name="twitter:description" content="模組化企業營運平台，整合 ERP、POS、CRM、AI 自動化。KARBØN X GAIA 旗下男團 NÄXER 也在用。規模改變，系統不換。">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,14 +24,22 @@
     "name": "ORBIT",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
-    "description": "模組化企業智慧營運平台，整合 ERP、POS、CRM、預約管理、人事出勤與 AI 自動化。適用任何以顧客為核心的組織。",
+    "description": "模組化企業智慧營運平台，整合 ERP、POS、CRM、預約管理、人事出勤與 AI 自動化。適用任何以顧客為核心的組織。KARBØN X GAIA 旗下男團 NÄXER 指定使用。",
     "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" },
     "publisher": {
       "@type": "Organization",
       "name": "OBARAI｜鎧洋聲影科技",
-      "url": "https://orbit.obarai.com",
+      "url": "https://www.obarai.com",
       "contactPoint": { "@type": "ContactPoint", "email": "hello@obarai.com", "contactType": "sales" }
-    }
+    },
+    "mentions": [
+      {
+        "@type": "MusicGroup",
+        "name": "NÄXER",
+        "description": "KARBØN X GAIA ENTERTAINMENT 旗下七人男團",
+        "parentOrganization": { "@type": "Organization", "name": "KARBØN X GAIA ENTERTAINMENT" }
+      }
+    ]
   }
   
   // Module tabs
@@ -184,6 +192,20 @@
     .footer-brands a{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:0.1em;color:var(--white-20);text-decoration:none;transition:color 0.2s;}
     .footer-brands a:hover{color:var(--white-40);}
     .footer-brands-dot{color:var(--white-20);font-size:10px;}
+    /* ─── NÄXER ENDORSEMENT ─── */
+    #endorsement{padding:120px 0;overflow:hidden;}
+    .endorse-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .endorse-quote{margin-top:40px;padding:24px 28px;border-left:1px solid var(--gold-60);background:var(--gold-08);border-radius:0 8px 8px 0;}
+    .endorse-quote p{font-size:15px;font-weight:300;color:var(--white-70);line-height:1.9;}
+    .endorse-quote cite{font-size:11.5px;color:var(--gold);margin-top:10px;letter-spacing:0.06em;display:block;font-style:normal;}
+    .endorse-img-wrap{position:relative;}
+    .endorse-img-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,169,110,0.06) 0%,transparent 70%);pointer-events:none;border-radius:16px;}
+    .endorse-img-wrap img{width:100%;border-radius:12px;display:block;filter:grayscale(15%);}
+    .endorse-badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(12,12,12,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:8px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+    .endorse-badge-name{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0.1em;color:var(--white);}
+    .endorse-badge-sub{font-size:11.5px;color:var(--white-40);margin-top:2px;}
+    .endorse-badge-tag{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-08);border:1px solid var(--gold-20);border-radius:4px;padding:4px 10px;white-space:nowrap;}
+    @media(max-width:900px){.endorse-grid{grid-template-columns:1fr;gap:48px;}}
 
 
     /* ─── MODULE TABS ─── */
@@ -751,29 +773,29 @@
 <hr class="divide">
 
 <!-- ═══ NÄXER × ORBIT ═══ -->
-<section id="endorsement" style="padding:120px 0;overflow:hidden;">
+<section id="endorsement">
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div class="endorse-grid">
 
       <div class="fi">
         <p class="eyebrow">Brand Partner</p>
         <h2 class="h2">他們選擇<br>用 ORBIT 運作</h2>
         <p class="lead">KARBØN X GAIA 旗下七人男團 NÄXER，與 OBARAI 共用同一套後台——從演出排程、票務管理到團隊協作，全部跑在 ORBIT 上。</p>
-        <div style="margin-top:40px;padding:24px 28px;border-left:1px solid var(--gold-60);background:var(--gold-08);border-radius:0 8px 8px 0;">
-          <p style="font-size:15px;font-weight:300;color:var(--white-70);line-height:1.9;">「規模改變，系統不換。對一個成長中的團體來說，這句話說到心坎裡。」</p>
-          <p style="font-size:11.5px;color:var(--gold);margin-top:10px;letter-spacing:0.06em;">— NÄXER</p>
+        <div class="endorse-quote">
+          <p>「規模改變，系統不換。對一個成長中的團體來說，這句話說到心坎裡。」</p>
+          <cite>— NÄXER</cite>
         </div>
       </div>
 
-      <div class="fi d2" style="position:relative;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,169,110,0.06) 0%,transparent 70%);pointer-events:none;border-radius:16px;"></div>
-        <img src="naxer.jpg" alt="NÄXER" style="width:100%;border-radius:12px;display:block;filter:grayscale(15%);">
-        <div style="position:absolute;bottom:20px;left:20px;right:20px;background:rgba(12,12,12,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:8px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
+      <div class="fi d2 endorse-img-wrap">
+        <div class="endorse-img-glow"></div>
+        <img src="naxer.jpg" alt="NÄXER — KARBØN X GAIA ENTERTAINMENT 旗下七人男團，ORBIT 品牌夥伴">
+        <div class="endorse-badge">
           <div>
-            <p style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0.1em;color:var(--white);">NÄXER</p>
-            <p style="font-size:11.5px;color:var(--white-40);margin-top:2px;">KARBØN X GAIA ENTERTAINMENT</p>
+            <p class="endorse-badge-name">NÄXER</p>
+            <p class="endorse-badge-sub">KARBØN X GAIA ENTERTAINMENT</p>
           </div>
-          <span style="font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-08);border:1px solid var(--gold-20);border-radius:4px;padding:4px 10px;">ORBIT User</span>
+          <span class="endorse-badge-tag">ORBIT User</span>
         </div>
       </div>
 
@@ -849,6 +871,7 @@
         <li><a href="#modules">產品模組</a></li>
         <li><a href="#ledger">Ledger OS</a></li>
         <li><a href="#scenarios">適用場景</a></li>
+        <li><a href="#endorsement">NÄXER</a></li>
         <li><a href="#about">關於我們</a></li>
         <li><a href="#contact">聯絡我們</a></li>
       </ul>
