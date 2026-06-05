@@ -297,6 +297,8 @@
 
 <script>
   const fmt = n => 'NT$' + n.toLocaleString('zh-TW');
+  const VALID_PROMO = 'ORBIT888';
+  let promoApplied = false;
 
   function loadOrder() {
     const raw = sessionStorage.getItem('orbit_order');
@@ -316,8 +318,16 @@
       monthly += order.monthly.price;
     }
     if (order.onboarding) {
-      items.push({ name: order.onboarding.label, sub: '導入服務（一次性）', price: fmt(order.onboarding.price) });
-      onetime += order.onboarding.price;
+      const discounted = promoApplied;
+      const priceHtml  = discounted
+        ? `<span style="text-decoration:line-through;color:var(--w40);font-size:11px;">${fmt(order.onboarding.price)}</span> <span style="color:var(--gold);font-weight:700;">NT$0</span>`
+        : fmt(order.onboarding.price);
+      items.push({
+        name:  order.onboarding.label,
+        sub:   discounted ? '導入服務（優惠碼折抵 ✓）' : '導入服務（一次性）',
+        price: priceHtml,
+      });
+      onetime += discounted ? 0 : order.onboarding.price;
     }
     if (order.ai) {
       items.push({ name: order.ai.label, sub: 'AI 加購', price: fmt(order.ai.price) + '/月' });
@@ -336,36 +346,56 @@
     document.getElementById('s-total').textContent   = fmt(monthly) + '/月';
   }
 
+  function applyPromo() {
+    const code  = document.getElementById('promo-code').value.trim().toUpperCase();
+    const msgEl = document.getElementById('promo-msg');
+    if (code === VALID_PROMO) {
+      promoApplied = true;
+      document.getElementById('promo-input-row').style.display   = 'none';
+      document.getElementById('promo-applied-row').style.display = 'flex';
+      document.getElementById('promo-code-display').textContent  = code;
+      msgEl.innerHTML = '';
+      renderSummary();
+    } else {
+      msgEl.innerHTML = '<span class="promo-msg-err">優惠碼無效，請確認後重試</span>';
+    }
+  }
+
+  function clearPromo() {
+    promoApplied = false;
+    document.getElementById('promo-input-row').style.display   = 'flex';
+    document.getElementById('promo-applied-row').style.display = 'none';
+    document.getElementById('promo-code').value = '';
+    document.getElementById('promo-msg').innerHTML = '';
+    renderSummary();
+  }
+
   function goToConfirm() {
-    const name    = document.getElementById('f-name').value.trim();
-    const phone   = document.getElementById('f-phone').value.trim();
-    const email   = document.getElementById('f-email').value.trim();
-    const company = document.getElementById('f-company').value.trim();
-    const industry= document.getElementById('f-industry').value;
-    const agreed  = document.getElementById('agree-terms').checked;
-    const errEl   = document.getElementById('err-msg');
+    const name     = document.getElementById('f-name').value.trim();
+    const phone    = document.getElementById('f-phone').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const company  = document.getElementById('f-company').value.trim();
+    const industry = document.getElementById('f-industry').value;
+    const agreed   = document.getElementById('agree-terms').checked;
+    const errEl    = document.getElementById('err-msg');
 
     errEl.style.display = 'none';
 
     if (!name || !phone || !email || !company || !industry) {
-      errEl.textContent = '請填寫所有必填欄位';
-      errEl.style.display = 'block';
-      return;
+      errEl.textContent = '請填寫所有必填欄位'; errEl.style.display = 'block'; return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errEl.textContent = '請輸入有效的電子信箱';
-      errEl.style.display = 'block';
-      return;
+      errEl.textContent = '請輸入有效的電子信箱'; errEl.style.display = 'block'; return;
     }
     if (!agreed) {
-      errEl.textContent = '請勾選同意服務條款後繼續';
-      errEl.style.display = 'block';
-      return;
+      errEl.textContent = '請勾選同意服務條款後繼續'; errEl.style.display = 'block'; return;
     }
 
-    const raw = sessionStorage.getItem('orbit_order');
+    const raw   = sessionStorage.getItem('orbit_order');
     const order = raw ? JSON.parse(raw) : {};
-    order.customer = { name, phone, email, company, industry, taxid: document.getElementById('f-taxid').value.trim() };
+    order.customer     = { name, phone, email, company, industry, taxid: document.getElementById('f-taxid').value.trim() };
+    order.promoApplied = promoApplied;
+    order.promoCode    = promoApplied ? VALID_PROMO : null;
     sessionStorage.setItem('orbit_order', JSON.stringify(order));
 
     window.location.href = 'confirm.html';
