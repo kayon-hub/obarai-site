@@ -574,6 +574,12 @@
     selectedMods.clear();
     selectedAiPlus = 0;
 
+    // Reset AI+ selection UI back to "不加購" since selectedAiPlus is reset
+    const aiNone = document.getElementById('ai-none');
+    if (aiNone) aiNone.checked = true;
+    const customRow = document.getElementById('aiplus-custom-row');
+    if (customRow) customRow.classList.remove('show');
+
     const sec = document.getElementById('module-section');
     const title = document.getElementById('module-title');
     const aiSec = document.getElementById('aiplus-section');
