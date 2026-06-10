@@ -322,6 +322,10 @@
       items.push({ name: order.plan.label, sub, price: fmt(order.plan.price) + '/月' });
       monthly += order.plan.price;
     }
+    if (order.ai_addon && order.ai_addon.price > 0) {
+      items.push({ name: 'ORBIT AI+', sub: 'AI 使用量加值 · 次月自動續購', price: fmt(order.ai_addon.price) + '/月' });
+      monthly += order.ai_addon.price;
+    }
     if (order.setup) {
       const discounted = promoApplied;
       const priceHtml  = discounted

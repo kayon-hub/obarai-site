@@ -156,6 +156,33 @@
     .footer-nav a:hover { color: var(--w70); }
     .footer-copy { font-size: 11px; color: rgba(236,233,224,0.2); }
 
+    /* ── AI+ Section ── */
+    #aiplus-section { transition: opacity 0.3s; }
+    #aiplus-section.hidden { display: none; }
+    .aiplus-cards { display: flex; flex-direction: column; gap: 8px; }
+    .aiplus-card { position: relative; }
+    .aiplus-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .aiplus-card label { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); cursor: pointer; transition: border-color 0.2s, background 0.2s; gap: 12px; }
+    .aiplus-card label:hover { border-color: rgba(200,169,110,0.25); }
+    .aiplus-card input:checked + label { border-color: var(--gold60); background: var(--gold08); }
+    .aiplus-card .label-left { flex: 1; }
+    .aiplus-card .aiplus-name { font-size: 14px; font-weight: 500; color: var(--white); }
+    .aiplus-card .aiplus-sub { font-size: 11px; color: var(--w40); margin-top: 3px; }
+    .aiplus-card .aiplus-price { font-family: var(--sans); font-size: 15px; font-weight: 600; color: var(--gold); white-space: nowrap; }
+    .aiplus-card .aiplus-price small { font-size: 11px; font-weight: 400; color: var(--w40); }
+    .aiplus-card input:checked + label .radio-dot { border-color: var(--gold); }
+    .aiplus-card input:checked + label .radio-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: block; }
+    .aiplus-custom-row { display: none; margin-top: 10px; padding: 16px 20px; border: 1px solid var(--gold20); border-radius: 10px; background: var(--gold08); align-items: center; gap: 12px; }
+    .aiplus-custom-row.show { display: flex; }
+    .aiplus-custom-label { font-size: 13px; color: var(--w70); flex-shrink: 0; }
+    .aiplus-custom-input-wrap { display: flex; align-items: center; gap: 6px; }
+    .aiplus-custom-input-wrap span { font-family: var(--sans); font-size: 13px; color: var(--gold); font-weight: 600; }
+    .aiplus-custom-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 600; padding: 8px 12px; width: 100px; text-align: center; outline: none; transition: border-color 0.2s; }
+    .aiplus-custom-input:focus { border-color: var(--gold60); }
+    .aiplus-custom-hint { font-size: 11px; color: var(--w40); margin-top: 6px; }
+    .aiplus-notice { font-size: 11px; color: var(--w40); margin-top: 12px; line-height: 1.6; padding: 10px 14px; border: 1px solid var(--borderl); border-radius: 8px; background: var(--surface2); }
+    .aiplus-notice strong { color: var(--gold); }
+
     @media (max-width: 640px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
@@ -201,11 +228,16 @@
         <div class="step-arrow">›</div>
         <div class="step-tab" id="tab3">
           <div class="num">3</div>
-          <span class="step-label">填寫資料</span>
+          <span class="step-label">AI 加值</span>
         </div>
         <div class="step-arrow">›</div>
         <div class="step-tab" id="tab4">
           <div class="num">4</div>
+          <span class="step-label">填寫資料</span>
+        </div>
+        <div class="step-arrow">›</div>
+        <div class="step-tab" id="tab5">
+          <div class="num">5</div>
           <span class="step-label">確認訂閱</span>
         </div>
       </div>
@@ -352,6 +384,92 @@
           </div>
         </div>
 
+        <!-- Section 3: AI+ -->
+        <div class="plan-section hidden" id="aiplus-section">
+          <h2>ORBIT AI+ 加值（選填）</h2>
+          <p class="section-hint">方案內建 AI 基礎額度已夠一般日常使用。若你的店需要更多 AI 互動量，可以加購。<strong>隨時可加購，次月自動續購</strong>。</p>
+
+          <div class="aiplus-cards">
+
+            <div class="aiplus-card">
+              <input type="radio" name="aiplus" id="ai-none" value="0" checked>
+              <label for="ai-none">
+                <div class="radio-dot"></div>
+                <div class="label-left">
+                  <div class="aiplus-name">不加購</div>
+                  <div class="aiplus-sub">使用方案內建 AI 基礎額度</div>
+                </div>
+                <div class="aiplus-price">NT$0<small>/月</small></div>
+              </label>
+            </div>
+
+            <div class="aiplus-card">
+              <input type="radio" name="aiplus" id="ai-150" value="150">
+              <label for="ai-150">
+                <div class="radio-dot"></div>
+                <div class="label-left">
+                  <div class="aiplus-name">ORBIT AI+ 輕量</div>
+                  <div class="aiplus-sub">適合偶爾需要額外 AI 用量的店家</div>
+                </div>
+                <div class="aiplus-price">NT$150<small>/月</small></div>
+              </label>
+            </div>
+
+            <div class="aiplus-card">
+              <input type="radio" name="aiplus" id="ai-300" value="300">
+              <label for="ai-300">
+                <div class="radio-dot"></div>
+                <div class="label-left">
+                  <div class="aiplus-name">ORBIT AI+ 標準</div>
+                  <div class="aiplus-sub">適合每天有穩定 AI 需求的店家</div>
+                </div>
+                <div class="aiplus-price">NT$300<small>/月</small></div>
+              </label>
+            </div>
+
+            <div class="aiplus-card">
+              <input type="radio" name="aiplus" id="ai-600" value="600">
+              <label for="ai-600">
+                <div class="radio-dot"></div>
+                <div class="label-left">
+                  <div class="aiplus-name">ORBIT AI+ 大量</div>
+                  <div class="aiplus-sub">適合高頻 AI 互動、多帳號大量使用</div>
+                </div>
+                <div class="aiplus-price">NT$600<small>/月</small></div>
+              </label>
+            </div>
+
+            <div class="aiplus-card">
+              <input type="radio" name="aiplus" id="ai-custom" value="custom">
+              <label for="ai-custom">
+                <div class="radio-dot"></div>
+                <div class="label-left">
+                  <div class="aiplus-name">自訂金額</div>
+                  <div class="aiplus-sub">最低 NT$150，每 NT$50 一階</div>
+                </div>
+                <div class="aiplus-price" style="color:var(--w40)">自訂</div>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- 自訂輸入框 -->
+          <div class="aiplus-custom-row" id="aiplus-custom-row">
+            <span class="aiplus-custom-label">輸入金額</span>
+            <div>
+              <div class="aiplus-custom-input-wrap">
+                <span>NT$</span>
+                <input type="number" id="aiplus-custom-input" class="aiplus-custom-input" value="150" min="150" step="50" placeholder="150">
+              </div>
+              <div class="aiplus-custom-hint">最低 NT$150 · 每 NT$50 一階</div>
+            </div>
+          </div>
+
+          <div class="aiplus-notice">
+            <strong>加購說明：</strong>AI+ 為 AI 使用量加值服務，非儲值金。服務一經啟用即開始計算，不可退款、不可折現、不可轉讓。次月自動續購，可隨時於後台取消。
+          </div>
+        </div>
+
       </div>
 
       <!-- Right: Cart sidebar -->
@@ -434,6 +552,7 @@
 
   let selectedPlan = null;   // { price, slots, label, value, accounts, ai }
   let selectedMods = new Set();
+  let selectedAiPlus = 0;   // 0 = 不加購, 150/300/600/custom amount
 
   function getSelectedPlan() {
     const el = document.querySelector('input[name="plan"]:checked');
@@ -451,11 +570,18 @@
   function onPlanChange() {
     selectedPlan = getSelectedPlan();
     selectedMods.clear();
+    selectedAiPlus = 0;
 
     const sec = document.getElementById('module-section');
     const title = document.getElementById('module-title');
+    const aiSec = document.getElementById('aiplus-section');
 
-    if (!selectedPlan) { sec.classList.add('hidden'); updateCart(); return; }
+    if (!selectedPlan) {
+      sec.classList.add('hidden');
+      aiSec.classList.add('hidden');
+      updateCart();
+      return;
+    }
 
     // PRO: auto-select all
     if (selectedPlan.slots >= 7) {
@@ -463,6 +589,7 @@
     }
 
     sec.classList.remove('hidden');
+    aiSec.classList.add('hidden');
     title.textContent = selectedPlan.slots >= 7
       ? '已包含全部 7 個模組'
       : `挑選模組（可選 ${selectedPlan.slots} 個）`;
@@ -517,6 +644,20 @@
     }
     renderModules();
     updateCart();
+    maybeShowAiPlus();
+  }
+
+  function maybeShowAiPlus() {
+    const aiSec = document.getElementById('aiplus-section');
+    const ready = selectedPlan && (selectedPlan.slots >= 7 || selectedMods.size > 0);
+    if (ready) {
+      aiSec.classList.remove('hidden');
+      setTimeout(() => {
+        aiSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    } else {
+      aiSec.classList.add('hidden');
+    }
   }
 
   function updateSlotCounter() {
@@ -533,16 +674,19 @@
   function updateStepper() {
     const tab1 = document.getElementById('tab1');
     const tab2 = document.getElementById('tab2');
+    const tab3 = document.getElementById('tab3');
 
     if (!selectedPlan) {
       tab1.className = 'step-tab active';
       tab2.className = 'step-tab';
+      tab3.className = 'step-tab';
       return;
     }
 
     const modulesReady = selectedPlan.slots >= 7 || selectedMods.size > 0;
     tab1.className = 'step-tab done';
-    tab2.className = modulesReady ? 'step-tab active' : 'step-tab';
+    tab2.className = modulesReady ? 'step-tab done' : 'step-tab active';
+    tab3.className = modulesReady ? 'step-tab active' : 'step-tab';
   }
 
   function updateCart() {
@@ -562,6 +706,8 @@
     }
 
     const modNames = [...selectedMods].map(id => MODULES.find(m => m.id === id)?.name).filter(Boolean);
+    const aiPlusPrice = selectedAiPlus || 0;
+    const monthly = selectedPlan.price + aiPlusPrice;
 
     let html = `
       <div class="cart-item">
@@ -586,6 +732,18 @@
       html += `<div class="cart-item-sub" style="color:rgba(200,169,110,0.5);font-size:11px">↓ 請選擇模組（尚未選取）</div>`;
     }
 
+    if (aiPlusPrice > 0) {
+      html += `
+        <div class="cart-item" style="margin-top:4px">
+          <div>
+            <div class="cart-item-name">ORBIT AI+</div>
+            <div class="cart-item-sub">AI 使用量加值 · 次月自動續購</div>
+          </div>
+          <div class="cart-item-price">${fmt(aiPlusPrice)}<span style="font-size:10px;font-weight:400;color:var(--w40)">/月</span></div>
+        </div>
+      `;
+    }
+
     html += `
       <div class="cart-item" style="margin-top:4px">
         <div>
@@ -597,9 +755,9 @@
     `;
 
     cartEl.innerHTML = html;
-    firstEl.textContent = fmt(selectedPlan.price + SETUP_FEE);
-    mFeeEl.textContent  = fmt(selectedPlan.price) + '/月';
-    totalEl.textContent = fmt(selectedPlan.price) + '/月';
+    firstEl.textContent = fmt(monthly + SETUP_FEE);
+    mFeeEl.textContent  = fmt(monthly) + '/月';
+    totalEl.textContent = fmt(monthly) + '/月';
 
     // Enable button only when modules are ready
     const ready = selectedPlan.slots >= 7 || selectedMods.size > 0;
@@ -611,10 +769,12 @@
     const ready = selectedPlan.slots >= 7 || selectedMods.size > 0;
     if (!ready) return;
 
+    const aiPlusPrice = selectedAiPlus || 0;
     const data = {
-      plan:    { label: selectedPlan.label, price: selectedPlan.price, value: selectedPlan.value, accounts: selectedPlan.accounts, ai: selectedPlan.ai },
-      modules: [...selectedMods],
-      setup:   SETUP_FEE,
+      plan:     { label: selectedPlan.label, price: selectedPlan.price, value: selectedPlan.value, accounts: selectedPlan.accounts, ai: selectedPlan.ai },
+      modules:  [...selectedMods],
+      setup:    SETUP_FEE,
+      ai_addon: aiPlusPrice > 0 ? { label: 'ORBIT AI+', price: aiPlusPrice } : null,
     };
     sessionStorage.setItem('orbit_order', JSON.stringify(data));
     window.location.href = 'checkout.html';
@@ -627,7 +787,52 @@
 
   // Wire up module checkboxes
   document.querySelectorAll('.mod-card input[type="checkbox"]').forEach(el => {
-    el.addEventListener('change', e => onModuleChange(e.target.value, e.target.checked));
+    el.addEventListener('change', e => {
+      onModuleChange(e.target.value, e.target.checked);
+      updateStepper();
+    });
+  });
+
+  // PRO: show AI+ section immediately after plan selected (all modules auto-selected)
+  document.querySelectorAll('input[name="plan"]').forEach(el => {
+    el.addEventListener('change', () => {
+      if (selectedPlan && selectedPlan.slots >= 7) {
+        setTimeout(() => maybeShowAiPlus(), 100);
+      }
+    });
+  });
+
+  // Wire up AI+ radio buttons
+  document.querySelectorAll('input[name="aiplus"]').forEach(el => {
+    el.addEventListener('change', e => {
+      const val = e.target.value;
+      const customRow = document.getElementById('aiplus-custom-row');
+      if (val === 'custom') {
+        customRow.classList.add('show');
+        const customInput = document.getElementById('aiplus-custom-input');
+        const raw = parseInt(customInput.value) || 150;
+        selectedAiPlus = Math.max(150, Math.round(raw / 50) * 50);
+        customInput.value = selectedAiPlus;
+      } else {
+        customRow.classList.remove('show');
+        selectedAiPlus = parseInt(val) || 0;
+      }
+      updateCart();
+    });
+  });
+
+  // Wire up custom input
+  document.getElementById('aiplus-custom-input').addEventListener('input', e => {
+    const raw = parseInt(e.target.value) || 150;
+    selectedAiPlus = Math.max(150, Math.round(raw / 50) * 50);
+    updateCart();
+  });
+
+  document.getElementById('aiplus-custom-input').addEventListener('blur', e => {
+    const rounded = Math.max(150, Math.round((parseInt(e.target.value) || 150) / 50) * 50);
+    e.target.value = rounded;
+    selectedAiPlus = rounded;
+    updateCart();
   });
 
   updateCart();
