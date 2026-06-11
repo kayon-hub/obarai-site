@@ -320,27 +320,61 @@
     }
   }
 
+  const LINE_OA_ID = '@896gzpnx';
+
+  function buildOrderText() {
+    const order = loadOrder();
+    if (!order) return '';
+    const c = order.customer || {};
+    const modNames = (order.modules || []).map(id => MODULE_NAMES[id]).filter(Boolean);
+
+    let monthly = 0, setup = order.setup || 0;
+    if (order.plan) monthly += order.plan.price;
+    if (order.ai_addon && order.ai_addon.price > 0) monthly += order.ai_addon.price;
+
+    const lines = [
+      '【ORBIT 訂閱申請】',
+      `方案：${order.plan ? order.plan.label : '-'}`,
+      modNames.length ? `模組：${modNames.join('、')}` : null,
+      (order.ai_addon && order.ai_addon.price > 0) ? `AI+：NT$${order.ai_addon.price.toLocaleString()}/月` : null,
+      `月費合計：NT$${monthly.toLocaleString()}/月`,
+      `導入費：NT$${setup.toLocaleString()}（一次性）`,
+      `首月應付：NT$${(monthly + setup).toLocaleString()}`,
+      '──────────',
+      `姓名：${c.name || ''}`,
+      `公司：${c.company || ''}`,
+      `行業：${INDUSTRY_NAMES[c.industry] || c.industry || ''}`,
+      `Email：${c.email || ''}`,
+      `電話：${c.phone || ''}`,
+      c.taxid ? `統編：${c.taxid}` : null,
+    ].filter(Boolean);
+
+    return lines.join('\n');
+  }
+
   function handlePayment() {
     const overlay = document.getElementById('overlay');
-    overlay.classList.add('show');
+    const text = buildOrderText();
+    if (!text) return;
 
-    // ECPay 定期定額入口（需後端產生 CheckMacValue 後才能實際送出）
-    // 目前顯示處理中畫面，待商戶帳號審核通過後接入真實 API
-    setTimeout(() => {
-      overlay.innerHTML = `
-        <div style="text-align:center;max-width:360px;padding:40px">
-          <div style="font-size:40px;margin-bottom:20px">✓</div>
-          <div style="font-family:var(--sans);font-size:20px;font-weight:600;color:var(--gold);margin-bottom:12px">訂閱申請已收到</div>
-          <div style="font-size:14px;color:var(--w70);line-height:1.8;margin-bottom:24px">
-            感謝您選擇 ORBIT。<br>
-            我們的團隊將在 24 小時內與您聯繫，<br>
-            完成帳號建立及 14 天試用啟動。
-          </div>
-          <div style="font-size:12px;color:var(--w40);margin-bottom:24px">確認信將寄送至 ${loadOrder()?.customer?.email || '您的信箱'}</div>
-          <a href="index.html" style="display:inline-flex;align-items:center;font-family:var(--tc);font-size:13px;font-weight:500;color:#0c0c0c;background:var(--gold);padding:12px 28px;border-radius:8px;text-decoration:none">返回首頁</a>
+    const lineUrl = `https://line.me/R/oaMessage/${encodeURIComponent(LINE_OA_ID)}/?${encodeURIComponent(text)}`;
+    const mailUrl = `mailto:hello@obarai.com?subject=${encodeURIComponent('ORBIT 訂閱申請')}&body=${encodeURIComponent(text)}`;
+
+    overlay.classList.add('show');
+    overlay.innerHTML = `
+      <div style="text-align:center;max-width:380px;padding:40px">
+        <div style="font-size:40px;margin-bottom:20px">✓</div>
+        <div style="font-family:var(--sans);font-size:20px;font-weight:600;color:var(--gold);margin-bottom:12px">最後一步：傳送申請</div>
+        <div style="font-size:14px;color:var(--w70);line-height:1.8;margin-bottom:28px">
+          請點擊下方按鈕，透過 LINE 將訂閱申請直接傳給我們。<br>
+          訂閱內容已自動帶入，按送出即可。<br>
+          我們將在 24 小時內與您聯繫，<br>
+          完成付款設定、帳號建立及 14 天試用啟動。
         </div>
-      `;
-    }, 2800);
+        <a href="${lineUrl}" style="display:inline-flex;align-items:center;justify-content:center;font-family:var(--tc);font-size:14px;font-weight:600;color:#0c0c0c;background:var(--gold);padding:14px 36px;border-radius:8px;text-decoration:none;margin-bottom:14px;width:100%;box-sizing:border-box">透過 LINE 傳送申請</a>
+        <a href="${mailUrl}" style="display:block;font-size:12px;color:var(--w40);text-decoration:underline">沒有 LINE？改用 Email 傳送</a>
+      </div>
+    `;
   }
 
   render();
