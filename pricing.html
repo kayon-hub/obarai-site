@@ -212,7 +212,7 @@
     <div class="hero">
       <p class="eyebrow">Pricing</p>
       <h1>選一個方案，自己挑模組</h1>
-      <p>每個方案都內建 POS + CRM + AI 基礎，再從 7 個模組中選出最適合你生意的幾個</p>
+      <p>每個方案都內建 POS + CRM + AI 基礎，再從 6 個模組中選出最適合你生意的幾個</p>
       <div class="trial-badge">14 天免費試用，到期後才開始計費</div>
 
       <!-- Stepper -->
@@ -293,18 +293,18 @@
             </div>
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-pro" value="pro" data-price="3988" data-slots="7" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
+              <input type="radio" name="plan" id="p-pro" value="pro" data-price="3988" data-slots="6" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
               <label for="p-pro">
                 <div class="radio-dot"></div>
                 <div class="label-left">
                   <div class="plan-name">PRO</div>
                   <div class="plan-meta">
                     <span class="meta-chip">5 個帳號</span>
-                    <span class="meta-chip">全選 7 個模組</span>
+                    <span class="meta-chip">全選 6 個模組</span>
                     <span class="meta-chip">AI 專業額度</span>
                     <span class="meta-chip">1 店</span>
                   </div>
-                  <div class="plan-includes">包含：POS · CRM · AI 基礎 + 全部 7 個模組</div>
+                  <div class="plan-includes">包含：POS · CRM · AI 基礎 + 全部 6 個模組</div>
                 </div>
                 <div class="plan-price">NT$3,988<small>/月</small></div>
               </label>
@@ -371,15 +371,6 @@
                 <div class="mod-name">ORBIT AUTH <div class="mod-check"></div></div>
                 <div class="mod-desc">細粒度權限管控</div>
                 <div class="mod-fit">適合：多角色・多店管理</div>
-              </label>
-            </div>
-
-            <div class="mod-card" data-id="ai_pro">
-              <input type="checkbox" id="mod-ai_pro" value="ai_pro">
-              <label for="mod-ai_pro">
-                <div class="mod-name">ORBIT AI Pro <div class="mod-check"></div></div>
-                <div class="mod-desc">深度分析 & 自動化建議</div>
-                <div class="mod-fit">適合：需要 AI 洞察的店家</div>
               </label>
             </div>
 
@@ -549,7 +540,6 @@
     { id: 'hr',     name: 'HR'     },
     { id: 'flow',   name: 'FLOW'   },
     { id: 'auth',   name: 'AUTH'   },
-    { id: 'ai_pro', name: 'AI Pro' },
   ];
 
   let selectedPlan = null;   // { price, slots, label, value, accounts, ai }
@@ -592,14 +582,14 @@
     }
 
     // PRO: auto-select all
-    if (selectedPlan.slots >= 7) {
+    if (selectedPlan.slots >= MODULES.length) {
       MODULES.forEach(m => selectedMods.add(m.id));
     }
 
     sec.classList.remove('hidden');
     aiSec.classList.add('hidden');
-    title.textContent = selectedPlan.slots >= 7
-      ? '已包含全部 7 個模組'
+    title.textContent = selectedPlan.slots >= MODULES.length
+      ? '已包含全部 6 個模組'
       : `挑選模組（可選 ${selectedPlan.slots} 個）`;
 
     renderModules();
@@ -613,7 +603,7 @@
   }
 
   function renderModules() {
-    const isPro = selectedPlan && selectedPlan.slots >= 7;
+    const isPro = selectedPlan && selectedPlan.slots >= MODULES.length;
 
     document.querySelectorAll('.mod-card').forEach(card => {
       const modId = card.dataset.id;
@@ -639,7 +629,7 @@
   }
 
   function onModuleChange(modId, checked) {
-    if (!selectedPlan || selectedPlan.slots >= 7) return;
+    if (!selectedPlan || selectedPlan.slots >= MODULES.length) return;
     if (checked) {
       if (selectedMods.size < selectedPlan.slots) selectedMods.add(modId);
       else {
@@ -657,7 +647,7 @@
 
   function maybeShowAiPlus() {
     const aiSec = document.getElementById('aiplus-section');
-    const ready = selectedPlan && (selectedPlan.slots >= 7 || selectedMods.size > 0);
+    const ready = selectedPlan && (selectedPlan.slots >= MODULES.length || selectedMods.size > 0);
     if (ready) {
       aiSec.classList.remove('hidden');
       setTimeout(() => {
@@ -671,8 +661,8 @@
   function updateSlotCounter() {
     const el = document.getElementById('slot-counter');
     if (!selectedPlan) { el.textContent = ''; return; }
-    if (selectedPlan.slots >= 7) {
-      el.innerHTML = 'PRO 方案包含全部 7 個模組，<strong>無需手動選擇</strong>。';
+    if (selectedPlan.slots >= MODULES.length) {
+      el.innerHTML = 'PRO 方案包含全部 6 個模組，<strong>無需手動選擇</strong>。';
     } else {
       const remaining = selectedPlan.slots - selectedMods.size;
       el.innerHTML = `已選 <strong>${selectedMods.size}</strong> / ${selectedPlan.slots} 個 · 還可選 <strong>${remaining}</strong> 個`;
@@ -691,7 +681,7 @@
       return;
     }
 
-    const modulesReady = selectedPlan.slots >= 7 || selectedMods.size > 0;
+    const modulesReady = selectedPlan.slots >= MODULES.length || selectedMods.size > 0;
     tab1.className = 'step-tab done';
     tab2.className = modulesReady ? 'step-tab done' : 'step-tab active';
     tab3.className = modulesReady ? 'step-tab active' : 'step-tab';
@@ -736,7 +726,7 @@
           </div>
         </div>
       `;
-    } else if (selectedPlan.slots < 7) {
+    } else if (selectedPlan.slots < MODULES.length) {
       html += `<div class="cart-item-sub" style="color:rgba(200,169,110,0.5);font-size:11px">↓ 請選擇模組（尚未選取）</div>`;
     }
 
@@ -768,13 +758,13 @@
     totalEl.textContent = fmt(monthly) + '/月';
 
     // Enable button only when modules are ready
-    const ready = selectedPlan.slots >= 7 || selectedMods.size > 0;
+    const ready = selectedPlan.slots >= MODULES.length || selectedMods.size > 0;
     btn.disabled = !ready;
   }
 
   function goToCheckout() {
     if (!selectedPlan) return;
-    const ready = selectedPlan.slots >= 7 || selectedMods.size > 0;
+    const ready = selectedPlan.slots >= MODULES.length || selectedMods.size > 0;
     if (!ready) return;
 
     const aiPlusPrice = selectedAiPlus || 0;
@@ -804,7 +794,7 @@
   // PRO: show AI+ section immediately after plan selected (all modules auto-selected)
   document.querySelectorAll('input[name="plan"]').forEach(el => {
     el.addEventListener('change', () => {
-      if (selectedPlan && selectedPlan.slots >= 7) {
+      if (selectedPlan && selectedPlan.slots >= MODULES.length) {
         setTimeout(() => maybeShowAiPlus(), 100);
       }
     });
