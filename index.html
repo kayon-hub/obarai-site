@@ -774,8 +774,7 @@
 
     let plan, price, slots;
     if (fSize >= 10 || mods.size > 5) { plan = 'ORBIT PRO'; price = 'NT$3,988/月起'; slots = 8; }
-    else if (fSize >= 3 || mods.size > 3) { plan = 'ORBIT PLUS'; price = 'NT$1,988/月起'; slots = 5; }
-    else { plan = 'ORBIT START'; price = 'NT$1,488/月起'; slots = 3; }
+    else { plan = 'ORBIT PLUS'; price = 'NT$1,988/月起'; slots = 5; }
 
     const finalMods = [...mods].slice(0, slots);
 
@@ -788,8 +787,8 @@
     const reasons = [];
     const indName = INDUSTRY_NAMES[fIndustry] || '你的行業';
     reasons.push('根據' + indName + '的營運需求，我們推薦 ' + plan + '。');
-    if (fSize <= 1) reasons.push('一人老闆輕裝上陣，START 方案就夠用。');
-    if (fSize >= 3 && fSize < 10) reasons.push('團隊 ' + fSize + ' 人，PLUS 方案含 3 個帳號最划算。');
+    if (fSize <= 1) reasons.push('一人老闆輕裝上陣，PLUS 方案 5 模組剛好夠用。');
+    if (fSize >= 2 && fSize < 10) reasons.push('團隊 ' + fSize + ' 人，PLUS 方案含 3 個帳號最划算。');
     if (fSize >= 10) reasons.push('團隊超過 10 人，PRO 方案全模組解鎖 + 額外帳號加購。');
     if (mods.has('rsvp')) reasons.push('有訂位/候位需求，RSVP 模組含 Waiting Commerce 候位商務（ORBIT 獨家）。');
     if (mods.has('qrshop')) reasons.push('QR Shop 讓客人掃碼自助點餐，省下一個人力。');
