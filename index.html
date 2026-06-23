@@ -627,6 +627,193 @@
 
 <hr class="divide">
 
+<!-- ═══ MODULE FINDER ═══ -->
+<section id="finder">
+  <div class="wrap">
+    <div class="fi"><p class="eyebrow">Module Finder</p><h2 class="h2">不知道該選什麼？<br>讓我們幫你配</h2><p style="color:var(--w50);max-width:520px;margin-top:12px;">回答幾個問題，我們根據你的行業和需求，推薦最適合的方案與模組組合。</p></div>
+
+    <div id="finder-app" style="margin-top:48px;">
+      <!-- Step 1: 行業 -->
+      <div id="f-step1" class="finder-step">
+        <p class="finder-q">你的行業是？</p>
+        <div class="finder-opts">
+          <button type="button" class="finder-opt" onclick="pickIndustry('cafe')">🍳 餐飲（早餐/咖啡/餐廳）</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('retail')">🛍 零售（服飾/寵物/3C/百貨）</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('salon')">✂️ 美髮沙龍 / 美容</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('medspa')">💉 醫美 / 診所</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('tutoring')">📚 補習班 / 教育</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('hotel')">🏨 旅宿 / 民宿</button>
+          <button type="button" class="finder-opt" onclick="pickIndustry('warehouse')">🏭 傳產 / 倉儲 / 批發</button>
+        </div>
+      </div>
+
+      <!-- Step 2: 人數 -->
+      <div id="f-step2" class="finder-step" style="display:none;">
+        <p class="finder-q">你的團隊有幾人？（含老闆）</p>
+        <div class="finder-opts">
+          <button type="button" class="finder-opt" onclick="pickSize(1)">1 人（老闆自己來）</button>
+          <button type="button" class="finder-opt" onclick="pickSize(3)">2~3 人</button>
+          <button type="button" class="finder-opt" onclick="pickSize(5)">4~5 人</button>
+          <button type="button" class="finder-opt" onclick="pickSize(10)">6~10 人</button>
+          <button type="button" class="finder-opt" onclick="pickSize(20)">10 人以上</button>
+        </div>
+      </div>
+
+      <!-- Step 3: 需求 -->
+      <div id="f-step3" class="finder-step" style="display:none;">
+        <p class="finder-q">你目前最想解決什麼？（可多選）</p>
+        <div class="finder-opts finder-multi" id="f-needs">
+          <button type="button" class="finder-opt" data-need="pos">收銀結帳太慢</button>
+          <button type="button" class="finder-opt" data-need="queue">客人排隊等太久</button>
+          <button type="button" class="finder-opt" data-need="qrshop">想讓客人自己點餐</button>
+          <button type="button" class="finder-opt" data-need="inventory">庫存管理混亂</button>
+          <button type="button" class="finder-opt" data-need="booking">預約/訂位很難管</button>
+          <button type="button" class="finder-opt" data-need="hr">員工排班算薪很煩</button>
+          <button type="button" class="finder-opt" data-need="multistore">有多間分店要管</button>
+          <button type="button" class="finder-opt" data-need="member">想經營會員回購</button>
+          <button type="button" class="finder-opt" data-need="warehouse">倉庫盤點很痛苦</button>
+        </div>
+        <button type="button" class="finder-next" onclick="showResult()">看我的推薦方案 →</button>
+      </div>
+
+      <!-- Result -->
+      <div id="f-result" class="finder-step" style="display:none;">
+        <div class="finder-result-card">
+          <p class="finder-result-label">為你推薦</p>
+          <h3 class="finder-result-plan" id="f-plan-name"></h3>
+          <p class="finder-result-price" id="f-plan-price"></p>
+          <div class="finder-result-mods">
+            <p style="font-size:12px;color:var(--w40);margin-bottom:8px;">推薦模組組合</p>
+            <div id="f-mod-tags"></div>
+          </div>
+          <div class="finder-result-reason" id="f-reason"></div>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <a href="https://plans.obarai.com/pricing.html" class="finder-cta">查看完整方案 →</a>
+            <button type="button" class="finder-restart" onclick="restartFinder()">重新選擇</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .finder-step{max-width:640px;}
+  .finder-q{font-size:20px;font-weight:600;color:var(--white);margin-bottom:20px;}
+  .finder-opts{display:flex;flex-wrap:wrap;gap:10px;}
+  .finder-opt{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:12px 20px;color:var(--w70);font-size:14px;cursor:pointer;transition:all 0.2s;}
+  .finder-opt:hover{border-color:var(--gold-40);color:var(--white);}
+  .finder-opt.selected{border-color:var(--gold);background:rgba(255,217,112,0.08);color:var(--gold);}
+  .finder-next{margin-top:24px;background:linear-gradient(135deg,var(--gold),#e8c547);color:#0c0c0c;border:none;border-radius:10px;padding:14px 32px;font-size:14px;font-weight:600;cursor:pointer;transition:transform 0.2s;}
+  .finder-next:hover{transform:translateY(-2px);}
+  .finder-result-card{background:var(--black);border:1px solid var(--gold-20);border-radius:16px;padding:36px;max-width:480px;}
+  .finder-result-label{font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--gold-60);margin-bottom:4px;}
+  .finder-result-plan{font-size:28px;font-weight:700;color:var(--white);margin-bottom:4px;}
+  .finder-result-price{font-size:16px;color:var(--gold);margin-bottom:20px;}
+  .finder-result-mods{margin-bottom:16px;}
+  #f-mod-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  #f-mod-tags span{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--gold-20);color:var(--gold);background:rgba(255,217,112,0.06);}
+  .finder-result-reason{font-size:13px;color:var(--w50);line-height:1.7;border-top:1px solid var(--border);padding-top:16px;}
+  .finder-cta{display:inline-flex;align-items:center;background:linear-gradient(135deg,var(--gold),#e8c547);color:#0c0c0c;border-radius:10px;padding:12px 24px;font-size:13px;font-weight:600;text-decoration:none;transition:transform 0.2s;}
+  .finder-cta:hover{transform:translateY(-2px);}
+  .finder-restart{background:none;border:1px solid var(--border);border-radius:10px;padding:12px 24px;font-size:13px;color:var(--w50);cursor:pointer;transition:all 0.2s;}
+  .finder-restart:hover{border-color:var(--w30);color:var(--white);}
+</style>
+
+<script>
+  let fIndustry = '', fSize = 0, fNeeds = new Set();
+
+  function pickIndustry(id) {
+    fIndustry = id;
+    document.getElementById('f-step1').style.display = 'none';
+    document.getElementById('f-step2').style.display = 'block';
+  }
+
+  function pickSize(n) {
+    fSize = n;
+    document.getElementById('f-step2').style.display = 'none';
+    document.getElementById('f-step3').style.display = 'block';
+  }
+
+  document.getElementById('f-needs').addEventListener('click', function(e) {
+    const btn = e.target.closest('.finder-opt');
+    if (!btn) return;
+    const need = btn.dataset.need;
+    if (fNeeds.has(need)) { fNeeds.delete(need); btn.classList.remove('selected'); }
+    else { fNeeds.add(need); btn.classList.add('selected'); }
+  });
+
+  const INDUSTRY_MODS = {
+    cafe:      ['rsvp','erp','qrshop','line','hr','auth'],
+    retail:    ['erp','auth','wms','line','hr','flow'],
+    salon:     ['rsvp','line','auth','hr'],
+    medspa:    ['rsvp','line','auth','hr'],
+    tutoring:  ['rsvp','erp','auth','hr'],
+    hotel:     ['rsvp','erp','line','auth','hr'],
+    warehouse: ['erp','wms','flow','auth','hr','line'],
+  };
+
+  const NEED_MODS = {
+    pos: [], queue: ['rsvp'], qrshop: ['qrshop'], inventory: ['erp'],
+    booking: ['rsvp'], hr: ['hr'], multistore: ['flow'], member: [], warehouse: ['wms'],
+  };
+
+  const MOD_LABELS = {
+    rsvp:'RSVP 訂位', line:'LINE 整合', erp:'ERP 資源管理', hr:'HR 人事考勤',
+    flow:'FLOW 營運管理', auth:'AUTH 權限管控', wms:'WMS 倉儲管理', qrshop:'QR Shop 掃碼點餐'
+  };
+
+  const INDUSTRY_NAMES = {
+    cafe:'餐飲業', retail:'零售業', salon:'美髮沙龍', medspa:'醫美',
+    tutoring:'補教業', hotel:'旅宿業', warehouse:'傳產/倉儲'
+  };
+
+  function showResult() {
+    const mods = new Set(INDUSTRY_MODS[fIndustry] || []);
+    fNeeds.forEach(n => (NEED_MODS[n]||[]).forEach(m => mods.add(m)));
+
+    let plan, price, slots;
+    if (fSize >= 10 || mods.size > 5) { plan = 'ORBIT PRO'; price = 'NT$3,988/月起'; slots = 8; }
+    else if (fSize >= 3 || mods.size > 3) { plan = 'ORBIT PLUS'; price = 'NT$1,988/月起'; slots = 5; }
+    else { plan = 'ORBIT START'; price = 'NT$1,488/月起'; slots = 3; }
+
+    const finalMods = [...mods].slice(0, slots);
+
+    document.getElementById('f-plan-name').textContent = plan;
+    document.getElementById('f-plan-price').textContent = price;
+
+    const tagsEl = document.getElementById('f-mod-tags');
+    tagsEl.innerHTML = finalMods.map(m => '<span>' + (MOD_LABELS[m]||m) + '</span>').join('');
+
+    const reasons = [];
+    const indName = INDUSTRY_NAMES[fIndustry] || '你的行業';
+    reasons.push('根據' + indName + '的營運需求，我們推薦 ' + plan + '。');
+    if (fSize <= 1) reasons.push('一人老闆輕裝上陣，START 方案就夠用。');
+    if (fSize >= 3 && fSize < 10) reasons.push('團隊 ' + fSize + ' 人，PLUS 方案含 3 個帳號最划算。');
+    if (fSize >= 10) reasons.push('團隊超過 10 人，PRO 方案全模組解鎖 + 額外帳號加購。');
+    if (mods.has('rsvp')) reasons.push('有訂位/候位需求，RSVP 模組含 Waiting Commerce 候位商務（ORBIT 獨家）。');
+    if (mods.has('qrshop')) reasons.push('QR Shop 讓客人掃碼自助點餐，省下一個人力。');
+    if (mods.has('erp')) reasons.push('ERP 即時庫存 + 低量警示，不用再手動盤點。');
+    if (mods.has('flow')) reasons.push('多門市管理需要 FLOW 模組：調貨、調人、總部看板。');
+    if (mods.has('wms')) reasons.push('倉儲管理用手機掃碼盤點，取代手持盤點機。');
+
+    document.getElementById('f-reason').innerHTML = reasons.join('<br>');
+
+    document.getElementById('f-step3').style.display = 'none';
+    document.getElementById('f-result').style.display = 'block';
+  }
+
+  function restartFinder() {
+    fIndustry = ''; fSize = 0; fNeeds = new Set();
+    document.querySelectorAll('.finder-opt').forEach(b => b.classList.remove('selected'));
+    document.getElementById('f-result').style.display = 'none';
+    document.getElementById('f-step3').style.display = 'none';
+    document.getElementById('f-step2').style.display = 'none';
+    document.getElementById('f-step1').style.display = 'block';
+  }
+</script>
+
+<hr class="divide">
 
 <!-- ═══ LEDGER OS ═══ -->
 <section id="ledger">
