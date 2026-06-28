@@ -139,9 +139,9 @@ function shouldShowLead(input, kbMatch) {
 function injectStyles() {
   var s = document.createElement('style');
   s.textContent = '\
-.ob-chat-btn{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#0a0a0a;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:9998;display:flex;align-items:center;justify-content:center;transition:transform .2s}\
-.ob-chat-btn:hover{transform:scale(1.08)}\
-.ob-chat-btn svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}\
+.ob-chat-btn{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e8c547,#c8a96e);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(200,169,110,.4);z-index:9998;display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s}\
+.ob-chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(200,169,110,.55)}\
+.ob-chat-btn svg{width:24px;height:24px;stroke:#0c0c0c;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}\
 .ob-chat-btn.open svg.ico-chat{display:none}\
 .ob-chat-btn:not(.open) svg.ico-x{display:none}\
 .ob-chat-box{position:fixed;bottom:92px;right:24px;width:380px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif}\
