@@ -1,4 +1,13 @@
 (function(){
+var DEMO_URL = 'https://50clock.obarai.com';
+var LINE_URL = 'https://lin.ee/yjUWCM8';
+
+var LEAD_TRIGGERS = ['報價','客製','優惠','折扣','議價','quote','合約','試用','免費','體驗','try','demo','聯繫','聯絡','業務','諮詢','洽詢','contact','合作','開通','導入','開始','預約','展示'];
+var msgCount = 0;
+var leadShown = false;
+
+var LEAD_MSG = '想進一步了解的話，可以直接預約展示或聯絡業務：';
+
 var KB = [
   {
     keys: ['什麼','是什麼','orbit','介紹','做什麼','幹嘛','功能'],
@@ -6,11 +15,13 @@ var KB = [
   },
   {
     keys: ['方案','價','費用','多少錢','收費','定價','cost','price','plan'],
-    a: 'ORBIT 提供三種方案：\n\n• START — NT$1,488/月（1 帳號，選 3 個模組）\n• PLUS — NT$1,988/月（3 帳號，選 5 個模組）\n• PRO — NT$3,988/月（5 帳號，全模組開通）\n\n所有方案皆含 POS + CRM + AI 基礎，另有 14 天免費試用。\n\n詳細報價與客製需求，歡迎聯繫我們的業務團隊為您規劃。'
+    a: 'ORBIT 提供三種方案：\n\n• START — NT$1,488/月（1 帳號，選 3 個模組）\n• PLUS — NT$1,988/月（3 帳號，選 5 個模組）\n• PRO — NT$3,988/月（5 帳號，全模組開通）\n\n所有方案皆含 POS + CRM + AI 基礎，另有 14 天免費試用。',
+    lead: true
   },
   {
     keys: ['試用','免費','體驗','try','free','demo'],
-    a: '我們提供 14 天免費試用，期間可完整體驗所有功能。試用期內隨時取消，不會產生任何費用。\n\n如需申請試用，請聯繫我們的業務團隊協助開通。'
+    a: '我們提供 14 天免費試用，期間可完整體驗所有功能。試用期內隨時取消，不會產生任何費用。',
+    lead: true
   },
   {
     keys: ['行業','產業','餐飲','零售','美髮','補習','旅宿','飯店','傳產','適合','industry'],
@@ -70,15 +81,18 @@ var KB = [
   },
   {
     keys: ['開通','導入','設定','上線','開始'],
-    a: '開通流程：\n\n1. 聯繫業務團隊，確認適合的方案與模組\n2. 支付一次性開通費 NT$888\n3. 系統設定與資料導入\n4. 教育訓練\n5. 正式上線\n\n從簽約到上線通常 1-2 週。'
+    a: '開通流程：\n\n1. 聯繫業務團隊，確認適合的方案與模組\n2. 支付一次性開通費 NT$888\n3. 系統設定與資料導入\n4. 教育訓練\n5. 正式上線\n\n從簽約到上線通常 1-2 週。',
+    lead: true
   },
   {
     keys: ['聯繫','聯絡','電話','客服','業務','諮詢','洽詢','contact','合作'],
-    a: '歡迎聯繫我們：\n\n電話：03-6109005\n信箱：hello@obarai.com\n\n我們的業務團隊會在 1 個工作日內回覆您。'
+    a: '歡迎聯繫我們：\n\n電話：03-6109005\n信箱：hello@obarai.com',
+    lead: true
   },
   {
     keys: ['報價','客製','優惠','折扣','議價','quote','合約'],
-    a: '詳細報價與客製化需求，需要由我們的業務團隊根據您的實際情況提供規劃。\n\n請聯繫我們：\n電話：03-6109005\n信箱：hello@obarai.com\n\n業務團隊會在 1 個工作日內回覆您。'
+    a: '詳細報價與客製化需求，需要由業務團隊根據您的實際情況提供規劃。',
+    lead: true
   },
   {
     keys: ['公司','obarai','鎧洋','統編'],
@@ -108,7 +122,18 @@ function findAnswer(input) {
     }
     if (score > bestScore) { bestScore = score; best = KB[i]; }
   }
-  return best && bestScore > 0 ? best.a : FALLBACK;
+  return best && bestScore > 0 ? best : null;
+}
+
+function shouldShowLead(input, kbMatch) {
+  if (leadShown) return false;
+  if (kbMatch && kbMatch.lead) return true;
+  var q = input.toLowerCase();
+  for (var i = 0; i < LEAD_TRIGGERS.length; i++) {
+    if (q.indexOf(LEAD_TRIGGERS[i].toLowerCase()) !== -1) return true;
+  }
+  if (msgCount >= 3) return true;
+  return false;
 }
 
 function injectStyles() {
@@ -129,6 +154,14 @@ function injectStyles() {
 .ob-msg{max-width:85%;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-word}\
 .ob-msg.bot{background:#fff;color:#111827;align-self:flex-start;border:1px solid #e5e7eb;border-bottom-left-radius:4px}\
 .ob-msg.user{background:#0a0a0a;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}\
+.ob-cta-card{align-self:flex-start;max-width:90%;background:#fff;border:1.5px solid #2563eb;border-radius:10px;padding:16px;border-bottom-left-radius:4px}\
+.ob-cta-card p{font-size:12px;color:#6b7280;margin-bottom:12px;line-height:1.6}\
+.ob-cta-btns{display:flex;flex-direction:column;gap:8px}\
+.ob-cta-btns a{display:block;text-align:center;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .15s}\
+.ob-cta-btns a:hover{opacity:.85}\
+.ob-cta-btns .cta-demo{background:#0a0a0a;color:#fff}\
+.ob-cta-btns .cta-line{background:#06c755;color:#fff}\
+.ob-cta-btns .cta-tel{background:none;border:1px solid #e5e7eb;color:#111827;font-size:12px}\
 .ob-chat-input{display:flex;padding:12px;gap:8px;border-top:1px solid #e5e7eb;background:#fff;flex-shrink:0}\
 .ob-chat-input input{flex:1;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px;font-size:13px;outline:none;font-family:inherit;transition:border-color .15s}\
 .ob-chat-input input:focus{border-color:#2563eb}\
@@ -139,13 +172,11 @@ function injectStyles() {
 }
 
 function createUI() {
-  // Float button
   var btn = document.createElement('button');
   btn.className = 'ob-chat-btn';
   btn.innerHTML = '<svg class="ico-chat" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><svg class="ico-x" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>';
   document.body.appendChild(btn);
 
-  // Chat box
   var box = document.createElement('div');
   box.className = 'ob-chat-box';
   box.innerHTML = '\
@@ -155,7 +186,7 @@ function createUI() {
 <div class="ob-chat-footer">Powered by OBARAI INTELLIGENCE</div>';
   document.body.appendChild(box);
 
-  var msgs = document.getElementById('ob-msgs');
+  var msgsEl = document.getElementById('ob-msgs');
   var input = document.getElementById('ob-input');
   var sendBtn = document.getElementById('ob-send');
   var isOpen = false;
@@ -164,8 +195,23 @@ function createUI() {
     var el = document.createElement('div');
     el.className = 'ob-msg ' + (isUser ? 'user' : 'bot');
     el.textContent = text;
-    msgs.appendChild(el);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgsEl.appendChild(el);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+
+  function showCtaCard() {
+    leadShown = true;
+    var card = document.createElement('div');
+    card.className = 'ob-cta-card';
+    card.innerHTML = '\
+<p>' + LEAD_MSG + '</p>\
+<div class="ob-cta-btns">\
+<a href="' + DEMO_URL + '" target="_blank" rel="noopener" class="cta-demo">預約私人展示</a>\
+<a href="' + LINE_URL + '" target="_blank" rel="noopener" class="cta-line">LINE 聯絡業務</a>\
+<a href="tel:036109005" class="cta-tel">撥打 03-6109005</a>\
+</div>';
+    msgsEl.appendChild(card);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
   }
 
   function send() {
@@ -173,8 +219,16 @@ function createUI() {
     if (!q) return;
     addMsg(q, true);
     input.value = '';
+    msgCount++;
+
     setTimeout(function() {
-      addMsg(findAnswer(q), false);
+      var match = findAnswer(q);
+      var text = match ? match.a : FALLBACK;
+      addMsg(text, false);
+
+      if (shouldShowLead(q, match)) {
+        setTimeout(function() { showCtaCard(); }, 500);
+      }
     }, 300 + Math.random() * 400);
   }
 
@@ -182,7 +236,7 @@ function createUI() {
     isOpen = !isOpen;
     box.classList.toggle('show', isOpen);
     btn.classList.toggle('open', isOpen);
-    if (isOpen && msgs.children.length === 0) {
+    if (isOpen && msgsEl.children.length === 0) {
       addMsg(GREETING, false);
     }
     if (isOpen) input.focus();
