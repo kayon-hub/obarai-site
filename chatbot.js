@@ -112,7 +112,16 @@ var KB = [
   }
 ];
 
-var GREETING = '你好！我是 ORBIT 智慧助理。\n\n有任何關於 ORBIT 平台的問題都可以問我，例如：\n• 功能介紹\n• 方案與價格\n• 適合什麼行業\n• 試用申請\n\n請問有什麼可以幫您的？';
+var GREETING = '你好！我是 ORBIT 智慧助理。\n請問有什麼可以幫您的？';
+var GREETING_BUTTONS = ['功能介紹', '方案與價格', '適合什麼行業', '申請試用', '聯繫業務'];
+
+var FOLLOWUP_MAP = {
+  '功能介紹': ['POS 收銀', 'CRM 會員', 'ERP 庫存', 'AI 自動化', 'HR 考勤', 'PMS 旅宿'],
+  '方案與價格': ['START 方案', 'PLUS 方案', 'PRO 方案', '申請試用'],
+  '適合什麼行業': ['餐飲業', '零售業', '美髮沙龍', '補教機構', '旅宿業'],
+  '聯繫業務': null,
+  '申請試用': null
+};
 
 var FALLBACK = '抱歉，這個問題我不太確定怎麼回答。\n\n建議您直接聯繫我們的團隊：\n電話：03-6109005\n信箱：hello@obarai.com\n\n或者您可以換個方式問我，例如「ORBIT 有哪些功能」「適合餐飲業嗎」「方案多少錢」。';
 
@@ -162,6 +171,9 @@ function injectStyles() {
 .ob-msg{max-width:85%;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-word}\
 .ob-msg.bot{background:#fff;color:#111827;align-self:flex-start;border:1px solid #e5e7eb;border-bottom-left-radius:4px}\
 .ob-msg.user{background:#0a0a0a;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}\
+.ob-quick{align-self:flex-start;display:flex;flex-wrap:wrap;gap:6px;max-width:90%}\
+.ob-quick button{background:#fff;border:1px solid #c8a96e;color:#0c0c0c;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap}\
+.ob-quick button:hover{background:#0c0c0c;color:#c8a96e;border-color:#c8a96e}\
 .ob-cta-card{align-self:flex-start;max-width:90%;background:#fff;border:1.5px solid #2563eb;border-radius:10px;padding:16px;border-bottom-left-radius:4px}\
 .ob-cta-card p{font-size:12px;color:#6b7280;margin-bottom:12px;line-height:1.6}\
 .ob-cta-btns{display:flex;flex-direction:column;gap:8px}\
@@ -207,6 +219,39 @@ function createUI() {
     msgsEl.scrollTop = msgsEl.scrollHeight;
   }
 
+  function addQuickButtons(buttons) {
+    var wrap = document.createElement('div');
+    wrap.className = 'ob-quick';
+    buttons.forEach(function(label) {
+      var b = document.createElement('button');
+      b.textContent = label;
+      b.onclick = function() {
+        wrap.remove();
+        handleQuickClick(label);
+      };
+      wrap.appendChild(b);
+    });
+    msgsEl.appendChild(wrap);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+
+  function handleQuickClick(label) {
+    addMsg(label, true);
+    msgCount++;
+    setTimeout(function() {
+      var match = findAnswer(label);
+      var text = match ? match.a : FALLBACK;
+      addMsg(text, false);
+      var followups = FOLLOWUP_MAP[label];
+      if (followups) {
+        setTimeout(function() { addQuickButtons(followups); }, 300);
+      }
+      if (shouldShowLead(label, match)) {
+        setTimeout(function() { showCtaCard(); }, 500);
+      }
+    }, 300);
+  }
+
   function showCtaCard() {
     leadShown = true;
     var card = document.createElement('div');
@@ -236,6 +281,8 @@ function createUI() {
 
       if (shouldShowLead(q, match)) {
         setTimeout(function() { showCtaCard(); }, 500);
+      } else if (!match) {
+        setTimeout(function() { addQuickButtons(GREETING_BUTTONS); }, 300);
       }
     }, 300 + Math.random() * 400);
   }
@@ -246,6 +293,7 @@ function createUI() {
     btn.classList.toggle('open', isOpen);
     if (isOpen && msgsEl.children.length === 0) {
       addMsg(GREETING, false);
+      setTimeout(function() { addQuickButtons(GREETING_BUTTONS); }, 200);
     }
     if (isOpen) input.focus();
   });
