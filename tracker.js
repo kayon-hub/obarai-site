@@ -1,5 +1,5 @@
 (function(){
-var GAS = 'https://script.google.com/macros/s/AKfycbzLx4nanZml23YkVo9ep6Zz0ZkER43VPRzdbUXPfvsjLjF8EizOMssmBQkoA3RArB1h/exec';
+var GAS = 'https://script.google.com/macros/s/AKfycbzSPemOnjLTbzh9ZIjRTZEcDPcjT6UN_saCEBm-qi120zMYzhtFwWmOpwO5YSlaeBsg/exec';
 var KEY = 'ob_vid';
 
 function getVid() {
