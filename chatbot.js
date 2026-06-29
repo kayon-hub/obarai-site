@@ -112,15 +112,16 @@ var KB = [
   }
 ];
 
-var GREETING = '你好！我是 ORBIT 智慧助理。\n請問有什麼可以幫您的？';
-var GREETING_BUTTONS = ['功能介紹', '方案與價格', '適合什麼行業', '申請試用', '聯繫業務'];
+var GREETING = '你好！我是 ORBIT 智慧助理。\n想了解 ORBIT 能怎麼幫助你的事業嗎？';
 
-var FOLLOWUP_MAP = {
-  '功能介紹': ['POS 收銀', 'CRM 會員', 'ERP 庫存', 'AI 自動化', 'HR 考勤', 'PMS 旅宿'],
-  '方案與價格': ['START 方案', 'PLUS 方案', 'PRO 方案', '申請試用'],
-  '適合什麼行業': ['餐飲業', '零售業', '美髮沙龍', '補教機構', '旅宿業'],
-  '聯繫業務': null,
-  '申請試用': null
+var FUNNEL = {
+  step: 0,
+  answers: { q1: '', q2: '', q3: '' },
+  questions: [
+    { text: '請問你想了解什麼呢？', buttons: ['產品功能', '方案價格', '申請試用', '客製需求'] },
+    { text: '請問你的行業與規模？', buttons: ['餐飲業', '零售業', '美髮沙龍', '補教機構', '旅宿業', '其他行業'] },
+    { text: '你最需要哪方面的協助？', buttons: ['收銀結帳', '會員管理', '庫存進銷存', '預約排班', '人事考勤', '全部都需要'] }
+  ]
 };
 
 var FALLBACK = '抱歉，這個問題我不太確定怎麼回答。\n\n建議您直接聯繫我們的團隊：\n電話：03-6109005\n信箱：hello@obarai.com\n\n或者您可以換個方式問我，例如「ORBIT 有哪些功能」「適合餐飲業嗎」「方案多少錢」。';
@@ -227,7 +228,7 @@ function createUI() {
       b.textContent = label;
       b.onclick = function() {
         wrap.remove();
-        handleQuickClick(label);
+        handleFunnelClick(label);
       };
       wrap.appendChild(b);
     });
@@ -235,36 +236,73 @@ function createUI() {
     msgsEl.scrollTop = msgsEl.scrollHeight;
   }
 
-  function handleQuickClick(label) {
+  function handleFunnelClick(label) {
     addMsg(label, true);
     msgCount++;
+
+    if (FUNNEL.step === 0) { FUNNEL.answers.q1 = label; }
+    else if (FUNNEL.step === 1) { FUNNEL.answers.q2 = label; }
+    else if (FUNNEL.step === 2) { FUNNEL.answers.q3 = label; }
+
+    FUNNEL.step++;
+
     setTimeout(function() {
-      var match = findAnswer(label);
-      var text = match ? match.a : FALLBACK;
-      addMsg(text, false);
-      var followups = FOLLOWUP_MAP[label];
-      if (followups) {
-        setTimeout(function() { addQuickButtons(followups); }, 300);
-      }
-      if (shouldShowLead(label, match)) {
-        setTimeout(function() { showCtaCard(); }, 500);
+      if (FUNNEL.step < 3) {
+        var next = FUNNEL.questions[FUNNEL.step];
+        addMsg(next.text, false);
+        setTimeout(function() { addQuickButtons(next.buttons); }, 250);
+      } else {
+        addMsg('感謝你的回覆！根據你的需求，我們的專員會為你推薦最適合的方案。\n\n請留下聯絡方式，專員會立即與您聯繫。', false);
+        setTimeout(function() { showLeadForm(); }, 400);
       }
     }, 300);
   }
 
-  function showCtaCard() {
+  function showLeadForm() {
     leadShown = true;
     var card = document.createElement('div');
     card.className = 'ob-cta-card';
     card.innerHTML = '\
-<p>' + LEAD_MSG + '</p>\
-<div class="ob-cta-btns">\
+<div style="margin-bottom:10px"><p style="font-size:12px;color:#6b7280;margin-bottom:10px">留下資料，專員立即與您聯繫</p>\
+<input type="text" placeholder="姓名 *" class="ob-lead-name" style="width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:6px;font-size:12px;margin-bottom:6px;font-family:inherit;outline:none">\
+<input type="tel" placeholder="手機號碼 *" class="ob-lead-phone" style="width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:6px;font-size:12px;margin-bottom:6px;font-family:inherit;outline:none">\
+<input type="text" placeholder="公司 / 店名（選填）" class="ob-lead-company" style="width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:6px;font-size:12px;margin-bottom:10px;font-family:inherit;outline:none"></div>\
+<button class="ob-lead-submit" style="width:100%;padding:10px;background:#0a0a0a;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">送出</button>\
+<div class="ob-cta-btns" style="margin-top:10px">\
 <a href="' + DEMO_URL + '" target="_blank" rel="noopener" class="cta-demo">預約私人展示</a>\
 <a href="' + LINE_URL + '" target="_blank" rel="noopener" class="cta-line">LINE 聯絡業務</a>\
 <a href="tel:036109005" class="cta-tel">撥打 03-6109005</a>\
 </div>';
     msgsEl.appendChild(card);
     msgsEl.scrollTop = msgsEl.scrollHeight;
+
+    card.querySelector('.ob-lead-submit').addEventListener('click', function() {
+      var name = card.querySelector('.ob-lead-name').value.trim();
+      var phone = card.querySelector('.ob-lead-phone').value.trim();
+      var company = card.querySelector('.ob-lead-company').value.trim();
+      if (!name || !phone) {
+        card.querySelector('.ob-lead-name').style.borderColor = name ? '' : '#dc2626';
+        card.querySelector('.ob-lead-phone').style.borderColor = phone ? '' : '#dc2626';
+        return;
+      }
+      this.disabled = true;
+      this.textContent = '送出中...';
+      var payload = {
+        type: 'chatbot_funnel',
+        q1: FUNNEL.answers.q1,
+        q2: FUNNEL.answers.q2,
+        q3: FUNNEL.answers.q3,
+        name: name,
+        phone: phone,
+        company: company,
+        source: window.location.href
+      };
+      fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) }).catch(function(){});
+      card.innerHTML = '<div style="text-align:center;padding:12px;color:#16a34a;font-size:13px;font-weight:600">已收到！專員會在 1 個工作日內與您聯繫。</div>';
+      setTimeout(function() {
+        addMsg('感謝！如果還有其他問題，歡迎繼續提問。', false);
+      }, 500);
+    });
   }
 
   function send() {
@@ -274,16 +312,28 @@ function createUI() {
     input.value = '';
     msgCount++;
 
+    if (FUNNEL.step < 3 && !leadShown) {
+      if (FUNNEL.step === 0) FUNNEL.answers.q1 = q;
+      else if (FUNNEL.step === 1) FUNNEL.answers.q2 = q;
+      else if (FUNNEL.step === 2) FUNNEL.answers.q3 = q;
+      FUNNEL.step++;
+      setTimeout(function() {
+        if (FUNNEL.step < 3) {
+          var next = FUNNEL.questions[FUNNEL.step];
+          addMsg(next.text, false);
+          setTimeout(function() { addQuickButtons(next.buttons); }, 250);
+        } else {
+          addMsg('感謝你的回覆！根據你的需求，我們的專員會為你推薦最適合的方案。\n\n請留下聯絡方式，專員會立即與您聯繫。', false);
+          setTimeout(function() { showLeadForm(); }, 400);
+        }
+      }, 300);
+      return;
+    }
+
     setTimeout(function() {
       var match = findAnswer(q);
       var text = match ? match.a : FALLBACK;
       addMsg(text, false);
-
-      if (shouldShowLead(q, match)) {
-        setTimeout(function() { showCtaCard(); }, 500);
-      } else if (!match) {
-        setTimeout(function() { addQuickButtons(GREETING_BUTTONS); }, 300);
-      }
     }, 300 + Math.random() * 400);
   }
 
@@ -293,7 +343,11 @@ function createUI() {
     btn.classList.toggle('open', isOpen);
     if (isOpen && msgsEl.children.length === 0) {
       addMsg(GREETING, false);
-      setTimeout(function() { addQuickButtons(GREETING_BUTTONS); }, 200);
+      setTimeout(function() {
+        var first = FUNNEL.questions[0];
+        addMsg(first.text, false);
+        setTimeout(function() { addQuickButtons(first.buttons); }, 250);
+      }, 400);
     }
     if (isOpen) input.focus();
   });
