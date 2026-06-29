@@ -201,6 +201,28 @@
     .footer-brands a:hover{color:var(--white-40);}
     .footer-brands-dot{color:var(--white-20);font-size:10px;}
     /* ─── NÄXER ENDORSEMENT ─── */
+    #guardian{padding:120px 0;background:var(--surface);}
+    .guardian-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .guardian-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:320px;}
+    .guardian-ring{width:200px;height:200px;border-radius:50%;border:2px solid var(--gold-20);position:relative;display:flex;align-items:center;justify-content:center;}
+    .guardian-ring::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:1px solid var(--gold-08);animation:guardianPulse 3s ease-in-out infinite;}
+    .guardian-ring::after{content:'';position:absolute;inset:-28px;border-radius:50%;border:1px solid var(--gold-08);animation:guardianPulse 3s ease-in-out infinite 0.5s;}
+    @keyframes guardianPulse{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.8;transform:scale(1.04)}}
+    .guardian-icon{font-size:56px;color:var(--gold);line-height:1;}
+    .guardian-badge{position:absolute;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;white-space:nowrap;}
+    .guardian-badge .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .guardian-badge .dot.green{background:#34d399;box-shadow:0 0 8px rgba(52,211,153,0.4);animation:dotBlink 2s ease infinite;}
+    .guardian-badge .dot.gold{background:var(--gold);box-shadow:0 0 8px var(--gold-20);}
+    @keyframes dotBlink{0%,100%{opacity:1}50%{opacity:0.5}}
+    .guardian-b1{top:10%;right:0;}
+    .guardian-b2{bottom:20%;left:-10px;}
+    .guardian-b3{bottom:5%;right:10%;}
+    .guardian-items{display:flex;flex-direction:column;gap:20px;margin-top:32px;}
+    .guardian-item{display:flex;gap:14px;align-items:flex-start;}
+    .guardian-item-icon{width:36px;height:36px;border-radius:8px;background:var(--gold-08);border:1px solid var(--gold-20);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:var(--gold);}
+    .guardian-item-text h4{font-size:14px;font-weight:500;margin-bottom:2px;}
+    .guardian-item-text p{font-size:12.5px;color:var(--white-40);line-height:1.6;}
+    @media(max-width:768px){.guardian-grid{grid-template-columns:1fr;gap:40px;}.guardian-visual{min-height:240px;}.guardian-badge{font-size:10px;padding:8px 12px;}}
     #endorsement{padding:120px 0;overflow:hidden;}
     .endorse-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
     .endorse-quote{margin-top:40px;padding:24px 28px;border-left:1px solid var(--gold-60);background:var(--gold-08);border-radius:0 8px 8px 0;}
@@ -895,6 +917,59 @@
       <div class="testi-card fi d2"><span class="testi-openquote">"</span><p class="testi-quote">做客製蛋糕最怕的就是取貨當天找不到備注，客人特地說不要什麼口味、寫什麼字，到時候全忘了。那種看著客人失望的臉，真的很想找個洞鑽進去。用了 CRM 之後每筆訂單備注都在，再也不靠記憶了。現在接訂單變成一件開心的事，不是壓力。</p><div class="testi-meta"><div class="testi-avatar"><img src="images/amy.jpg" alt="Amy Lin"></div><div><p class="testi-name">Amy Lin</p><p class="testi-role">碎花甜點工作室 · 創辦人</p></div><span class="testi-tag">甜點工作室</span></div></div>
       <div class="testi-card fi d1"><span class="testi-openquote">"</span><p class="testi-quote">我有三個教練，每個人排班不一樣、學員預約各自在 LINE 談、收費靠我自己記。月底對不起來的時候大家都很有意見，搞得氣氛很差。串在一起之後，帳清楚了，爭議少了。我們現在終於有心思去想怎麼把課程做得更好，而不是每天在解決後勤問題。</p><div class="testi-meta"><div class="testi-avatar"><img src="images/kevin.jpg" alt="Kevin Liu"></div><div><p class="testi-name">Kevin Liu</p><p class="testi-role">FORMA 健身工作室 · 創辦人</p></div><span class="testi-tag">健身工作室</span></div></div>
       <div class="testi-card fi d2"><span class="testi-openquote">"</span><p class="testi-quote">以前每天下班多留一小時整理出勤表，遇到補班或請假就更亂，有時候算錯了薪水還要重來。那種「今天終於可以早點走」的念頭，每天都有但每天都做不到。導入之後，整理的事情系統自己做了。我現在六點就可以走，這一個小時我拿去運動，整個人狀態好很多。</p><div class="testi-meta"><div class="testi-avatar"><img src="images/vivian.jpg" alt="Vivian Wu"></div><div><p class="testi-name">Vivian Wu</p><p class="testi-role">安康牙醫診所 · 行政主管</p></div><span class="testi-tag">診所</span></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- ═══ ORBIT GUARDIAN ═══ -->
+<section id="guardian">
+  <div class="wrap">
+    <div class="guardian-grid">
+      <div>
+        <div class="fi"><p class="eyebrow">ORBIT Guardian</p>
+        <h2 class="h2">每天深夜<br>守門員自動巡邏</h2></div>
+        <p class="lead fi d1">每晚系統自動執行資安掃描與健康檢查。你睡覺的時候，ORBIT 守門員正在確認一切正常。</p>
+        <div class="guardian-items fi d2">
+          <div class="guardian-item">
+            <div class="guardian-item-icon">&#9737;</div>
+            <div class="guardian-item-text">
+              <h4>資料庫完整性檢查</h4>
+              <p>每日自動驗證核心資料表結構與資料一致性，異常立即通知。</p>
+            </div>
+          </div>
+          <div class="guardian-item">
+            <div class="guardian-item-icon">&#9888;</div>
+            <div class="guardian-item-text">
+              <h4>資安威脅偵測</h4>
+              <p>掃描異常存取模式、API 呼叫頻率、權限配置，守住每一道門。</p>
+            </div>
+          </div>
+          <div class="guardian-item">
+            <div class="guardian-item-icon">&#9889;</div>
+            <div class="guardian-item-text">
+              <h4>營運異常預警</h4>
+              <p>合約到期提醒、備品低庫存警示、房務逾時通知，問題在發生前攔截。</p>
+            </div>
+          </div>
+          <div class="guardian-item">
+            <div class="guardian-item-icon">&#128274;</div>
+            <div class="guardian-item-text">
+              <h4>零停機更新</h4>
+              <p>系統更新採無中斷部署，舊版持續服務直到新版就緒，瞬間切換。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="guardian-visual fi d2">
+        <div class="guardian-ring">
+          <div class="guardian-icon">&#9899;</div>
+        </div>
+        <div class="guardian-badge guardian-b1"><div class="dot green"></div>系統狀態正常</div>
+        <div class="guardian-badge guardian-b2"><div class="dot gold"></div>00:00 資安掃描完成</div>
+        <div class="guardian-badge guardian-b3"><div class="dot green"></div>15 張資料表已驗證</div>
+      </div>
     </div>
   </div>
 </section>
