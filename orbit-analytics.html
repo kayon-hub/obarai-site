@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ORBIT Analytics</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  :root{--bg:#0c0c0c;--card:#141414;--border:#1f1f1f;--text:#e5e5e5;--muted:#6b7280;--gold:#c8a96e;--cyan:#22d3ee}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+  .lock{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center}
+  .lock-box{text-align:center;max-width:320px;width:90%}
+  .lock-box h2{font-size:14px;color:var(--muted);letter-spacing:2px;margin-bottom:20px}
+  .lock-box input{width:100%;padding:14px;font-size:20px;text-align:center;letter-spacing:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);outline:none;font-family:monospace}
+  .lock-box input:focus{border-color:var(--gold)}
+  .lock-box input.err{border-color:#dc2626;animation:shake .4s}
+  .lock-box button{margin-top:12px;width:100%;padding:10px;background:var(--gold);color:#0c0c0c;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  .header{padding:24px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .header h1{font-size:16px;font-weight:700;letter-spacing:1px}
+  .header .sub{font-size:11px;color:var(--muted)}
+  .header .refresh{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit}
+  .header .refresh:hover{border-color:var(--gold);color:var(--gold)}
+
+  .container{max-width:1000px;margin:0 auto;padding:24px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px}
+  .stat .label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .stat .val{font-size:28px;font-weight:800;margin-top:4px}
+  .stat .val.gold{color:var(--gold)}
+  .stat .val.cyan{color:var(--cyan)}
+
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
+  .panel h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:8px 0;border-bottom:1px solid var(--border)}
+  td{padding:10px 0;font-size:13px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  .bar-wrap{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:4px}
+  .bar{height:100%;border-radius:3px;background:var(--gold)}
+
+  .empty{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+  .loading{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="lock" id="lock">
+  <div class="lock-box">
+    <h2>ORBIT ANALYTICS</h2>
+    <input type="password" id="pin" maxlength="8" placeholder="--------" onkeydown="if(event.key==='Enter')checkPin()">
+    <button onclick="checkPin()">進入</button>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="header">
+    <div>
+      <h1>ORBIT Analytics</h1>
+      <div class="sub">www.obarai.com 瀏覽分析</div>
+    </div>
+    <button class="refresh" onclick="loadData()">重新整理</button>
+  </div>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="label">今日瀏覽</div><div class="val gold" id="s-today">-</div></div>
+      <div class="stat"><div class="label">7 日瀏覽</div><div class="val cyan" id="s-week">-</div></div>
+      <div class="stat"><div class="label">不重複訪客</div><div class="val" id="s-uv">-</div></div>
+      <div class="stat"><div class="label">30 日瀏覽</div><div class="val" id="s-month">-</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>頁面瀏覽排行</h3>
+      <div id="page-table"><div class="loading">載入中...</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>來源分析</h3>
+      <div id="ref-table"><div class="loading">載入中...</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>裝置分析</h3>
+      <div id="device-table"><div class="loading">載入中...</div></div>
+    </div>
+
+    <div class="panel">
+      <h3>最近 50 筆瀏覽</h3>
+      <div id="recent-table"><div class="loading">載入中...</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var PIN = '61210989';
+var GAS = 'https://script.google.com/macros/s/AKfycbwurdEwtQMWAcgtnFj5nJ8U19z3uE4TnbIqXs1rMLxvQqXV7y65oBXPZ7RSh-V1pqzt/exec';
+
+function checkPin() {
+  var input = document.getElementById('pin');
+  if (input.value === PIN) {
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    sessionStorage.setItem('ob_analytics', '1');
+    loadData();
+  } else {
+    input.classList.add('err');
+    input.value = '';
+    setTimeout(function() { input.classList.remove('err'); }, 500);
+  }
+}
+
+if (sessionStorage.getItem('ob_analytics') === '1') {
+  document.getElementById('lock').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadData();
+}
+
+function loadData() {
+  fetch(GAS + '?action=analytics')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.rows || d.rows.length === 0) {
+        document.getElementById('s-today').textContent = '0';
+        document.getElementById('s-week').textContent = '0';
+        document.getElementById('s-uv').textContent = '0';
+        document.getElementById('s-month').textContent = '0';
+        document.getElementById('page-table').innerHTML = '<div class="empty">尚無數據，等待訪客瀏覽...</div>';
+        document.getElementById('ref-table').innerHTML = '<div class="empty">尚無數據</div>';
+        document.getElementById('device-table').innerHTML = '<div class="empty">尚無數據</div>';
+        document.getElementById('recent-table').innerHTML = '<div class="empty">尚無數據</div>';
+        return;
+      }
+      processData(d.rows);
+    })
+    .catch(function() {
+      document.getElementById('page-table').innerHTML = '<div class="empty">無法載入數據，請確認 GAS 已更新部署</div>';
+    });
+}
+
+function processData(rows) {
+  var now = new Date();
+  var todayStr = now.toISOString().slice(0, 10);
+  var weekAgo = new Date(now - 7 * 86400000).toISOString().slice(0, 10);
+  var monthAgo = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
+
+  var todayCount = 0, weekCount = 0, monthCount = 0;
+  var uvSet = {};
+  var pageCounts = {};
+  var refCounts = {};
+  var deviceCounts = { mobile: 0, desktop: 0, tablet: 0 };
+
+  rows.forEach(function(r) {
+    var date = (r[0] || '').slice(0, 10);
+    var page = r[1] || '/';
+    var vid = r[2] || '';
+    var ref = r[3] || '(direct)';
+    var ua = r[4] || '';
+
+    if (date >= monthAgo) {
+      monthCount++;
+      uvSet[vid] = true;
+      pageCounts[page] = (pageCounts[page] || 0) + 1;
+
+      if (ref && ref !== '(direct)') {
+        try { ref = new URL(ref).hostname; } catch(e) {}
+      }
+      refCounts[ref] = (refCounts[ref] || 0) + 1;
+
+      if (/Mobile|iPhone|Android/.test(ua)) deviceCounts.mobile++;
+      else if (/Tablet|iPad/.test(ua)) deviceCounts.tablet++;
+      else deviceCounts.desktop++;
+    }
+    if (date >= weekAgo) weekCount++;
+    if (date === todayStr) todayCount++;
+  });
+
+  document.getElementById('s-today').textContent = todayCount;
+  document.getElementById('s-week').textContent = weekCount;
+  document.getElementById('s-uv').textContent = Object.keys(uvSet).length;
+  document.getElementById('s-month').textContent = monthCount;
+
+  // Page table
+  var pages = Object.entries(pageCounts).sort(function(a, b) { return b[1] - a[1]; });
+  var maxP = pages.length ? pages[0][1] : 1;
+  var ph = '<table><tr><th>頁面</th><th>瀏覽</th><th></th></tr>';
+  pages.forEach(function(p) {
+    ph += '<tr><td>' + p[0] + '</td><td>' + p[1] + '</td><td style="width:40%"><div class="bar-wrap"><div class="bar" style="width:' + (p[1] / maxP * 100) + '%"></div></div></td></tr>';
+  });
+  document.getElementById('page-table').innerHTML = ph + '</table>';
+
+  // Ref table
+  var refs = Object.entries(refCounts).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 10);
+  var rh = '<table><tr><th>來源</th><th>次數</th></tr>';
+  refs.forEach(function(r) { rh += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>'; });
+  document.getElementById('ref-table').innerHTML = rh + '</table>';
+
+  // Device table
+  var total = deviceCounts.mobile + deviceCounts.desktop + deviceCounts.tablet || 1;
+  var dh = '<table><tr><th>裝置</th><th>次數</th><th>比例</th></tr>';
+  [['手機', deviceCounts.mobile], ['桌面', deviceCounts.desktop], ['平板', deviceCounts.tablet]].forEach(function(d) {
+    dh += '<tr><td>' + d[0] + '</td><td>' + d[1] + '</td><td>' + Math.round(d[1] / total * 100) + '%</td></tr>';
+  });
+  document.getElementById('device-table').innerHTML = dh + '</table>';
+
+  // Recent
+  var recent = rows.slice(-50).reverse();
+  var th = '<table><tr><th>時間</th><th>頁面</th><th>來源</th><th>裝置</th></tr>';
+  recent.forEach(function(r) {
+    var t = (r[0] || '').replace('T', ' ').slice(0, 19);
+    var device = /Mobile|iPhone|Android/.test(r[4] || '') ? '手機' : '桌面';
+    var ref = r[3] || '-';
+    if (ref.length > 30) { try { ref = new URL(ref).hostname; } catch(e) { ref = ref.slice(0, 30); } }
+    th += '<tr><td style="white-space:nowrap;font-size:11px;color:#6b7280">' + t + '</td><td>' + (r[1] || '/') + '</td><td style="font-size:11px">' + ref + '</td><td style="font-size:11px">' + device + '</td></tr>';
+  });
+  document.getElementById('recent-table').innerHTML = th + '</table>';
+}
+</script>
+</body>
+</html>
