@@ -143,12 +143,16 @@ function shouldShowLead(input, kbMatch) {
 function injectStyles() {
   var s = document.createElement('style');
   s.textContent = '\
-.ob-chat-btn{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e8c547,#c8a96e);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(200,169,110,.4);z-index:9998;display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s}\
-.ob-chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(200,169,110,.55)}\
-.ob-chat-btn svg{width:24px;height:24px;stroke:#0c0c0c;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}\
+.ob-chat-btn{position:fixed;bottom:28px;right:28px;display:flex;align-items:center;gap:10px;padding:13px 24px 13px 18px;border-radius:50px;background:#0c0c0c;border:1px solid rgba(200,169,110,.5);cursor:pointer;z-index:9998;transition:all .25s;animation:ob-breathe 2.8s ease-in-out infinite;font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif}\
+.ob-chat-btn:hover{animation:none;border-color:rgba(200,169,110,.8);box-shadow:0 8px 32px rgba(200,169,110,.35);transform:translateY(-2px)}\
+.ob-chat-btn svg{width:20px;height:20px;stroke:#c8a96e;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}\
+.ob-chat-btn .ob-btn-text{font-size:12.5px;font-weight:500;color:#c8a96e;letter-spacing:.04em;white-space:nowrap}\
+.ob-chat-btn.open{padding:12px;border-radius:50%;width:48px;height:48px;justify-content:center;animation:none;border-color:rgba(255,255,255,.15)}\
+.ob-chat-btn.open .ob-btn-text{display:none}\
 .ob-chat-btn.open svg.ico-chat{display:none}\
 .ob-chat-btn:not(.open) svg.ico-x{display:none}\
-.ob-chat-box{position:fixed;bottom:92px;right:24px;width:380px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif}\
+@keyframes ob-breathe{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,0),0 4px 16px rgba(0,0,0,.3)}50%{box-shadow:0 0 20px 6px rgba(200,169,110,.2),0 4px 16px rgba(0,0,0,.3)}}\
+.ob-chat-box{position:fixed;bottom:84px;right:24px;width:380px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif}\
 .ob-chat-box.show{display:flex}\
 .ob-chat-head{background:#0a0a0a;color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}\
 .ob-chat-head .av{width:36px;height:36px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}\
@@ -178,7 +182,7 @@ function injectStyles() {
 function createUI() {
   var btn = document.createElement('button');
   btn.className = 'ob-chat-btn';
-  btn.innerHTML = '<svg class="ico-chat" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><svg class="ico-x" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>';
+  btn.innerHTML = '<svg class="ico-chat" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span class="ob-btn-text">ORBIT 智慧助理</span><svg class="ico-x" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>';
   document.body.appendChild(btn);
 
   var box = document.createElement('div');
