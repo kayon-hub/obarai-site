@@ -23,8 +23,21 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--white);font-family:var(--tc);-webkit-font-smoothing:antialiased}
 
+  /* STARFIELD */
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .star{position:absolute;width:1px;height:1px;background:#fff;border-radius:50%;animation:twinkle var(--dur) ease-in-out infinite var(--delay)}
+  .star.m{width:1.5px;height:1.5px;box-shadow:0 0 2px rgba(255,255,255,0.3)}
+  .star.l{width:2px;height:2px;box-shadow:0 0 4px rgba(200,169,110,0.25)}
+  @keyframes twinkle{0%,100%{opacity:var(--lo)}50%{opacity:var(--hi)}}
+
+  /* SHOOTING STAR */
+  .meteor{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:0;z-index:1;pointer-events:none}
+  .meteor::after{content:'';position:absolute;top:0;right:0;width:60px;height:1px;background:linear-gradient(to left,rgba(200,169,110,0.7),transparent);transform-origin:right center;transform:rotate(0deg)}
+  .meteor.active{animation:shoot var(--speed) linear forwards}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0)}5%{opacity:1}80%{opacity:.6}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
+
   /* SNAP CONTAINER */
-  .book{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+  .book{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
   .page{height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;flex-direction:column}
 
   /* PAGE INDICATOR */
@@ -129,6 +142,7 @@
 </head>
 <body>
 
+<div class="stars" id="starfield"></div>
 <div class="book" id="book">
 
   <!-- PAGE 1: OPENING -->
@@ -239,6 +253,45 @@
 <div class="indicator" id="indicator"></div>
 
 <script>
+// STARFIELD
+(function() {
+  var field = document.getElementById('starfield');
+  var count = Math.min(Math.floor(window.innerWidth * window.innerHeight / 3000), 200);
+  for (var i = 0; i < count; i++) {
+    var s = document.createElement('div');
+    var size = Math.random();
+    s.className = 'star' + (size > 0.92 ? ' l' : size > 0.75 ? ' m' : '');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
+    s.style.setProperty('--delay', (Math.random() * 5) + 's');
+    s.style.setProperty('--lo', (0.1 + Math.random() * 0.2).toFixed(2));
+    s.style.setProperty('--hi', (0.5 + Math.random() * 0.5).toFixed(2));
+    field.appendChild(s);
+  }
+})();
+
+// SHOOTING STAR on page flip
+var lastPage = -1;
+function shootMeteor() {
+  var field = document.getElementById('starfield');
+  var m = document.createElement('div');
+  m.className = 'meteor';
+  var startX = 20 + Math.random() * 60;
+  var startY = 5 + Math.random() * 30;
+  m.style.left = startX + '%';
+  m.style.top = startY + '%';
+  var dx = -(120 + Math.random() * 200);
+  var dy = 120 + Math.random() * 150;
+  m.style.setProperty('--dx', dx + 'px');
+  m.style.setProperty('--dy', dy + 'px');
+  m.style.setProperty('--speed', (0.6 + Math.random() * 0.5) + 's');
+  m.style.transform = 'rotate(' + (25 + Math.random() * 15) + 'deg)';
+  field.appendChild(m);
+  requestAnimationFrame(function() { m.classList.add('active'); });
+  setTimeout(function() { m.remove(); }, 1500);
+}
+
 var book = document.getElementById('book');
 var pages = document.querySelectorAll('.page');
 var totalPages = pages.length;
@@ -265,6 +318,10 @@ var obs = new IntersectionObserver(function(entries) {
       dots.forEach(function(d, i) {
         d.classList.toggle('active', i === idx);
       });
+      if (idx !== lastPage && lastPage !== -1) {
+        shootMeteor();
+      }
+      lastPage = idx;
     }
   });
 }, { threshold: 0.4 });
