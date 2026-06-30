@@ -36,6 +36,14 @@
   .meteor.active{animation:shoot var(--speed) linear forwards}
   @keyframes shoot{0%{opacity:0;transform:translate(0,0)}5%{opacity:1}80%{opacity:.6}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
 
+  /* TOP BAR */
+  .top-bar{position:fixed;top:0;left:0;right:0;z-index:50;height:48px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+  .top-bar .logo{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0.12em;color:var(--white);text-decoration:none;pointer-events:auto}
+  .top-bar .logo span{color:var(--gold)}
+  .top-bar .logo-co{font-size:8px;letter-spacing:0.18em;opacity:0.5;display:block;line-height:1;font-weight:600}
+  .top-bar .back{font-size:11px;color:var(--white-40);text-decoration:none;transition:color .2s;pointer-events:auto}
+  .top-bar .back:hover{color:var(--gold)}
+
   /* SNAP CONTAINER */
   .book{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
   .page{height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;flex-direction:column}
@@ -141,6 +149,11 @@
 </style>
 </head>
 <body>
+
+<div class="top-bar">
+  <a class="logo" href="https://www.obarai.com"><span class="logo-co">OBARAI INTELLIGENCE</span>ORBIT<span>.</span></a>
+  <a class="back" href="https://www.obarai.com">返回官網</a>
+</div>
 
 <div class="stars" id="starfield"></div>
 <div class="book" id="book">
