@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORBIT 方案定價 — 選方案・挑模組・開始試用</title>
-  <meta name="description" content="ORBIT 三種方案 START／PLUS／PRO，每個方案自選模組，14 天免費試用。NT$1,488 起。">
+  <title>ORBIT 方案定價 — 選方案・挑模組・洽詢報價</title>
+  <meta name="description" content="ORBIT 三種方案 START／PLUS／PRO，每個方案自選模組，依需求規模客製報價，14 天免費試用。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -201,7 +201,7 @@
     <div class="hero">
       <p class="eyebrow">Pricing</p>
       <h1>選一個方案，自己挑模組</h1>
-      <p>每個方案都內建 POS + CRM + AI 基礎，再從 6 個模組中選出最適合你生意的幾個</p>
+      <p>每個方案都內建 POS + CRM + AI 基礎，再從 8 個模組中選出最適合你生意的幾個</p>
       <div class="trial-badge">14 天免費試用，到期後才開始計費</div>
 
       <!-- Stepper -->
@@ -242,11 +242,11 @@
         <!-- Section 1: Plan -->
         <div class="plan-section">
           <h2>選擇方案</h2>
-          <p class="section-hint">所有方案均含 <strong>POS + CRM + AI 基礎</strong>，開通費 NT$888（一次性）。</p>
+          <p class="section-hint">所有方案均含 <strong>POS + CRM + AI 基礎</strong>，實際月費依帳號數、模組與使用規模客製報價。</p>
           <div class="plan-cards">
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-start" value="start" data-price="1488" data-slots="3" data-label="ORBIT START" data-accounts="1" data-ai="基礎額度">
+              <input type="radio" name="plan" id="p-start" value="start" data-slots="3" data-label="ORBIT START" data-accounts="1" data-ai="基礎額度">
               <label for="p-start">
                 <div class="radio-dot"></div>
                 <div class="label-left">
@@ -259,12 +259,12 @@
                   </div>
                   <div class="plan-includes">包含：POS · CRM · AI 基礎</div>
                 </div>
-                <div class="plan-price">NT$1,488<small>/月起</small></div>
+                <div class="plan-price" style="font-size:13px;">洽詢報價</div>
               </label>
             </div>
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-plus" value="plus" data-price="1988" data-slots="5" data-label="ORBIT PLUS" data-accounts="3" data-ai="進階額度">
+              <input type="radio" name="plan" id="p-plus" value="plus" data-slots="5" data-label="ORBIT PLUS" data-accounts="3" data-ai="進階額度">
               <label for="p-plus">
                 <div class="radio-dot"></div>
                 <div class="label-left">
@@ -277,25 +277,25 @@
                   </div>
                   <div class="plan-includes">包含：POS · CRM · AI 基礎</div>
                 </div>
-                <div class="plan-price">NT$1,988<small>/月起</small></div>
+                <div class="plan-price" style="font-size:13px;">洽詢報價</div>
               </label>
             </div>
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-pro" value="pro" data-price="3988" data-slots="6" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
+              <input type="radio" name="plan" id="p-pro" value="pro" data-slots="8" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
               <label for="p-pro">
                 <div class="radio-dot"></div>
                 <div class="label-left">
                   <div class="plan-name">PRO</div>
                   <div class="plan-meta">
                     <span class="meta-chip">5 個帳號</span>
-                    <span class="meta-chip">全選 6 個模組</span>
+                    <span class="meta-chip">全選 8 個模組</span>
                     <span class="meta-chip">AI 專業額度</span>
                     <span class="meta-chip">1 店</span>
                   </div>
-                  <div class="plan-includes">包含：POS · CRM · AI 基礎 + 全部 6 個模組</div>
+                  <div class="plan-includes">包含：POS · CRM · AI 基礎 + 全部 8 個模組</div>
                 </div>
-                <div class="plan-price">NT$3,988<small>/月起</small></div>
+                <div class="plan-price" style="font-size:13px;">洽詢報價</div>
               </label>
             </div>
 
@@ -360,6 +360,24 @@
                 <div class="mod-name">ORBIT AUTH <div class="mod-check"></div></div>
                 <div class="mod-desc">細粒度權限管控</div>
                 <div class="mod-fit">適合：多角色・多店管理</div>
+              </label>
+            </div>
+
+            <div class="mod-card" data-id="wms">
+              <input type="checkbox" id="mod-wms" value="wms">
+              <label for="mod-wms">
+                <div class="mod-name">ORBIT WMS <div class="mod-check"></div></div>
+                <div class="mod-desc">倉儲管理 & 多倉同步 & 盤點</div>
+                <div class="mod-fit">適合：傳產・倉儲・物流・批發</div>
+              </label>
+            </div>
+
+            <div class="mod-card" data-id="qrshop">
+              <input type="checkbox" id="mod-qrshop" value="qrshop">
+              <label for="mod-qrshop">
+                <div class="mod-name">ORBIT QR Shop <div class="mod-check"></div></div>
+                <div class="mod-desc">掃碼點餐 & 自助下單</div>
+                <div class="mod-fit">適合：餐飲・手搖飲・美食街</div>
               </label>
             </div>
 
@@ -464,7 +482,8 @@
           </div>
 
           <div style="margin-top:20px">
-            <button class="btn-gold" id="continue-btn" disabled onclick="goToCheckout()">下一步：填寫資料 →</button>
+            <button class="btn-gold" id="continue-btn" disabled onclick="goToCheckout()">送出洽詢 →</button>
+            <a href="https://lin.ee/yjUWCM8" target="_blank" rel="noopener" class="btn-outline">LINE 洽詢 →</a>
             <a href="index.html" class="btn-outline">返回首頁</a>
           </div>
 
@@ -494,8 +513,6 @@
 </footer>
 
 <script>
-  const SETUP_FEE = 888;
-
   const MODULES = [
     { id: 'rsvp',   name: 'RSVP'   },
     { id: 'line',   name: 'LINE'   },
@@ -503,6 +520,8 @@
     { id: 'hr',     name: 'HR'     },
     { id: 'flow',   name: 'FLOW'   },
     { id: 'auth',   name: 'AUTH'   },
+    { id: 'wms',    name: 'WMS'    },
+    { id: 'qrshop', name: 'QR Shop' },
   ];
 
   let selectedPlan = null;   // { price, slots, label, value, accounts, ai }
@@ -552,7 +571,7 @@
     sec.classList.remove('hidden');
     aiSec.classList.add('hidden');
     title.textContent = selectedPlan.slots >= MODULES.length
-      ? '已包含全部 6 個模組'
+      ? '已包含全部 8 個模組'
       : `挑選模組（可選 ${selectedPlan.slots} 個）`;
 
     renderModules();
@@ -625,7 +644,7 @@
     const el = document.getElementById('slot-counter');
     if (!selectedPlan) { el.textContent = ''; return; }
     if (selectedPlan.slots >= MODULES.length) {
-      el.innerHTML = 'PRO 方案包含全部 6 個模組，<strong>無需手動選擇</strong>。';
+      el.innerHTML = 'PRO 方案包含全部 8 個模組，<strong>無需手動選擇</strong>。';
     } else {
       const remaining = selectedPlan.slots - selectedMods.size;
       el.innerHTML = `已選 <strong>${selectedMods.size}</strong> / ${selectedPlan.slots} 個 · 還可選 <strong>${remaining}</strong> 個`;
@@ -707,15 +726,15 @@
     const ready = selectedPlan.slots >= MODULES.length || selectedMods.size > 0;
     if (!ready) return;
 
-    const aiPlusPrice = selectedAiPlus || 0;
-    const data = {
-      plan:     { label: selectedPlan.label, price: selectedPlan.price, value: selectedPlan.value, accounts: selectedPlan.accounts, ai: selectedPlan.ai },
-      modules:  [...selectedMods],
-      setup:    SETUP_FEE,
-      ai_addon: aiPlusPrice > 0 ? { label: 'ORBIT AI+', price: aiPlusPrice } : null,
-    };
-    sessionStorage.setItem('orbit_order', JSON.stringify(data));
-    window.location.href = 'checkout.html';
+    const modNames = [...selectedMods].map(id => MODULES.find(m => m.id === id)?.name).filter(Boolean);
+    const modList = modNames.length > 0 ? modNames.join('、') : '（方案內全模組）';
+    const aiNote = selectedAiPlus > 0 ? `\n有興趣加購 ORBIT AI+（約 NT$${selectedAiPlus}/月量級）` : '';
+
+    const subject = encodeURIComponent(`【ORBIT 方案洽詢】${selectedPlan.label}`);
+    const body = encodeURIComponent(
+      `您好，我想洽詢 ORBIT 訂閱方案。\n\n方案：${selectedPlan.label}（${selectedPlan.accounts} 帳號・${selectedPlan.ai}）\n選擇模組：${modList}${aiNote}\n\n請問後續報價與開通流程為何？感謝您。`
+    );
+    window.location.href = `mailto:hello@obarai.com?subject=${subject}&body=${body}`;
   }
 
   // Wire up plan radio

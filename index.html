@@ -648,8 +648,9 @@
             <div id="f-mod-tags"></div>
           </div>
           <div class="finder-result-reason" id="f-reason"></div>
-          <div style="display:flex;gap:12px;margin-top:24px;">
+          <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
             <a href="https://plans.obarai.com/pricing.html" class="finder-cta">查看完整方案 →</a>
+            <a href="https://lin.ee/yjUWCM8" target="_blank" rel="noopener" class="finder-restart">LINE 洽詢 →</a>
             <button type="button" class="finder-restart" onclick="restartFinder()">重新選擇</button>
           </div>
         </div>
@@ -734,8 +735,8 @@
     fNeeds.forEach(n => (NEED_MODS[n]||[]).forEach(m => mods.add(m)));
 
     let plan, price, slots;
-    if (fSize >= 10 || mods.size > 5) { plan = 'ORBIT PRO'; price = 'NT$3,988/月起'; slots = 8; }
-    else { plan = 'ORBIT PLUS'; price = 'NT$1,988/月起'; slots = 5; }
+    if (fSize >= 10 || mods.size > 5) { plan = 'ORBIT PRO'; price = '洽詢報價'; slots = 8; }
+    else { plan = 'ORBIT PLUS'; price = '洽詢報價'; slots = 5; }
 
     const finalMods = [...mods].slice(0, slots);
 
