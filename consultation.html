@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預約商業諮詢 — OBARAI Intelligence</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f8f6;
+    --surface: #ffffff;
+    --border: #e4e2dd;
+    --border-focus: #1a1a1a;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #999;
+    --accent: #1a1a1a;
+    --accent-light: #f0efec;
+    --radius: 8px;
+    --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 3rem 1rem 5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* Back link */
+  .back-link {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--text-primary); }
+
+  /* Header */
+  .header { margin-bottom: 2.5rem; }
+
+  .wordmark {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+
+  /* Notice box */
+  .notice {
+    border: 0.5px solid var(--border);
+    border-left: 2px solid var(--text-primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 2.5rem;
+    background: var(--surface);
+  }
+
+  .notice p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .notice strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* Section */
+  .section { margin-bottom: 2.25rem; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding-bottom: 0.6rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Fields */
+  .field { margin-bottom: 1rem; }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font-size: 14px;
+    font-family: var(--font);
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.6rem 0.85rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(26,26,26,0.07);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 88px;
+    line-height: 1.65;
+  }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.25rem;
+    cursor: pointer;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Checkbox */
+  .checkbox-group { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.2rem; }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  /* Radio pills */
+  .radio-group { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.2rem; }
+
+  .radio-pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 0.38rem 0.9rem;
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    user-select: none;
+    background: var(--surface);
+  }
+
+  .radio-pill:hover { border-color: #bbb; color: var(--text-primary); }
+
+  .radio-pill input { display: none; }
+
+  .radio-pill:has(input:checked) {
+    border-color: var(--text-primary);
+    background: var(--text-primary);
+    color: #fff;
+  }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: var(--accent-light);
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    letter-spacing: 0.03em;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .privacy {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .submit-btn {
+    background: var(--text-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.65rem 1.6rem;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .submit-btn:hover { opacity: 0.82; }
+  .submit-btn:active { transform: scale(0.98); }
+
+  /* Mobile */
+  @media (max-width: 520px) {
+    body { padding: 2rem 1rem 4rem; }
+    .row { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; align-items: flex-start; }
+    .submit-btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back-link">← 返回首頁</a>
+
+  <header class="header">
+    <p class="wordmark">OBARAI Intelligence Co., Ltd.</p>
+    <h1>預約商業諮詢</h1>
+    <p>填寫以下資料，我們將安排專屬諮詢時段，了解您的營運現況並提供 ORBIT 解決方案建議。</p>
+  </header>
+
+  <div class="notice">
+    <p><strong>諮詢說明</strong><br>
+    首次諮詢為 30 分鐘評估會議，協助確認您的需求與適合方案。我們重視每一次對話的品質，每週名額有限，請提前預約。</p>
+  </div>
+
+  <form id="consult-form">
+
+    <div class="section">
+      <div class="section-label">基本資料</div>
+      <div class="row">
+        <div class="field">
+          <label for="name">姓名 / 聯絡人</label>
+          <input type="text" id="name" name="name" placeholder="王小明" required>
+        </div>
+        <div class="field">
+          <label for="title">職稱</label>
+          <input type="text" id="title" name="title" placeholder="負責人 / 店長">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="phone">聯絡電話</label>
+          <input type="tel" id="phone" name="phone" placeholder="09xx-xxx-xxx" required>
+        </div>
+        <div class="field">
+          <label for="email">電子信箱</label>
+          <input type="email" id="email" name="email" placeholder="name@company.com" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="company">公司 / 店家名稱</label>
+          <input type="text" id="company" name="company" placeholder="XX 有限公司">
+        </div>
+        <div class="field">
+          <label for="city">所在縣市</label>
+          <select id="city" name="city">
+            <option value="">請選擇</option>
+            <option>台北市</option><option>新北市</option><option>桃園市</option>
+            <option>新竹市</option><option>新竹縣</option><option>苗栗縣</option>
+            <option>台中市</option><option>彰化縣</option><option>南投縣</option>
+            <option>雲林縣</option><option>嘉義市</option><option>嘉義縣</option>
+            <option>台南市</option><option>高雄市</option><option>屏東縣</option>
+            <option>宜蘭縣</option><option>花蓮縣</option><option>台東縣</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">企業資訊</div>
+      <div class="row">
+        <div class="field">
+          <label for="industry">行業類別</label>
+          <select id="industry" name="industry">
+            <option value="">請選擇</option>
+            <option>餐飲 / F&amp;B</option>
+            <option>零售 / 選品店</option>
+            <option>美業 / 美容美甲</option>
+            <option>醫美診所</option>
+            <option>補習班 / 才藝班</option>
+            <option>旅宿 / 民宿</option>
+            <option>建設 / 工程</option>
+            <option>會計 / 記帳</option>
+            <option>其他服務業</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="headcount">員工人數</label>
+          <select id="headcount" name="headcount">
+            <option value="">請選擇</option>
+            <option>1–5 人（微型）</option>
+            <option>6–20 人（小型）</option>
+            <option>21–50 人（中型）</option>
+            <option>51 人以上</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="current-tools">目前使用的系統或工具</label>
+        <input type="text" id="current-tools" name="current_tools" placeholder="例：Excel、紙本記帳、LINE 群組、其他 ERP…">
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">需求評估</div>
+
+      <div class="field">
+        <label>感興趣的模組 <span class="tag">可複選</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="POS 收銀系統"> POS 收銀系統</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="ERP 進銷存管理"> ERP 進銷存管理</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="會計 / 電子發票（財政部串接）"> 會計 / 電子發票（財政部串接）</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="CRM 客戶關係管理"> CRM 客戶關係管理</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="人資 / 排班 / GPS 打卡"> 人資 / 排班 / GPS 打卡</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="LINE OA 自動化通知"> LINE OA 自動化通知</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="AI 智慧助理（ORBIT AI+）"> AI 智慧助理（ORBIT AI+）</label>
+          <label class="checkbox-item"><input type="checkbox" name="modules" value="AI 智慧家居 / 建案管理"> AI 智慧家居 / 建案管理</label>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1.25rem">
+        <label>預期導入時程</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="timeline" value="1 個月內"> 1 個月內</label>
+          <label class="radio-pill"><input type="radio" name="timeline" value="1–3 個月"> 1–3 個月</label>
+          <label class="radio-pill"><input type="radio" name="timeline" value="3–6 個月"> 3–6 個月</label>
+          <label class="radio-pill"><input type="radio" name="timeline" value="尚在評估"> 尚在評估</label>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1.25rem">
+        <label>年度預算範圍（NTD）</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="budget" value="2 萬以下"> 2 萬以下</label>
+          <label class="radio-pill"><input type="radio" name="budget" value="2–5 萬"> 2–5 萬</label>
+          <label class="radio-pill"><input type="radio" name="budget" value="5–10 萬"> 5–10 萬</label>
+          <label class="radio-pill"><input type="radio" name="budget" value="10 萬以上"> 10 萬以上</label>
+          <label class="radio-pill"><input type="radio" name="budget" value="不確定"> 不確定</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">其他說明</div>
+
+      <div class="field">
+        <label for="painpoint">目前最大的營運痛點</label>
+        <textarea id="painpoint" name="painpoint" placeholder="例：帳務整理費時、發票開立錯誤、無法即時掌握庫存…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>希望諮詢方式</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="meeting" value="線上視訊"> 線上視訊</label>
+          <label class="radio-pill"><input type="radio" name="meeting" value="到府拜訪"> 到府拜訪</label>
+          <label class="radio-pill"><input type="radio" name="meeting" value="電話諮詢"> 電話諮詢</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="availability">方便聯絡時段</label>
+        <input type="text" id="availability" name="availability" placeholder="例：週一至週五 10:00–18:00">
+      </div>
+
+      <div class="field">
+        <label for="source">從哪裡得知 OBARAI</label>
+        <select id="source" name="source">
+          <option value="">請選擇</option>
+          <option>Pro360 / 接案平台</option>
+          <option>朋友 / 同業推薦</option>
+          <option>Instagram / Facebook</option>
+          <option>LINE 群組</option>
+          <option>搜尋引擎</option>
+          <option>其他</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="privacy">
+        提交即表示同意 OBARAI 依個資法蒐集並處理您的資料，<br>
+        僅用於本次諮詢安排。聯絡信箱：hello@obarai.com
+      </p>
+      <button type="submit" class="submit-btn">送出申請 →</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+document.getElementById('consult-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const f = e.target;
+
+  const val = (id) => f.querySelector('#' + id).value.trim();
+  const checkedVals = (name) => [...f.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+  const radioVal = (name) => (f.querySelector(`input[name="${name}"]:checked`) || {}).value || '';
+
+  const modules = checkedVals('modules');
+
+  const lines = [
+    '【OBARAI 商業諮詢預約申請】',
+    '',
+    '── 基本資料 ──',
+    `姓名／聯絡人：${val('name')}`,
+    `職稱：${val('title')}`,
+    `聯絡電話：${val('phone')}`,
+    `電子信箱：${val('email')}`,
+    `公司／店家名稱：${val('company')}`,
+    `所在縣市：${val('city')}`,
+    '',
+    '── 企業資訊 ──',
+    `行業類別：${val('industry')}`,
+    `員工人數：${val('headcount')}`,
+    `目前使用的系統或工具：${val('current-tools')}`,
+    '',
+    '── 需求評估 ──',
+    `感興趣的模組：${modules.length ? modules.join('、') : '（未選擇）'}`,
+    `預期導入時程：${radioVal('timeline')}`,
+    `年度預算範圍：${radioVal('budget')}`,
+    '',
+    '── 其他說明 ──',
+    `目前最大的營運痛點：${val('painpoint')}`,
+    `希望諮詢方式：${radioVal('meeting')}`,
+    `方便聯絡時段：${val('availability')}`,
+    `從哪裡得知 OBARAI：${val('source')}`,
+  ];
+
+  const subject = encodeURIComponent(`【商業諮詢預約】${val('company') || val('name')}`);
+  const body = encodeURIComponent(lines.join('\n'));
+  window.location.href = `mailto:hello@obarai.com?subject=${subject}&body=${body}`;
+});
+</script>
+
+</body>
+</html>

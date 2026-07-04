@@ -4,5 +4,6 @@ Allow: /pricing.html
 Allow: /terms.html
 Allow: /privacy.html
 Allow: /refund.html
+Allow: /consultation.html
 
 Sitemap: https://www.obarai.com/sitemap.xml
