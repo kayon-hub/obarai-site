@@ -3460,12 +3460,13 @@ const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
 // CHECKBOX FIX
-// 問題：<label> 包 <input> 時，click 事件會觸發兩次（label click + input change）
-// 解法：改監聽 input 的 change 事件，由 input 驅動 UI 更新
+// 解法：label click + preventDefault，手動 toggle 一次
 // ============================================================
-document.querySelectorAll('.check-item input[type="checkbox"]').forEach(input => {
-  input.addEventListener('change', () => {
-    const item = input.closest('.check-item');
+document.querySelectorAll('.check-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const input = item.querySelector('input[type="checkbox"]');
+    input.checked = !input.checked;
     item.classList.toggle('selected', input.checked);
   });
 });
