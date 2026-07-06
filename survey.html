@@ -1,912 +1,1701 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>員工心聲｜喜歡建築 × OBARAI</title>
+
+<title>員工心聲｜喜歡建築 × OBARAI INTELLIGENCE</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
 
-  :root {
-    --ink: #1a1a18;
-    --ink-2: #4a4a46;
-    --ink-3: #8a8a84;
-    --rule: #e2e0d8;
-    --bg: #f7f5f0;
-    --card: #ffffff;
-    --gold: #9a8040;
-    --gold-light: #f2ede0;
-    --radius: 10px;
-  }
+*, *::before, *::after {
 
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
-    padding: 0 0 80px;
-  }
+  box-sizing: border-box;
 
-  /* Header */
-  .header {
-    background: var(--ink);
-    color: #fff;
-    padding: 48px 24px 36px;
-    text-align: center;
-  }
-  .header-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-  .header h1 {
-    font-size: clamp(22px, 5vw, 30px);
-    font-weight: 300;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    margin-bottom: 14px;
-  }
-  .header-sub {
-    font-size: 13px;
-    font-weight: 300;
-    color: #aaa9a2;
-    line-height: 1.7;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-  .anon-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(154,128,64,0.15);
-    border: 1px solid rgba(154,128,64,0.3);
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-size: 12px;
-    color: #c9a84c;
-    margin-top: 20px;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 0.04em;
-  }
-  .header-quote {
-    font-size: 15px;
-    font-weight: 300;
-    color: #ffffff;
-    line-height: 1.9;
-    letter-spacing: 0.06em;
-    padding: 18px 24px;
-    border-left: 2px solid var(--gold);
-    text-align: left;
-    max-width: 340px;
-    margin: 0 auto;
-    font-style: italic;
-  }
-  .anon-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: #c9a84c;
-    border-radius: 50%;
-  }
+  margin: 0;
 
-  /* Form container */
-  .form-wrap {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
+  padding: 0;
 
-  /* Section */
-  .section {
-    margin-top: 32px;
-  }
-  .section-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    padding-left: 2px;
-  }
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    border: 1px solid var(--rule);
-    overflow: hidden;
-  }
+}
 
-  /* Question row */
-  .q {
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .q:last-child { border-bottom: none; }
-  .q-text {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .q-hint {
-    font-size: 12px;
-    color: var(--ink-3);
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
+:root {
 
-  /* Checkbox grid */
+  --ink: #1a1a18;
+
+  --ink-2: #4a4a46;
+
+  --ink-3: #8a8a84;
+
+  --rule: #e2e0d8;
+
+  --bg: #f7f5f0;
+
+  --card: #ffffff;
+
+  --gold: #9a8040;
+
+  --gold-light: #f2ede0;
+
+  --danger: #e24b4a;
+
+  --radius: 10px;
+
+}
+
+html {
+
+  scroll-behavior: smooth;
+
+}
+
+body {
+
+  font-family: 'Noto Sans TC', sans-serif;
+
+  background: var(--bg);
+
+  color: var(--ink);
+
+  min-height: 100vh;
+
+  padding-bottom: 80px;
+
+}
+
+/* =========================================================
+
+   HEADER
+
+========================================================= */
+
+.header {
+
+  background: var(--ink);
+
+  color: #fff;
+
+  padding: 52px 24px 44px;
+
+  text-align: center;
+
+}
+
+.header-logo {
+
+  height: 52px;
+
+  width: auto;
+
+  margin-bottom: 28px;
+
+  opacity: 0.95;
+
+  filter: brightness(0) invert(1);
+
+}
+
+.header-quote {
+
+  font-size: 15px;
+
+  font-weight: 300;
+
+  color: #ffffff;
+
+  line-height: 2;
+
+  letter-spacing: 0.05em;
+
+  padding: 18px 24px;
+
+  border-left: 2px solid var(--gold);
+
+  text-align: left;
+
+  max-width: 360px;
+
+  margin: 0 auto;
+
+}
+
+.header-eyebrow {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color: var(--gold);
+
+  margin-top: 30px;
+
+  margin-bottom: 14px;
+
+}
+
+.header h1 {
+
+  font-size: clamp(24px, 5vw, 32px);
+
+  font-weight: 300;
+
+  line-height: 1.45;
+
+  letter-spacing: 0.04em;
+
+  margin-bottom: 16px;
+
+}
+
+.header-sub {
+
+  font-size: 13px;
+
+  font-weight: 300;
+
+  color: #aaa9a2;
+
+  line-height: 1.9;
+
+  max-width: 380px;
+
+  margin: 0 auto;
+
+}
+
+.anon-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  background: rgba(154,128,64,0.15);
+
+  border: 1px solid rgba(154,128,64,0.3);
+
+  border-radius: 20px;
+
+  padding: 6px 15px;
+
+  font-size: 12px;
+
+  color: #c9a84c;
+
+  margin-top: 22px;
+
+  font-family: 'Inter', sans-serif;
+
+  letter-spacing: 0.04em;
+
+}
+
+.anon-badge::before {
+
+  content: '';
+
+  width: 6px;
+
+  height: 6px;
+
+  background: #c9a84c;
+
+  border-radius: 50%;
+
+}
+
+/* =========================================================
+
+   OBARAI MANIFESTO
+
+========================================================= */
+
+.manifesto {
+
+  max-width: 560px;
+
+  margin: 0 auto;
+
+  padding: 0 16px;
+
+}
+
+.manifesto-card {
+
+  background: var(--card);
+
+  border: 1px solid var(--rule);
+
+  border-radius: var(--radius);
+
+  padding: 28px 24px;
+
+  margin-top: 24px;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.manifesto-card::before {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  width: 3px;
+
+  height: 100%;
+
+  background: var(--gold);
+
+}
+
+.manifesto-eyebrow {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color: var(--gold);
+
+  margin-bottom: 14px;
+
+}
+
+.manifesto-title {
+
+  font-size: 18px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  margin-bottom: 14px;
+
+}
+
+.manifesto-text {
+
+  font-size: 13px;
+
+  font-weight: 300;
+
+  line-height: 1.9;
+
+  color: var(--ink-2);
+
+}
+
+.manifesto-signature {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+
+  color: var(--ink-3);
+
+  margin-top: 18px;
+
+}
+
+/* =========================================================
+
+   FORM
+
+========================================================= */
+
+.form-wrap {
+
+  max-width: 560px;
+
+  margin: 0 auto;
+
+  padding: 0 16px;
+
+}
+
+.section {
+
+  margin-top: 32px;
+
+}
+
+.section-label {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color: var(--gold);
+
+  margin-bottom: 12px;
+
+  padding-left: 2px;
+
+}
+
+.card {
+
+  background: var(--card);
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--rule);
+
+  overflow: hidden;
+
+}
+
+.q {
+
+  padding: 20px;
+
+  border-bottom: 1px solid var(--rule);
+
+}
+
+.q:last-child {
+
+  border-bottom: none;
+
+}
+
+.q-text {
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  margin-bottom: 12px;
+
+  color: var(--ink);
+
+}
+
+.q-hint {
+
+  font-size: 12px;
+
+  color: var(--ink-3);
+
+  margin-bottom: 12px;
+
+  line-height: 1.65;
+
+}
+
+/* =========================================================
+
+   CHECKBOX
+
+========================================================= */
+
+.check-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px;
+
+}
+
+.check-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 12px;
+
+  border: 1px solid var(--rule);
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: border-color 0.15s, background 0.15s;
+
+  font-size: 13px;
+
+  color: var(--ink-2);
+
+  user-select: none;
+
+}
+
+.check-item:hover {
+
+  border-color: var(--gold);
+
+  background: var(--gold-light);
+
+}
+
+.check-item input {
+
+  display: none;
+
+}
+
+.check-item.selected {
+
+  border-color: var(--gold);
+
+  background: var(--gold-light);
+
+  color: var(--ink);
+
+  font-weight: 500;
+
+}
+
+.check-box {
+
+  width: 16px;
+
+  height: 16px;
+
+  border: 1.5px solid var(--rule);
+
+  border-radius: 4px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.check-item.selected .check-box {
+
+  background: var(--gold);
+
+  border-color: var(--gold);
+
+}
+
+.check-item.selected .check-box::after {
+
+  content: '';
+
+  width: 8px;
+
+  height: 5px;
+
+  border-left: 1.5px solid #fff;
+
+  border-bottom: 1.5px solid #fff;
+
+  transform: rotate(-45deg) translateY(-1px);
+
+}
+
+/* =========================================================
+
+   RADIO
+
+========================================================= */
+
+.radio-row {
+
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+}
+
+.radio-pill {
+
+  padding: 7px 16px;
+
+  border: 1px solid var(--rule);
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  color: var(--ink-2);
+
+  cursor: pointer;
+
+  transition: all 0.15s;
+
+  user-select: none;
+
+}
+
+.radio-pill:hover {
+
+  border-color: var(--gold);
+
+  color: var(--ink);
+
+}
+
+.radio-pill.selected {
+
+  background: var(--gold);
+
+  border-color: var(--gold);
+
+  color: #fff;
+
+  font-weight: 500;
+
+}
+
+.radio-pill input {
+
+  display: none;
+
+}
+
+/* =========================================================
+
+   TEXTAREA
+
+========================================================= */
+
+textarea {
+
+  width: 100%;
+
+  border: 1px solid var(--rule);
+
+  border-radius: 8px;
+
+  padding: 13px 14px;
+
+  font-family: 'Noto Sans TC', sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 300;
+
+  color: var(--ink);
+
+  background: #faf9f6;
+
+  resize: vertical;
+
+  min-height: 100px;
+
+  outline: none;
+
+  transition: border-color 0.15s;
+
+  line-height: 1.8;
+
+}
+
+textarea:focus {
+
+  border-color: var(--gold);
+
+  background: #fff;
+
+}
+
+textarea::placeholder {
+
+  color: var(--ink-3);
+
+}
+
+/* =========================================================
+
+   SCALE
+
+========================================================= */
+
+.scale-row {
+
+  display: flex;
+
+  gap: 6px;
+
+  align-items: center;
+
+}
+
+.scale-label-text {
+
+  font-size: 11px;
+
+  color: var(--ink-3);
+
+  min-width: 48px;
+
+}
+
+.scale-label-text:last-child {
+
+  text-align: right;
+
+}
+
+.scale-btns {
+
+  display: flex;
+
+  gap: 5px;
+
+  flex: 1;
+
+  justify-content: center;
+
+}
+
+.scale-btn {
+
+  width: 36px;
+
+  height: 36px;
+
+  border: 1px solid var(--rule);
+
+  border-radius: 7px;
+
+  background: none;
+
+  font-size: 13px;
+
+  color: var(--ink-2);
+
+  cursor: pointer;
+
+  font-family: 'Inter', sans-serif;
+
+}
+
+.scale-btn:hover {
+
+  border-color: var(--gold);
+
+}
+
+.scale-btn.selected {
+
+  background: var(--gold);
+
+  border-color: var(--gold);
+
+  color: #fff;
+
+  font-weight: 500;
+
+}
+
+/* =========================================================
+
+   TRANSITION / PHILOSOPHY
+
+========================================================= */
+
+.transition-card {
+
+  background: var(--ink);
+
+  border-radius: var(--radius);
+
+  padding: 30px 24px;
+
+  text-align: center;
+
+}
+
+.transition-eyebrow {
+
+  font-family: 'Inter', sans-serif;
+
+  color: var(--gold);
+
+  font-size: 10px;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 18px;
+
+}
+
+.transition-card p {
+
+  color: #b8b6af;
+
+  font-size: 14px;
+
+  font-weight: 300;
+
+  line-height: 2;
+
+}
+
+.transition-card strong {
+
+  color: #fff;
+
+  font-weight: 400;
+
+}
+
+/* =========================================================
+
+   SCENARIO
+
+========================================================= */
+
+.scenario-card {
+
+  background: var(--ink);
+
+  border-radius: var(--radius);
+
+  overflow: hidden;
+
+}
+
+.scenario-label {
+
+  background: var(--gold);
+
+  color: #fff;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  padding: 8px 20px;
+
+}
+
+.scenario-body {
+
+  padding: 24px 20px 28px;
+
+  color: #d4d2cb;
+
+  font-size: 14px;
+
+  font-weight: 300;
+
+  line-height: 1.9;
+
+}
+
+.scenario-body p {
+
+  margin-bottom: 18px;
+
+}
+
+.scenario-body strong {
+
+  color: #fff;
+
+  font-weight: 500;
+
+}
+
+.scenario-timeline {
+
+  margin-top: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border-left: 1.5px solid #3a3a36;
+
+  margin-left: 8px;
+
+}
+
+.scenario-step {
+
+  display: flex;
+
+  gap: 16px;
+
+  align-items: flex-start;
+
+  padding: 11px 0;
+
+}
+
+.step-dot {
+
+  width: 10px;
+
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #3a3a36;
+
+  border: 1.5px solid var(--gold);
+
+  flex-shrink: 0;
+
+  margin-left: -6px;
+
+  margin-top: 4px;
+
+}
+
+.dot-sos {
+
+  background: #7a1a1a;
+
+  border-color: var(--danger);
+
+  box-shadow: 0 0 8px rgba(226,75,74,0.5);
+
+}
+
+.step-content {
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  color: #b8b6af;
+
+  flex: 1;
+
+}
+
+.step-time {
+
+  display: block;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  color: var(--gold);
+
+  margin-bottom: 4px;
+
+}
+
+.sos-label {
+
+  color: var(--danger);
+
+}
+
+.step-muted {
+
+  color: #777770;
+
+  font-style: italic;
+
+}
+
+.step-highlight {
+
+  color: #fff;
+
+  font-weight: 400;
+
+}
+
+.scenario-question {
+
+  background: #fff;
+
+  padding: 24px 20px;
+
+  text-align: center;
+
+  border-bottom: 1px solid var(--rule);
+
+}
+
+.scenario-question p {
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  color: var(--ink-2);
+
+}
+
+.scenario-question strong {
+
+  color: var(--ink);
+
+  font-weight: 500;
+
+}
+
+/* =========================================================
+
+   OBARAI PRINCIPLES
+
+========================================================= */
+
+.principles {
+
+  margin-top: 48px;
+
+}
+
+.principles-card {
+
+  background: var(--ink);
+
+  border-radius: var(--radius);
+
+  padding: 30px 24px;
+
+}
+
+.principles-title {
+
+  font-family: 'Inter', sans-serif;
+
+  color: var(--gold);
+
+  font-size: 10px;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 22px;
+
+}
+
+.principle {
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid #343430;
+
+}
+
+.principle:last-child {
+
+  border-bottom: none;
+
+}
+
+.principle-number {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  color: var(--gold);
+
+  letter-spacing: 0.1em;
+
+  margin-bottom: 6px;
+
+}
+
+.principle-title {
+
+  color: #fff;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  margin-bottom: 6px;
+
+}
+
+.principle-text {
+
+  color: #8f8e88;
+
+  font-size: 12px;
+
+  font-weight: 300;
+
+  line-height: 1.8;
+
+}
+
+/* =========================================================
+
+   SUBMIT
+
+========================================================= */
+
+.submit-wrap {
+
+  margin-top: 32px;
+
+  text-align: center;
+
+}
+
+.submit-btn {
+
+  background: var(--ink);
+
+  color: #fff;
+
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 16px 48px;
+
+  font-family: 'Noto Sans TC', sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  width: 100%;
+
+  max-width: 320px;
+
+}
+
+.submit-btn:hover {
+
+  background: #2e2e2a;
+
+}
+
+.submit-btn:active {
+
+  transform: scale(0.98);
+
+}
+
+.submit-note {
+
+  font-size: 11px;
+
+  color: var(--ink-3);
+
+  margin-top: 11px;
+
+}
+
+/* =========================================================
+
+   FOOTER
+
+========================================================= */
+
+.site-footer {
+
+  text-align: center;
+
+  padding: 38px 24px 28px;
+
+  margin-top: 48px;
+
+  border-top: 1px solid var(--rule);
+
+}
+
+.footer-logo {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.22em;
+
+  color: var(--ink-2);
+
+  margin-bottom: 10px;
+
+}
+
+.footer-mission {
+
+  max-width: 400px;
+
+  margin: 0 auto 18px;
+
+  font-size: 12px;
+
+  color: var(--ink-3);
+
+  line-height: 1.8;
+
+}
+
+.footer-info {
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 300;
+
+  color: var(--ink-3);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+}
+
+.footer-dot {
+
+  color: var(--rule);
+
+}
+
+.footer-info a {
+
+  color: var(--gold);
+
+  text-decoration: none;
+
+}
+
+/* =========================================================
+
+   THANK YOU
+
+========================================================= */
+
+.thankyou {
+
+  display: none;
+
+  text-align: center;
+
+  padding: 80px 24px;
+
+}
+
+.thankyou-icon {
+
+  width: 56px;
+
+  height: 56px;
+
+  background: var(--gold-light);
+
+  border: 1.5px solid var(--gold);
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0 auto 24px;
+
+  font-size: 22px;
+
+}
+
+.thankyou h2 {
+
+  font-size: 22px;
+
+  font-weight: 300;
+
+  letter-spacing: 0.05em;
+
+  margin-bottom: 18px;
+
+}
+
+.thankyou p {
+
+  font-size: 14px;
+
+  color: var(--ink-2);
+
+  line-height: 2;
+
+}
+
+@media (max-width: 520px) {
+
   .check-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .check-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 9px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 7px;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    font-size: 13px;
-    color: var(--ink-2);
-    user-select: none;
-  }
-  .check-item:hover { border-color: var(--gold); background: var(--gold-light); }
-  .check-item input { display: none; }
-  .check-item.selected {
-    border-color: var(--gold);
-    background: var(--gold-light);
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .check-box {
-    width: 16px; height: 16px;
-    border: 1.5px solid var(--rule);
-    border-radius: 4px;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .check-item.selected .check-box {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .check-item.selected .check-box::after {
-    content: '';
-    width: 8px; height: 5px;
-    border-left: 1.5px solid #fff;
-    border-bottom: 1.5px solid #fff;
-    transform: rotate(-45deg) translateY(-1px);
-    display: block;
+
+    grid-template-columns: 1fr;
+
   }
 
-  /* Radio pills */
-  .radio-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .radio-pill {
-    padding: 7px 16px;
-    border: 1px solid var(--rule);
-    border-radius: 20px;
-    font-size: 13px;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.15s;
-    user-select: none;
-  }
-  .radio-pill:hover { border-color: var(--gold); color: var(--ink); }
-  .radio-pill.selected {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #fff;
-    font-weight: 500;
-  }
-  .radio-pill input { display: none; }
+  .header {
 
-  /* Textarea */
-  textarea {
-    width: 100%;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink);
-    background: #faf9f6;
-    resize: vertical;
-    min-height: 90px;
-    outline: none;
-    transition: border-color 0.15s;
-    line-height: 1.7;
-  }
-  textarea:focus { border-color: var(--gold); background: #fff; }
-  textarea::placeholder { color: var(--ink-3); }
+    padding-top: 42px;
 
-  /* Scale */
-  .scale-row {
-    display: flex;
-    gap: 6px;
-    align-items: center;
   }
-  .scale-label-text {
-    font-size: 11px;
-    color: var(--ink-3);
-    min-width: 48px;
-  }
-  .scale-label-text:last-child { text-align: right; }
-  .scale-btns {
-    display: flex;
-    gap: 5px;
-    flex: 1;
-    justify-content: center;
-  }
+
   .scale-btn {
-    width: 36px; height: 36px;
-    border: 1px solid var(--rule);
-    border-radius: 7px;
-    background: none;
-    font-size: 13px;
-    color: var(--ink-2);
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.15s;
-  }
-  .scale-btn:hover { border-color: var(--gold); color: var(--ink); }
-  .scale-btn.selected {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #fff;
-    font-weight: 500;
+
+    width: 32px;
+
+    height: 34px;
+
   }
 
-  /* Submit */
-  .submit-wrap {
-    margin-top: 32px;
-    text-align: center;
-  }
-  .submit-btn {
-    background: var(--ink);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 15px 48px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    width: 100%;
-    max-width: 320px;
-  }
-  .submit-btn:hover { background: #2e2e2a; }
-  .submit-btn:active { transform: scale(0.98); }
-  .submit-note {
-    font-size: 11px;
-    color: var(--ink-3);
-    margin-top: 10px;
-    font-family: 'Inter', sans-serif;
+  .q {
+
+    padding: 18px;
+
   }
 
-  /* Footer */
-  .site-footer {
-    text-align: center;
-    padding: 36px 24px 28px;
-    margin-top: 48px;
-    border-top: 1px solid var(--rule);
-  }
-  .footer-logo {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    color: var(--ink-2);
-    margin-bottom: 10px;
-  }
-  .footer-info {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--ink-3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .footer-dot { color: var(--rule); }
-  .footer-info a {
-    color: var(--gold);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-  .footer-info a:hover { text-decoration: underline; }
+}
 
-  /* Scenario card */
-  .scenario-card {
-    background: var(--ink);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 0;
-  }
-  .scenario-label {
-    background: var(--gold);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 7px 20px;
-  }
-  .scenario-body {
-    padding: 22px 20px 24px;
-    color: #d4d2cb;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.85;
-  }
-  .scenario-body p {
-    margin-bottom: 16px;
-  }
-  .scenario-body strong {
-    color: #fff;
-    font-weight: 500;
-  }
-  .scenario-timeline {
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-left: 1.5px solid #3a3a36;
-    margin-left: 8px;
-    padding-left: 0;
-  }
-  .scenario-step {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    padding: 10px 0 10px 0;
-    position: relative;
-  }
-  .step-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #3a3a36;
-    border: 1.5px solid var(--gold);
-    flex-shrink: 0;
-    margin-left: -6px;
-    margin-top: 4px;
-  }
-  .dot-sos {
-    background: #7a1a1a;
-    border-color: #e24b4a;
-    box-shadow: 0 0 8px rgba(226,75,74,0.5);
-  }
-  .step-content {
-    font-size: 13px;
-    line-height: 1.75;
-    color: #b8b6af;
-    flex: 1;
-  }
-  .step-time {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 3px;
-  }
-  .sos-label {
-    color: #e24b4a !important;
-  }
-  .step-muted {
-    color: #6a6a64;
-    font-style: italic;
-  }
-  .step-highlight {
-    color: #fff;
-    font-weight: 400;
-  }
-  .step-sos .step-content {
-    color: #d4d2cb;
-  }
-  .scenario-step:last-child {
-    padding-bottom: 0;
-  }
-
-  /* Thank you screen */
-  .thankyou {
-    display: none;
-    text-align: center;
-    padding: 80px 24px;
-  }
-  .thankyou-icon {
-    width: 56px; height: 56px;
-    background: var(--gold-light);
-    border: 1.5px solid var(--gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 22px;
-  }
-  .thankyou h2 {
-    font-size: 22px;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
-  }
-  .thankyou p {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.8;
-  }
 </style>
+
 </head>
+
 <body>
 
+<!-- ======================================================
+
+     HEADER
+
+====================================================== -->
+
 <div class="header">
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAACECAYAAADhnvK8AAAABHNCSVQICAgIfAhkiAAAAL16VFh0UmF3IHByb2ZpbGUgdHlwZSBBUFAxAAAYlX1PWwoCMQz87yn2CNMk28dxiqyyICp7/w+ntNUtiBOaF0mm427bYzv2y/I6ntf9vrmlQgBn2bIUAAkNCniBr5G+oUf1zLiE2GtpMeQUYae5ggkrJ4IGH/naQnW53bFBq0LjjYJf3KifPHHYyHTuJxukc7/0PwmKVQ0y5ofuj3yVYPRZVWOQQGhkBVY1w3/rJI1XvvpW4Y3Ue7Nu/9kj3BvwqFYQuLTJYgAAIABJREFUeJzt3XmUHFd9L/Dv795bS6/TM9Mz0kga7ZJtSQbvNgZsE4jjQBLAD2LWQBwSJw8OkECSkzwOZCUr2Zy8BMySHPIIZGF5BJ5jsMEsjmO8G9uStS8zmr337uqquve+P6p7FmlGI1kGWZPf55yxpJmuqjvt7m/fvQDGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY88enesCMPasEQEkAFjMvZQ7f7cGsPbclY0xxhh7PuMaIDvvEAlYa7DhyhuHel70up/RQS0mCAUQiKyWni9H7vrE307ufrBKQsAac66LzJ6n1LkuAGNnjAiwgBzctNm/7OY/jKtTIKlAALSOke4tYmD/A1+b3P3gwyD+jGdL4wBkP1BEBICQ9MZ1+uRmu+yScCIAFvaM++zioNmMG6XANMohpHQtAKvjMHKkq6MwfI5+BbaCcQCy51a3xtUJM2stZoNvPjv7n4U/JQKBYO3yzVatjZFC+kZKkJD+7CmE8G03XXkchJ0CByB7bnSapfNrcb7vw033+CrT2w8nvVr52XWt2Pq5bH6w0aiP+45omqh5LG6WR8Pa9EyzMh1ba5PaIDA3wrtEzdAYbZLHdx6OeUXg4GOngQOQnZ0Tgi+by4tU/4YtNrPqNbGTuzlW6WsC4UDbTiYRIYAA9UkEQkAIASkFHKurvXHjHtGY+KyZOXxPY/zAZLvd7lxDJNNaTmaNMbHRcSyAmIhgdRwbHcdExBHIlsUByM4CzQZfvm9Vyh/c/vrIG/xg3aotoTFAZAHdBtl2SEIYCAGi5AuGYIlgSMCQEJGQeZLZ14jevtc4AzuR31r/mpza+zv1Q4/cV6+WDJD0J9p5tUGSSjmprBJxkBVSwVoLoeKsl8qiLoQ8N88JO5/wEBk7czQXfIX+Qc/p2/72llv8q8CQa6yBgAmFEICQIvkiARKwEEkXIQmQlCCSSZ+fEAAJQ2QNLGIIqeD4ynFcpNDeLca//4szu79zbxAEC66f6l0ls2u3F6Aja7tVUQsrlKL6sT2lZnnSzC8rYyfiAGRnZl6gDGx84VVhbuOX64EZBDQEiQBSuCAhklCj5EtIJAGYDP+SkJ2vZCUHCZmMFhMl01mIQBYxyMZWuL7j+UjH1a8Ee+55W+nYnmljuJOPPTc4ANlp6zZBs7m8yGy4+g/KcebXwrAFSRSQlD6SmlwSZJQ0cUlIA1BsAdPtA7QkITr9fyQESEhBUiiQFEJIQCQjwZQ0mQ1gAi28dG9KTEzf89erm/W65Zodey5wHyA7Ld3wy/cN+mrNVf8xGdjrSDcDJaVrCX5St7OwMCCQsRaxsUJYkoqkdJPBDgWpJAQBliQMBHR3wBeAtDZMBjukO286jSAhfGF1HIVRbf5ntnRceKmMTPoFu2PABALQalS1NfqH+RSx8xAHIFteJ/wyPUUfQ1c+VArsDmmiAFL4s3UwawFLgDWhhnBJua7rOPBl/Ixrql82rcq9cat2yJO26bkOWmGEGCrnZPsusOn+GyKVf7V2skNxrEHWGAJiC+tSpzYIIkUEgXnXW7vrpZfHG6+70wTNSDjKSYpKkVCe03j085fP7H/kSHfZHGOL4QBkp9ZpauZ6+hy1/prvlZt6h4QOIYSfVLiS+S1ENtYGgqTrpn1ZVa2JD9jpkX8Oa5MTpUbtVG3VRwF8LtvT9y5/YONmr7jtNp1f+752DJd0HEJAJZOjAQix4EA3lemtG1mEFYZ00u9otTaO44hcobd3BjgyWzFkbBEcgOwUkvDzPB9q7ZWfLTf1Lml1ACF8YG5FmzUm1EK6Kd9Fqj3xjvahZz5dLk8tXIrWWRI3v9N5dh2ItahXZnS9MrMX+x5+f2HN5t/LbX7RB9vZ9b+soxBkEYLgzi2cSziOIwVZA0GBEOQjGQcOJMG3xnL7ly2LA5AtrVN7yg9f8o5S7N4sbDsAkd8dfEgmHusAyvULTvwlO/7Q26cnj5bnjqe5JW+d5RlLVsY6AQlrUB49UMbogV8ZuODqT7ibrrs7hFxFOo5P3Nig3W63iaQAkaBk9AUQQpCQgoh3QWDLE8s/hP231Gn69g1tXlN3V91hwiAgEv7cAyxsrAPheH4BpXe3DnzrteXJo2WATlgPfJrtT2vnVnt0jp/c819Pth76zCZf1++E8hTBthYeYo0QojOfsDv63J1sfbZPAPvvgAOQLc5apFJpor4LPx+0AiMk1PwanNEmEK7r95rJN07vve/2IGglU1Oexa4ui10bAEAC1cmRVvm+f3iVG0x+jlR2q53Xsk2nMtnZHWWIIEh2wq9Tm2RsGRyA7GSd6lN+zYUvrsXyamF1CAjV3bLKWh2S4/oFO/OLE/v+67OzxzzX8/KsAZFAq1EzjYf+9c1pXf0SSXf2NdtsNevJpTs1v3lL7bgFzE4HByBbqBNkmUyWotSaT4Rh25Ak1V2DSzChgXL7veifKocf+mjnoB/YpGTbCcFGdUaPf/cf3xiHbdMN6Hq91glAARLJ5GvRCUEe+GWngwOQLSozsHFHIxbbJXRsQQoEEGC0sSKfVnU98f2fC8OwU9P6wcaNtQYgQmVmUodB03bHkvv7i/1SyLkRZuouv+OXNTs9/EphC1mbjO5mht4XRaEhIbr7WMFqE0rXV+lo8i3TE8dbJ+7O8sMo13yx1nF3ak1S85u/hI6bwGx5HIBsVjc0enoHvBCpN1sdAxAugGTnPRJuxrEj9eO7v3wuyndi2EqZ3AiEhOysFulurCDAgyDsdHAAslndeEn1Du0IYrgCFAKdmpdFKKQQTjj9G7VqxeCHWftbAhHR7IBHtwYoBEQ3EJNHndMysuc3DkA2pzvQ4RdujOIYJCG6qzUsrHKVQFw+9hXgHMdK5+LU2XUm+VayzVayv6CcHclm7FQ4ANkCUkqESN2Q7KSSbEUAwFgL5QqzP2yWS8Dzayeq7rw/AiWToudPxmbsFDgAGYC5/r9sNi+NdC8DDACIzmqOGEIAYf3rzUZj3r0tnw864Sfm9fvxKDA7TfxKYQtJR8UGg8k/SIAAGBgiAVfEe89p2U5gk0mCcyO+s/lHJ2y7wNjiOABZRxIYjuu5IIn5t2GzAEgIRO3WsfmPPWc6lc+Z6Znp+SVJ7rU+bz4gY8vgAGQLpNMZTwoBWGMAwKK7SwsA8zzZWbSTbel0Kt1tAi/4IRHnHzstHICsI6lW1WrVINJxcke3ufiDtRbK8/vnP/ac6Vw+jKKoM0LduSHc3APO9RQddn7gAGQLGB1FgmBg7YLXhgVgpL/pHBVroU6/X6FQKCQr8TrbbnX3HDTmnGc0Oz9wALIFbBxFDtnjSVNSJHdyE1CwBlb417mue66LCGsNrLUwxpqTR3w7YchNYHYaOAAZgLllZvV61QjdfjgJFtPdoVQB1oSQV6SyhRSAc7fWlgien6bi+s1Ou9VoJM10C8Akf9pOs514LgxbHr9I2DwEYwykaf6HkC5gbNyNOWFtGBql3J41lwLnpoVJUgHW4oKfvO3Gvguu2WjazXZ35Dcpk+3co0Sj1Wy0TnUuxgAOQDbP7HS6dvkbjly42oMEqTiKoNODv6mU+qEvBSEhYXWMwvB2f+CV7/lqdWTvaOxkh5KB6flzs42w1qDVSPYKfF4tWWHPOxyA7CRBeWyv76jQAAKwxsICJBSRCRuRelWuuG4tgB/aXDsSEtZoZPK9Yusv/M1/VJutOJ452nJ7hl6s4xhIygkLA2OMggkhdND8oRSOndc4ANmsbj9gaWYySpnq/ybpudYgECQMrIWAFWGsjejd/g++53VqVz/YEOyGXzqXp+3/8+/uwOqLrmuP7bs3arWs7Fl9k9ERYEkYbWB1bCxIIGpXW+WJGnDK+9AxxgHIFlc6cP/78pj5NSeVSWtjhDUmAAklyMRV47+8sP6S1/+gy0BCwRqNbKEodr3r45+Qw5fdauNWrEef/Kx0fGX83kutDo22RhlrZkeFbat8f1CdSe6exE1gdgocgGxRQathyvvu+xNn6uHhrGN3k+P7xgoQpDFhq1mRA/+8ZvMLLk6mnDy3tcBkKZuANTGKG3ekd7zn03fqNZf8bFybrirHU9XH7/6yW9y0NTQEGB0aa2CSqTExSWmi6UP/prXmTRHYsvgVwk5ClCwnW7d51xZPytgc++6OTHvkVRnPCSCkDyHSQRBUm9ltj6/besmO+TdKP+vrCpncA8QabLr+ll1bfulTR+P88I/GjVIg/HTelEaOlp/+zylvw2XvD1sNkLUCxgDWwuhYkNWicfTx/5uc7+yfC7aycQCykyQLKixmxg8fkmuvelitveadonb4a2Lk3myuffQnUr6730vn8uV6A1Pu5ieLGy95RXLcswlCmqvxWQsYjd7h7f4Lfv72DxV/8gNPBJHtM+16DCLIdB7l733hNqk8pXPrbtVRK7ZErrUW0CY2RArNiUdqI7vHgGT4hrFT4c9ItrjO7THzq7esCVddPSKietOJSz+Lmb1fQNiM4fWuN5lVb9du77uMmy2mRPQNM/bYWyoTh0eXOy91Niyw1s7fdAaFoY1u8YrXvrrnkld/XKd68rpdD6WSiqSAdZRxPSfc/cHrs9ntN9zaXn35xyluBiSUT0IAJg5UptcXB7/58mMP/Ps9RCKpSTJ2ChyAbGmdECxuf8m7pt11twvXhacEnPbUH1Hp4F/F5WPHJSyRm+u1qYHr/EzhBmGj74jW5LdL06PjzWZz3v4EnSVqJ/BSafSsv7i/d9eNb8hsffHvaa+noKMmSIpQuK5LUsLABF5xyK/e/Tc3Hb/zjq9nbnhPs9lqCamkEkJCgGIDQlqZw5N3//X2Vr1qkqJzDZCdGgcgO4Xknr+enybvghvvrMbqFUQiRjrvOl4aDtrHVWv6o6Ix9kVbPb7PBLWWiWPhO4rK5ZkoTuboLZDK5snLFb3s6i1rM+sufoW7esdbnP4NL4khoaM2IBBKx1FQjiApQRKxddLC1eXHv/ebP3Lp0LVv+GCrZ+tvU9wOIYQrhABZE8hMwTdPfXnX5NP3PQkSC2qWjC2FA5CdWqcWmC0UfbPx+t1NSg8rSYElpaxyXeGl4XhpKCngkm2KqPagiNuP2qg96QpEjqsQWwHPz60SqZ7NMlW4SKZ7twsvi9gQAA0YHUNJI5SjhOMKSAVICRJktBRhtn/QP3j7m3NBeSYtLrllPG41Quk6LpEArA7gpP1U4+hHRr/59+/vlpex08EByJbV7U/rHdrUS1tvPDLTaGeVkiE5riKhYpLCCJJKKk9J5cJxPEilIISCVA4c5aJ7+8rZL4GQpGukchWkVKQUSDkgoQDHAUkBC133iuuy5bs+8tKRuz753dxLf+loPbarlCBASCVAoVGOmxbR47X7/v6yRmVGcwCyM8GjwGxZ1hqACKXjB0t2753DPZ7dHwvHtcaGIHKJpC+kVIJghI1jxEGIsBlSHARoN0IdVAMT1kPSYSygDcGChHKFkL4lqNl7eQCwBMBoxHHYTA0MZ4PvffYd+/79o9/JXvXGf6iGeq0w2hhrFbQONZHrIT5cf/Bfrm1UZjRx+LEzxAHITo9NJjyXxg6Xae9dOwfd9pfgZf3Y6BhGx53GhAAJBRIuSLgW5IPIBXX/hEoe09m9xZq5exGDutNgYm106OcH0vX7/vHW73/6g58oXvYTv16n3FspbocWxrU6bsZEblrp/a2HPrezPnm0Qd1pNIydAXmuC8DOL0QCQbOmaXrf5/oL+f02t+Z/RFCCjA6VlFYIEkQEQRJEyR3ahJAQQiZN384NzEmIzt8FhJCdnbh0m9yUm+/tl9Vvf+zluz//kS+sveq1H6h4az9s27UmkRSx1iS8jNuD2r82H/3iK2pToy2e8sKeLe4DZGduXlNzcNOOoth07R+10+tujWMDidgoKUJJSgkphRBKCOVCCgkhBEg6kMoFSdkJQhlbIWMoz/d7+oD6yH0TX/vLV5X3P1bJ7rzp4yWTvtVaXYZQBTg+cikn9sv7X1fe8+0vtVotcJ8fOxscgOxZ6r50LIQQGNh66bCz/orfNPn1vxgZCaM1BCwkiVBJYYQQEMqFdFwQSYAIwvF84WUg/Qw8NI/Wn/zqLUfu/T//6WX6BjH84rsrWu0iG0P5KaRdijNx5bdbRx7+89LYkUZSBA4/dnY4ANlZoe6Kjo7i+u1Zd9UFL3UGtv2sTQ/8OMlUFkJCKA9SKAgpQVLBVRJSEag19ZXmwf/6s5mn7/1uq1ZzUhtf9IeBP/jOsFWBp0w95ahviNbER1vj++8pT450dnmeC1/GzgYHIHtOLNYP11Nc7aQKq/tUrrhG+IUBP11YLZTyo7A5Y+qTT9UnDhwqjexvxnGMdeu39qUHtt1SrlXb1gRPiahxLKhNT9TK06ExZt51iAc7GGPPT92NDc7oGLHMWFxn7iBjzzV+VbEfmCS0aPZVtuAeI53+O7tgjfDchMDZRi7X9hhjjDHGGGPPGW4CrzREyZIyCyxoWnaalcs2KYlOPbh6uudZ8pxn0qQ9xcvz2ZRjwfmezXHcHGfseYw/zxg7E/yOWTGSvfuy2Rxlixs2kJe52sJZ72VyxWZlaq8i8/24Pv7E5NixxqJHd6aXrF6zPtOz5oI3B+12bCGUsQYEa4SQsHEUtYPm0+3yyGPlmYn2siXqnHPd9ssu87N9l4bNytGjex68a2HtdPFj8r1Fb/WWK97WDprawiohpDAW2hptyFrbjqJDtjX12MSx/VPLPzXJgEvvwJp8//pdr4eJMHHgsU9XKzPhcpOppVQYvvCa1/opr+/Yngc/Va9VDE/FWTk4AFeCzpu4Z2B90Rm88Ks1k7tSCAtEdWhLcFwfkSa4ipCLxm8tH374U62gjfkh1J3Ht3bTjo0zmYsOxlEbGU8A0gOMBqyBtoRWWyPvo65mnto6cWzf+FIB0g2J3oGhlF79oma1WoPre/BmnhiqTR4eW+64wuCGgWDgiok4qMD3fLQ14DkKShiAHLS0hLIhsu3RN47ve+Cz3Q+AJZ4gCEHou+hH/22qJW8mIhRl6Tcmn7nvD5cLwFQ6TWL9y6pCiqw3+WB6auJ4iwNw5eDdYM53nTdwJtfrx8UX7p8O1JWp5qH3epMP9tLo/Q6OflvK0f9MZep7LtdR6+hUnP9kz9odb0zCYu7zr3sD8WqlXNVRHKR06aPexIMpZ/S+tBq7P6XGHkir4/en08HRW0tNk6XMwLuSAxcPgu53/YELfr3WCrFhQP0FhIhR2PgxJeWyS9iMjmIdNIOBvLorPf2gaw58XcqR73juxENpNXZ/Kj394KYoaE5UndX/lCsU/SVvz0lJMOYHhtfNtNXNA+n48z0q+E7DGfr9/lXDOVi76BzD7vey6YzIem5NRzowhu+ytNKoc10AdpY6b0lv8IK3lNpRviBrHygdfugv5z8kDJoBShMPD66LXlTytxyoy8GP5fK9/1KrluITa0CplO/EwvrtRuNwdWw0OPFyA+v7vtUQEtYuvZNQt4Y0MLShp2IyH8pS8Hj9wMO/ki3uSJV19rbC6m1bZ0Z27ztl7YuIhJ/yg3ZtojQ+FgFApRSE8x5xaPCSHU/P1MNBz/WzAIJF64DWwnUcmMK2OxwQZOmZnzPkDwap7J5sfvh3MH70lxerzXW/V6lWNOWq424qNbTU78vOXxyA571kMwLjZH9cWmVM6cinAICEmL0tZDdnSuOHRzKbN93foNR12XRPP6ql8W5oEAgWFo7jOoCFyKx+ff/Wa2vGonN/DYIBvKpN3ZaS+pn21OEPLzj5/BJ1/1nY8oG2cdHbPvj2qZkZO+CP/pbbd/ltAa3+mFJ7fySOT7WFVWeidBx6QggIEsgPrl/TagUkHY/cbP/103Vc70tMBPXSTHLdE4Ksu53/4OYdZZ26qei2Pjk2cqisHLec2TR0f5X63tu7euPvlsYOzSzdJBdEghTfZHhl4gBcAZJVFbqHkoGCYO7NnLyhk/c1IYoikLDHrI6N1loCczWmbhO4Uqm2rKeh4/hSkx+6HQCsjpIHmhi6beFa/QxB9ACon1jl6tb+ikObBqo29/60rX6jenzfIyDC5OiBsf7s2o+UkHtfbnDrxZXRPU+cshZoNEDWGGNgycLPF69q9a75QhhrxGSQleH3zMRTr2k0G2bR81gL1/XQzmz4hCOAeHrPrwJAHIXwWmM/18pe9CQVtvyZmDjy9qVat0opCEd6vN/gysR9gCtAslmAfVSH7dhP91w8t8SM5n1Z5HsKMtR4mSOlUMJWgZNHwZQSBFJwTOMvzIG7Vbz/bqUP3avMkW8pfeQ7Kt/cOxzEdjsGXvBUNl8QJ/a9WZuEhunZ/CfaWPjByC+FUTjXz1Y99Lu+5xqdXvuZdCZHmC3nYmj2Z9ZajO554It5O/MrYRSh16fP2GP3X12bOja6aPh1+/BWbbumaf1r+p3g9pnxozPd81XG9j2Viqa/Wou9txWHNm8EFu8LbLcDGwTtKq9FXpk4AM93nRqXqB27Qwqh6v76v+spru1Lfmhnv9KZrFDFne9v6NRQ1lY/Xy+N14GTm41GGwOhjI7iqUqlrGvVsq5VK7paKet6rapta2bUc2g8NJT3/LQHzIuvzoBDYXDDcN1m3ubr0ufLx/fvAQBrkmb09NjRSiqa/O0W0ru8vvXXYcEJTvrVDFmzoOpVOfjAX/T6+stjtfhNTmHjTUscCViLVDpDbXfgDo8iE0w8/YHZa1FSG3Zbo++2ViPODv+N53mLjuwSiWQjVwjDEbjycBP4fNepQVUnDu0ZuGDd+6d1z5+2enZO5/sv/AzC2n3C6tjI9NqIUu8oGTnUl473R2N7fyYMo0X776RylI4jEcv069w1l5atNQSQJRCRINX28rc022LVqmx8d61WCpIi2NmyeJ6HMLflU9po+MHx99WjedfpdDja8sE/c3rzH2q66z6Xyh5b16pXZgdjZpvk1iLSEK4lp1s2IkIQBNYbe+Sn0/0vOFD2N3+1Z6i1s3J871MLfpfOdVT/tlfWkN21Wsz81tj4sWo3GLtqk4f3927b9JXJdu5VfcVNL2yP7H5ssefEQDqxMYLfLCsP/z9dESziOMbxJ7/5kXXbXnhP7BffE4js68nveRPBwsQaWYof7Ymrv9o8+uQ/VyulaKm+N63jqDfjTIVOdjM5xb9OpokkW1YJWJh243BO134jOLb7z5ut1lyqdc7XP7Rle5Tvvzrbnr5j8tDhQwuu07mx0szkaH1ocNu7w/zQh13aemNr30NfPbEckqzpy3tTbuyXq93fsjNlpVKaCvpTR67xBl9wn5/ddZdr2zsmx47MNlOttcj39Kpscf2fenD2t47s/2MAC6cKEiEMQ8TT+36h0L/zkZ7C1r+Ma8dfVq1W7Px5flIKKmTduvBSU8Ekr4VbabhWv0LlcnlyXV9JxxFBqxGF7cAEQXdWy9KThh3HQSabk/aE9mDSciREUWjr9fqSQZBKZ4TvpxC0mqbVai5ZPsdxkM31iHbYRrNeO2mEQTkOstm81Dq2tWrlhJ8n5e/pKQiQpDBq21ajvuAxjusik8ktcfxCPYVeQSSpXq/oOIoWXokIuVyPICmoVqloY/SpTsUYO6dO1Vk/b2PRs+rUX2KD0lOd82yud7YDEKc8fpky8+AHY+ep2Tdwd2PSZ3n8mQYBneb15sq2OCHOfozudEN5ud+Pg3Bl4vsCr0CZTJa0jk8a1UxnMhRFEaSUyGSyFIbhgp/7for6+otuKp0m3/dFq9Vc0HRUSqG/OOAUCr1uFEU6juMFx+dyeYqicNHR1EwmS9YaGHNya9T3fUgpofXC5qW1FrlcXuTyOdVqNk86MJvNUl9/0cvl807QasXzz62Ugud5iKIImUyGrMWi1+4vDjhKKrTb7QWFFkKgr7+oevv6XSJh2kHA/X8rEAfgCtKtpbzy1a+7bWr8+KPNZtMmtTcBwOI1r3vTewu9fapanjn2uje89X898tD3vjW/ObtueH3mpp947Qcvv+qadzqOc+Dg/n3HiAhCCFhr8cLLrth244//1IeKAwNuqTR9qFopR/Ob1G+99Rd+/+C+vfcGQcue2NS+5U1vfU+5XH66XC61u9/rnveaa6+7MpPLpybGj5fm1/ouveLqLTe84qZf37J1+65ms7lnZnqqRZTcTB3W4sde9eq3XHjRrpcMDa1ZNXLs6DNBENjuOTPZnHrDW9/xxScff+Sfrr72pTf4vteYmpxozj//j77yp155yaVX/tT2C3dcMz42+lCjUdfd49etX59+zU+/6VP9/UVNhMbx0ZEy1wJXHh4FXpFsamH7DoAFjNG1a196/d/6nvfz7Xa7NfvozujqoYMHGnd+5Ysf3n7hzpu+8bX/d78QAsaY2VO126GZmZk5fuTwod2TE+Otk64Kmz1x8GT2ZyRzS5VWKukIotkPY5tMp6HLr7z6t/7x7+94q45j5HsKs9NhuuM3xsIrl0sHJ8ZGv18ul0z3WAAwRtueQs+ml9/4ypuDdqvVvVMTEcEYgzXrhjPDwxtu+uRHb383MNfc7h6vpJK1cq0yOnLsmWNHD4+e4slm5zGeCL0CSUf5i9VWXNfNf/Prd/7k9p0v+JCfSu8ATu6pcx3PVY6Xn3/83MwRcsIwqFYr5Sm5SP+cNsj6qZTjuO4i13ZSnu97nufTiWUjkGPnfxgnIWW1MWE+X/B2XnzJuhe95IZbOmWYLREBfqVcnqxWKzWlFn6W+37a3fvM0388Pn78qWte/LJ/bwfBgsCOwjAiULanUJADg6tc1/MWFMpaUCqb7i+XSpNG8y4wKxU3gVeQbrBs2LApf+Twgb1BENjZgQZrsXnLluIze55+7OnvP/4vAwOD+aefeuLRbgR2j81kstTT0+McOrj/aHc+XPcObvl8Dy7aefENg6uHVjfq9cNTkxOtbpMRALZdcOHwCy/9FudbAAABWElEQVS74uXFYlHufWb3oe72/AAwPLwhfeHOi2/etHnrmr17nnpCaz23bnhw0GsHrerU5EStWw6tNSql6XtfcsMr3rt6zdpdTzz60L9OT002O4UFrMXwho3ZDZs2XzkwuHrzxPjxJxr1uumWx/N8WrN2XfHb3/z6A/3FwfHjI0cfq5RLEUAgAhqNugbZJ6//kR9755q1w1uPHj70WBC0Zo/3U77dvv2iq/oHBguu58VHDh0c4yYwY+e5s30TSynhuu6SI7RKKSi5+OeqlBIn1tTOluM4cF33Wf9eyx3neR7kEr8PY+w8dL7UZM5kmsoyZ1ri/GLe38+P54QxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4w9h/4/5f3ffgBovTMAAAAASUVORK5CYII=" alt="OBARAI Intelligence" style="height:52px; width:auto; margin-bottom:24px; opacity:0.95; filter:brightness(0) invert(1);">
-  <div class="header-quote">AI 不是取代人類，<br>而是協助人類處理那些可以由電腦解決的事。</div>
-  <div class="header-eyebrow" style="margin-top:28px;">喜歡建築 × OBARAI Intelligence</div>
-  <h1>你的聲音<br>讓公司變得更好</h1>
-  <p class="header-sub">我們想知道，哪些事情可以更輕鬆——<br>哪些事情，你希望未來能靠科技解決。</p>
-  <div class="anon-badge">完全匿名，不記錄身份</div>
+
+  <!--
+
+  把你原本那一整行 Base64 Logo 放在這裡
+
+  也就是原本的：
+
+  <img src="data:image/png;base64,......">
+
+  -->
+
+  <div class="header-quote">
+
+    有些工作，需要人的判斷。<br>
+
+    有些溝通，需要人的溫度。<br>
+
+    但有些重複、等待和尋找，<br>
+
+    也許不該一直消耗一個人。
+
+  </div>
+
+  <div class="header-eyebrow">
+
+    喜歡建築 × OBARAI Intelligence
+
+  </div>
+
+  <h1>
+
+    我們想知道<br>
+
+    你每天真正累的是什麼
+
+  </h1>
+
+  <p class="header-sub">
+
+    這不是考試，也不是工作績效調查。<br>
+
+    我們只是想聽見，那些平常沒有人會問的事。
+
+  </p>
+
+  <div class="anon-badge">
+
+    完全匿名，不記錄身份
+
+  </div>
+
 </div>
+
+<!-- ======================================================
+
+     OBARAI MANIFESTO
+
+====================================================== -->
+
+<div class="manifesto">
+
+  <div class="manifesto-card">
+
+    <div class="manifesto-eyebrow">
+
+      WHY WE ARE HERE
+
+    </div>
+
+    <div class="manifesto-title">
+
+      我們不是來問你<br>
+
+      「AI 可以做什麼」。
+
+    </div>
+
+    <div class="manifesto-text">
+
+      我們想先知道，人每天正在承受什麼。<br><br>
+
+      因為科技真正的價值，不是讓人做更多事，
+
+      而是把那些可以交給電腦的重複、等待與混亂接過去，
+
+      把人的時間，還給真正需要人的地方。
+
+    </div>
+
+    <div class="manifesto-signature">
+
+      OBARAI INTELLIGENCE
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ======================================================
+
+     FORM
+
+====================================================== -->
 
 <div class="form-wrap">
 
-  <!-- Q1 -->
-  <div class="section">
-    <div class="section-label">01 — 你的工作</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你在公司主要負責什麼？</div>
-        <div class="q-hint">讓我們更了解你說的每句話背後的脈絡。</div>
-        <div class="radio-row" id="role-group">
-          <label class="radio-pill"><input type="radio" name="role" value="業務/銷售"> 業務 / 銷售</label>
-          <label class="radio-pill"><input type="radio" name="role" value="工程/工地"> 工程 / 工地</label>
-          <label class="radio-pill"><input type="radio" name="role" value="設計/規劃"> 設計 / 規劃</label>
-          <label class="radio-pill"><input type="radio" name="role" value="行政/財務"> 行政 / 財務</label>
-          <label class="radio-pill"><input type="radio" name="role" value="客服/交屋"> 客服 / 交屋</label>
-          <label class="radio-pill"><input type="radio" name="role" value="其他"> 其他</label>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Q1 -->
 
-  <!-- Q2 -->
-  <div class="section">
-    <div class="section-label">02 — 每天的消耗</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你每天下班前，最常覺得「這件事怎麼又要做一遍」的是什麼？</div>
-        <div class="q-hint">想想那些讓你皺眉頭的瞬間，可以複選。</div>
-        <div class="check-grid" id="pain-group">
-          <label class="check-item"><input type="checkbox" value="回覆客戶訊息"><div class="check-box"></div>回覆客戶訊息</label>
-          <label class="check-item"><input type="checkbox" value="填寫紙本表單"><div class="check-box"></div>填寫紙本表單</label>
-          <label class="check-item"><input type="checkbox" value="追進度/回報狀態"><div class="check-box"></div>追進度 / 回報狀態</label>
-          <label class="check-item"><input type="checkbox" value="整理資料/報表"><div class="check-box"></div>整理資料 / 報表</label>
-          <label class="check-item"><input type="checkbox" value="安排工班時間"><div class="check-box"></div>安排工班時間</label>
-          <label class="check-item"><input type="checkbox" value="處理客變需求"><div class="check-box"></div>處理客變需求</label>
-          <label class="check-item"><input type="checkbox" value="跨部門溝通確認"><div class="check-box"></div>跨部門溝通確認</label>
-          <label class="check-item"><input type="checkbox" value="找資料/翻紀錄"><div class="check-box"></div>找資料 / 翻紀錄</label>
-          <label class="check-item"><input type="checkbox" value="催款/催簽"><div class="check-box"></div>催款 / 催簽</label>
-          <label class="check-item"><input type="checkbox" value="其他"><div class="check-box"></div>其他</label>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="section">
 
-  <!-- Q3 -->
-  <div class="section">
-    <div class="section-label">03 — 資訊流失</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你有沒有遇過「這件事明明講過，但後來搞不清楚誰知道、誰不知道」的情況？</div>
-        <div class="q-hint">比如客戶要求說了一半、工班換人後資訊斷掉、主管交辦後沒有紀錄……</div>
-        <div class="radio-row" id="info-loss-group">
-          <label class="radio-pill"><input type="radio" name="info_loss" value="常常發生"> 常常發生</label>
-          <label class="radio-pill"><input type="radio" name="info_loss" value="偶爾有"> 偶爾有</label>
-          <label class="radio-pill"><input type="radio" name="info_loss" value="很少"> 很少</label>
-          <label class="radio-pill"><input type="radio" name="info_loss" value="幾乎沒有"> 幾乎沒有</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">當你需要查一件事情的「最新狀況」，你通常怎麼做？</div>
-        <div class="q-hint">比如確認某個案場進度、某位客戶的回覆……</div>
-        <div class="check-grid" id="check-method-group">
-          <label class="check-item"><input type="checkbox" value="打電話問同事"><div class="check-box"></div>打電話問同事</label>
-          <label class="check-item"><input type="checkbox" value="翻 LINE 訊息"><div class="check-box"></div>翻 LINE 訊息</label>
-          <label class="check-item"><input type="checkbox" value="翻 Excel 或資料夾"><div class="check-box"></div>翻 Excel / 資料夾</label>
-          <label class="check-item"><input type="checkbox" value="問主管"><div class="check-box"></div>問主管</label>
-          <label class="check-item"><input type="checkbox" value="去現場確認"><div class="check-box"></div>去現場確認</label>
-          <label class="check-item"><input type="checkbox" value="根本找不到"><div class="check-box"></div>根本找不到</label>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="section-label">01 — 你每天所在的位置</div>
 
-  <!-- Q4 -->
-  <div class="section">
-    <div class="section-label">04 — 溝通成本</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你一天大概要花多少時間在「跟別人確認同一件事」上面？（電話、LINE、當面問）</div>
-        <div class="q-hint">不用精確，大概感覺就好。</div>
-        <div class="radio-row" id="comm-time-group">
-          <label class="radio-pill"><input type="radio" name="comm_time" value="30分鐘以內"> 30 分鐘以內</label>
-          <label class="radio-pill"><input type="radio" name="comm_time" value="30分到1小時"> 30 分～1 小時</label>
-          <label class="radio-pill"><input type="radio" name="comm_time" value="1到2小時"> 1～2 小時</label>
-          <label class="radio-pill"><input type="radio" name="comm_time" value="超過2小時"> 超過 2 小時</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">你現在怎麼讓工作「跑起來」？主要靠什麼？</div>
-        <div class="q-hint">就是那些你每天打開的東西，可以複選。</div>
-        <div class="check-grid" id="tools-group">
-          <label class="check-item"><input type="checkbox" value="LINE 群組"><div class="check-box"></div>LINE 群組</label>
-          <label class="check-item"><input type="checkbox" value="Excel / Google 試算表"><div class="check-box"></div>Excel / 試算表</label>
-          <label class="check-item"><input type="checkbox" value="紙本/手寫"><div class="check-box"></div>紙本 / 手寫</label>
-          <label class="check-item"><input type="checkbox" value="電話/口頭確認"><div class="check-box"></div>電話 / 口頭確認</label>
-          <label class="check-item"><input type="checkbox" value="公司系統"><div class="check-box"></div>公司現有系統</label>
-          <label class="check-item"><input type="checkbox" value="沒有固定工具"><div class="check-box"></div>沒有固定工具</label>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="card">
 
-  <!-- Q5 -->
-  <div class="section">
-    <div class="section-label">05 — 客戶體驗</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">客戶最常打來或傳訊息問你的，是哪種問題？</div>
-        <div class="q-hint">就是那種你已經回答很多次、但還是一直有人問的問題，可以複選。</div>
-        <div class="check-grid" id="client-q-group">
-          <label class="check-item"><input type="checkbox" value="工程什麼時候完工"><div class="check-box"></div>工程什麼時候完工</label>
-          <label class="check-item"><input type="checkbox" value="客變確認了沒"><div class="check-box"></div>客變確認了沒</label>
-          <label class="check-item"><input type="checkbox" value="交屋流程怎麼走"><div class="check-box"></div>交屋流程怎麼走</label>
-          <label class="check-item"><input type="checkbox" value="款項什麼時候要繳"><div class="check-box"></div>款項什麼時候要繳</label>
-          <label class="check-item"><input type="checkbox" value="保固怎麼申請"><div class="check-box"></div>保固怎麼申請</label>
-          <label class="check-item"><input type="checkbox" value="智慧設備怎麼用"><div class="check-box"></div>智慧設備怎麼用</label>
-          <label class="check-item"><input type="checkbox" value="客戶問的都不一樣"><div class="check-box"></div>每次都不一樣</label>
-          <label class="check-item"><input type="checkbox" value="我不直接接觸客戶"><div class="check-box"></div>我不直接接觸客戶</label>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="q">
 
-  <!-- Q6 -->
-  <div class="section">
-    <div class="section-label">06 — 自動化機會</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">如果明天早上上班，有一件事情「已經被自動做好了」，你最希望是哪件事？</div>
-        <div class="q-hint">不用正式，說那個讓你最累、最想甩掉的事。</div>
-        <textarea placeholder="例如：每次客戶問進度我都要一個一個回，如果有東西自動更新就好了……" id="auto-wish"></textarea>
-      </div>
-    </div>
-  </div>
+      <div class="q-text">
 
-  <!-- Q7 -->
-  <div class="section">
-    <div class="section-label">07 — 決策困難</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你做工作決定的時候，最常遇到「資訊不夠、很難判斷」的是哪種情況？</div>
-        <div class="q-hint">比如不知道某個案的最新狀況、不確定客戶意願、不清楚工班能否趕上……可以複選。</div>
-        <div class="check-grid" id="decision-group">
-          <label class="check-item"><input type="checkbox" value="不知道案場最新進度"><div class="check-box"></div>不知道案場最新進度</label>
-          <label class="check-item"><input type="checkbox" value="不清楚客戶當前意願"><div class="check-box"></div>不清楚客戶當前意願</label>
-          <label class="check-item"><input type="checkbox" value="不確定工班能否準時"><div class="check-box"></div>不確定工班能否準時</label>
-          <label class="check-item"><input type="checkbox" value="找不到過去的合約紀錄"><div class="check-box"></div>找不到過去的合約紀錄</label>
-          <label class="check-item"><input type="checkbox" value="不知道誰負責哪件事"><div class="check-box"></div>不知道誰負責哪件事</label>
-          <label class="check-item"><input type="checkbox" value="資料分散在不同地方"><div class="check-box"></div>資料分散在不同地方</label>
-        </div>
-      </div>
-    </div>
-  </div>
+        每天來到公司，你大部分的時間都在處理什麼？
 
-  <!-- Q8 -->
-  <div class="section">
-    <div class="section-label">08 — 科技接受度</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">想像一下：手機上有一個 APP，隨時能看到每個案場進度、每位客戶狀態，不用再問來問去——你會用嗎？</div>
-        <div class="radio-row" id="app-group">
-          <label class="radio-pill"><input type="radio" name="app" value="一定會用"> 一定會用</label>
-          <label class="radio-pill"><input type="radio" name="app" value="應該會"> 應該會</label>
-          <label class="radio-pill"><input type="radio" name="app" value="看情況"> 看情況</label>
-          <label class="radio-pill"><input type="radio" name="app" value="不太需要"> 不太需要</label>
-        </div>
       </div>
-      <div class="q">
-        <div class="q-text">如果公司要導入一套新的管理系統，你最擔心的是什麼？</div>
-        <div class="q-hint">說真的，這樣我們才能做出真的好用的東西，可以複選。</div>
-        <div class="check-grid" id="concern-group">
-          <label class="check-item"><input type="checkbox" value="學起來太麻煩"><div class="check-box"></div>學起來太麻煩</label>
-          <label class="check-item"><input type="checkbox" value="用了一半又換掉"><div class="check-box"></div>用了一半又換掉</label>
-          <label class="check-item"><input type="checkbox" value="老同事不會用"><div class="check-box"></div>老同事不會用</label>
-          <label class="check-item"><input type="checkbox" value="資料轉移怕出錯"><div class="check-box"></div>資料轉移怕出錯</label>
-          <label class="check-item"><input type="checkbox" value="不適合我們的工作方式"><div class="check-box"></div>不適合我們的方式</label>
-          <label class="check-item"><input type="checkbox" value="沒什麼擔心"><div class="check-box"></div>沒什麼擔心</label>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Q9 -->
-  <div class="section">
-    <div class="section-label">09 — 回家這件事</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">下班回到家，你最希望家裡已經幫你「準備好」什麼？</div>
-        <div class="q-hint">想像推開門的那一刻——燈光、溫度、音樂、安全感……你第一個希望的是什麼？</div>
-        <textarea placeholder="例如：希望一進門燈就自動開、冷氣已經涼了，不用摸黑找開關……" id="home-wish"></textarea>
-      </div>
-      <div class="q">
-        <div class="q-text">回到家之後，你最常做的「多餘的事」是什麼？</div>
-        <div class="q-hint">就是那些你覺得「這種事也要我自己動手嗎」的瑣事，可以複選。</div>
-        <div class="check-grid" id="home-chore-group">
-          <label class="check-item"><input type="checkbox" value="一間一間開燈關燈"><div class="check-box"></div>一間一間開關燈</label>
-          <label class="check-item"><input type="checkbox" value="調冷氣溫度"><div class="check-box"></div>調冷氣溫度</label>
-          <label class="check-item"><input type="checkbox" value="確認門窗有沒有鎖好"><div class="check-box"></div>確認門窗有沒鎖好</label>
-          <label class="check-item"><input type="checkbox" value="找遙控器"><div class="check-box"></div>到處找遙控器</label>
-          <label class="check-item"><input type="checkbox" value="出門才發現忘記關電器"><div class="check-box"></div>出門才想到沒關電器</label>
-          <label class="check-item"><input type="checkbox" value="半夜起來確認有沒有關瓦斯"><div class="check-box"></div>半夜爬起來確認瓦斯</label>
-        </div>
-      </div>
-    </div>
-  </div>
+      <div class="q-hint">
 
-  <!-- Q10 -->
-  <div class="section">
-    <div class="section-label">10 — 家裡的那個人</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">你的父母或長輩自己在家的時候，你最擔心的是什麼？</div>
-        <div class="q-hint">不一定每個人都有這樣的情況，但如果有——說說那個讓你放不下的擔心。</div>
-        <div class="check-grid" id="elder-worry-group">
-          <label class="check-item"><input type="checkbox" value="跌倒或身體不舒服沒人知道"><div class="check-box"></div>跌倒或身體不適沒人知道</label>
-          <label class="check-item"><input type="checkbox" value="忘記關瓦斯或熱水器"><div class="check-box"></div>忘記關瓦斯 / 熱水器</label>
-          <label class="check-item"><input type="checkbox" value="不會用智慧設備求救"><div class="check-box"></div>不會用設備求救</label>
-          <label class="check-item"><input type="checkbox" value="陌生人按門鈴不知道如何應對"><div class="check-box"></div>陌生人按門鈴不知怎麼辦</label>
-          <label class="check-item"><input type="checkbox" value="長時間沒動靜不確定是否安全"><div class="check-box"></div>長時間沒動靜不知是否安全</label>
-          <label class="check-item"><input type="checkbox" value="我的家人都不需要擔心"><div class="check-box"></div>我的家人不需要擔心</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">如果手機能在「家裡有異狀」的時候主動通知你，你最希望是哪種情況？</div>
-        <div class="q-hint">可以複選。</div>
-        <div class="check-grid" id="alert-wish-group">
-          <label class="check-item"><input type="checkbox" value="長輩超過一定時間沒動靜"><div class="check-box"></div>長輩超時沒動靜</label>
-          <label class="check-item"><input type="checkbox" value="有人在門口徘徊"><div class="check-box"></div>有人在門口徘徊</label>
-          <label class="check-item"><input type="checkbox" value="瓦斯或火災警報"><div class="check-box"></div>瓦斯 / 火災警報</label>
-          <label class="check-item"><input type="checkbox" value="出門後門沒鎖好"><div class="check-box"></div>出門後門沒鎖好</label>
-          <label class="check-item"><input type="checkbox" value="小孩放學回家了"><div class="check-box"></div>小孩放學回家了</label>
-          <label class="check-item"><input type="checkbox" value="這些我都想要"><div class="check-box"></div>以上都想要</label>
-        </div>
-      </div>
-    </div>
-  </div>
+        不用想職稱，我們只是想知道，你每天站在哪個位置看這間公司。
 
-  <!-- Q11 -->
-  <div class="section">
-    <div class="section-label">11 — 如果 AI 在家裡</div>
-
-    <div class="scenario-card">
-      <div class="scenario-label">請先讀這個情境</div>
-      <div class="scenario-body">
-        <p>AI 學習了家中每個人的生活習慣。<br>它知道男主人平常洗澡只要 8 分鐘，女主人 20 分鐘。</p>
-        <p>今天，患有高血壓的男主人進浴室已經 <strong>40 分鐘</strong>。<br>浴室內的溫度、濕度持續上升。</p>
-        <div class="scenario-timeline">
-          <div class="scenario-step">
-            <div class="step-dot"></div>
-            <div class="step-content"><span class="step-time">第 40 分鐘</span>AI 透過家中 HomePod 輕聲詢問：「你還好嗎？」<br><span class="step-muted">沒有回應。</span></div>
-          </div>
-          <div class="scenario-step">
-            <div class="step-dot"></div>
-            <div class="step-content"><span class="step-time">同時</span>AI 傳訊息給家中所有成員的 LINE：<br><span class="step-muted">「爸爸 40 分鐘前進浴室，至今未出來，浴室溫濕度持續上升，請協助關心。」</span></div>
-          </div>
-          <div class="scenario-step">
-            <div class="step-dot"></div>
-            <div class="step-content"><span class="step-time">過了 10 分鐘</span>情況沒有改善。<br>AI 再次透過 HomePod 提醒，<br>並播放<span class="step-highlight">重金屬音樂</span>試圖引起注意。<br><span class="step-muted">毫無反應。</span></div>
-          </div>
-          <div class="scenario-step step-sos">
-            <div class="step-dot dot-sos"></div>
-            <div class="step-content"><span class="step-time sos-label">SOS 模式啟動</span>AI 自動撥打 110、119，<br>同時解開大門智能鎖，<br>並通報大樓警衛。</div>
-          </div>
-        </div>
       </div>
+
+      <div class="radio-row">
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="業務/銷售">
+
+          業務 / 銷售
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="工程/工地">
+
+          工程 / 工地
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="設計/規劃">
+
+          設計 / 規劃
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="行政/財務">
+
+          行政 / 財務
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="客服/交屋">
+
+          客服 / 交屋
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="role" value="其他">
+
+          其他
+
+        </label>
+
+      </div>
+
     </div>
 
-    <div class="card" style="margin-top: 12px;">
-      <div class="q">
-        <div class="q-text">看完這個情境，你覺得這樣的 AI 守護功能——你需要嗎？</div>
-        <div class="q-hint">不用考慮技術或費用，只說你心裡的第一個感覺。</div>
-        <div class="radio-row" id="sos-need-group">
-          <label class="radio-pill"><input type="radio" name="sos_need" value="非常需要，這就是我要的"> 非常需要</label>
-          <label class="radio-pill"><input type="radio" name="sos_need" value="需要，家裡有長輩或小孩"> 需要（家有長輩）</label>
-          <label class="radio-pill"><input type="radio" name="sos_need" value="還好，我家目前不需要"> 目前不需要</label>
-          <label class="radio-pill"><input type="radio" name="sos_need" value="沒想過，但看完覺得應該有"> 沒想過但應該要有</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">如果你家裡也有這樣的 AI，你最希望它幫你守護的是誰？</div>
-        <div class="q-hint">可以複選。</div>
-        <div class="check-grid" id="guard-who-group">
-          <label class="check-item"><input type="checkbox" value="年長的父母"><div class="check-box"></div>年長的父母</label>
-          <label class="check-item"><input type="checkbox" value="年幼的孩子"><div class="check-box"></div>年幼的孩子</label>
-          <label class="check-item"><input type="checkbox" value="獨居的自己"><div class="check-box"></div>獨居的自己</label>
-          <label class="check-item"><input type="checkbox" value="另一半"><div class="check-box"></div>另一半</label>
-          <label class="check-item"><input type="checkbox" value="有慢性病的家人"><div class="check-box"></div>有慢性病的家人</label>
-          <label class="check-item"><input type="checkbox" value="所有家人"><div class="check-box"></div>所有家人</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">對你來說，「智慧家庭」最重要的是哪一件事？</div>
-        <div class="q-hint">不是功能最多、最酷——而是你真正在意的那一件。</div>
-        <div class="radio-row" id="smarthome-priority-group">
-          <label class="radio-pill"><input type="radio" name="smarthome_priority" value="家人安全"> 家人安全</label>
-          <label class="radio-pill"><input type="radio" name="smarthome_priority" value="省電省錢"> 省電省錢</label>
-          <label class="radio-pill"><input type="radio" name="smarthome_priority" value="方便省事"> 方便省事</label>
-          <label class="radio-pill"><input type="radio" name="smarthome_priority" value="掌握家裡狀況"> 隨時掌握家裡狀況</label>
-          <label class="radio-pill"><input type="radio" name="smarthome_priority" value="住起來有質感"> 住起來有質感</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">如果家裡有一個 AI，你第一個想讓它幫你做的是什麼？</div>
-        <div class="q-hint">沒有標準答案，說你第一個冒出來的念頭就好。</div>
-        <textarea placeholder="例如：幫我確認媽媽有沒有吃藥、出門自動鎖門、半夜有動靜就通知我……" id="ai-home-wish"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <!-- Q12 -->
-  <div class="section">
-    <div class="section-label">12 — 未來想像</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">三年後，你最希望公司的哪一件事「完全不一樣了」？</div>
-        <div class="q-hint">可能是一個流程、一個習慣、一種感覺——說你心裡真正想的。</div>
-        <textarea placeholder="例如：希望交屋那天，住戶已經用 APP 自己確認缺失清單，不用我一筆一筆抄……" id="future-wish"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <!-- Q13 -->
-  <div class="section">
-    <div class="section-label">13 — 現況與心聲</div>
-    <div class="card">
-      <div class="q">
-        <div class="q-text">老實說，現在的工作流程讓你覺得……</div>
-        <div class="q-hint">1 = 很順，我知道每件事在哪裡；5 = 常常不知道球在誰手上</div>
-        <div style="margin-top: 4px;">
-          <div class="scale-row">
-            <span class="scale-label-text">很順暢</span>
-            <div class="scale-btns" id="chaos-scale">
-              <button type="button" class="scale-btn" data-val="1">1</button>
-              <button type="button" class="scale-btn" data-val="2">2</button>
-              <button type="button" class="scale-btn" data-val="3">3</button>
-              <button type="button" class="scale-btn" data-val="4">4</button>
-              <button type="button" class="scale-btn" data-val="5">5</button>
-            </div>
-            <span class="scale-label-text">很混亂</span>
-          </div>
-        </div>
-      </div>
-      <div class="q">
-        <div class="q-text">最後——有什麼事是你一直想說、但沒有機會說的？</div>
-        <div class="q-hint">這裡沒有人知道是你說的。說真的就好。</div>
-        <textarea placeholder="對公司、對流程、對未來的期待，或是任何你覺得應該被聽到的聲音……" id="freetext"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <div class="submit-wrap">
-    <button class="submit-btn" onclick="submitForm()">送出我的意見</button>
-    <div class="submit-note">送出後無法修改，請確認填寫完整</div>
-  </div>
-
-  <div class="site-footer">
-    <div class="footer-logo">OBARAI INTELLIGENCE</div>
-    <div class="footer-info">
-      <span>統編 61210989</span>
-      <span class="footer-dot">·</span>
-      <span>03-6129005</span>
-      <span class="footer-dot">·</span>
-      <a href="https://www.obarai.com" target="_blank">obarai.com</a>
-    </div>
-  </div>
-
-  <div class="thankyou" id="thankyou">
-    <div class="thankyou-icon">✦</div>
-    <h2>謝謝你的心聲</h2>
-    <p>你說的每一句話，<br>都會讓這間公司變得更好。<br><br>
-    <span style="color: var(--ink-3); font-size: 13px;">OBARAI Intelligence × 喜歡建築</span></p>
   </div>
 
 </div>
 
-<script>
-  // Checkbox toggle
-  document.querySelectorAll('.check-item').forEach(item => {
-    item.addEventListener('click', () => {
-      item.classList.toggle('selected');
-      item.querySelector('input').checked = item.classList.contains('selected');
-    });
-  });
+<!-- Q2 -->
 
-  // Radio pill toggle
-  document.querySelectorAll('.radio-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const name = pill.querySelector('input').name;
-      document.querySelectorAll(`.radio-pill input[name="${name}"]`).forEach(r => {
-        r.closest('.radio-pill').classList.remove('selected');
-      });
-      pill.classList.add('selected');
-      pill.querySelector('input').checked = true;
-    });
-  });
+<div class="section">
 
-  // Scale buttons
-  document.querySelectorAll('#chaos-scale .scale-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#chaos-scale .scale-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-    });
-  });
+  <div class="section-label">
 
-  function submitForm() {
-    const role = document.querySelector('input[name="role"]:checked')?.value || '';
-    const pain = [...document.querySelectorAll('#pain-group input:checked')].map(i => i.value);
-    const infoLoss = document.querySelector('input[name="info_loss"]:checked')?.value || '';
-    const checkMethod = [...document.querySelectorAll('#check-method-group input:checked')].map(i => i.value);
-    const commTime = document.querySelector('input[name="comm_time"]:checked')?.value || '';
-    const tools = [...document.querySelectorAll('#tools-group input:checked')].map(i => i.value);
-    const clientQ = [...document.querySelectorAll('#client-q-group input:checked')].map(i => i.value);
-    const autoWish = document.getElementById('auto-wish').value.trim();
-    const decisions = [...document.querySelectorAll('#decision-group input:checked')].map(i => i.value);
-    const app = document.querySelector('input[name="app"]:checked')?.value || '';
-    const concerns = [...document.querySelectorAll('#concern-group input:checked')].map(i => i.value);
-    const homeWish = document.getElementById('home-wish').value.trim();
-    const homeChores = [...document.querySelectorAll('#home-chore-group input:checked')].map(i => i.value);
-    const elderWorry = [...document.querySelectorAll('#elder-worry-group input:checked')].map(i => i.value);
-    const alertWish = [...document.querySelectorAll('#alert-wish-group input:checked')].map(i => i.value);
-    const aiHomeWish = document.getElementById('ai-home-wish').value.trim();
-    const sosNeed = document.querySelector('input[name="sos_need"]:checked')?.value || '';
-    const guardWho = [...document.querySelectorAll('#guard-who-group input:checked')].map(i => i.value);
-    const smarthomePriority = document.querySelector('input[name="smarthome_priority"]:checked')?.value || '';
-    const futureWish = document.getElementById('future-wish').value.trim();
-    const chaos = document.querySelector('#chaos-scale .scale-btn.selected')?.dataset.val || '';
-    const freetext = document.getElementById('freetext').value.trim();
+    02 — 那些每天偷偷消耗你的事
 
-    if (!role) { alert('請選擇你的工作領域'); return; }
+  </div>
 
-    const result = { role, pain, infoLoss, checkMethod, commTime, tools, clientQ, autoWish, decisions, app, concerns, homeWish, homeChores, elderWorry, alertWish, sosNeed, guardWho, smarthomePriority, aiHomeWish, futureWish, chaos, freetext, ts: new Date().toISOString() };
-    console.log('Survey result:', JSON.stringify(result, null, 2));
+  <div class="card">
 
-    document.querySelector('.form-wrap').style.display = 'none';
-    document.getElementById('thankyou').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
-</body>
-</html>
+    <div class="q">
+
+      <div class="q-text">
+
+        一天工作結束，有哪些事情最容易讓你冒出一句：「怎麼又是這個？」
+
+      </div>
+
+      <div class="q-hint">
+
+        那些重複、瑣碎、明明做過卻又要再做一次的事。可以複選。
+
+      </div>
+
+      <div class="check-grid" id="pain-group">
+
+        <label class="check-item">
+
+          <input type="checkbox" value="回覆客戶訊息">
+
+          <div class="check-box"></div>
+
+          回覆客戶訊息
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="填寫紙本表單">
+
+          <div class="check-box"></div>
+
+          填寫紙本表單
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="追進度/回報狀態">
+
+          <div class="check-box"></div>
+
+          追進度 / 回報狀態
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="整理資料/報表">
+
+          <div class="check-box"></div>
+
+          整理資料 / 報表
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="安排工班時間">
+
+          <div class="check-box"></div>
+
+          安排工班時間
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="處理客變需求">
+
+          <div class="check-box"></div>
+
+          處理客變需求
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="跨部門溝通確認">
+
+          <div class="check-box"></div>
+
+          跨部門溝通確認
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="找資料/翻紀錄">
+
+          <div class="check-box"></div>
+
+          找資料 / 翻紀錄
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="催款/催簽">
+
+          <div class="check-box"></div>
+
+          催款 / 催簽
+
+        </label>
+
+        <label class="check-item">
+
+          <input type="checkbox" value="其他">
+
+          <div class="check-box"></div>
+
+          其他
+
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Q3 -->
+
+<div class="section">
+
+  <div class="section-label">
+
+    03 — 那些消失在對話裡的事
+
+  </div>
+
+  <div class="card">
+
+    <div class="q">
+
+      <div class="q-text">
+
+        你有沒有遇過這種時候：這件事明明講過，最後卻沒有人確定「現在到底怎樣了」？
+
+      </div>
+
+      <div class="q-hint">
+
+        客戶說過的需求找不到了、工班換人後資訊斷掉、
+
+        主管以為你知道、你以為另一個人知道……
+
+      </div>
+
+      <div class="radio-row">
+
+        <label class="radio-pill">
+
+          <input type="radio" name="info_loss" value="常常發生">
+
+          常常發生
+
+        </label>
+
+        <label class="radio-pill">
+
+          <input type="radio" name="info_loss" value="偶爾有">
+
+          偶爾有
+
+        </label>
+
+        <label
