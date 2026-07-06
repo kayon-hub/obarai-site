@@ -1316,7 +1316,38 @@ textarea::placeholder {
 
 }
 
+/* =========================================================
+   SUBMIT LOADING / ERROR STATES
+========================================================= */
+.submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.error-toast {
+  display: none;
+  background: #fee;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--danger);
+  line-height: 1.7;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.error-toast.show {
+  display: block;
+}
+
 </style>
+
+<!-- Supabase JS SDK (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 </head>
 
@@ -3320,6 +3351,11 @@ textarea::placeholder {
 
   </div>
 
+  <div class="error-toast" id="error-toast">
+    送出時發生錯誤，請稍後再試。<br>
+    <span id="error-detail" style="font-size:12px;opacity:0.75;"></span>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -3411,283 +3447,134 @@ textarea::placeholder {
 </div>
 
 <script>
+// ============================================================
+// SUPABASE CONFIG
+// ⚠️ KAYON: 填入你的 Supabase URL 和 publishable (anon) key
+// Supabase Dashboard → Project Settings → API
+// ============================================================
+const SUPABASE_URL = 'https://rjtskxlvzojxmbzlsmwd.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_RcL2z2bRBdvQvInpH8l3Cg_e7BkiXMH';
+const SURVEY_TABLE = 'survey_responses'; // 確認資料表名稱
 
-/* CHECKBOX */
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-document.querySelectorAll('.check-item').forEach(item => {
-
-  item.addEventListener('click', () => {
-
-    item.classList.toggle('selected');
-
-    item.querySelector('input').checked =
-
-      item.classList.contains('selected');
-
+// ============================================================
+// CHECKBOX FIX
+// 問題：<label> 包 <input> 時，click 事件會觸發兩次（label click + input change）
+// 解法：改監聽 input 的 change 事件，由 input 驅動 UI 更新
+// ============================================================
+document.querySelectorAll('.check-item input[type="checkbox"]').forEach(input => {
+  input.addEventListener('change', () => {
+    const item = input.closest('.check-item');
+    item.classList.toggle('selected', input.checked);
   });
-
 });
 
-/* RADIO */
-
+// ============================================================
+// RADIO
+// ============================================================
 document.querySelectorAll('.radio-pill').forEach(pill => {
-
   pill.addEventListener('click', () => {
-
     const name = pill.querySelector('input').name;
-
-    document
-
-      .querySelectorAll(`.radio-pill input[name="${name}"]`)
-
-      .forEach(radio => {
-
-        radio
-
-          .closest('.radio-pill')
-
-          .classList.remove('selected');
-
-      });
-
+    document.querySelectorAll(`.radio-pill input[name="${name}"]`).forEach(radio => {
+      radio.checked = false;
+      radio.closest('.radio-pill').classList.remove('selected');
+    });
     pill.classList.add('selected');
-
     pill.querySelector('input').checked = true;
-
   });
-
 });
 
-/* SCALE */
-
-document
-
-  .querySelectorAll('#chaos-scale .scale-btn')
-
-  .forEach(btn => {
-
-    btn.addEventListener('click', () => {
-
-      document
-
-        .querySelectorAll('#chaos-scale .scale-btn')
-
-        .forEach(button => {
-
-          button.classList.remove('selected');
-
-        });
-
-      btn.classList.add('selected');
-
-    });
-
+// ============================================================
+// SCALE
+// ============================================================
+document.querySelectorAll('#chaos-scale .scale-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#chaos-scale .scale-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
   });
-
-/* SUBMIT */
-
-function submitForm() {
-
-  const role =
-
-    document.querySelector('input[name="role"]:checked')?.value || '';
-
-  const pain =
-
-    [...document.querySelectorAll('#pain-group input:checked')]
-
-      .map(i => i.value);
-
-  const infoLoss =
-
-    document.querySelector('input[name="info_loss"]:checked')?.value || '';
-
-  const checkMethod =
-
-    [...document.querySelectorAll('#check-method-group input:checked')]
-
-      .map(i => i.value);
-
-  const commTime =
-
-    document.querySelector('input[name="comm_time"]:checked')?.value || '';
-
-  const tools =
-
-    [...document.querySelectorAll('#tools-group input:checked')]
-
-      .map(i => i.value);
-
-  const clientQ =
-
-    [...document.querySelectorAll('#client-q-group input:checked')]
-
-      .map(i => i.value);
-
-  const autoWish =
-
-    document.getElementById('auto-wish').value.trim();
-
-  const decisions =
-
-    [...document.querySelectorAll('#decision-group input:checked')]
-
-      .map(i => i.value);
-
-  const app =
-
-    document.querySelector('input[name="app"]:checked')?.value || '';
-
-  const concerns =
-
-    [...document.querySelectorAll('#concern-group input:checked')]
-
-      .map(i => i.value);
-
-  const homeWish =
-
-    document.getElementById('home-wish').value.trim();
-
-  const homeChores =
-
-    [...document.querySelectorAll('#home-chore-group input:checked')]
-
-      .map(i => i.value);
-
-  const elderWorry =
-
-    [...document.querySelectorAll('#elder-worry-group input:checked')]
-
-      .map(i => i.value);
-
-  const alertWish =
-
-    [...document.querySelectorAll('#alert-wish-group input:checked')]
-
-      .map(i => i.value);
-
-  const sosNeed =
-
-    document.querySelector('input[name="sos_need"]:checked')?.value || '';
-
-  const guardWho =
-
-    [...document.querySelectorAll('#guard-who-group input:checked')]
-
-      .map(i => i.value);
-
-  const smarthomePriority =
-
-    document.querySelector(
-
-      'input[name="smarthome_priority"]:checked'
-
-    )?.value || '';
-
-  const aiHomeWish =
-
-    document.getElementById('ai-home-wish').value.trim();
-
-  const futureWish =
-
-    document.getElementById('future-wish').value.trim();
-
-  const chaos =
-
-    document.querySelector(
-
-      '#chaos-scale .scale-btn.selected'
-
-    )?.dataset.val || '';
-
-  const freetext =
-
-    document.getElementById('freetext').value.trim();
-
-  if (!role) {
-
-    alert('請先告訴我們，你每天大部分的時間都在處理什麼。');
-
-    return;
-
-  }
-
-  const result = {
-
-    role,
-
-    pain,
-
-    infoLoss,
-
-    checkMethod,
-
-    commTime,
-
-    tools,
-
-    clientQ,
-
-    autoWish,
-
-    decisions,
-
-    app,
-
-    concerns,
-
-    homeWish,
-
-    homeChores,
-
-    elderWorry,
-
-    alertWish,
-
-    sosNeed,
-
-    guardWho,
-
-    smarthomePriority,
-
-    aiHomeWish,
-
-    futureWish,
-
-    chaos,
-
-    freetext,
-
-    ts: new Date().toISOString()
-
+});
+
+// ============================================================
+// COLLECT FORM DATA
+// ============================================================
+function collectData() {
+  return {
+    role:               document.querySelector('input[name="role"]:checked')?.value || '',
+    pain:               [...document.querySelectorAll('#pain-group input:checked')].map(i => i.value),
+    info_loss:          document.querySelector('input[name="info_loss"]:checked')?.value || '',
+    check_method:       [...document.querySelectorAll('#check-method-group input:checked')].map(i => i.value),
+    comm_time:          document.querySelector('input[name="comm_time"]:checked')?.value || '',
+    tools:              [...document.querySelectorAll('#tools-group input:checked')].map(i => i.value),
+    client_q:           [...document.querySelectorAll('#client-q-group input:checked')].map(i => i.value),
+    auto_wish:          document.getElementById('auto-wish')?.value.trim() || '',
+    decisions:          [...document.querySelectorAll('#decision-group input:checked')].map(i => i.value),
+    app_openness:       document.querySelector('input[name="app"]:checked')?.value || '',
+    concerns:           [...document.querySelectorAll('#concern-group input:checked')].map(i => i.value),
+    home_wish:          document.getElementById('home-wish')?.value.trim() || '',
+    home_chores:        [...document.querySelectorAll('#home-chore-group input:checked')].map(i => i.value),
+    elder_worry:        [...document.querySelectorAll('#elder-worry-group input:checked')].map(i => i.value),
+    alert_wish:         [...document.querySelectorAll('#alert-wish-group input:checked')].map(i => i.value),
+    sos_need:           document.querySelector('input[name="sos_need"]:checked')?.value || '',
+    guard_who:          [...document.querySelectorAll('#guard-who-group input:checked')].map(i => i.value),
+    smarthome_priority: document.querySelector('input[name="smarthome_priority"]:checked')?.value || '',
+    ai_home_wish:       document.getElementById('ai-home-wish')?.value.trim() || '',
+    future_wish:        document.getElementById('future-wish')?.value.trim() || '',
+    chaos_scale:        document.querySelector('#chaos-scale .scale-btn.selected')?.dataset.val || '',
+    freetext:           document.getElementById('freetext')?.value.trim() || '',
+    submitted_at:       new Date().toISOString()
   };
-
-  console.log(
-
-    'Survey result:',
-
-    JSON.stringify(result, null, 2)
-
-  );
-
-  document.querySelector('.manifesto').style.display = 'none';
-
-  document.querySelector('.form-wrap').style.display = 'none';
-
-  document.querySelector('.header').style.display = 'none';
-
-  document.getElementById('thankyou').style.display = 'block';
-
-  window.scrollTo({
-
-    top: 0,
-
-    behavior: 'smooth'
-
-  });
-
 }
 
+// ============================================================
+// SUBMIT
+// ============================================================
+async function submitForm() {
+  const data = collectData();
+
+  if (!data.role) {
+    alert('請先告訴我們，你每天大部分的時間都在處理什麼。');
+    return;
+  }
+
+  const btn = document.querySelector('.submit-btn');
+  const errorToast = document.getElementById('error-toast');
+  const errorDetail = document.getElementById('error-detail');
+
+  // UI: loading state
+  btn.disabled = true;
+  btn.textContent = '送出中…';
+  errorToast.classList.remove('show');
+
+  try {
+    // 檢查是否已填入真正的金鑰
+    if (SUPABASE_URL.includes('YOUR_PROJECT_ID') || SUPABASE_ANON_KEY.includes('YOUR_')) {
+      throw new Error('尚未設定 Supabase 金鑰，請聯絡 OBARAI 技術團隊。');
+    }
+
+    const { error } = await _sb.from(SURVEY_TABLE).insert([data]);
+
+    if (error) {
+      throw new Error(error.message || '寫入失敗');
+    }
+
+    // ✅ 成功：顯示 Thank You
+    document.querySelector('.manifesto').style.display = 'none';
+    document.querySelector('.form-wrap').style.display = 'none';
+    document.querySelector('.header').style.display = 'none';
+    document.querySelector('.submit-wrap').style.display = 'none';
+    document.getElementById('thankyou').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    // ❌ 失敗：顯示錯誤，不顯示 Thank You
+    btn.disabled = false;
+    btn.textContent = '留下我的聲音';
+    errorDetail.textContent = err.message;
+    errorToast.classList.add('show');
+    console.error('[Survey] Submit error:', err);
+  }
+}
 </script>
 
 </body>
