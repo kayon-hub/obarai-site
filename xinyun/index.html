@@ -154,12 +154,12 @@
     // ===== ORBIT Supabase（與正式站同一專案；anon key 本即可公開）=====
     const SUPABASE_URL = "https://rjtskxlvzojxmbzlsmwd.supabase.co";
     const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqdHNreGx2em9qeG1iemxzbXdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMTYwMDMsImV4cCI6MjA5Mzg5MjAwM30.juEnIx_tdOATvGmIbn3t_dBzr3Yoo3wSor-sB1bfTEM";
-    let supabase = null;
+    let supabaseClient = null;
     try {
       if (!window.supabase || !window.supabase.createClient) {
         throw new Error("Supabase SDK 未載入");
       }
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
     } catch (e) {
       console.error(e);
       document.addEventListener("DOMContentLoaded", () => {
@@ -220,7 +220,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       const uid = user.id;
 
       // 1) employees.user_id 已綁
-      let { data: emp } = await supabase
+      let { data: emp } = await supabaseClient
         .from("employees")
         .select("id, name, email, role, position, department, client_id, user_id")
         .eq("user_id", uid)
@@ -228,7 +228,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
 
       // 2) employees.email 對得上
       if (!emp && email) {
-        const r = await supabase
+        const r = await supabaseClient
           .from("employees")
           .select("id, name, email, role, position, department, client_id, user_id")
           .ilike("email", email)
@@ -238,7 +238,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
 
       // 3) 新韻底下再找一次（防 email 大小寫／多租戶）
       if (!emp && email) {
-        const r = await supabase
+        const r = await supabaseClient
           .from("employees")
           .select("id, name, email, role, position, department, client_id, user_id")
           .eq("client_id", XINYUN_CLIENT_ID)
@@ -273,7 +273,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       }
 
       // 4) client owner（新韻老闆帳）
-      const { data: owned } = await supabase
+      const { data: owned } = await supabaseClient
         .from("clients")
         .select("id, name, user_id")
         .eq("user_id", uid)
@@ -283,7 +283,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       }
 
       // 5) client_members 核准成員（至少確認是新韻的人）
-      const { data: member } = await supabase
+      const { data: member } = await supabaseClient
         .from("client_members")
         .select("client_id, role, approval_status, user_id")
         .eq("user_id", uid)
@@ -448,7 +448,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     async function loginWithGoogle() {
       $("loginErr").textContent = "";
       $("blockedBox").classList.add("hidden");
-      if (!supabase) {
+      if (!supabaseClient) {
         $("loginErr").textContent = "登入元件尚未就緒，請強制重新整理（Cmd+Shift+R）後再試。";
         return;
       }
@@ -462,7 +462,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         } else if (window.location.hostname.includes("xinyun.obarai.com")) {
           redirectTo = "https://xinyun.obarai.com/";
         }
-        const { data, error } = await supabase.auth.signInWithOAuth({
+        const { data, error } = await supabaseClient.auth.signInWithOAuth({
           provider: "google",
           options: {
             redirectTo,
@@ -491,7 +491,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     }
 
     async function logout() {
-      await supabase.auth.signOut();
+      await supabaseClient.auth.signOut();
       currentUser = null;
       googleUser = null;
       $("screen-app").classList.add("hidden");
@@ -830,7 +830,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     // boot: recover session after OAuth redirect
     (async function boot() {
       // Supabase may put tokens in hash
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await supabaseClient.auth.getSession();
       if (session) {
         await handleSession(session);
         // clean ugly hash from URL after parse
@@ -838,7 +838,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
           history.replaceState(null, "", location.pathname + location.search);
         }
       }
-      supabase.auth.onAuthStateChange(async (event, session) => {
+      supabaseClient.auth.onAuthStateChange(async (event, session) => {
         if (event === "SIGNED_IN" && session) {
           await handleSession(session);
         }
