@@ -620,7 +620,11 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       } else {
         html += "日常決策與推進以你為準；同時我會尊重許總的經驗與願景。現場怎麼跑、你希望公司怎麼變——請你親自說。";
       }
-      html += "</div></div>";
+      html += "</div>";
+      if (!isXu) {
+        html += '<p class="note" style="margin:10px 2px 0;line-height:1.65">愛的告白：<br>＊你老公說他會陪你把公司給做好，你就專心的工作，其他的交給 ORBIT，因為沒做好你老公生氣起來很可怕＊<br>AI Team 又要開檢討會寫報告了</p>';
+      }
+      html += "</div>";
 
       html += '<div class="card"><h2>我能為新韻做什麼</h2><div class="feat-grid">';
       [["【人】考勤","打卡請假"],["【客】客戶","往來集中"],["【賣】訂單","出貨、車倉"],["【倉】庫存","雙倉、BOM"],
