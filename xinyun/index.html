@@ -419,6 +419,8 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
 
     let currentUser = null;
     let googleUser = null; // { email, name, avatar }
+    let cloudDraft = null;
+    let cloudSaveTimer = null;
 
     function $(id) { return document.getElementById(id); }
     function toast(msg) {
@@ -504,7 +506,51 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       $("googleLabel").textContent = "換一個 Google 帳號";
     }
 
-    function enterApp() {
+    async function loadCloudDraft() {
+      if (!googleUser || !googleUser.userId || !currentUser) return null;
+      const { data, error } = await supabaseClient
+        .from("xinyun_interview_drafts")
+        .select("answers, updated_at")
+        .eq("user_id", googleUser.userId)
+        .eq("profile_id", currentUser.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    }
+
+    function setSaveStatus(message, isError) {
+      const el = $("saveStatus");
+      if (!el) return;
+      el.textContent = message;
+      el.style.color = isError ? "var(--danger)" : "var(--slate)";
+    }
+
+    function queueCloudSave(answers) {
+      if (!googleUser || !googleUser.userId || !currentUser) return;
+      const userId = googleUser.userId;
+      const profileId = currentUser.id;
+      setSaveStatus("正在儲存…", false);
+      clearTimeout(cloudSaveTimer);
+      cloudSaveTimer = setTimeout(async () => {
+        const { error } = await supabaseClient
+          .from("xinyun_interview_drafts")
+          .upsert({
+            user_id: userId,
+            client_id: XINYUN_CLIENT_ID,
+            profile_id: profileId,
+            answers,
+            updated_at: new Date().toISOString()
+          }, { onConflict: "user_id,profile_id" });
+        if (error) {
+          console.error("cloud draft save", error);
+          setSaveStatus("雲端儲存失敗，內容仍保存在此裝置", true);
+          return;
+        }
+        setSaveStatus("已儲存至雲端，可稍後繼續修改", false);
+      }, 700);
+    }
+
+    async function enterApp() {
       $("screen-login").classList.add("hidden");
       $("screen-app").classList.remove("hidden");
       $("whoName").textContent = currentUser.name;
@@ -522,6 +568,12 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         currentUser.kind === "leader"
           ? "我想聽新韻的故事與未來——" + H + "慢慢說，我記下來。"
           : "我想聽你工作上的真實情況——慢慢想、慢慢寫，7/30 再提出來也沒關係。";
+      cloudDraft = null;
+      try {
+        cloudDraft = await loadCloudDraft();
+      } catch (e) {
+        console.error("cloud draft load", e);
+      }
       if (currentUser.kind === "staff") renderStaff();
       else renderLeader();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -556,10 +608,10 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       html += '<div class="card"><h2>整理給訓練用</h2>';
       html += '<div class="summary-box" id="summary"></div><div class="actions">';
       html += '<button type="button" class="btn secondary" id="btnCopy">複製我的回答</button></div>';
-      html += '<p class="note">自動存在本機。複製後可自行留存或交給窗口。</p></div>';
+      html += '<p class="note" id="saveStatus">登入後自動儲存至雲端，可跨裝置繼續修改。</p></div>';
 
       $("appBody").innerHTML = html;
-      loadStaff();
+      loadStaff(cloudDraft && cloudDraft.answers);
       u.questions.forEach((_, i) => $( "q_"+i ).addEventListener("input", saveStaff));
       $("extraNote").addEventListener("input", saveStaff);
       $("btnCopy").addEventListener("click", () => {
@@ -577,11 +629,12 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         if (el) data.answers[i] = el.value;
       });
       localStorage.setItem(storageKey(), JSON.stringify(data));
+      queueCloudSave(data);
       if ($("summary")) $("summary").textContent = buildStaffSummary();
     }
-    function loadStaff() {
+    function loadStaff(cloudData) {
       try {
-        const data = JSON.parse(localStorage.getItem(storageKey()) || "null");
+        const data = cloudData || JSON.parse(localStorage.getItem(storageKey()) || "null");
         if (!data) return;
         currentUser.questions.forEach((_, i) => {
           if ($("q_"+i) && data.answers && data.answers[i] != null) $("q_"+i).value = data.answers[i];
@@ -649,12 +702,13 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       html += "</div>" + field("s_private","想私下跟 ORBIT 說的話","可空白") + "</div>";
 
       html += '<div class="card"><h2>整理</h2><div class="summary-box" id="summary"></div>';
-      html += '<div class="actions"><button type="button" class="btn secondary" id="btnCopy">複製全部內容</button></div></div>';
+      html += '<div class="actions"><button type="button" class="btn secondary" id="btnCopy">複製全部內容</button></div>';
+      html += '<p class="note" id="saveStatus">登入後自動儲存至雲端，可跨裝置繼續修改。</p></div>';
 
       $("appBody").innerHTML = html;
       renderChips("historyChips", historyHints);
       renderChips("futureChips", futureHints);
-      loadLeader();
+      loadLeader(cloudDraft && cloudDraft.answers);
       ["h_start","h_turn","h_pride","f_vision","f_priority","f_boundary","s_private"].forEach(id => {
         $(id).addEventListener("input", () => { saveLeader(); $("summary").textContent = buildLeaderSummary(); });
       });
@@ -690,16 +744,18 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     }
     function val(id) { return $(id) ? $(id).value : ""; }
     function saveLeader() {
-      localStorage.setItem(storageKey(), JSON.stringify({
+      const data = {
         chipsH: getOnChips("historyChips"), chipsF: getOnChips("futureChips"),
         h_start: val("h_start"), h_turn: val("h_turn"), h_pride: val("h_pride"),
         f_vision: val("f_vision"), f_priority: val("f_priority"), f_boundary: val("f_boundary"),
         s_private: val("s_private")
-      }));
+      };
+      localStorage.setItem(storageKey(), JSON.stringify(data));
+      queueCloudSave(data);
     }
-    function loadLeader() {
+    function loadLeader(cloudData) {
       try {
-        const data = JSON.parse(localStorage.getItem(storageKey()) || "null");
+        const data = cloudData || JSON.parse(localStorage.getItem(storageKey()) || "null");
         if (!data) return;
         ["h_start","h_turn","h_pride","f_vision","f_priority","f_boundary","s_private"].forEach(k => {
           if (data[k] != null && $(k)) $(k).value = data[k];
@@ -748,6 +804,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       const email = (user.email || "").toLowerCase();
       const meta = user.user_metadata || {};
       googleUser = {
+        userId: user.id,
         email,
         name: meta.full_name || meta.name || email,
         avatar: meta.avatar_url || meta.picture || ""
