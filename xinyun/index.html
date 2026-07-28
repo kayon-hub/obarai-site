@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0B1F3A" />
   <title>ORBIT 登入｜新韻傳音</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <style>
     :root {
       --navy: #0B1F3A; --blue: #2563EB; --cyan: #06B6D4; --cream: #F8FAFC;
@@ -154,7 +154,19 @@
     // ===== ORBIT Supabase（與正式站同一專案；anon key 本即可公開）=====
     const SUPABASE_URL = "https://rjtskxlvzojxmbzlsmwd.supabase.co";
     const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqdHNreGx2em9qeG1iemxzbXdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMTYwMDMsImV4cCI6MjA5Mzg5MjAwM30.juEnIx_tdOATvGmIbn3t_dBzr3Yoo3wSor-sB1bfTEM";
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    let supabase = null;
+    try {
+      if (!window.supabase || !window.supabase.createClient) {
+        throw new Error("Supabase SDK 未載入");
+      }
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    } catch (e) {
+      console.error(e);
+      document.addEventListener("DOMContentLoaded", () => {
+        const el = document.getElementById("loginErr");
+        if (el) el.textContent = "登入元件載入失敗，請重新整理頁面。";
+      });
+    }
 
     /**
      * 新韻 client_id（正式租戶）
