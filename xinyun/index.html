@@ -314,7 +314,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
 
     const USERS = {
       wudengxiong: {
-        id: "wudengxiong", name: "吳登雄", call: "登雄", title: "業務（A車）", kind: "staff", honor: "你",
+        id: "wudengxiong", name: "吳登雄", call: "登雄", title: "業務", kind: "staff", honor: "你",
         questions: [
           "你一天從裝車到收工，哪一段最耗神或最容易出錯？",
           "車上的貨你現在怎麼記？公司怎麼知道你車上有什麼？",
@@ -327,7 +327,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         ]
       },
       limingkuan: {
-        id: "limingkuan", name: "李明寬", call: "明寬", title: "業務（B車）", kind: "staff", honor: "你",
+        id: "limingkuan", name: "李明寬", call: "明寬", title: "業務", kind: "staff", honor: "你",
         questions: [
           "你一天從裝車到收工，哪一段最耗神或最容易出錯？",
           "車上的貨你現在怎麼記？公司怎麼知道你車上有什麼？",
@@ -368,7 +368,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         ]
       },
       linyunpei: {
-        id: "linyunpei", name: "林筠珮", call: "筠珮", title: "倉管（試用）", kind: "staff", honor: "你",
+        id: "linyunpei", name: "林筠珮", call: "筠珮", title: "倉管", kind: "staff", honor: "你",
         introExtra: "新人視角很重要——看不懂多半是我或流程沒講清楚，不是你的問題。",
         questions: [
           "到職到現在，哪件事是你自己摸出來、沒人教的？",
@@ -410,7 +410,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
         id: "xuzong", name: "許總", call: "許總", title: "創辦人", kind: "leader", honor: "您", leaderRole: "xu"
       },
       xujunhao: {
-        id: "xujunhao", name: "許峻豪", call: "峻豪", title: "現任決策", kind: "leader", honor: "你", leaderRole: "jun"
+        id: "xujunhao", name: "許峻豪", call: "峻豪", title: "新韻傳音", kind: "leader", honor: "你", leaderRole: "jun"
       }
     };
 
@@ -706,7 +706,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     }
     function buildLeaderSummary() {
       const u = currentUser;
-      const roleLabel = u.leaderRole === "xu" ? "許總（創辦人／長輩願景）" : "許峻豪（現任決策）";
+      const roleLabel = u.leaderRole === "xu" ? "許總（創辦人／長輩願景）" : "許峻豪";
       return [
         "【ORBIT × 新韻｜領導訪談紀錄】",
         "對象：" + u.name + "（" + roleLabel + "）",
