@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B1F3A" />
+  <title>ORBIT 登入｜新韻傳音</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --navy: #0B1F3A; --blue: #2563EB; --cyan: #06B6D4; --cream: #F8FAFC;
+      --ink: #0F172A; --slate: #64748B; --line: #E2E8F0; --danger: #DC2626;
+      --radius: 14px; --shadow: 0 10px 40px rgba(11, 31, 58, 0.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: var(--cream); color: var(--ink); line-height: 1.55; min-height: 100dvh;
+    }
+    .hidden { display: none !important; }
+    #screen-login {
+      min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px 16px;
+      background: linear-gradient(165deg, #071525 0%, #0B1F3A 45%, #122A4A 100%);
+    }
+    .login-card {
+      width: 100%; max-width: 400px; background: #fff; border-radius: 20px;
+      padding: 28px 22px 22px; box-shadow: var(--shadow);
+    }
+    .login-logo { text-align: center; margin-bottom: 8px; }
+    .login-logo .orbit { font-size: 1.6rem; font-weight: 800; letter-spacing: 0.12em; color: var(--navy); }
+    .login-logo .sub { font-size: 0.85rem; color: var(--slate); margin-top: 4px; }
+    .login-card h1 { margin: 16px 0 6px; font-size: 1.25rem; text-align: center; }
+    .login-card .hint { text-align: center; font-size: 0.85rem; color: var(--slate); margin: 0 0 18px; }
+    .btn {
+      border: none; border-radius: 12px; padding: 14px 12px; font-size: 0.95rem;
+      font-weight: 700; cursor: pointer; font-family: inherit;
+    }
+    .btn.google {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #fff; color: #1f1f1f; border: 1px solid #dadce0;
+    }
+    .btn.google:hover { background: #f8f9fa; }
+    .btn.primary { width: 100%; background: var(--blue); color: #fff; }
+    .btn.ghost { background: #F1F5F9; color: var(--ink); }
+    .btn.secondary { background: var(--navy); color: #fff; width: 100%; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .login-err { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; margin: 12px 0; text-align: center; }
+    .login-foot { margin-top: 14px; font-size: 0.75rem; color: var(--slate); text-align: center; line-height: 1.45; }
+    .spin { width: 18px; height: 18px; border: 2px solid #e5e7eb; border-top-color: var(--blue);
+      border-radius: 50%; animation: s 0.7s linear infinite; display: inline-block; vertical-align: middle; }
+    @keyframes s { to { transform: rotate(360deg); } }
+
+    #screen-app { max-width: 520px; margin: 0 auto; padding: 16px 16px 100px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .topbar .who { font-size: 0.9rem; color: var(--slate); }
+    .topbar .who strong { color: var(--ink); }
+    .topbar .logout { border: none; background: transparent; color: var(--blue); font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 8px; }
+    .hero {
+      background: linear-gradient(145deg, var(--navy) 0%, #15345c 100%);
+      color: #fff; border-radius: 20px; padding: 20px 18px; box-shadow: var(--shadow); margin-bottom: 14px;
+    }
+    .hero .badge { font-size: 11px; letter-spacing: 0.08em; color: var(--cyan); font-weight: 700; margin-bottom: 8px; }
+    .hero h1 { margin: 0 0 8px; font-size: 1.25rem; line-height: 1.35; }
+    .hero p { margin: 0; color: #B8C5D6; font-size: 0.9rem; }
+    .card { background: #fff; border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); margin-bottom: 12px; }
+    .card h2 { margin: 0 0 8px; font-size: 1.05rem; }
+    .orbit-say {
+      background: #EEF4FF; border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0;
+      padding: 12px 14px; font-size: 0.9rem; margin-bottom: 12px;
+    }
+    .orbit-say strong { color: var(--blue); }
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .feat { border: 1px solid var(--line); border-radius: 12px; padding: 10px; background: #FAFBFC; }
+    .feat .k { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
+    .feat .v { font-size: 0.78rem; color: var(--slate); margin-top: 2px; }
+    .q-block { border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 10px; background: #FAFBFC; }
+    .q-block .q-num { font-size: 0.75rem; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+    .q-block .q-text { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+    textarea {
+      width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+      font-size: 0.95rem; font-family: inherit; min-height: 72px; resize: vertical;
+    }
+    textarea:focus { outline: 2px solid rgba(37, 99, 235, 0.35); border-color: var(--blue); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 11px; font-size: 0.8rem; cursor: pointer; }
+    .chip.on { background: #DBEAFE; border-color: var(--blue); color: var(--blue); font-weight: 600; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .summary-box {
+      background: #F8FAFC; border: 1px dashed var(--line); border-radius: 12px; padding: 12px;
+      font-size: 0.82rem; white-space: pre-wrap; max-height: 220px; overflow: auto; color: var(--slate);
+    }
+    .note { font-size: 0.75rem; color: var(--slate); margin-top: 8px; }
+    .toast {
+      position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(12px);
+      background: var(--navy); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 0.85rem;
+      opacity: 0; pointer-events: none; transition: 0.25s; z-index: 40;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 8px;
+    }
+    .blocked {
+      background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B;
+      border-radius: 12px; padding: 14px; font-size: 0.9rem; margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="screen-login">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="orbit">ORBIT</div>
+        <div class="sub">新韻傳音 · 企業營運系統</div>
+      </div>
+      <h1>登入</h1>
+      <p class="hint">使用 Google 帳號登入（與 ORBIT 系統相同）<br/>登入後自動帶出您的問題</p>
+      <button type="button" class="btn google" id="btnGoogle">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        <span id="googleLabel">使用 Google 繼續</span>
+      </button>
+      <div class="login-err" id="loginErr"></div>
+      <div id="blockedBox" class="blocked hidden"></div>
+    </div>
+  </div>
+
+  <div id="screen-app" class="hidden">
+    <div class="topbar">
+      <div class="who">
+        <img class="avatar hidden" id="whoAvatar" alt="" />
+        已登入 · <strong id="whoName"></strong> · <span id="whoRole"></span>
+        <div style="font-size:0.75rem;color:#94A3B8" id="whoEmail"></div>
+      </div>
+      <button type="button" class="logout" id="btnLogout">登出</button>
+    </div>
+    <div class="hero">
+      <div class="badge">ORBIT × 新韻傳音</div>
+      <h1 id="heroTitle"></h1>
+      <p id="heroSub">我想聽新韻的故事與未來——您慢慢說，我記下來。</p>
+    </div>
+    <div id="appBody"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== ORBIT Supabase（與正式站同一專案；anon key 本即可公開）=====
+    const SUPABASE_URL = "https://rjtskxlvzojxmbzlsmwd.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqdHNreGx2em9qeG1iemxzbXdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMTYwMDMsImV4cCI6MjA5Mzg5MjAwM30.juEnIx_tdOATvGmIbn3t_dBzr3Yoo3wSor-sB1bfTEM";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    /**
+     * 新韻 client_id（正式租戶）
+     * 登入後優先用系統已綁定的 employees / client_members 對應身分
+     * EMAIL_MAP 僅作後備（logs 已確認的信箱）
+     */
+    
+const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
+
+    // ORBIT 營運／開發帳號：Google 登入後可選身分預覽（正式員工仍走系統綁定）
+    const ADMIN_EMAILS = new Set([
+      "karbonxgaiaxartist@gmail.com",
+      "kayon@obarai.com",
+      "karbonxgaia.kayon@gmail.com",
+    ]);
+
+
+    // 後備對照（logs 已出現過的綁定；系統查得到時以系統為準）
+    const EMAIL_MAP = {
+      "a0985154502@gmail.com": "xujunhao",   // 許峻豪
+      "sindy8346@gmail.com": "lixue",        // 張麗雪
+      "deden.lien@gmail.com": "lianyucheng", // 連禹澄
+      "dnchild@gmail.com": "lianyucheng",    // 連禹澄（另一信箱）
+      "a62845599@kimo.com": "limingkuan",    // 李明寬
+      "a62845599@gmail.com": "limingkuan",   // 李明寬
+    };
+
+    const NAME_HINTS = [
+      { re: /吳登雄|登雄/, id: "wudengxiong" },
+      { re: /李明寬|明寬/, id: "limingkuan" },
+      { re: /張麗雪|麗雪/, id: "lixue" },
+      { re: /陳宣蓉|宣蓉/, id: "chenxuanrong" },
+      { re: /林筠珮|筠珮/, id: "linyunpei" },
+      { re: /趙宗弘|宗弘|崔頓|崔崔/, id: "zhaozonghong" },
+      { re: /連禹澄|禹澄|DEAN|Lien/i, id: "lianyucheng" },
+      { re: /許峻豪|峻豪/, id: "xujunhao" },
+      { re: /許華樂|許總/, id: "xuzong" },
+    ];
+
+    function matchProfileByName(name) {
+      if (!name) return null;
+      for (const h of NAME_HINTS) {
+        if (h.re.test(String(name))) return USERS[h.id] || null;
+      }
+      return null;
+    }
+
+    /** 用 ORBIT 已綁定的員工／成員資料對身分（大家已綁定 Google 後應走這條） */
+    async function resolveFromSystem(user) {
+      const email = (user.email || "").toLowerCase();
+      const uid = user.id;
+
+      // 1) employees.user_id 已綁
+      let { data: emp } = await supabase
+        .from("employees")
+        .select("id, name, email, role, position, department, client_id, user_id")
+        .eq("user_id", uid)
+        .maybeSingle();
+
+      // 2) employees.email 對得上
+      if (!emp && email) {
+        const r = await supabase
+          .from("employees")
+          .select("id, name, email, role, position, department, client_id, user_id")
+          .ilike("email", email)
+          .maybeSingle();
+        emp = r.data;
+      }
+
+      // 3) 新韻底下再找一次（防 email 大小寫／多租戶）
+      if (!emp && email) {
+        const r = await supabase
+          .from("employees")
+          .select("id, name, email, role, position, department, client_id, user_id")
+          .eq("client_id", XINYUN_CLIENT_ID)
+          .ilike("email", email)
+          .maybeSingle();
+        emp = r.data;
+      }
+
+      if (emp) {
+        const byName = matchProfileByName(emp.name) || matchProfileByName(emp.position);
+        if (byName) return { profile: byName, source: "employees", raw: emp };
+        // 系統有員工列但名冊沒對上：仍給通用 staff 殼
+        return {
+          profile: {
+            id: "dyn-" + (emp.id || uid),
+            name: emp.name || email,
+            call: (emp.name || "同仁").slice(0, 4),
+            title: emp.position || emp.department || emp.role || "員工",
+            kind: "staff",
+            honor: "你",
+            questions: [
+              "你現在工作上，最花時間、最容易出錯、或最煩的是什麼事？",
+              "如果我只能先幫你做掉一件事，你最希望是哪一件？",
+              "我要怎麼配合你，你用我才輕鬆？（手機／電腦、什麼時間用、主動提醒還是自己查）",
+              "打卡／請假你用過我了嗎？有沒有哪裡不順？",
+              "還有什麼想跟我說的？"
+            ]
+          },
+          source: "employees-generic",
+          raw: emp
+        };
+      }
+
+      // 4) client owner（新韻老闆帳）
+      const { data: owned } = await supabase
+        .from("clients")
+        .select("id, name, user_id")
+        .eq("user_id", uid)
+        .maybeSingle();
+      if (owned && owned.id === XINYUN_CLIENT_ID) {
+        return { profile: USERS.xujunhao, source: "client-owner", raw: owned };
+      }
+
+      // 5) client_members 核准成員（至少確認是新韻的人）
+      const { data: member } = await supabase
+        .from("client_members")
+        .select("client_id, role, approval_status, user_id")
+        .eq("user_id", uid)
+        .eq("client_id", XINYUN_CLIENT_ID)
+        .maybeSingle();
+      if (member && member.approval_status !== "pending") {
+        // 成員有綁但 employees 沒對上 name → 用 email 後備
+        const byEmail = EMAIL_MAP[email] ? USERS[EMAIL_MAP[email]] : null;
+        if (byEmail) return { profile: byEmail, source: "client_members+email", raw: member };
+        return {
+          profile: {
+            id: "member-" + uid.slice(0, 8),
+            name: user.user_metadata?.full_name || user.user_metadata?.name || email,
+            call: (user.user_metadata?.name || "同仁").toString().slice(0, 6),
+            title: member.role || "成員",
+            kind: "staff",
+            honor: "你",
+            questions: [
+              "你現在工作上，最花時間、最容易出錯、或最煩的是什麼事？",
+              "如果我只能先幫你做掉一件事，你最希望是哪一件？",
+              "我要怎麼配合你，你用我才輕鬆？",
+              "打卡／請假你用過我了嗎？有沒有哪裡不順？",
+              "還有什麼想跟我說的？"
+            ]
+          },
+          source: "client_members-generic",
+          raw: member
+        };
+      }
+
+      // 6) 純 email 後備
+      if (EMAIL_MAP[email] && USERS[EMAIL_MAP[email]]) {
+        return { profile: USERS[EMAIL_MAP[email]], source: "email-map", raw: null };
+      }
+
+      return null;
+    }
+
+
+    const USERS = {
+      wudengxiong: {
+        id: "wudengxiong", name: "吳登雄", call: "登雄", title: "業務（A車）", kind: "staff", honor: "你",
+        questions: [
+          "你一天從裝車到收工，哪一段最耗神或最容易出錯？",
+          "車上的貨你現在怎麼記？公司怎麼知道你車上有什麼？",
+          "客戶從開口訂貨到出貨收款，中間哪一步最常卡關？",
+          "客戶電話、上次買什麼、欠多少——你現在存在哪裡？",
+          "在外面臨時要查庫存或報價，你現在怎麼查？",
+          "談成了之後，你希望公司誰馬上知道？你現在怎麼告訴他們？",
+          "如果我只能先幫你扛一件事，你最希望是哪一件？",
+          "打卡／請假你用過我了嗎？有沒有哪裡不順？"
+        ]
+      },
+      limingkuan: {
+        id: "limingkuan", name: "李明寬", call: "明寬", title: "業務（B車）", kind: "staff", honor: "你",
+        questions: [
+          "你一天從裝車到收工，哪一段最耗神或最容易出錯？",
+          "車上的貨你現在怎麼記？公司怎麼知道你車上有什麼？",
+          "客戶從開口訂貨到出貨收款，中間哪一步最常卡關？",
+          "客戶電話、上次買什麼、欠多少——你現在存在哪裡？",
+          "在外面臨時要查庫存或報價，你現在怎麼查？",
+          "談成了之後，你希望公司誰馬上知道？你現在怎麼告訴他們？",
+          "如果我只能先幫你扛一件事，你最希望是哪一件？",
+          "打卡／請假你用過我了嗎？有沒有哪裡不順？"
+        ]
+      },
+      lixue: {
+        id: "lixue", name: "張麗雪", call: "麗雪", title: "會計", kind: "staff", honor: "你",
+        introExtra: "你是帳務這條線很關鍵的使用者；現金／撥款若已試過，卡關也可以直接寫。",
+        questions: [
+          "每個月從單據進來到月底結帳，哪一段最花你時間？",
+          "對帳你現在怎麼對？最常對不起來的是什麼？",
+          "公司要付一筆錢，現在誰說了算、怎麼通知你、付完怎麼記？",
+          "業務在外面收的錢，怎麼回到你帳上？",
+          "薪水怎麼算？請假、加班資料你從哪裡拿？",
+          "老闆問財務數字時，你最希望「一按就有」的是哪張表？",
+          "如果我只能先幫你扛一件事，你最希望是哪一件？",
+          "打卡／請假紀錄若能直接給你算薪用，還差什麼？"
+        ]
+      },
+      chenxuanrong: {
+        id: "chenxuanrong", name: "陳宣蓉", call: "宣蓉", title: "倉管", kind: "staff", honor: "你",
+        questions: [
+          "一批貨從進門到上架，哪個動作最煩？",
+          "我顯示的庫存跟你實際看到的準嗎？不準通常為什麼？",
+          "業務從倉庫拿貨上車，現在怎麼記？",
+          "中國那邊來的貨，你什麼時候知道？到了怎麼點收？",
+          "組裝要領哪些料（BOM）現在記在哪？（清單之後也可以給我建檔）",
+          "盤點多久一次？最想省掉哪一段？",
+          "教筠珮時，哪些東西最難教？",
+          "漏打卡提醒若用過：時間、語氣舒不舒服？",
+          "如果我只能先幫你扛一件事，你最希望是哪一件？"
+        ]
+      },
+      linyunpei: {
+        id: "linyunpei", name: "林筠珮", call: "筠珮", title: "倉管（試用）", kind: "staff", honor: "你",
+        introExtra: "新人視角很重要——看不懂多半是我或流程沒講清楚，不是你的問題。",
+        questions: [
+          "到職到現在，哪件事是你自己摸出來、沒人教的？",
+          "你用過我哪些功能？有哪個畫面看了不知道要幹嘛？",
+          "有沒有差點做錯或做錯的事？當時是哪裡沒講清楚？",
+          "如果一打開就有新人引導，你希望第一頁寫什麼？",
+          "不敢問人的問題，有沒有想先問我的？",
+          "打卡／請假用起來還順嗎？"
+        ]
+      },
+      zhaozonghong: {
+        id: "zhaozonghong", name: "趙宗弘", call: "宗弘", title: "電商平台／admin", kind: "staff", honor: "你",
+        introExtra: "電商流程與你當 admin 窗口的合作方式，都歡迎直接寫。",
+        questions: [
+          "一個新商品上到所有平台，完整做一次要多久？哪一段最想砍掉？",
+          "哪個平台賣掉後，你要手動改哪些地方的庫存？",
+          "各平台訂單進來後，到宣蓉出貨中間怎麼交接？",
+          "多平台上架那個頁面，你實際用起來哪裡最不爽？",
+          "官網你自己會動哪些？哪些還得等我們？",
+          "同事系統有問題會不會先找你？你希望怎麼跟我回報最省事？",
+          "電商數據（哪個平台好、什麼在動）你現在怎麼看？",
+          "如果我只能先幫你扛一件事，你最希望是哪一件？"
+        ]
+      },
+      lianyucheng: {
+        id: "lianyucheng", name: "連禹澄", call: "禹澄", title: "美編", kind: "staff", honor: "你",
+        introExtra: "美編這塊我目前碰得少——主要想聽你怎麼工作、哪裡需要我、哪裡請我別插手。",
+        questions: [
+          "工作通常怎麼開始？誰、用什麼方式跟你說要做什麼？",
+          "做完的檔案放哪？別人要用怎麼拿？",
+          "最常麻煩的是：需求不清、改來改去、還是版本亂？",
+          "商品圖從你手上到上架，中間經過誰？",
+          "有沒有很重複、很耗時的產出（例如每平台不同尺寸）？",
+          "你理想中，我幫你做什麼就好，其他別來煩你？",
+          "如果定稿商品圖掛在我這裡、大家自己來拿——你會覺得方便還是多餘？"
+        ]
+      },
+      xuzong: {
+        id: "xuzong", name: "許總", call: "許總", title: "創辦人", kind: "leader", honor: "您", leaderRole: "xu"
+      },
+      xujunhao: {
+        id: "xujunhao", name: "許峻豪", call: "峻豪", title: "現任決策", kind: "leader", honor: "你", leaderRole: "jun"
+      }
+    };
+
+    const historyHints = ["創業那年", "第一筆大單", "家族事業", "產品線變過", "通路／經銷", "疫情或景氣", "接班／傳承"];
+    const futureHints = ["庫存帳一致", "少靠個人 LINE", "報表一按就有", "外勤好用手機", "年輕客群", "收斂 SKU", "導入順、少反工", "內部溝通清楚"];
+
+    let currentUser = null;
+    let googleUser = null; // { email, name, avatar }
+
+    function $(id) { return document.getElementById(id); }
+    function toast(msg) {
+      const t = $("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1800);
+    }
+    function storageKey() {
+      return "orbit-xinyun-portal-v3-" + (currentUser ? currentUser.id : "none");
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    async function loginWithGoogle() {
+      $("loginErr").textContent = "";
+      $("blockedBox").classList.add("hidden");
+      $("btnGoogle").disabled = true;
+      $("googleLabel").innerHTML = '<span class="spin"></span> 導向 Google…';
+      const redirectTo = window.location.origin + window.location.pathname + window.location.search;
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo,
+          queryParams: { prompt: "select_account" }
+        }
+      });
+      if (error) {
+        $("loginErr").textContent = error.message || "Google 登入失敗";
+        $("btnGoogle").disabled = false;
+        $("googleLabel").textContent = "使用 Google 繼續";
+      }
+    }
+
+    async function logout() {
+      await supabase.auth.signOut();
+      currentUser = null;
+      googleUser = null;
+      $("screen-app").classList.add("hidden");
+      $("screen-login").classList.remove("hidden");
+      $("btnGoogle").disabled = false;
+      $("googleLabel").textContent = "使用 Google 繼續";
+      $("loginErr").textContent = "";
+      $("blockedBox").classList.add("hidden");
+      // clean hash from oauth
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    }
+
+    function showBlocked(email) {
+      $("screen-login").classList.remove("hidden");
+      $("screen-app").classList.add("hidden");
+      $("blockedBox").classList.remove("hidden");
+      $("blockedBox").innerHTML =
+        "目前無法對應到員工資料：<br><strong>" + escapeHtml(email) + "</strong><br><br>" +
+        "請確認您用的是平常登入 ORBIT 的 Google 帳號，或洽窗口協助。";
+      $("btnGoogle").disabled = false;
+      $("googleLabel").textContent = "換一個 Google 帳號";
+    }
+
+    function enterApp() {
+      $("screen-login").classList.add("hidden");
+      $("screen-app").classList.remove("hidden");
+      $("whoName").textContent = currentUser.name;
+      $("whoRole").textContent = currentUser.title;
+      $("whoEmail").textContent = googleUser ? googleUser.email : "";
+      if (googleUser && googleUser.avatar) {
+        $("whoAvatar").src = googleUser.avatar;
+        $("whoAvatar").classList.remove("hidden");
+      } else {
+        $("whoAvatar").classList.add("hidden");
+      }
+      const H = currentUser.honor || "您";
+      $("heroTitle").textContent = "Hi，" + currentUser.call + "，我是 ORBIT";
+      $("heroSub").textContent =
+        currentUser.kind === "leader"
+          ? "我想聽新韻的故事與未來——" + H + "慢慢說，我記下來。"
+          : "我想聽你工作上的真實情況——慢慢想、慢慢寫，7/30 再提出來也沒關係。";
+      if (currentUser.kind === "staff") renderStaff();
+      else renderLeader();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ===== staff =====
+    function renderStaff() {
+      const u = currentUser;
+      let html = "";
+      html += '<div class="card"><div class="orbit-say"><strong>ORBIT：</strong>';
+      html += "我是來幫忙分擔日常工作的，不是來盯人、也不是來考核的。";
+      html += "下面是給你的問題——想到什麼就寫。7/30 歡迎提出來，不會變成評分。";
+      if (u.introExtra) html += " " + u.introExtra;
+      html += "</div></div>";
+
+      html += '<div class="card"><h2>我大致能幫什麼</h2><div class="feat-grid">';
+      [["【人】","打卡請假"],["【客】","客戶往來"],["【賣】","訂單／車倉"],["【倉】","庫存調撥"],
+       ["【帳】","單據撥款"],["【看】","報表"],["【聊】","工作通訊"],["【AI】","問數協助"]
+      ].forEach(([k,v]) => { html += '<div class="feat"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; });
+      html += "</div></div>";
+
+      html += '<div class="card"><h2>請你先想一想</h2>';
+      u.questions.forEach((q, i) => {
+        html += '<div class="q-block"><div class="q-num">問題 '+(i+1)+'</div>';
+        html += '<div class="q-text">'+escapeHtml(q)+'</div>';
+        html += '<textarea id="q_'+i+'" placeholder="慢慢寫，可空白…"></textarea></div>';
+      });
+      html += '<div class="q-block"><div class="q-num">還有呢</div>';
+      html += '<div class="q-text">還想跟我說的（可空白）</div>';
+      html += '<textarea id="extraNote" placeholder="沒有也完全沒關係"></textarea></div></div>';
+
+      html += '<div class="card"><h2>整理給訓練用</h2>';
+      html += '<div class="summary-box" id="summary"></div><div class="actions">';
+      html += '<button type="button" class="btn secondary" id="btnCopy">複製我的回答</button></div>';
+      html += '<p class="note">自動存在本機。複製後可自行留存或交給窗口。</p></div>';
+
+      $("appBody").innerHTML = html;
+      loadStaff();
+      u.questions.forEach((_, i) => $( "q_"+i ).addEventListener("input", saveStaff));
+      $("extraNote").addEventListener("input", saveStaff);
+      $("btnCopy").addEventListener("click", () => {
+        const t = buildStaffSummary();
+        $("summary").textContent = t;
+        copyText(t);
+      });
+      $("summary").textContent = buildStaffSummary();
+    }
+
+    function saveStaff() {
+      const data = { answers: {}, extra: ($("extraNote") && $("extraNote").value) || "" };
+      currentUser.questions.forEach((_, i) => {
+        const el = $("q_"+i);
+        if (el) data.answers[i] = el.value;
+      });
+      localStorage.setItem(storageKey(), JSON.stringify(data));
+      if ($("summary")) $("summary").textContent = buildStaffSummary();
+    }
+    function loadStaff() {
+      try {
+        const data = JSON.parse(localStorage.getItem(storageKey()) || "null");
+        if (!data) return;
+        currentUser.questions.forEach((_, i) => {
+          if ($("q_"+i) && data.answers && data.answers[i] != null) $("q_"+i).value = data.answers[i];
+        });
+        if ($("extraNote") && data.extra != null) $("extraNote").value = data.extra;
+      } catch (_) {}
+    }
+    function buildStaffSummary() {
+      const u = currentUser;
+      const lines = ["【ORBIT × 新韻｜員工回饋】",
+        "姓名：" + u.name + "（" + u.title + "）",
+        "Google：" + (googleUser ? googleUser.email : ""),
+        "時間：" + new Date().toLocaleString("zh-TW"), ""];
+      u.questions.forEach((q, i) => {
+        const a = ($("q_"+i) && $("q_"+i).value.trim()) || "（未填）";
+        lines.push((i+1) + ". " + q);
+        lines.push("→ " + a);
+        lines.push("");
+      });
+      lines.push("還想說：" + (($("extraNote") && $("extraNote").value.trim()) || "（未填）"));
+      lines.push("", "— 由 ORBIT 整理 —");
+      return lines.join("\n");
+    }
+
+    // ===== leader =====
+    function field(id, label, ph) {
+      return '<label style="display:block;margin-bottom:12px"><span style="display:block;font-size:0.88rem;font-weight:600;margin-bottom:6px">'
+        + escapeHtml(label) + '</span><textarea id="'+id+'" placeholder="'+escapeHtml(ph||"慢慢寫…")+'"></textarea></label>';
+    }
+    function renderLeader() {
+      const u = currentUser;
+      const isXu = u.leaderRole === "xu";
+      let html = '<div class="card"><div class="orbit-say"><strong>ORBIT：</strong>';
+      if (isXu) {
+        html += "新韻能走到今天，離不開您一路的經驗。日常推進會與許峻豪對齊節奏；但<strong>創辦人與長輩的經驗、願景與底線</strong>，對我同樣重要。";
+      } else {
+        html += "日常決策與推進以你為準；同時我會尊重許總的經驗與願景。現場怎麼跑、你希望公司怎麼變——請你親自說。";
+      }
+      html += "</div></div>";
+
+      html += '<div class="card"><h2>我能為新韻做什麼</h2><div class="feat-grid">';
+      [["【人】考勤","打卡請假"],["【客】客戶","往來集中"],["【賣】訂單","出貨、車倉"],["【倉】庫存","雙倉、BOM"],
+       ["【帳】單據","撥款留痕"],["【看】報表","少追數字"],["【聊】通訊","工作歸工作"],["【AI】協助","問數、人拍板"]
+      ].forEach(([k,v]) => { html += '<div class="feat"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; });
+      html += '</div><p class="note">金流：新韻本業與 ORBIT 帳各自獨立。</p></div>';
+
+      html += '<div class="card"><h2>想聽新韻的故事</h2><div class="chips" id="historyChips"></div>';
+      html += field("h_start","新韻是怎麼開始的？","例如：誰創的、一開始做什麼");
+      html += field("h_turn","最關鍵的轉折或辛苦？","可選填");
+      html += field("h_pride","最值得驕傲的是？","可選填") + "</div>";
+
+      html += '<div class="card"><h2>希望未來怎麼變</h2>';
+      html += '<p class="note" style="margin-bottom:8px">希望我先幫新韻守住哪些？（可多選）</p>';
+      html += '<div class="chips" id="futureChips"></div>';
+      html += field("f_vision","三年後，希望別人怎麼形容新韻？","");
+      html += field("f_priority","最想先改的 1～3 件事","");
+      html += field("f_boundary","有沒有請 ORBIT 先別插手的事？","可選填") + "</div>";
+
+      html += '<div class="card"><h2>想直接跟我說的</h2><div class="orbit-say"><strong>ORBIT：</strong>';
+      html += isXu ? "底線、顧慮、對未來的期許——可以寫在這裡。" : "權限、特別規則、不方便多人轉述的事——可以直接跟我說。";
+      html += "</div>" + field("s_private","想私下跟 ORBIT 說的話","可空白") + "</div>";
+
+      html += '<div class="card"><h2>整理</h2><div class="summary-box" id="summary"></div>';
+      html += '<div class="actions"><button type="button" class="btn secondary" id="btnCopy">複製全部內容</button></div></div>';
+
+      $("appBody").innerHTML = html;
+      renderChips("historyChips", historyHints);
+      renderChips("futureChips", futureHints);
+      loadLeader();
+      ["h_start","h_turn","h_pride","f_vision","f_priority","f_boundary","s_private"].forEach(id => {
+        $(id).addEventListener("input", () => { saveLeader(); $("summary").textContent = buildLeaderSummary(); });
+      });
+      $("btnCopy").addEventListener("click", () => {
+        const t = buildLeaderSummary();
+        $("summary").textContent = t;
+        copyText(t);
+      });
+      $("summary").textContent = buildLeaderSummary();
+    }
+
+    function renderChips(id, items) {
+      const el = $(id);
+      el.innerHTML = "";
+      items.forEach(text => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "chip"; b.textContent = text;
+        b.addEventListener("click", () => {
+          b.classList.toggle("on");
+          saveLeader();
+          if ($("summary")) $("summary").textContent = buildLeaderSummary();
+        });
+        el.appendChild(b);
+      });
+    }
+    function getOnChips(id) {
+      const el = $(id); if (!el) return [];
+      return [...el.querySelectorAll(".chip.on")].map(c => c.textContent);
+    }
+    function setOnChips(id, list) {
+      const el = $(id); if (!el) return;
+      el.querySelectorAll(".chip").forEach(c => c.classList.toggle("on", (list||[]).includes(c.textContent)));
+    }
+    function val(id) { return $(id) ? $(id).value : ""; }
+    function saveLeader() {
+      localStorage.setItem(storageKey(), JSON.stringify({
+        chipsH: getOnChips("historyChips"), chipsF: getOnChips("futureChips"),
+        h_start: val("h_start"), h_turn: val("h_turn"), h_pride: val("h_pride"),
+        f_vision: val("f_vision"), f_priority: val("f_priority"), f_boundary: val("f_boundary"),
+        s_private: val("s_private")
+      }));
+    }
+    function loadLeader() {
+      try {
+        const data = JSON.parse(localStorage.getItem(storageKey()) || "null");
+        if (!data) return;
+        ["h_start","h_turn","h_pride","f_vision","f_priority","f_boundary","s_private"].forEach(k => {
+          if (data[k] != null && $(k)) $(k).value = data[k];
+        });
+        setOnChips("historyChips", data.chipsH || []);
+        setOnChips("futureChips", data.chipsF || []);
+      } catch (_) {}
+    }
+    function buildLeaderSummary() {
+      const u = currentUser;
+      const roleLabel = u.leaderRole === "xu" ? "許總（創辦人／長輩願景）" : "許峻豪（現任決策）";
+      return [
+        "【ORBIT × 新韻｜領導訪談紀錄】",
+        "對象：" + u.name + "（" + roleLabel + "）",
+        "Google：" + (googleUser ? googleUser.email : ""),
+        "時間：" + new Date().toLocaleString("zh-TW"), "",
+        "—— 新韻歷史 ——",
+        "關鍵字：" + (getOnChips("historyChips").join("、") || "（未選）"),
+        "怎麼開始：\n" + (val("h_start").trim() || "（未填）"),
+        "轉折／辛苦：\n" + (val("h_turn").trim() || "（未填）"),
+        "驕傲：\n" + (val("h_pride").trim() || "（未填）"), "",
+        "—— 希望未來 ——",
+        "想先守住：" + (getOnChips("futureChips").join("、") || "（未選）"),
+        "三年後：\n" + (val("f_vision").trim() || "（未填）"),
+        "最想先改：\n" + (val("f_priority").trim() || "（未填）"),
+        "請別插手：\n" + (val("f_boundary").trim() || "（未填）"), "",
+        "—— 想直接跟 ORBIT 說的 ——",
+        val("s_private").trim() || "（未填）", "",
+        "— 由 ORBIT 整理 —"
+      ].join("\n");
+    }
+
+    async function copyText(text) {
+      try { await navigator.clipboard.writeText(text); toast("已複製到剪貼簿"); }
+      catch {
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); document.body.removeChild(ta);
+        toast("已複製到剪貼簿");
+      }
+    }
+
+        async function handleSession(session) {
+      if (!session || !session.user) return false;
+      const user = session.user;
+      const email = (user.email || "").toLowerCase();
+      const meta = user.user_metadata || {};
+      googleUser = {
+        email,
+        name: meta.full_name || meta.name || email,
+        avatar: meta.avatar_url || meta.picture || ""
+      };
+
+      // 營運帳號：選身分後進問題頁
+      if (ADMIN_EMAILS.has(email)) {
+        $("loginErr").textContent = "";
+        $("blockedBox").classList.add("hidden");
+        showAdminPicker();
+        return true;
+      }
+
+      $("loginErr").textContent = "正在對照系統已綁定的員工資料…";
+      let resolved = null;
+      try {
+        resolved = await resolveFromSystem(user);
+      } catch (e) {
+        console.warn("resolveFromSystem", e);
+      }
+
+      if (!resolved) {
+        const uid = EMAIL_MAP[email];
+        if (uid && USERS[uid]) resolved = { profile: USERS[uid], source: "email-map-fallback", raw: null };
+      }
+
+      if (!resolved || !resolved.profile) {
+        showBlocked(email);
+        return false;
+      }
+
+      currentUser = resolved.profile;
+      console.info("[ORBIT portal] identity", resolved.source, currentUser.name, email);
+      $("loginErr").textContent = "";
+      enterApp();
+      return true;
+    }
+
+    function showAdminPicker() {
+      $("screen-login").classList.add("hidden");
+      $("screen-app").classList.remove("hidden");
+      $("whoName").textContent = googleUser.name || "KAYON";
+      $("whoRole").textContent = "營運預覽";
+      $("whoEmail").textContent = googleUser.email || "";
+      if (googleUser.avatar) {
+        $("whoAvatar").src = googleUser.avatar;
+        $("whoAvatar").classList.remove("hidden");
+      }
+      $("heroTitle").textContent = "Hi，我是 ORBIT";
+      $("heroSub").textContent = "你已用營運帳號登入。請選要預覽的身分，會帶出對應問題。";
+      const list = Object.values(USERS).map(u => {
+        return '<button type="button" class="btn ghost pick-role" data-id="' + u.id + '" style="width:100%;margin-bottom:8px;text-align:left">' +
+          '<strong>' + escapeHtml(u.name) + '</strong> · ' + escapeHtml(u.title) + '</button>';
+      }).join("");
+      $("appBody").innerHTML =
+        '<div class="card"><h2>選擇預覽身分</h2>' +
+        '<p class="note" style="margin-bottom:12px">員工會用自己的 Google 直接進問題；你可在此切換預覽。</p>' +
+        list + "</div>";
+      document.querySelectorAll(".pick-role").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          currentUser = USERS[id];
+          enterApp();
+        });
+      });
+    }
+
+
+
+    $("btnGoogle").addEventListener("click", loginWithGoogle);
+    $("btnLogout").addEventListener("click", logout);
+
+    // boot: recover session after OAuth redirect
+    (async function boot() {
+      // Supabase may put tokens in hash
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        await handleSession(session);
+        // clean ugly hash from URL after parse
+        if (location.hash && location.hash.includes("access_token")) {
+          history.replaceState(null, "", location.pathname + location.search);
+        }
+      }
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === "SIGNED_IN" && session) {
+          await handleSession(session);
+        }
+        if (event === "SIGNED_OUT") {
+          currentUser = null;
+          googleUser = null;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
