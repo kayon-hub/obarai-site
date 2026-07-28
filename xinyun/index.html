@@ -115,7 +115,7 @@
         <div class="sub">新韻傳音 · 企業營運系統</div>
       </div>
       <h1>登入</h1>
-      <p class="hint">使用 Google 帳號登入（與 ORBIT 系統相同）<br/>登入後自動帶出您的問題</p>
+      <p class="hint">這是一份可以重複作答、隨時回來修改的訪談表單。<br/>請使用與 ORBIT 相同的 Google 帳號登入；慢慢想、好好寫，不用一次完成。</p>
       <button type="button" class="btn google" id="btnGoogle">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -566,8 +566,8 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       $("heroTitle").textContent = "Hi，" + currentUser.call + "，我是 ORBIT";
       $("heroSub").textContent =
         currentUser.kind === "leader"
-          ? "我想聽新韻的故事與未來——" + H + "慢慢說，我記下來。"
-          : "我想聽你工作上的真實情況——慢慢想、慢慢寫，7/30 再提出來也沒關係。";
+          ? "我想聽新韻的故事與未來——" + H + "慢慢說、好好想，可以多次回來修改。"
+          : "我想聽你工作上的真實情況——慢慢想、好好寫，可以多次回來修改。";
       cloudDraft = null;
       try {
         cloudDraft = await loadCloudDraft();
@@ -585,7 +585,7 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
       let html = "";
       html += '<div class="card"><div class="orbit-say"><strong>ORBIT：</strong>';
       html += "我是來幫忙分擔日常工作的，不是來盯人、也不是來考核的。";
-      html += "下面是給你的問題——想到什麼就寫。7/30 歡迎提出來，不會變成評分。";
+      html += "下面是給你的問題——不用急著一次答完，可以慢慢想、重複回來修改。7/30 歡迎提出來，不會變成評分。";
       if (u.introExtra) html += " " + u.introExtra;
       html += "</div></div>";
 
