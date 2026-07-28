@@ -448,18 +448,43 @@ const XINYUN_CLIENT_ID = "a0985154502-pending-rny1ig";
     async function loginWithGoogle() {
       $("loginErr").textContent = "";
       $("blockedBox").classList.add("hidden");
+      if (!supabase) {
+        $("loginErr").textContent = "登入元件尚未就緒，請強制重新整理（Cmd+Shift+R）後再試。";
+        return;
+      }
       $("btnGoogle").disabled = true;
       $("googleLabel").innerHTML = '<span class="spin"></span> 導向 Google…';
-      const redirectTo = window.location.origin + window.location.pathname + window.location.search;
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo,
-          queryParams: { prompt: "select_account" }
+      try {
+        // 固定回短網址根路徑，需在 Supabase Redirect URLs 允許
+        let redirectTo = window.location.origin + "/";
+        if (window.location.hostname.includes("www.obarai.com")) {
+          redirectTo = "https://www.obarai.com/xinyun/";
+        } else if (window.location.hostname.includes("xinyun.obarai.com")) {
+          redirectTo = "https://xinyun.obarai.com/";
         }
-      });
-      if (error) {
-        $("loginErr").textContent = error.message || "Google 登入失敗";
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo,
+            queryParams: { prompt: "select_account" }
+          }
+        });
+        if (error) {
+          $("loginErr").textContent = error.message || "Google 登入失敗";
+          $("btnGoogle").disabled = false;
+          $("googleLabel").textContent = "使用 Google 繼續";
+          return;
+        }
+        if (data && data.url) {
+          window.location.assign(data.url);
+        } else {
+          $("loginErr").textContent = "無法取得 Google 授權網址，請稍後再試。";
+          $("btnGoogle").disabled = false;
+          $("googleLabel").textContent = "使用 Google 繼續";
+        }
+      } catch (e) {
+        console.error(e);
+        $("loginErr").textContent = "登入發生錯誤：" + (e.message || e);
         $("btnGoogle").disabled = false;
         $("googleLabel").textContent = "使用 Google 繼續";
       }
