@@ -1,0 +1,2329 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ORBIT 系統操作手冊 — 新韻傳音</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+  @media (prefers-color-scheme: dark) {}
+  :root {
+    --paper: #faf8f3;
+    --paper-raised: #ffffff;
+    --ink: #1c1a16;
+    --ink-soft: #514c42;
+    --ink-faint: #8a8375;
+    --line: #e6e0d3;
+    --line-soft: #f0ebe0;
+    --accent: #b3671a;
+    --accent-ink: #7a4711;
+    --accent-soft: #f4e6d3;
+    --gold: #a8842f;
+    --employee: #2f6f5e;
+    --employee-bg: #e3efe9;
+    --manager: #7a4711;
+    --manager-bg: #f4e6d3;
+    --all: #4a5568;
+    --all-bg: #eceef1;
+    --warn-bg: #fbeee0;
+    --warn-line: #e0af6a;
+    --warn-ink: #7a4711;
+    --code-bg: #f0ebe0;
+    --shadow: 0 1px 2px rgba(30,20,5,0.06), 0 6px 20px -8px rgba(30,20,5,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16140f;
+      --paper-raised: #1e1b15;
+      --ink: #ece7db;
+      --ink-soft: #b8b0a0;
+      --ink-faint: #7d7566;
+      --line: #332e24;
+      --line-soft: #26221a;
+      --accent: #e0a355;
+      --accent-ink: #f3cd97;
+      --accent-soft: #362a18;
+      --gold: #d4af5a;
+      --employee: #6fbfa2;
+      --employee-bg: #1c2c26;
+      --manager: #e0a355;
+      --manager-bg: #362a18;
+      --all: #a4acb8;
+      --all-bg: #24262b;
+      --warn-bg: #2e2416;
+      --warn-line: #5c4423;
+      --warn-ink: #f3cd97;
+      --code-bg: #26221a;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 24px -8px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #16140f; --paper-raised: #1e1b15; --ink: #ece7db; --ink-soft: #b8b0a0; --ink-faint: #7d7566;
+    --line: #332e24; --line-soft: #26221a; --accent: #e0a355; --accent-ink: #f3cd97; --accent-soft: #362a18;
+    --gold: #d4af5a; --employee: #6fbfa2; --employee-bg: #1c2c26; --manager: #e0a355; --manager-bg: #362a18;
+    --all: #a4acb8; --all-bg: #24262b; --warn-bg: #2e2416; --warn-line: #5c4423; --warn-ink: #f3cd97;
+    --code-bg: #26221a; --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 6px 24px -8px rgba(0,0,0,0.5);
+  }
+  :root[data-theme="light"] {
+    --paper: #faf8f3; --paper-raised: #ffffff; --ink: #1c1a16; --ink-soft: #514c42; --ink-faint: #8a8375;
+    --line: #e6e0d3; --line-soft: #f0ebe0; --accent: #b3671a; --accent-ink: #7a4711; --accent-soft: #f4e6d3;
+    --gold: #a8842f; --employee: #2f6f5e; --employee-bg: #e3efe9; --manager: #7a4711; --manager-bg: #f4e6d3;
+    --all: #4a5568; --all-bg: #eceef1; --warn-bg: #fbeee0; --warn-line: #e0af6a; --warn-ink: #7a4711;
+    --code-bg: #f0ebe0; --shadow: 0 1px 2px rgba(30,20,5,0.06), 0 6px 20px -8px rgba(30,20,5,0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "PingFang TC", "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-soft); color: var(--accent-ink); }
+
+  a { color: var(--accent-ink); text-decoration-color: var(--line); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px;
+  }
+
+  code, .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+  code {
+    background: var(--code-bg); padding: .12em .4em; border-radius: 4px; font-size: .88em;
+  }
+
+  /* ---------- Shell layout ---------- */
+  .shell { display: grid; grid-template-columns: 300px minmax(0,1fr); min-height: 100vh; }
+  @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } }
+
+  .sidebar {
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    border-right: 1px solid var(--line); background: var(--paper-raised);
+    padding: 28px 20px 60px;
+  }
+  @media (max-width: 900px) {
+    .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
+  }
+  .brand { display:flex; align-items:baseline; gap:10px; margin-bottom: 4px; }
+  .brand-mark {
+    font-family: ui-monospace, monospace; font-weight: 700; font-size: 13px; letter-spacing: .08em;
+    color: var(--accent-ink); background: var(--accent-soft); padding: 3px 7px; border-radius: 5px;
+  }
+  .brand-name { font-weight: 700; font-size: 17px; letter-spacing: .01em; }
+  .brand-sub { color: var(--ink-faint); font-size: 12.5px; margin: 2px 0 22px; }
+
+  .search-wrap { position: relative; margin-bottom: 18px; }
+  #search {
+    width: 100%; padding: 9px 12px 9px 32px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink); font-size: 14px; font-family: inherit;
+  }
+  .search-wrap svg { position:absolute; left:9px; top:50%; transform:translateY(-50%); opacity:.5; }
+  #search-count { font-size: 11.5px; color: var(--ink-faint); margin-top: 6px; display:none; }
+
+  nav.toc { display: flex; flex-direction: column; gap: 2px; }
+  .toc-group { margin-bottom: 14px; }
+  .toc-group-label {
+    font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+    font-weight: 600; margin: 0 0 6px 4px;
+  }
+  .toc-link {
+    display: flex; align-items: baseline; gap: 8px; padding: 6px 8px; border-radius: 6px;
+    color: var(--ink-soft); font-size: 13.8px; text-decoration: none;
+  }
+  .toc-link:hover { background: var(--line-soft); color: var(--ink); }
+  .toc-count { margin-left: auto; color: var(--ink-faint); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+
+  main { min-width: 0; padding: 0; }
+  .page {
+    max-width: 780px; margin: 0 auto; padding: 56px 28px 120px;
+  }
+  @media (max-width: 640px) { .page { padding: 36px 18px 90px; } }
+
+  /* ---------- Hero / intro ---------- */
+  .hero { margin-bottom: 56px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink);
+    font-weight: 700; margin-bottom: 14px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before { content:""; width:18px; height:1px; background: var(--accent); display:inline-block; }
+  h1.title {
+    font-size: clamp(28px, 4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 18px;
+    text-wrap: balance; font-weight: 800;
+  }
+  .lede { font-size: 17.5px; color: var(--ink-soft); max-width: 60ch; margin: 0 0 28px; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+  }
+  .meta-pill {
+    font-size: 12.5px; color: var(--ink-faint); border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px 12px; display:flex; align-items:center; gap:6px;
+  }
+
+  /* ---------- Section chrome ---------- */
+  h2.part-title {
+    font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink);
+    font-weight: 700; margin: 72px 0 4px; padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  h2.part-title .num { color: var(--ink-faint); margin-right: 8px; font-weight: 600; }
+  .part-desc { color: var(--ink-soft); font-size: 15px; margin: 8px 0 32px; max-width: 62ch; }
+
+  details.module {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--paper-raised);
+    margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  details.module[open] { }
+  summary.module-head {
+    list-style: none; cursor: pointer; padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+    font-weight: 700; font-size: 16px;
+  }
+  summary.module-head::-webkit-details-marker { display: none; }
+  summary.module-head .chev {
+    margin-left: auto; color: var(--ink-faint); transition: transform .18s ease; flex-shrink:0;
+  }
+  details[open] summary.module-head .chev { transform: rotate(90deg); }
+  summary.module-head .letter {
+    font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; color: var(--accent-ink);
+    background: var(--accent-soft); border-radius: 6px; width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  summary.module-head .mtitle-sub { font-weight: 400; color: var(--ink-faint); font-size: 13px; margin-left: 2px; }
+  .module-body { padding: 4px 20px 22px; border-top: 1px solid var(--line-soft); }
+  .module-note {
+    margin: 16px 0 20px; padding: 13px 16px; border-radius: 9px; background: var(--warn-bg);
+    border: 1px solid var(--warn-line); color: var(--warn-ink); font-size: 14px; line-height: 1.65;
+  }
+  .module-note strong { color: inherit; }
+
+  .entry { padding: 22px 0; border-top: 1px solid var(--line-soft); }
+  .entry:first-of-type { border-top: none; padding-top: 14px; }
+  .entry-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .entry-num { font-family: ui-monospace, monospace; color: var(--ink-faint); font-size: 13px; }
+  .entry-title { font-size: 16.5px; font-weight: 700; margin: 0; text-wrap: balance; }
+  .badge {
+    font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; letter-spacing: .02em;
+    white-space: nowrap;
+  }
+  .badge-員工 { color: var(--employee); background: var(--employee-bg); }
+  .badge-管理者 { color: var(--manager); background: var(--manager-bg); }
+  .badge-全部 { color: var(--all); background: var(--all-bg); }
+
+  .entry-body { font-size: 15px; color: var(--ink-soft); }
+  .entry-body p { margin: 0 0 12px; }
+  .entry-body ol, .entry-body ul { margin: 0 0 12px; padding-left: 22px; }
+  .entry-body li { margin-bottom: 5px; }
+  .entry-body strong { color: var(--ink); }
+  .entry-body table { border-collapse: collapse; width: 100%; font-size: 13.8px; }
+  .entry-body th, .entry-body td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; }
+  .entry-body th { background: var(--line-soft); font-weight: 700; }
+  .table-wrap { overflow-x: auto; margin: 14px 0; border-radius: 8px; }
+  .table-wrap table { font-variant-numeric: tabular-nums; }
+
+  .limit-box {
+    margin: 14px 0; padding: 12px 15px; border-radius: 8px; background: var(--warn-bg);
+    border-left: 3px solid var(--warn-line); font-size: 14px; color: var(--warn-ink); line-height:1.65;
+  }
+  .limit-box strong:first-child { display:block; margin-bottom:3px; }
+
+  /* future / support cards */
+  .path-grid { display: grid; gap: 14px; margin: 28px 0; }
+  .path-card {
+    border: 1px solid var(--line); background: var(--paper-raised); border-radius: 12px; padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .path-card h3 { margin: 0 0 6px; font-size: 15.5px; }
+  .path-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+  .path-tag {
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; color: var(--gold);
+    background: var(--accent-soft); padding: 2px 8px; border-radius: 999px; margin-bottom:8px;
+  }
+
+  .sla-table { width:100%; border-collapse: collapse; font-size: 14px; margin: 18px 0; font-variant-numeric: tabular-nums; }
+  .sla-table th, .sla-table td { border:1px solid var(--line); padding: 9px 12px; text-align:left; }
+  .sla-table th { background: var(--line-soft); }
+  .sla-table td:first-child { font-weight:700; }
+
+  .contact-strip {
+    display:flex; flex-wrap:wrap; gap:12px; margin: 22px 0 8px;
+  }
+  .contact-strip a {
+    display:flex; align-items:center; gap:8px; padding: 12px 18px; border-radius: 10px;
+    background: var(--accent-soft); color: var(--accent-ink); font-weight:700; font-size:14.5px;
+    text-decoration:none; border: 1px solid var(--warn-line);
+  }
+
+  footer.page-foot {
+    margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line);
+    color: var(--ink-faint); font-size: 13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">ORBIT</span>
+      <span class="brand-name">系統操作手冊</span>
+    </div>
+    <div class="brand-sub">新韻傳音有限公司 專屬版</div>
+
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="text" placeholder="搜尋操作項目…" autocomplete="off" />
+    </div>
+    <div id="search-count"></div>
+
+    <nav class="toc" id="toc">
+      <div class="toc-group">
+        <div class="toc-group-label">導覽</div>
+        <a class="toc-link" href="#intro">使用說明</a>
+        <a class="toc-link" href="#part1">一、日常操作</a>
+        <a class="toc-link" href="#part2">二、業務成長情境</a>
+        <a class="toc-link" href="#part3">三、後援與支援</a>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-label">模組索引</div>
+        <a class="toc-link" href="#mod-A"><span class="letter-inline">A</span> 通用/裝置設定<span class="toc-count">11</span></a>
+        <a class="toc-link" href="#mod-B">B 打卡<span class="toc-count">16</span></a>
+        <a class="toc-link" href="#mod-C">C 請假<span class="toc-count">9</span></a>
+        <a class="toc-link" href="#mod-D">D POS訂單<span class="toc-count">15</span></a>
+        <a class="toc-link" href="#mod-E">E 客戶管理<span class="toc-count">8</span></a>
+        <a class="toc-link" href="#mod-F">F 商品庫存採購<span class="toc-count">14</span></a>
+        <a class="toc-link" href="#mod-G">G 倉儲<span class="toc-count">5</span></a>
+        <a class="toc-link" href="#mod-H">H 生產退貨<span class="toc-count">10</span></a>
+        <a class="toc-link" href="#mod-I">I 財務發票報表<span class="toc-count">13</span></a>
+        <a class="toc-link" href="#mod-J">J BI Planner<span class="toc-count">4</span></a>
+        <a class="toc-link" href="#mod-K">K LINE整合<span class="toc-count">6</span></a>
+        <a class="toc-link" href="#mod-M">M DOCS單據中心<span class="toc-count">14</span></a>
+        <a class="toc-link" href="#mod-N">N 公布欄<span class="toc-count">4</span></a>
+        <a class="toc-link" href="#mod-O">O 系統設定權限<span class="toc-count">19</span></a>
+        <a class="toc-link" href="#mod-P">P 情境SOP<span class="toc-count">6</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="page">
+
+      <section class="hero" id="intro">
+        <div class="eyebrow">新韻傳音 · 許峻豪 專用</div>
+        <h1 class="title">ORBIT 系統操作手冊</h1>
+        <p class="lede">這份手冊分三個部分：<strong>一、日常操作</strong>——152則已驗證過的實際操作說明，照畫面實際文字寫，做不到的地方也誠實列出；<strong>二、業務成長情境</strong>——公司之後成長會遇到的狀況，ORBIT現在能接住哪些、哪些要另外談；<strong>三、後援與支援</strong>——遇到問題找誰、多久會回應。左側可以搜尋或直接點模組跳過去，不用整份從頭看到尾。</p>
+        <div class="hero-meta">
+          <span class="meta-pill">📅 2026-07-31 版</span>
+          <span class="meta-pill">✅ 152 則操作內容，逐條依系統實測撰寫</span>
+          <span class="meta-pill">🔒 誠實原則：做不到的功能一律寫清楚，不美化</span>
+        </div>
+      </section>
+
+      <!-- PART1_START -->
+      <h2 class="part-title" id="part1"><span class="num">一</span>日常操作</h2>
+      <p class="part-desc">依模組分成 15 個區塊，共 152 則。每則都是照系統畫面實際文字撰寫，系統目前做不到的地方會用橘色框誠實標出，不會美化成「好像有這個功能」。點模組標題展開內容。</p>
+
+      <details class="module" id="mod-A" open>
+        <summary class="module-head"><span class="letter">A</span> 通用/裝置設定 <span class="mtitle-sub">11 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">1</span><h3 class="entry-title">要用什麼瀏覽器開啟ORBIT？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <p>網址：<code>app.obarai.com</code></p>
+              <ol>
+                <li>第一次使用：iPhone 請用「Safari」開啟，Android 請用「Chrome」開啟。</li>
+                <li>開啟後先登入，再把圖示加到手機桌面（見下方條目）。</li>
+                <li>之後每次使用，一律點手機桌面的 ORBIT 圖示進入，不要再從瀏覽器網址列或書籤開。</li>
+                <li>不要從 LINE、Facebook、Instagram 等 App 內建的小瀏覽器直接點連結開啟——這種內建瀏覽器抓不到定位（打卡需要用），部分手勢操作（例如滑動打卡）也可能沒反應。</li>
+              </ol>
+              <p>電腦（Windows/Mac）上使用不限瀏覽器種類，Chrome、Edge、Safari 都可以，只有手機的「LINE 內建瀏覽器」明確不能用。判斷方法：畫面若出現 LINE 自己的工具列（例如右上角三個點選單、「用預設瀏覽器開啟」選項），就代表是 LINE 內建瀏覽器，請改用桌面圖示開啟。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">2</span><h3 class="entry-title">如何把ORBIT加到手機桌面(iPhone)？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>用「Safari」開啟 <code>app.obarai.com</code>（如果是從 LINE 點連結進來的，請先按住連結選「複製連結」，再貼到 Safari 網址列開啟，不要直接在 LINE 裡點開）。</li>
+                <li>點畫面下方（或上方，依 iOS 版本而定）的「分享」按鈕（方形+向上箭頭圖示）。</li>
+                <li>往下滑選單，點「加入主畫面」。</li>
+                <li>右上角點「新增」。</li>
+                <li>之後桌面上會出現 ORBIT 的圖示，名稱顯示為「ERP.POS」，之後一律點這個圖示進入系統。</li>
+              </ol>
+              <p>一定要用 Safari：用 Chrome、LINE 內建瀏覽器等其他方式加入主畫面，可能不是完整的獨立 App 模式，定位功能也可能不正常。桌面圖示名稱顯示「ERP.POS」，不是「ORBIT」，這是正常的，點下去是同一個系統。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">3</span><h3 class="entry-title">如何把ORBIT加到手機桌面(Android)？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>用「Chrome」開啟 <code>app.obarai.com</code>（如果是從 LINE 點連結進來的，建議先複製連結貼到 Chrome 開啟）。</li>
+                <li>點畫面右上角「⋮」（三個點選單）。</li>
+                <li>選「加入主畫面」或「安裝應用程式」（不同 Android 版本文字可能不同）。</li>
+                <li>確認名稱後點「安裝」或「新增」。</li>
+                <li>之後桌面上會出現「ORBIT」圖示。</li>
+              </ol>
+              <p>部分機型會直接跳出「安裝這個應用程式？」提示卡片，點「安裝」效果一樣。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">4</span><h3 class="entry-title">登入不了/忘記密碼怎麼辦？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>如果原本是用 LINE 或 Google 登入：登入不了時不需要重設密碼，直接重新點同一顆按鈕再走一次授權流程即可。</li>
+                <li>如果是用信箱＋密碼登入：先確認信箱有沒有打錯（大小寫、有無多打空格）。</li>
+                <li>密碼忘記了，點密碼欄位上方的「忘記密碼？」連結。</li>
+                <li>輸入登入信箱，點「寄送重設連結」，系統會寄一封重設密碼信到信箱。</li>
+                <li>到信箱點連結完成重設。</li>
+                <li>都試過還是進不去，請聯繫管理者，或請管理者聯繫 ORBIT 客服 hello@obarai.com。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">5</span><h3 class="entry-title">如何用LINE登入ORBIT？第一次要綁定什麼？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>打開 ORBIT 登入頁，點「使用 LINE 登入」按鈕。</li>
+                <li>導去 LINE 授權頁面，第一次使用按「同意並登入」。</li>
+                <li>授權完成後系統自動用 LINE 帳號建立/對應一個 ORBIT 登入身分，不需要另外設密碼。</li>
+                <li>第一次登入且系統還無法辨識你屬於哪間公司時，會導去「驗證公司身分」頁面，輸入公司統一編號（8碼數字）。</li>
+                <li>統編驗證成功後：如果是這間公司第一個登入的人，會直接進入系統；如果公司已經有人建過帳號，會導去「個人資料建檔」頁面，填資料後送出，等主管審核通過才能正式使用。</li>
+              </ol>
+              <p>LINE 登入不需要統一編號以外的額外綁定——不用另外綁手機號碼或加 LINE 官方帳號好友。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">6</span><h3 class="entry-title">第一次使用ORBIT：新人入職設定三步驟</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p><strong>登入 → 驗證公司身分（統一編號）→ 個人資料建檔 → 送出等主管審核</strong></p>
+              <ol>
+                <li>用公司提供的方式登入（LINE 或 Google 最快）。</li>
+                <li>系統辨識不到公司時，在「統一編號」欄輸入公司統編（8碼數字）後按「確認」。</li>
+                <li>填寫個人資料：姓名（必填）、部門、職稱、電話、Email、計薪方式（月薪／時薪）、對應的薪資金額，填完點「送出，等候主管審核」。</li>
+                <li>送出後系統會建立你的員工資料，但狀態是「待審核」，要等主管在後台核准，才能正式使用打卡、請假等功能。</li>
+              </ol>
+              <p>這個流程只在第一次登入、系統裡找不到對應員工資料時出現，已建檔過的人再次登入會直接進系統。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">7</span><h3 class="entry-title">換新手機了，要重新設定什麼？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <p><strong>新手機：登入 → 加入桌面 → 允許定位權限</strong></p>
+              <ol>
+                <li>在新手機上用原本的方式登入（帳號本身不用重新申請）。</li>
+                <li>把圖示加回新手機桌面。</li>
+                <li>第一次在新手機打卡時，會重新跳出「是否允許定位」的詢問，記得按「允許」（iPhone 需選「使用 App 期間」）。</li>
+              </ol>
+              <div class="limit-box"><strong>提醒</strong>舊手機會自動被登出：ORBIT 是「單一裝置登入」設計——只要在新手機登入成功，舊手機下次操作時就會被強制登出，這是系統本來的設計，不是故障。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">8</span><h3 class="entry-title">畫面跑版/按鈕點不動怎麼辦？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>先確認是不是從手機桌面的 ORBIT 圖示開啟，不是從 LINE 或其他 App 內建瀏覽器點連結進來的。</li>
+                <li>把 App 完全關閉（滑掉背景，不是只切到別的畫面）再重新從桌面圖示打開一次。</li>
+                <li>還是不行，試著整個重新整理頁面。</li>
+                <li>確認手機系統版本、瀏覽器版本不要太舊。</li>
+                <li>都試過還是異常，把當下的畫面截圖，附上手機型號、大概的操作步驟，回報管理者。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">9</span><h3 class="entry-title">LINE通知收不到怎麼辦？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <p>目前系統設計如下（跟大部分人想的不一樣，請先看這段）：</p>
+              <ol>
+                <li><strong>鈴鐺（通知）</strong>：那是系統公告／最新消息，不是 LINE 訊息，是站內通知，跟 LINE 無關。</li>
+                <li><strong>請假申請送出時</strong>：系統會嘗試發一則通知，但對象是「公司負責人本人」，不是承辦的主管、更不是申請人自己，而且要公司完成 LINE 官方帳號串接、負責人本人用 LINE 登入過、以及公司後台「自動通知」設定已開啟，三個條件同時符合才發得出去。</li>
+                <li><strong>請假被核准/拒絕時</strong>：系統設計是寄「Email」通知申請人，不是 LINE，而且要寄到個人資料裡填的 Email 欄位，同樣要公司開啟「自動通知」才會寄。</li>
+              </ol>
+              <div class="limit-box"><strong>目前這是正常現象</strong>一般員工收不到 LINE 通知是正常的，請改用畫面上的「請假紀錄」「補打卡申請」列表自己查詢審核狀態。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">10</span><h3 class="entry-title">個人資料填錯了，在哪裡改？</h3><span class="badge badge-員工">員工（修改須由管理者執行）</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>員工自己沒有任何畫面可以修改已經送出的個人資料（姓名、部門、職稱、電話、Email、薪資等）。「個人資料建檔」表單只在第一次登入出現一次，之後找不到「編輯個人資料」的入口——「員工」頁面權限限定在店長／管理者以上。</div>
+              <ol>
+                <li>發現資料有誤，直接跟主管/店長說明要改哪一項、正確的資料是什麼。</li>
+                <li>由主管到後台「員工」頁面，找到你的資料進行編輯。</li>
+                <li>涉及薪資的異動，通常需要更高層級的人確認。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">153</span><h3 class="entry-title">如何切換語言/深淺色主題？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前不支援</strong>系統只有深色主題，沒有淺色模式可以切換；介面語言固定為繁體中文，沒有語言切換功能。</div>
+              <p>覺得畫面太暗或字太小，可以先用瀏覽器本身的縮放（手機雙指縮放、電腦 Ctrl/Cmd＋「+」）調整。有實際需求請聯繫 hello@obarai.com 提出，未來版本會評估。</p>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-B">
+        <summary class="module-head"><span class="letter">B</span> 打卡 <span class="mtitle-sub">16 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">11</span><h3 class="entry-title">為什麼打不了卡，顯示「需要開啟定位服務」？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>最常見原因：從 LINE 等 App 內建瀏覽器直接點連結打卡——這種內建瀏覽器抓不到手機定位。請改從手機桌面的 ORBIT 圖示開啟。</li>
+                <li>確認手機系統的「定位服務」總開關是開著的。</li>
+                <li>確認瀏覽器/App 本身有拿到定位權限，且第一次跳出詢問時有按「允許」。</li>
+                <li>如果之前不小心按過「拒絕」，系統不會再自動跳出詢問，需要手動到手機設定重新開啟。</li>
+              </ol>
+              <p>如果滑動打卡整個沒反應（連錯誤訊息都沒跳出來），不是定位問題，請看「滑動開始上班沒反應怎麼辦」條目。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">12</span><h3 class="entry-title">定位權限按到拒絕了怎麼辦？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li><strong>iPhone</strong>：設定 → 隱私權與安全性 → 定位服務 → 找到「Safari網站」→ 選「使用App期間」，並開啟「精確位置」。</li>
+                <li><strong>Android</strong>：設定 → 應用程式 → Chrome → 權限 → 位置 → 選「僅在使用時允許」。</li>
+                <li>回到 ORBIT（桌面圖示重新開啟），再打卡一次。</li>
+              </ol>
+              <p>iPhone 特別注意「精確位置」也要打開，只開「大概位置」誤差可能達數百公尺，容易導致打卡範圍判定失敗。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">13</span><h3 class="entry-title">人在公司卻顯示不在打卡範圍內？</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>系統會顯示明確的錯誤訊息：「您不在店面範圍內（距離XX公尺，允許範圍XX公尺）。如為業務需求，請管理者核發外勤打卡授權。」</li>
+                <li>確認手機定位的「精確位置」已開啟——只開一般定位，室內誤差可能達數百公尺。</li>
+                <li>走近窗邊或門口再試一次，GPS 在室內深處訊號較弱，容易飄移。</li>
+                <li>距離顯示異常大（例如相差好幾公里），代表公司後台設定的座標本身可能有誤，需請管理者確認。</li>
+              </ol>
+              <div class="limit-box"><strong>新韻目前設定</strong>允許打卡範圍是 <strong>100 公尺</strong>。系統判定範圍只管「上班」「下班」兩個時間點，午休開始/結束不受地點限制。連上公司 Wi-Fi 不代表定位就會準確，系統是用手機 GPS 座標判斷，不是用 Wi-Fi。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">14</span><h3 class="entry-title">外出跑業務可以在外面打卡嗎？(地理圍欄例外)</h3><span class="badge badge-員工">員工（核發須由管理者操作）</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有「員工自己送出外勤申請」的表單，只有管理者可以直接核發授權。</div>
+              <ol>
+                <li>事先（或當下）用其他管道告知主管，說明今天需要在範圍外打卡的原因。</li>
+                <li>由管理者在打卡頁面點「管理者：核發外勤打卡授權」，選擇員工姓名與日期，備註原因，送出後即完成授權。</li>
+                <li>授權完成後，被授權的員工當天打卡不會再受地點限制。</li>
+              </ol>
+              <p>這個授權是<strong>當天生效、需要每次個別核發</strong>的，不是一次設定永久生效。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">15</span><h3 class="entry-title">一天打幾次卡？順序是什麼？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>一共固定 <strong>4段</strong>：上班到 → 滑動「滑動上班打卡」→ 開始午休 →「滑動結束午休」→ 滑動「滑動下班打卡」。</p>
+              <p>順序系統會強制卡住，跳不過去：如果沒打「午休開始」「午休結束」，直接點下班打卡會被擋下。畫面上方「今日狀態」會顯示你目前在哪個階段，跟著畫面顯示的按鈕打即可。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">16</span><h3 class="entry-title">忘記打卡怎麼辦？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p><strong>員工考勤 → 補打卡申請 → 新增補打卡</strong></p>
+              <ol>
+                <li>進入「員工考勤」頁面，切到「補打卡申請」分頁。</li>
+                <li>點「新增補打卡」。</li>
+                <li>填寫：日期（必填）、上班時間／下班時間（至少填一個）、補打卡原因（必填）。</li>
+                <li>點「提交申請」，狀態顯示「待審核」。</li>
+                <li>等主管核准，核准後系統會自動把時間寫回當天的打卡紀錄；如果那天完全沒有打卡紀錄，核准後系統會直接補建一筆。</li>
+              </ol>
+              <div class="limit-box"><strong>限制</strong>目前只能補「上班」「下班」時間，不能補「午休開始」「午休結束」——忘記打的是午休那兩段，需要另外請管理者手動處理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">17</span><h3 class="entry-title">如何送出補卡申請？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>點「員工考勤」頁面上方的「補打卡申請」分頁。</li>
+                <li>點右上角「新增補打卡」按鈕。</li>
+                <li>填寫「日期」、「上班時間」與「下班時間」（至少填一個）、「補打卡原因」（必填）。</li>
+                <li>確認資料無誤，點「提交申請」。</li>
+              </ol>
+              <p>送出後如果打錯了想改，目前沒有「編輯」功能，只能重新送一筆新的申請。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">18</span><h3 class="entry-title">補卡申請送出後多久會核准？被退回怎麼辦？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>系統沒有自動核准機制，也沒有時限規定，完全要等主管手動點「核准」或「拒絕」。核准後，你申請的時間會自動寫入當天的打卡紀錄。</p>
+              <div class="limit-box"><strong>被拒絕怎麼辦</strong>畫面不會顯示拒絕原因欄位；如果還是需要補這筆紀錄，目前沒有「重新申請」按鈕，需要直接再送一次新的補打卡申請。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">19</span><h3 class="entry-title">在哪裡看自己的考勤歷史？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p><strong>員工考勤 → 打卡（近7日）或 歷史紀錄與行事曆（完整列表）</strong></p>
+              <ol>
+                <li>最近7天的打卡紀錄跟統計，直接在「員工考勤」首頁就看得到。</li>
+                <li>要看更早以前的紀錄，點「歷史紀錄與行事曆」。</li>
+                <li>「打卡原始紀錄」區塊列出打卡明細，一般員工只看得到自己的資料。</li>
+              </ol>
+              <p>這個頁面不是真正的月曆網格檢視，是「表格列表」形式（一列一天）。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">20</span><h3 class="entry-title">打卡成功怎麼確認？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>滑動打卡成功的瞬間，滑動條會出現打勾的完成圖示，手機會震動一下。</li>
+                <li>畫面上方「今日狀態」文字會立刻更新。</li>
+                <li>完成「下班打卡」後，畫面會切換成完成畫面，顯示當天扣除午休後的總工時。</li>
+              </ol>
+              <p>如果滑到底卻沒有出現打勾動畫、也沒有跳出任何錯誤訊息：通常代表操作根本沒有送出去，請看「滑動開始上班沒反應」條目排查。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">21</span><h3 class="entry-title">「滑動開始上班」沒反應怎麼辦？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>先確認滑動手勢做對了：需要<strong>用手指從最左邊拖到最右邊</strong>（拖到底），不是輕點一下。</li>
+                <li>確認是從手機桌面的 ORBIT 圖示開啟。</li>
+                <li>檢查「選擇員工」下拉選單有沒有出現你自己的名字——選單空的代表帳號權限異常，請截圖回報管理者。</li>
+                <li>滑到底後系統會請求定位權限，如果手機當下彈出定位詢問視窗，可能會中斷這次滑動手勢，請重新滑一次。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">22</span><h3 class="entry-title">打錯卡(午休按成下班)怎麼修正？</h3><span class="badge badge-員工">員工/管理者</span></div>
+            <div class="entry-body">
+              <p>系統按鈕是「跟著狀態走」的——還沒打「午休開始」前，畫面只會出現「開始午休」按鈕，不會出現「下班」按鈕，所以理論上不太可能誤把「午休」按成「下班」。</p>
+              <ul>
+                <li>上/下班時間打錯：送「補打卡申請」（自己送出即可）。</li>
+                <li>午休開始/結束時間打錯：目前的申請表單沒有這兩個欄位，需要請管理者到「歷史紀錄與行事曆」手動編輯。</li>
+              </ul>
+              <p>已經打卡完成的紀錄，員工自己沒有「刪除」或「復原」的按鈕。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">23</span><h3 class="entry-title">加班怎麼記？(有無加班申請)</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有「加班申請」功能——員工完全沒有畫面可以自己登記或申請加班。「加班時數」欄位只能由管理者透過匯入或手動輸入才會出現。</div>
+              <p>有加班請用口頭或其他管道告知管理者，由管理者透過匯入功能記錄。打卡系統（上下班時間）跟「加班時數」報表是兩個獨立的東西，不會自動連動。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">24</span><h3 class="entry-title">國定假日/補班日出勤怎麼算？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>「公司行事曆」會自動同步政府行政機關辦公日曆表，但<strong>目前只是顯示用的參考資料</strong>，打卡時系統不會自動對照這張表計算加班費倍率或特別工資。</p>
+              <p>國定假日出勤是否有加給、怎麼計算，目前系統沒有自動判斷，需要人工核算，反映給管理者處理。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">25</span><h3 class="entry-title">薪資單在哪裡看？看不懂欄位怎麼辦？</h3><span class="badge badge-員工">員工（暫須向管理者索取）</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>一般員工完全看不到自己的薪資單，「薪資單」分頁限管理者（店長）以上才會顯示。想看自己的薪資單，請直接跟管理者索取。</div>
+              <p>管理者可在「員工」頁「薪資單」分頁查看：職位、薪資基準、出勤天數、總工時、遲到天數、請假天數、應付薪資（試算，非最終薪資）。</p>
+              <p>「應付薪資」目前<strong>不包含</strong>加班費、國定假日加給、請假扣薪等項目，若要當正式薪資單使用，還需要管理者額外核算調整。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">154</span><h3 class="entry-title">排班制/輪班的打卡有什麼不同？(員工端)</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p><strong>打卡操作完全一樣，系統不分班別。</strong>系統目前沒有排班表／班別範本功能，不管早班晚班還是輪班，打卡都是同一套流程：上班 → 午休開始 → 午休結束 → 下班。</p>
+              <div class="limit-box"><strong>請留意</strong>遲到判定是全公司統一的固定門檻（超過上午9:30打上班卡記為「遲到」），<strong>不會</strong>依個人班表調整——晚班員工正常時間上班可能被標成遲到。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-C">
+        <summary class="module-head"><span class="letter">C</span> 請假 <span class="mtitle-sub">9 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">26</span><h3 class="entry-title">假單要怎麼填？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p><strong>員工考勤 → 請假申請 → 新增請假</strong></p>
+              <ol>
+                <li>選「假別」。</li>
+                <li>選「起始日」「結束日」——多天／全天請假不用填時間，只選日期即可。</li>
+                <li>只請部分時段（半天）：勾選「只請部分時段」，結束日自動鎖定同一天，多出「起始時間」「結束時間」欄位。</li>
+                <li>填「請假事由」（必填）。</li>
+                <li>按「提交申請」，送出後等主管核准。</li>
+              </ol>
+              <p>整天／跨日只填日期（系統自動以整天8小時計算時數）；部分時段限單日，想跨日請假就不要勾選部分時段。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">27</span><h3 class="entry-title">我下午請假，中午離開要打下班卡嗎？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>先送出下午的假單：勾選「只請部分時段」，填起訖時間送出等核准。</li>
+                <li>中午離開時，<strong>照常打「下班打卡」</strong>。</li>
+              </ol>
+              <div class="limit-box"><strong>提醒</strong>假單跟打卡紀錄是各自獨立的兩筆資料，系統不會因為有假單就自動免除打卡動作。系統目前也不會自動判定「早退」狀態。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">28</span><h3 class="entry-title">全天請假還需要打卡嗎？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>全天（或跨日）請假送出假單，等主管核准即可，<strong>不需要打卡</strong>。</p>
+              <div class="limit-box"><strong>提醒</strong>系統目前沒有機制會自動把沒打卡的一天標記成「缺勤」，這點請公司內部自行留意管理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">29</span><h3 class="entry-title">假單送出了但主管還沒核准，我可以先走嗎？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>不管假單是「待審核」還是「已核准」，離開前一樣要照常打「下班打卡」，系統都不會因為狀態不同而有不一樣的反應。是否需要等主管核准才能離開，<strong>屬於公司內部管理規定，不是系統限制</strong>。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">30</span><h3 class="entry-title">請好的假臨時不請了（銷假）怎麼辦？</h3><span class="badge badge-員工">員工/管理者</span></div>
+            <div class="entry-body">
+              <p><strong>還是「待審核」狀態</strong>：請主管將該假單「拒絕」——效果等同銷假，不會扣假別額度。</p>
+              <div class="limit-box"><strong>已核准的假單</strong>目前尚未提供線上銷假功能，無法自行取消，已扣的額度也無法自動退還。如需取消，請聯繫管理者手動處理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">31</span><h3 class="entry-title">已經早退了才想到要請假，可以補嗎？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>用跟一般請假完全相同的流程送假單，「起始日」可以選過去的日期——系統不會檢查日期是否已經過去。系統沒有任何「補請假時限」的限制，這條規則需要公司自訂並口頭要求員工遵守。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">32</span><h3 class="entry-title">有哪些假別？額度怎麼看？</h3><span class="badge badge-員工">員工（查自己）/管理者（查全公司）</span></div>
+            <div class="entry-body">
+              <p><strong>員工考勤 → 右上角「假別管理」</strong></p>
+              <p>上半「假別設定」表格列出所有假別規則；下半「休假額度與餘額」表格列出每筆額度、已休、剩餘、狀態。一般員工只能看到自己的額度，管理者以上可以看到全公司。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">33</span><h3 class="entry-title">新韻假別規則明細</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>新韻傳音目前系統設定的假別，跟系統預設的台灣勞基法11種法定假別完全一致，<strong>沒有另外調整過</strong>：</p>
+              <div class="table-wrap"><table>
+                <tr><th>假別</th><th>給假單位</th><th>是否扣薪</th><th>需證明文件</th><th>備註</th></tr>
+                <tr><td>特別休假</td><td>小時</td><td>否</td><td>否</td><td>法定特休，未休完需結算</td></tr>
+                <tr><td>加班補休</td><td>小時</td><td>否</td><td>否</td><td>加班轉換，未休完需結算</td></tr>
+                <tr><td>事假</td><td>小時</td><td>是（全額）</td><td>否</td><td>一年最多14天(112小時)</td></tr>
+                <tr><td>普通傷病假</td><td>小時</td><td>是（半薪）</td><td>是</td><td>一年最多30天(240小時，半薪)</td></tr>
+                <tr><td>公傷病假</td><td>小時</td><td>否</td><td>是</td><td>依實際情況核給</td></tr>
+                <tr><td>婚假</td><td>天</td><td>否</td><td>是</td><td>8天(64小時)</td></tr>
+                <tr><td>喪假</td><td>天</td><td>否</td><td>是</td><td>依親屬關係給予不同天數</td></tr>
+                <tr><td>產假</td><td>天</td><td>否</td><td>是</td><td>56天(448小時)</td></tr>
+                <tr><td>陪產檢及陪產假</td><td>天</td><td>否</td><td>是</td><td>7天(56小時)</td></tr>
+                <tr><td>家庭照顧假</td><td>小時</td><td>是（全額）</td><td>否</td><td>併入事假計算(最多7天)</td></tr>
+                <tr><td>生理假</td><td>小時</td><td>是（半薪）</td><td>否</td><td>每月1天，全年最多3天不併入病假</td></tr>
+              </table></div>
+              <p>L01特休的實際天數依員工年資動態計算，這裡列的是規則設定，個人實際可休天數要看「休假額度與餘額」表格。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">34</span><h3 class="entry-title">請假要附證明嗎？怎麼附？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>新韻目前設定普通傷病假、公傷病假、婚假、喪假、產假、陪產檢及陪產假這6種需要證明文件，其餘不需要。</p>
+              <div class="limit-box"><strong>目前限制</strong>系統尚未提供線上附件上傳功能，「新增請假」表單沒有檔案上傳欄位。如需附證明文件，請透過系統以外的方式（口頭交給主管、或用LINE/紙本另外交）。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+      <details class="module" id="mod-D">
+        <summary class="module-head"><span class="letter">D</span> POS訂單 <span class="mtitle-sub">15 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">35</span><h3 class="entry-title">如何在POS櫃檯建立一筆銷售？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <ul>
+                <li>用畫面上方「搜尋菜單品項或條碼」找商品，或按「掃描」用相機掃條碼，也可以直接點商品格加入購物車。</li>
+                <li>購物車內用 +／− 調整數量；往右滑品項可加備註／規格，往左滑可刪除該品項。</li>
+                <li>選擇付款方式：信用卡／電子支付／現金，也可以切換「零售／企業」計費模式。</li>
+                <li>滑動「滑動結帳」完成，畫面會顯示「付款完成」。</li>
+              </ul>
+              <p>若畫面右上角顯示「點餐員模式」，只能「滑動送出」把訂單送出，沒有收款權限，需要收銀員以上角色才能完成收款。訂單一旦送出，品項就無法再修改（見第37則）。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">36</span><h3 class="entry-title">如何查詢訂單？訂單狀態代表什麼？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>到「訂單」頁面，上方分頁可切換：全部／待處理／進行中／已完成／已取消。可用搜尋框輸入訂單編號或客戶姓名／電話查特定訂單。</p>
+              <p>訂單狀態：待處理 → 進行中 → 已完成 / 已取消。付款狀態（分開的兩個欄位）：未付款 / 已付款 / 已退款。訂單編號旁若有紫色「線上」標籤，代表是線上點餐進來的訂單。頁面每30秒自動重新整理。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">37</span><h3 class="entry-title">客人要改單（加項/減項）怎麼操作？</h3><span class="badge badge-員工">員工（結帳前）/管理者（作廢重開）</span></div>
+            <div class="entry-body">
+              <p><strong>訂單還沒送出</strong>：直接在購物車用 +／− 調整數量；往左滑刪除、往右滑打開備註/規格面板。</p>
+              <div class="limit-box"><strong>訂單已經送出</strong>目前系統不支援直接修改已送出訂單的品項內容。要加點或改品項，做法是整張訂單作廢（需管理者權限，見第38則），回到櫃檯重新建立一張正確的訂單。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">38</span><h3 class="entry-title">訂單打錯了如何作廢？需要什麼權限？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>到「訂單」頁面，找到該筆訂單，按「取消訂單」按鈕（只有非「已完成」「已取消」狀態才會顯示）。若「作廢需主管PIN」開啟中（預設開啟），會跳出主管PIN輸入框。作廢後訂單狀態變「已取消」，系統自動把扣掉的庫存加回去。</p>
+              <p>只有「店長」「管理員」角色能看到作廢按鈕，一般「銷售員」「櫃檯」帳號不會出現這個按鈕。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">39</span><h3 class="entry-title">退款怎麼處理？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>到「訂單」頁面，找到該筆訂單，按「退款」（只在「已完成且已付款」的訂單才會出現），驗證主管PIN後訂單付款狀態變成「已退款」。</p>
+              <div class="limit-box"><strong>重要</strong>系統「退款」按鈕只是把付款狀態標記成「已退款」用來記帳，並不會真的把錢退回客人的信用卡或電子支付帳戶。實際退錢要照客人當初付款方式在系統外處理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">40</span><h3 class="entry-title">結帳有哪些付款方式？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>新韻目前是「零售」計費模式，有三個選項：信用卡、電子支付、現金；切到「企業」模式選項會換成匯款、月結、支票。</p>
+              <div class="limit-box"><strong>重要</strong>結帳畫面上的付款方式選擇，是用來把款項分類記錄，並不會實際串接刷卡機或電子支付平台扣款。實際收款動作都是在系統外面完成的。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">42</span><h3 class="entry-title">折扣/優惠怎麼套用？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>購物車下方按「套用折扣（主管授權）」，輸入主管PIN後選折扣方式：九折／八五折／八折，或輸入固定折扣金額（NT$）。折扣套用在整張訂單。</p>
+              <p>單一品項要「招待」（整項免費）是跟折扣不同的獨立功能，同樣需要主管PIN：折扣是打整單折數/減金額，招待是把某一項價格歸零。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">43</span><h3 class="entry-title">拆單/合併結帳怎麼操作？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>系統目前有的是「拆開品項份數，各自設定不同規格」：購物車裡數量大於1的品項，往右滑打開備註面板，按「拆開 N 份，各自設不同規格」——但拆開的品項仍是同一張訂單、一起結帳。</p>
+              <div class="limit-box"><strong>目前限制</strong>沒有「多人分開結帳」或「兩張訂單合併成一張結帳」的功能。要分開付款，只能建立成兩張獨立訂單分別結帳。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">44</span><h3 class="entry-title">結帳時如何開立電子發票？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p><strong>不是在櫃檯結帳當下開票</strong>——訂單結帳完成後，到「訂單」頁按「開立發票」連結，或直接到「電子發票」頁手動開立。系統會自動帶入訂單品項，手動輸入買方統編（消費者留0000000000）、名稱、Email、發票類型，確認後按「確認開立」。</p>
+              <div class="limit-box"><strong>重要</strong>櫃檯結帳畫面上的「發票/收據」選項跟載具號碼輸入欄，目前<strong>不會</strong>被送到「電子發票」開票流程。真正開票需要到「電子發票」頁手動重新輸入一次買方資訊。建議收銀員先記下客人的統編/載具（例如寫在訂單備註）。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">45</span><h3 class="entry-title">發票開錯了如何作廢重開？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>到「電子發票」頁，找到狀態為「開立成功」的發票，按「作廢」，輸入作廢原因後確認。重開沒有自動化流程，需要按「新增發票」重新填一次品項跟買方資訊。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">46</span><h3 class="entry-title">客人要統編/載具，在哪裡輸入？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>在「電子發票」頁的「買方統編」欄輸入（消費者留0000000000）；發票類型四選一：紙本／一般載具、手機條碼（斜線開頭共8碼）、自然人憑證（2碼英文+14碼數字）、捐贈發票（愛心碼）。</p>
+              <div class="limit-box"><strong>重要</strong>櫃檯結帳畫面雖然有一個「載具」輸入欄（含掃描功能），但目前不會被送出，只是畫面上看起來能填而已。建議先記下客人口頭報的統編/載具，等到「電子發票」頁真正開票時再手動輸入。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">47</span><h3 class="entry-title">如何列印單據？出單機沒反應怎麼辦？</h3><span class="badge badge-員工">員工/管理者</span></div>
+            <div class="entry-body">
+              <p>結帳建立訂單時，系統自動把訂單轉成列印工作。店裡需要一台常駐執行「出單機橋接程式」的裝置（樹莓派/舊電腦），定期抓取列印工作轉送給印表機。瀏覽器本身沒辦法直接連印表機。</p>
+              <p><strong>排查</strong>：到「設定 → 出單機橋接」看連線狀態；確認橋接裝置還開著、程式還在執行；檢查印表機跟橋接裝置是否同一區網；出現連線驗證錯誤代表憑證錯誤或已撤銷，需重新產生一組憑證。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">48</span><h3 class="entry-title">Print Agent離線如何重啟？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>先確認裝置沒斷電、沒斷網；若是終端機手動啟動的，關掉終端機就會停，需要重新啟動。建議正式門市設定「開機自動啟動、當掉自動重啟」。重啟後回「設定 → 出單機橋接」確認狀態變回「剛剛在線」。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">49</span><h3 class="entry-title">交班金額對不起來，怎麼查？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有專門的「交班」或「班別現金對帳」功能，沒有畫面可以讓員工在交班時輸入實際現金金額跟系統自動比對。</div>
+              <p>替代做法：到「訂單」頁切到「已完成」，篩選「現金」付款訂單逐筆加總，跟現金實際點的金額比對；「報表」頁可看當日總營收，但不分付款方式。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">155</span><h3 class="entry-title">訂單可以匯出嗎？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>「訂單」頁面沒有匯出成CSV／Excel的按鈕。</div>
+              <p>需要營收彙總數字：用「報表」頁（支援日期區間與匯出）。需要單筆訂單憑證：訂單可以列印單據（見第47則）。</p>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-E">
+        <summary class="module-head"><span class="letter">E</span> 客戶管理 <span class="mtitle-sub">8 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">51</span><h3 class="entry-title">如何新增客戶資料？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>「顧客管理」頁 →「新增顧客」→ 選客戶類型（B2C個人／B2B公司）→ 填姓名、手機（必填）、生日、Email → 送出。系統用手機號碼查重。</p>
+              <div class="limit-box"><strong>請注意</strong>「生日」欄位建議一律填寫：生日留空直接送出時，系統目前會出錯、顧客不會被建立，而且畫面上不會有任何失敗提示，容易誤以為已經建立成功。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">52</span><h3 class="entry-title">如何查詢客戶的歷史訂單與消費紀錄？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>「顧客管理」搜尋客戶後點「查看」，預設顯示「消費記錄」頁籤：列出最近50筆訂單。上方統計卡顯示累計消費／消費次數／積分／建檔日期。</p>
+              <div class="limit-box"><strong>提醒</strong>消費紀錄最多顯示50筆，沒有分頁；「備註」頁籤的「儲存備註」按鈕即使因權限不足沒存檔成功，畫面仍會顯示「已儲存」，不確定時建議重新整理確認。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">53</span><h3 class="entry-title">會員等級/標籤怎麼管理？</h3><span class="badge badge-員工">員工</span></div>
+            <div class="entry-body">
+              <p>會員等級（Guest／Member／Gold／VIP）是系統自動即時算出的，沒有人工調整入口：累計消費≥5萬→VIP；≥1.5萬→Gold；到店≥1次→Member；其餘→Guest。</p>
+              <div class="limit-box"><strong>目前限制</strong>沒有「標籤」（自由多選分類）功能，最接近的是「備註」欄位（自由文字，不能拿來篩選）。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">54</span><h3 class="entry-title">客戶資料重複了怎麼合併？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有「合併客戶」功能，也沒有直接編輯客戶姓名/電話/Email的入口（只有進客戶檔案頁改「備註」）。重複的那筆目前無法刪除，也無法把訂單轉掛到保留的那一筆，需要另外協助處理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">55</span><h3 class="entry-title">如何匯入既有客戶名單？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>準備CSV/Excel，第一列須含「姓名」與「手機」欄位（支援常見別名）。到「會員 → 匯入」選檔案匯入，完成後提示新增幾位、幾位重複略過、幾筆缺欄位跳過。</p>
+              <p>缺少姓名或手機欄位會直接擋下整批匯入；手機號碼重複的資料會直接略過，不會覆蓋既有客戶。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">56</span><h3 class="entry-title">客戶個資保護原則</h3><span class="badge badge-全部">全部</span></div>
+            <div class="entry-body">
+              <p>跨店隔離：客戶資料底層依店家帳號隔離；查詢客戶資料最低要「收銀員」以上；新增/編輯要「店長」以上。</p>
+              <p>系統目前<strong>沒有「地址」欄位</strong>：客戶資料只有姓名、手機、Email、生日、備註、統一編號，不會儲存地址。以上是技術上的存取限制，不是正式的法遵/個資聲明，如客戶詢問個資政策，建議另外準備正式聲明文件。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">57</span><h3 class="entry-title">如何發LINE通知給客戶？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前不支援</strong>系統沒有「選一位客戶、發訊息給他」的畫面。「LINE推播」功能是發給全部好友的廣播（不能挑單一客戶），且目前新韻的帳號畫面上沒有這個按鈕，只有「串接LINE官方帳號」的設定入口。「候位叫號」「訂位提醒」等場景設計上會觸發LINE推播，但需要客人先綁定LINE，目前一般客戶資料還沒有這個綁定機制，所以這類自動通知目前實際上不會送達客人手機。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">58</span><h3 class="entry-title">客戶要求刪除個資怎麼處理？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有「刪除客戶」功能。唯一能做的：把「備註」欄位清空存檔；姓名/電話/Email/生日等核心欄位沒有直接編輯入口可清空。這件事涉及法律責任，建議提報請公司決定如何處理，不要自行判斷。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-F">
+        <summary class="module-head"><span class="letter">F</span> 商品庫存採購 <span class="mtitle-sub">14 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">59</span><h3 class="entry-title">如何新增商品？（含分類/規格）</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>「庫存管理」→「新增品項」→ 填商品名稱、品項類型（一般商品／零件／半成品／成品／組合品）、分類、商品編號/SKU（留空自動產生）、國際條碼（選填）、售價、成本、初始庫存、補貨警示（預設10）、單位 → 儲存。</p>
+              <p>新韻目前已有13個商品分類可直接選用；新增商品畫面本身沒有「+新增分類」，要建全新分類目前只能透過批次匯入CSV。「成本」欄位只有店長／管理員看得到。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">60</span><h3 class="entry-title">多規格商品怎麼建？（例：CD/USB/數位版）</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>庫存要分開算（例如CD有實體庫存、數位版不扣庫存）→ 建成三筆獨立商品。只是同一品項的價格級距（共用庫存）→ 用「規格/尺寸」功能新增。</p>
+              <div class="limit-box"><strong>重要</strong>「規格/尺寸」功能只影響售價，<strong>不會各自扣獨立庫存</strong>——同一張商品卡片下所有規格共用同一個庫存數字。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">61</span><h3 class="entry-title">如何調整售價？何時生效？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>庫存 → 找商品 → 編輯 → 改「售價」→ 儲存。<strong>立即生效</strong>，沒有「排程未來生效日」的功能，也沒有改價歷史紀錄可查。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">62</span><h3 class="entry-title">商品售完如何標示/下架？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p><strong>庫存歸零</strong>：系統自動標示紅色「缺貨」，不用手動操作。<strong>要完全不讓商品出現在結帳選單</strong>：庫存→找商品→按✕（停用）。</p>
+              <div class="limit-box"><strong>提醒</strong>「缺貨」是自動判斷，就算沒庫存，只要沒手動按「停用」，商品依然會出現在結帳選單，可能造成「明明沒貨還能被點」。「刪除」跟「停用」不同，刪除後無法恢復，建議暫時下架用「停用」。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">63</span><h3 class="entry-title">如何建立採購單？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>「採購」頁 →「新增採購單」→ 選供應商（選填）、預計到貨日、備註 → 填採購項目（<strong>商品名稱請照「庫存管理」名稱完整照抄</strong>，名稱一致系統才會連結庫存商品）→「建立採購單」。</p>
+              <p>狀態流轉：待出貨 → 標記運送中 → 確認到貨（真正入庫，見第64則）。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">64</span><h3 class="entry-title">進貨驗收怎麼做？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>「採購」頁找到「運送中」的採購單，按「確認到貨」——按下的當下商品庫存就會增加。</p>
+              <div class="limit-box"><strong>重要</strong>品項要跟庫存商品「名稱完全一致」才會自動連結入庫，名稱對不上的品項會被跳過、不入庫，需要事後用「庫存調整」手動補。目前「確認到貨」是整張一次全部入庫，沒有「部分到貨」的處理方式。文件中心另有一個「進貨驗收單」是列印用文件，跟這裡的庫存異動是兩個獨立的東西。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">65</span><h3 class="entry-title">如何管理供應商資料？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>「採購」頁左側供應商清單是唯讀顯示，系統沒有「新增供應商」或「編輯供應商」的操作畫面。目前唯一建立方式是透過新增採購單或商品匯入CSV時自動建立，但只會填「名稱」，聯絡人/電話/Email/地址都是空的。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">66</span><h3 class="entry-title">庫存數量不對怎麼辦？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>系統沒有可以回頭查詢庫存異動歷史的畫面，只能直接盤點修正，沒辦法「先查是誰動了庫存」再決定怎麼調整。</div>
+              <p>庫存 → 找商品 → 「庫存調整」→ 選調整類型（＋進貨／－出貨／＝盤點調整）→ 數量不對且不確定原因時建議選「盤點調整」直接輸入實際數量，備註寫清楚原因。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">67</span><h3 class="entry-title">低庫存警示怎麼設定？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>商品新增/編輯畫面的「補貨警示」欄位（預設10）填低於多少數量提醒補貨，儲存即可。警示出現在「庫存管理」列表的狀態標籤跟頁面提示條。</p>
+              <div class="limit-box"><strong>提醒</strong>沒有「全店統一預設值」設定畫面，每個商品各自設定。目前只有畫面標籤跟提示條，沒有自動發Email/LINE通知。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">68</span><h3 class="entry-title">成本欄位誰看得到？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>成本欄位在系統後端就做了角色過濾：店長／管理員可以看到成本跟毛利數字，點餐員／收銀員完全看不到，這是刻意設計的保護，不是漏洞。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">69</span><h3 class="entry-title">條碼怎麼建立與列印？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>商品編輯畫面「國際條碼」欄位手動輸入或掃描帶入，儲存即可，結帳時用手機鏡頭掃條碼比對是正常可用的。</p>
+              <div class="limit-box"><strong>目前限制</strong>系統本身沒有「產生可列印的條碼圖案/標籤」功能。「庫存管理」列表上方的「條碼清單」按鈕可匯出全部商品條碼清單，交給外部標籤軟體批次產生標籤。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">70</span><h3 class="entry-title">商品照片/描述怎麼維護？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前完全沒有</strong>商品新增/編輯畫面沒有照片或描述欄位可填，系統也完全沒有「描述」這個欄位。如需顯示商品照片或說明文字，目前系統沒有對應維護入口，需要另外評估開發。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">71</span><h3 class="entry-title">庫存資料如何匯出？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>「庫存」頁（可先篩選）→ 右上角「匯出」→ 產生CSV，欄位含商品名稱、SKU、分類、售價、成本、庫存、補貨警示、單位、狀態。UTF-8編碼，Excel開啟不會亂碼。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">72</span><h3 class="entry-title">組合品（BOM成品）庫存怎麼算？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>組合品本身不建庫存，「還能賣幾組」即時算出：結帳時系統逐一檢查每個子項目「目前庫存÷組合所需數量」，取最小值當可賣上限，不夠扣會整張擋下並提示。</p>
+              <p>操作路徑：庫存→新增品項（類型選「組合品」，先存檔）→重新編輯→「組合內容」→新增子品項與數量→儲存。</p>
+              <div class="limit-box"><strong>容易誤會</strong>「庫存」列表畫面上組合品的「庫存」欄位顯示的是新增時填的「初始庫存」數字，<strong>不是即時算出的「還能賣幾組」</strong>，容易誤讀，真正的可售量要看子項庫存才準。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+      <details class="module" id="mod-G">
+        <summary class="module-head"><span class="letter">G</span> 倉儲 <span class="mtitle-sub">5 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">73</span><h3 class="entry-title">如何查各倉庫的庫存？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>倉儲 → 倉儲總覽：卡片列出每個倉別的商品數與總庫存，低庫存會有提示。</p>
+              <div class="limit-box"><strong>目前限制</strong>沒有「輸入商品名稱→查它在各倉庫各有多少」的專門查詢畫面，只能靠低庫存提示或到「盤點作業」選倉查看。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">75</span><h3 class="entry-title">盤點完整流程</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>倉儲 → 盤點作業：<strong>①開始盤點</strong>選倉別開始（該倉暫時凍結，其他倉不受影響）→ <strong>②盤點輸入</strong>逐項填「實際盤點」數量（自動存檔）→ <strong>③結束盤點</strong>系統自動把差異寫入庫存調整，顯示差異報表，倉解除凍結。</p>
+              <p>盤點是整倉進行的，沒有「只盤點部分商品」的功能。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">76</span><h3 class="entry-title">盤點中可以繼續出貨嗎？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p><strong>不行，只限「正在被盤點的那個倉」。</strong>盤點進行中，出貨、調撥、生產工單領料等會被系統擋下，要等盤點結束才恢復。不影響其他倉。建議盤點主力倉安排在打烊後或營業空檔進行。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">77</span><h3 class="entry-title">盤點差異怎麼處理？要主管核可嗎？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>沒有另外的核准機制，按下「結束盤點」的當下系統就自動把差異寫入庫存調整並生效。</p>
+              <div class="limit-box"><strong>目前限制</strong>如果需要的是「員工盤點、店長核准差異」這種雙人把關流程，目前系統做不到——盤點跟差異確認是同一人在同一次操作完成的。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">79</span><h3 class="entry-title">新增倉庫/儲位怎麼設定？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>倉儲 → 倉別管理 →「新增倉別」→ 填倉別名稱（必填）、代碼（選填）、類型（主倉／分店倉／外部倉／業務車）、地址 → 儲存。可設為「預設倉」、停用/啟用、刪除（預設倉跟有庫存的倉不能刪）。</p>
+              <div class="limit-box"><strong>目前限制</strong>系統的「倉」是最小單位，還沒有「儲位」（倉庫內部貨架/儲格編號）這種更細的設定。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-H">
+        <summary class="module-head"><span class="letter">H</span> 生產退貨 <span class="mtitle-sub">10 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">81</span><h3 class="entry-title">如何建立BOM（組合品配方）？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>這裡指的是「生產用料表」（生產領料用），跟結帳時自動展開的「組合內容」是不同東西，別搞混。</p>
+              <p>庫存 → 商品類型設為「成品」或「半成品」→ 存檔後重新編輯 →「生產用料表」區塊 →「+新增原料／零件」選既有零件/半成品填數量 → 儲存。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">82</span><h3 class="entry-title">如何開生產工單？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>生產工單 →「新增工單」→ 選要生產的成品（須已設定生產用料表）、領料/入庫倉別（同一個倉，不能分開指定）、計畫產量（可小數）→「建立工單」（狀態：草稿）。</p>
+              <p>工單建立當下，系統會把當時的用料表內容「凍結」成專屬快照，之後原始配方改版不影響這張工單。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">83</span><h3 class="entry-title">領料怎麼操作？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>生產工單列表找「草稿」狀態的工單，按「領料」——依用料快照把每項原料一次全部扣除，狀態變「已領料」。庫存不夠會擋下整個動作並顯示不足品項，不會扣一半。</p>
+              <div class="limit-box"><strong>提醒</strong>沒有「部分領料」，一次扣完整張工單的量。領料檢查的是「該倉別」的庫存，不是商品總庫存數字。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">84</span><h3 class="entry-title">生產完工怎麼回報？成品何時入庫？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>找「已領料」的工單按「完工入庫」→ 填實際完工數量、損耗數量（選填，預設0）→ 系統檢查「完工數量＋損耗數量」是否等於計畫產量，對不上會擋下 →「確認完工入庫」，成品立即入庫，工單變「已完工」。</p>
+              <div class="limit-box"><strong>提醒</strong>完工動作無法回復，「已完工」的工單不能再取消。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">85</span><h3 class="entry-title">生產工單如何取消？已領的料怎麼辦？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>只有「草稿」「已領料」狀態的工單有「取消」按鈕，「已完工」不能取消。取消時：草稿狀態直接標記取消，無庫存動作；已領料狀態系統會把之前領走的原料<strong>全額自動沖銷回原倉</strong>再標記取消。</p>
+              <p>沖銷是全額的，不能只取消部分原料。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">86</span><h3 class="entry-title">生產進度在哪裡追蹤？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>生產工單列表本身就是唯一的追蹤畫面：工單號、狀態標籤（草稿／已領料／已完工／已取消）、成品名稱、計畫產量，已完工顯示「實際完工（損耗）」。</p>
+              <div class="limit-box"><strong>目前限制</strong>沒有時間軸/甘特圖，也沒有跨工單的產能總覽儀表板。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">87</span><h3 class="entry-title">客戶退貨怎麼處理？(退貨單→退貨入庫)</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>提醒：這裡指「退貨」選單（真正影響庫存），跟單據中心的「退貨單」文件（純紙本記錄）是不同東西。</p>
+              <p><strong>①建立退貨單（草稿）</strong>：搜尋原訂單→系統列出還可退品項（組合品自動拆解到子品項）→每項設定退貨數量／狀態（良品回庫/待驗/不良品/報廢/不回庫）／回庫倉別／原因 →「建立退貨單」。<strong>②確認回庫</strong>：草稿單按「確認回庫」（跳確認視窗，動作無法重複執行），系統依狀態寫入對應倉庫存，狀態變「已回庫」。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">88</span><h3 class="entry-title">退貨的錢怎麼退？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>重要</strong>「退貨單回庫」「訂單標記退款」「發票作廢」是三個各自獨立的動作，彼此<strong>不會自動連動</strong>。要處理乾淨需要分開手動做：①建退貨單確認回庫 ②實際退錢給客人（系統不會自動退錢）③訂單頁標記「已退款」（記帳用）④如有開發票另外作廢。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">89</span><h3 class="entry-title">瑕疵品退貨入庫後怎麼標記(不可再售)？</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>不是靠單一商品貼標記，是靠「回庫到哪個倉」決定可不可以再售。建退貨單時狀態選「不良品」（或「待驗」「報廢」），系統只讓你選「不計入可售」的倉別，回庫後不會加進可售庫存總數。</p>
+              <p>前提要先在「倉別管理」建立至少一個「不計入可售」的倉。若之後不良品驗完發現可以賣，目前沒有「轉成良品」的一鍵功能，需要走庫存調整處理。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">90</span><h3 class="entry-title">出貨/外送流程怎麼走？(出貨單)</h3><span class="badge badge-管理者">管理者（單據）/員工（結帳）</span></div>
+            <div class="entry-body">
+              <p><strong>商品出貨（真的扣庫存）</strong>：客戶結帳、訂單成立的當下就已經自動完成，不需要另外走「出貨」步驟。<strong>「出貨單」文件</strong>：單據中心裡純列印/PDF用的紙本單據，跟實際扣庫存動作無關，開不開都不影響庫存。</p>
+              <div class="limit-box"><strong>提醒</strong>側邊欄的「外送」選單目前只開放餐飲業態使用，零售業態（新韻）看不到這個選單，一般商品配送目前沒有外送員接單/配送追蹤機制。</div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+      <details class="module" id="mod-I">
+        <summary class="module-head"><span class="letter">I</span> 財務發票報表 <span class="mtitle-sub">13 則</span><span class="chev">▸</span></summary>
+        <div class="module-body">
+
+          <div class="module-note"><strong>先看這個</strong>財務總覽/損益分析/稅務中心（91、92、98、102號）的數字來源目前還沒有把POS訂單或電子發票金額自動接進來，也沒有手動輸入收入/成本的表單，這幾頁對新韻來說暫時會呈現無資料/掛零的狀況——不是操作方法的問題，是資料來源還在補。「報表」頁（99-101號）抓的是真實訂單資料，不受此限制，可以正常使用。</div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">91</span><h3 class="entry-title">財務總覽各區塊數字怎麼看?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>財務 → 總覽：四張KPI卡（本月營收／毛利／預估應納稅／淨利）、營收來源與成本分佈、損益快覽趨勢圖（本月/本季/本年度）、「ORBIT AI財務顧問」（需升級正式授權方案才開通）。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">92</span><h3 class="entry-title">損益分析怎麼解讀?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>含稅營業稅率固定5%。銷項稅額＝營收×5/105；進項稅額＝可抵扣成本×5/105；應納稅額＝銷項－進項；毛利＝（營收－銷項稅額）－總成本；淨利＝毛利－應納稅額。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">93</span><h3 class="entry-title">電子發票如何開立?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>兩種進入方式：訂單頁「開立發票」圖示自動帶入品項；或電子發票頁「開立發票」手動填寫。<strong>沒有「結帳自動連動開立」</strong>，一定要手動觸發。開立成功後狀態是「已產生待上傳」，需再手動按「上傳」才會真正送到財政部。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">94</span><h3 class="entry-title">發票作廢流程與時限</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>電子發票列表狀態為「開立成功」的發票列有「作廢」按鈕，輸入原因後系統自動上傳財政部規定的作廢單。</p>
+              <div class="limit-box"><strong>重要提醒</strong>系統本身<strong>沒有實作作廢時限的檢查</strong>——不論這張發票是今天開的還是三個月前開的，只要狀態是「開立成功」都允許按作廢。但財政部電子發票作廢在法規上通常有時限，系統沒有把關這件事，建議操作前先確認或洽詢稅務顧問。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">95</span><h3 class="entry-title">發票上傳失敗怎麼辦?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>發票6種狀態：待處理、已產生待上傳、已上傳待回應、開立成功、錯誤、已作廢。「已產生待上傳」才會出現「上傳」按鈕；失敗時狀態變「錯誤」，失敗原因直接顯示在該筆發票列下方（紅字），可直接重試不會重新配發字軌號碼。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">96</span><h3 class="entry-title">電子發票設定與測試怎麼做?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>電子發票頁右上「發票設定」：賣方資訊、連線設定（帳號/SFTP/憑證檔上傳）、字軌設定（發票類別/字軌代碼/起訖號碼）。</p>
+              <div class="limit-box"><strong>目前限制</strong>沒有正式的「測試連線」按鈕，較接近測試的做法是先改成測試環境網址跑一輪流程看看。字軌代碼申請是系統以外的政府流程，需另外找會計師/稅務顧問處理。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">97</span><h3 class="entry-title">ECPay對帳：建單/付款/通知狀態怎麼查?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>系統裡沒有一個叫「ECPay對帳」的獨立畫面，要查某筆訂單有沒有付款成功，目前只能到「訂單」管理頁看該筆訂單本身的付款狀態。「金流中心」不是ECPay自動對帳工具，是手動記錄手續費彙總的資料表，跟ECPay流程完全獨立。</p>
+              <div class="limit-box"><strong>重要提醒</strong>ECPay合作關係目前尚未正式確認為穩定上線狀態，這塊金流串接目前還沒有在正式環境被完整驗證過付款回調流程，使用前請先跟系統管理者確認實際狀況。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">98</span><h3 class="entry-title">月底財務結算SOP</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <div class="limit-box"><strong>目前限制</strong>沒有整合式的「月結精靈」，月底結算需要自己把「日結通知」開關、報表分析頁、稅務中心（提醒「以上為試算數字，實際申報需依發票紀錄及稅務顧問確認，台灣營業稅為雙月制」）幾個功能拼起來看。</div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">99</span><h3 class="entry-title">銷售與毛利報表怎麼看?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>先澄清：「報表」頁<strong>沒有「毛利」</strong>，只有銷售數據。要看毛利要去「財務→總覽」的損益快覽（但資料來源另有限制，見91/92）。「報表」頁內容：4張KPI卡、每日營收長條圖、熱銷商品Top5。只計算已付款的訂單，未結帳/已作廢/退款不算入。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">100</span><h3 class="entry-title">報表日期區間與匯出</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>只有「今日」「7天」「30天」三個固定按鈕，<strong>沒有自訂起訖日期</strong>。匯出下拉選單：下載CSV到本機，或存到Google Drive（需先設定整合）。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">101</span><h3 class="entry-title">報表數字對不起來，先檢查什麼?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <ol>
+                <li>報表只算「已付款」訂單，未結帳/作廢/退款訂單不算入。</li>
+                <li>「報表」跟「財務→總覽」是兩套完全不同的資料來源，目前沒有自動同步機制，數字對不起來不是bug，是本來就沒串接。</li>
+                <li>「熱銷商品Top5」若訂單有折扣，顯示金額是否已扣折扣需另外確認。</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">102</span><h3 class="entry-title">稅務頁面是做什麼的?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>財務→稅務：銷項稅額／進項稅額／預估應納稅額三張卡，加「可抵扣進項明細」表格。頁尾明白提醒：「以上為試算數字，實際申報金額需依據發票紀錄及稅務顧問確認」——這只是試算工具，不是正式申報依據。</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="entry-num">103</span><h3 class="entry-title">員工看得到哪些財務數字?</h3><span class="badge badge-管理者">管理者</span></div>
+            <div class="entry-body">
+              <p>點餐員、收銀員完全看不到「財務」「電子發票」「報表」這三個選單項目——不是欄位被隱藏，是整個功能進不去。店長、工務、管理員這三個角色以上才看得到。「業務目標/商機」（BI Planner）不算財務數字，收銀員也可以使用自己的部分。</p>
+            </div>
+          </div>
+
+        </div>
+      </details>
+      <details class="module" id="mod-J">
+  <summary class="module-head"><span class="letter">J</span> BI Planner <span class="mtitle-sub">4 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">104</span><h3 class="entry-title">BI Planner（業務目標預測）是什麼？怎麼開始用？</h3><span class="badge badge-員工">員工（主管／店長可另外查看並切換查看全隊資料）</span></div>
+      <div class="entry-body">
+        <p>BI Planner 是把「業務目標、商機、預測、待辦行動」放在同一個工作台的模組，適合有業務銷售導向的需求（例如需要主動開發案源的業務團隊）。畫面上分成四個分頁：<code>總覽</code>／<code>Pipeline</code>／<code>行動計畫</code>／<code>每日日報</code>。</p>
+        <p><strong>誰能用</strong>：<code>admin</code>、<code>manager</code>（店長）、<code>cashier</code>（收銀員）三種角色可以進；<code>waiter</code>（點餐員）、<code>supervisor</code>（工務）不能進。</p>
+        <ul>
+          <li><code>manager</code>／<code>admin</code>：看得到全體業務的資料，右上角有 <code>篩選業務</code> 下拉選單，可以切換查看團隊裡任何一個成員的資料。</li>
+          <li><code>cashier</code>：只看得到、只能操作自己的商機／目標／日報，畫面上沒有 <code>篩選業務</code> 選單。</li>
+        </ul>
+        <p><strong>怎麼開始用：</strong></p>
+        <ol>
+          <li>右上角 <code>設定目標</code>：填當期營收目標（作法見下一則）</li>
+          <li>右上角 <code>新增商機</code>：開始記錄潛在案源</li>
+          <li>到 <code>Pipeline</code> 分頁，用商機卡片上的階段下拉選單，把商機依實際進度切換到對應階段（<code>新商機</code>／<code>已評估</code>／<code>提案中</code>／<code>議價中</code>／<code>已成交</code>／<code>未成交</code>）</li>
+          <li><code>每日日報</code> 分頁：每天回報當日業績與工作內容</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">105</span><h3 class="entry-title">業務目標要怎麼設定？</h3><span class="badge badge-員工">員工（主管／店長可另外為團隊成員設定目標）</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>BI Planner → 右上角 <code>設定目標</code></p>
+        <ol>
+          <li>跳出視窗，填四個必填欄位：<code>起始日</code>、<code>結束日</code>、<code>營收目標</code>、<code>成交筆數目標</code></li>
+          <li><code>cashier</code> 只能設定自己的目標；<code>manager</code>／<code>admin</code> 會多看到一個 <code>負責業務</code> 下拉選單，可以幫團隊裡任何一個成員設定目標</li>
+          <li>同一人、同一段期間重複設定會直接覆蓋更新，不會產生兩筆重複目標</li>
+        </ol>
+        <p>目標設定後會出現在：</p>
+        <ul>
+          <li><code>總覽</code> 分頁的「本月目標」卡（含「已達成 X%」）</li>
+          <li><code>行動計畫</code> 分頁的「目標進度」區塊（每個有設目標的人各一條進度條）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">106</span><h3 class="entry-title">預測數字（加權營收預測）是怎麼算出來的？可以信嗎？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><code>總覽</code> 分頁的 <code>加權營收預測</code>，簡單說就是：把每筆還在談的商機金額，乘上這筆商機目前的成交機率，全部加起來，再加上這個月已經確定成交的金額。</p>
+        <p>系統把商機分成 6 個階段，每個階段有一個預設成交機率：<code>新商機</code> 10%、<code>已評估</code> 30%、<code>提案中</code> 50%、<code>議價中</code> 75%、<code>已成交</code> 100%、<code>未成交</code> 0%。越後面的階段代表越接近成交，在預測裡佔的比重也就越高。業務把商機拖到哪個階段，機率就自動帶入該階段的預設值；如果覺得某筆商機的實際把握度跟預設值不同，也可以在新增／編輯商機時手動調整那一筆的 <code>成交機率 %</code>。</p>
+        <div class="limit-box"><strong>這個數字僅供參考，不是精算保證</strong>它完全取決於業務有沒有誠實、即時更新商機的階段跟金額——案源進度沒有隨時更新，預測就會失真。本質上這是「業務自己回報的加權估算」，不是根據過去實際成交的歷史數據跑統計模型算出來的。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">107</span><h3 class="entry-title">目標達成率要去哪裡看？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><code>總覽</code> 分頁有 4 張卡：<code>本月目標</code>／<code>本月已達成</code>／<code>距離目標尚差</code>／<code>每日需要業績</code>（＝距離目標尚差 ÷ 剩餘天數，算出平均每天要做多少業績才能達標）。<code>本月目標</code> 卡下方會直接顯示「已達成 X%」。</p>
+        <p><code>行動計畫</code> 分頁 → <code>目標進度</code> 區塊：針對每個有設定目標的人，各自顯示一條進度條，百分比 = 該人在目標期間內已成交金額 ÷ 營收目標。</p>
+        <div class="limit-box"><strong>「已達成」的認定規則，跟直覺可能不太一樣</strong>商機階段要被標記為 <code>已成交</code>，且成交時間（<code>won_at</code>，抓不到時改用最後更新時間）落在目標期間內（以台北時區的日曆日判斷）才會算進「已達成」金額。</div>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+<details class="module" id="mod-K">
+  <summary class="module-head"><span class="letter">K</span> LINE整合 <span class="mtitle-sub">6 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">108</span><h3 class="entry-title">怎麼把公司的LINE官方帳號串接進ORBIT？</h3><span class="badge badge-管理者">管理者（存檔僅限admin帳號角色）</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊選單 → <code>整合應用</code> → LINE官方帳號卡片 → <code>串接 LINE 官方帳號</code>（已串接過則顯示 <code>編輯 LINE 設定</code>）</p>
+        <ol>
+          <li>進入「整合應用」頁面，找到「LINE 官方帳號」卡片（分類標籤：顧客互動），右上角會顯示「已串接」（綠色）或「未串接」（灰色）。</li>
+          <li>按下卡片下方按鈕，會跳出「LINE 串接設定」視窗，填寫 <code>Channel Access Token *</code>（必填，畫面提示「從 LINE Developers → Messaging API 取得」）與 <code>Channel ID</code>（選填，畫面提示「LINE Developers → Basic settings」）。</li>
+          <li>視窗下方會顯示一組「Webhook 接收網址（填入 LINE Developers 後台）」，格式為 <code>{你的網域}/api/webhooks/line/{你的client id}</code>，旁邊有「複製」按鈕可以一鍵複製，貼到 LINE Developers 後台的 Webhook URL 欄位。</li>
+          <li>填完按 <code>儲存設定</code>。畫面文字寫「主管密碼授權後可修改 API 設定」，但實際查證下來，這裡的存檔限制看的是登入帳號本身的角色（僅admin角色能真的存進去），不是輸入主管PIN碼那種臨時授權——manager角色能打開頁面看到目前設定，但按「儲存設定」會被API擋下。</li>
+          <li>存檔成功會顯示「✓ 儲存成功」，卡片狀態變成「已串接」。</li>
+        </ol>
+        <p>Channel Access Token是長效金鑰，在LINE Developers Console的「Messaging API」分頁下產生，不會過期（除非手動重新產生）。這裡串接的是公司的LINE官方帳號（客人主動加好友的那個），跟員工個人用LINE登入ORBIT是完全不同的兩件事。</p>
+        <div class="limit-box"><strong>目前限制</strong>「LINE 串接設定」視窗只有「Channel Access Token」跟「Channel ID」兩個欄位，沒有「Channel Secret」欄位——這代表LINE官方帳號「收訊」方向的功能（顧客傳訊息、家長綁定等）目前無法運作，詳見本模組「Webhook是什麼」條目的說明。另外，目前系統是一個公司對應一組LINE官方帳號設定，如果貴公司未來需要總店＋分店各自一個官方帳號，目前架構尚不支援，需要另外規劃，屬於待確認事項。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">109</span><h3 class="entry-title">LINE通知有哪些？誰會收到什麼？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>系統裡所有會觸發LINE訊息的地方，分成兩大類：<strong>通知「老闆本人」</strong>（用同一套機制）、<strong>通知「特定對象」</strong>（顧客、家長等，各自獨立邏輯）。</p>
+        <p><strong>A. 通知老闆本人的事件</strong>（送達對象一律是公司在ORBIT的負責人帳號，不是操作當下的登入者）：</p>
+        <ol>
+          <li>員工完成統編驗證、申請加入待審核</li>
+          <li>員工請假申請送出</li>
+          <li>採購單狀態變更</li>
+          <li>生產工單狀態變成「完工」或「作廢」（注意：領料這個中間步驟不會通知）</li>
+          <li>商品低於安全庫存（每日排程逐一檢查一次）</li>
+        </ol>
+        <div class="limit-box"><strong>這一整類通知目前能不能收到，要看兩個前提，兩個都要滿足</strong>一、後台的 <code>automation_notify</code> 開關要是打開的——這是選擇選入(opt-in)、預設關閉，而且目前整個系統沒有任何畫面能讓貴公司自己開啟，只能由KAYON/工程端直接在資料庫手動改，貴公司目前是否已開啟待確認。二、老闆本人要曾經用「LINE登入」ORBIT過，系統才查得到對應的LINE帳號；如果平常都用密碼登入，就算開關開了也只會收到email、收不到LINE推播（email是主要管道，不受LINE有沒有設定影響）。</div>
+        <p><strong>B. 通知特定對象的事件</strong>（各自獨立邏輯，不透過上面那套機制）：</p>
+        <ul>
+          <li><strong>候位「叫號」</strong>：在「訂位管理」候位清單按「已叫號」時會嘗試觸發，但畫面目前沒有蒐集顧客LINE帳號的機制，實際上只會顯示「客人尚未綁定LINE，請以口頭或電話通知」，不會真的推播到顧客手機。</li>
+          <li><strong>訂位前一天提醒</strong>：每天固定時間會執行排程，但目前查詢隔天訂位資料的部分還沒接上真實資料，排程會照常執行、但永遠處理0筆，不會發出任何訊息。</li>
+          <li><strong>補教家長：學生到班／未到班通知</strong>：家長要先傳「綁定 ６碼」訊息給LINE官方帳號完成綁定才能收到，但這一步依賴Webhook收訊，目前無法完成，所以家長端目前連綁定這一步都做不到，後續通知自然也不會發生。</li>
+          <li><strong>LINE官方帳號AI客服自動回覆</strong>：顧客傳訊息進來時由AI即時生成回覆，同樣受Webhook缺口影響，目前無法觸發。</li>
+          <li><strong>建案LINE推播（廣播給全部好友）</strong>：只有系統「產業別」設定為建案類客戶，才會在「整合應用」頁面看到這個面板，手動輸入文字群發。貴公司的產業別設定是否屬於這類、看不看得到這個面板，目前待確認。</li>
+          <li><strong>n8n自動化webhook轉發</strong>：讓外部n8n自動化流程呼叫ORBIT代發LINE訊息，是後端對後端的技術介接，沒有對應的操作畫面，需要另外設定n8n跟環境變數，一般不會用到，這裡列出只是避免跟其他LINE功能搞混。</li>
+        </ul>
+        <div class="limit-box"><strong>目前真的會送達的LINE通知非常有限</strong>綜合以上，扣掉需要手動開啟才會動作的老闆通知、扣掉還沒接資料的訂位前一天提醒、扣掉沒有畫面能綁定顧客LINE的候位叫號、再扣掉Webhook缺口卡住的家長綁定跟AI客服——目前唯一不需要額外設定、只要Channel Access Token填對就能實際運作的，只有「建案LINE推播」這個手動廣播功能，而且只有特定產業別客戶看得到。其餘功能目前都卡在至少一個前置缺口上，這點務必先理解清楚，避免預期落差。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">110</span><h3 class="entry-title">怎麼測試LINE通知有沒有真的通？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>「整合應用」頁面的LINE官方帳號卡片目前沒有像其他整合項目那樣的「測試並連結」按鈕——LINE走的是自己一套「填Token→存檔」的流程，沒有內建的「傳送測試訊息」功能。以下是目前系統裡實際能拿來驗證的方法，以及各自的限制。</p>
+        <ol>
+          <li><strong>測試「收訊」方向（顧客傳訊息進來）</strong>：用手機把公司的LINE官方帳號加為好友，傳一句話過去，理論上該收到AI客服的自動回覆——但目前這個方法測不出結果，因為Webhook缺少「Channel Secret」欄位（詳見「Webhook是什麼」條目），LINE平台送出的請求一定會被系統擋下，傳過去大概率不會有任何回覆。這不是操作方式錯誤，是系統目前缺欄位的緣故。</li>
+          <li><strong>測試「發送」方向（系統推播給顧客）</strong>：在「訂位管理」把候位清單裡某筆顧客標記為「已叫號」，理論上會觸發LINE推播——但目前這個方法也測不出真正送達，因為這個動作沒有帶顧客的LINE帳號資訊，畫面本身也沒有地方能取得，請求一定會落到「客人尚未綁定」的分支，只會顯示文字給店員自己看，不會真的送到顧客手機上。</li>
+          <li><strong>唯一「按下去、只要Token正確就真的會送出」的測試方式</strong>：如果貴公司的「產業別」設定為建案類客戶，「整合應用」頁面會多顯示一個「建案 LINE 推播」欄位，在文字框輸入任意測試文字，按「發送推播」，會推播給LINE官方帳號的<strong>全部好友</strong>（不是只發給自己）。如果Token正確，畫面會顯示「已推播給全部LINE好友」，自己的手機（如果已加好友）應該會收到這則測試訊息——這是目前唯一能驗證Token本身有沒有設對的方式。因為這是廣播，測試文字要避免寫真實促銷內容，測完記得跟已加好友的人說明這是測試。</li>
+        </ol>
+        <p>「串接LINE官方帳號」視窗按下「儲存設定」出現「✓ 儲存成功」，只代表Token有寫進資料庫，<strong>不代表</strong>Token本身有效——存檔動作本身不會呼叫LINE API做任何驗證。</p>
+        <div class="limit-box"><strong>目前無法在系統內直接測試Token是否有效</strong>如果貴公司的產業別不是建案類，目前完全沒有內建方式可以在系統裡測試LINE Token到底填對了沒有，只能等真的有候位/家長綁定情境發生時，間接觀察有沒有正常運作，或請工程端協助查看伺服器log。貴公司的產業別設定是否屬於建案類，目前待確認。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">111</span><h3 class="entry-title">Webhook是什麼？什麼情況需要設定？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>一般串接LINE，Token是讓ORBIT<strong>主動發訊息給LINE</strong>用的（例如推播通知）。但反過來，「顧客傳訊息給店家的LINE官方帳號」這件事，LINE平台不會自己知道要把訊息轉去哪裡——需要先告訴LINE「有新訊息時，把資料送到這個網址」，這個「被動接收對方通知」的網址就叫Webhook。</p>
+        <p>在ORBIT裡，這個網址格式是 <code>{你的網域}/api/webhooks/line/{你的client id}</code>，設定的地方在LINE Developers後台的「Messaging API」設定頁，貼上這個網址並啟用「Use webhook」。</p>
+        <p>Webhook只有在需要<strong>接收</strong>LINE傳來的事件時才需要，包含：顧客傳訊息進來、要讓AI客服自動回覆；補教家長要用LINE完成綁定。如果貴公司只需要系統主動推播（例如低庫存警示、候位叫號），理論上不設定Webhook不影響「發送」方向的功能——但因為Webhook網址在「LINE串接設定」視窗是預先顯示好、附一鍵複製按鈕的，系統的預設操作流程是希望每個客戶都設定它。</p>
+        <div class="limit-box"><strong>目前Webhook對所有客戶都會回應403，實際上無法運作</strong>LINE官方帳號每次呼叫Webhook都會附一個簽章，系統這端要用「Channel Secret」重新驗算比對，確認請求真的是LINE平台送來的、不是別人偽造的。但目前「LINE串接設定」視窗只有「Channel Access Token」跟「Channel ID」兩個欄位，沒有「Channel Secret」欄位，這個值永遠是空的，Webhook收到請求時一定會回傳403 Forbidden——不管Webhook網址貼得多正確、Token填得多正確都一樣。這不是貴公司專屬問題，是任何客戶都會遇到的現況。受影響的功能：LINE官方帳號AI客服自動回覆完全無法觸發；補教家長LINE綁定完全無法完成（連帶到班/未到班通知也不會發生）。程式碼裡的AI回覆邏輯、綁定碼比對邏輯都已寫得完整，純粹是「進不了門」的問題，待後續補上這個欄位才能真正動起來，目前沒有排定時程。</div>
+        <p>系統裡還有另一個Webhook，是給n8n這類自動化工具「呼叫回ORBIT」用的技術介接，用另一組共用密鑰驗證，不是LINE的簽章機制。這個Webhook沒有對應的操作畫面，一般不需要操作，這裡列出只是避免跟LINE Webhook搞混。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">112</span><h3 class="entry-title">「整合應用」頁面上有什麼？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊選單 → <code>整合應用</code></p>
+        <p>這個頁面目前列出多張平台卡片，其中只有「LINE 官方帳號」（分類標籤：顧客互動）真的可以設定、有操作入口，其餘卡片畫面上都顯示「即將上線」徽章，按鈕區塊固定顯示灰字「更多模組即將上線」（不可點擊），目前沒有任何可操作的功能。</p>
+        <p>LINE官方帳號卡片描述文字是「串接品牌 LINE 官方帳號，訂單通知、預約提醒、候位叫號一鍵推播。」右上角狀態徽章依是否已填Token顯示「已串接」（綠色）或「未串接」（灰色）。卡片下方另有「資料流」說明兩行：「訂單 / 預約狀態 → LINE 訊息推播」（標註「狀態變更時」）、「LINE 訊息事件 → POS 通知中心」（標註「顧客互動時（Webhook）」）。</p>
+        <div class="limit-box"><strong>這兩行資料流是設計上的目標說明，跟目前實際串接情況有落差</strong>「狀態變更時自動推播」目前只有候位叫號一種情境會嘗試觸發，且因為沒有畫面能取得顧客的LINE帳號資訊，實際上不會真的送達；「Webhook收顧客互動」則因為Channel Secret欄位缺口，目前完全無法運作（詳見「Webhook是什麼」條目）。</div>
+        <div class="limit-box"><strong>頁面上兩個容易誤導的地方</strong>一、頁首「X 個平台 · 已連結 Y 個」的Y數字，不會反映LINE有沒有連結成功——這個計數只統計其他平台的連結資料，LINE走的是自己獨立的設定流程，不計入這個數字，所以就算LINE已經成功串接、卡片顯示「已串接」，頁首的「已連結」數字目前通常還是會顯示0。二、頁面下方「已啟用的資料流」表格，目前對任何客戶都會是空的，同樣是因為LINE不計入那個資料來源、其餘平台都還沒上線——這張表格目前不會出現任何一列資料。看到「已連結 0 個」或空白的資料流表格，不代表LINE沒設定成功，請以LINE官方帳號卡片本身的「已串接／未串接」徽章為準。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">113</span><h3 class="entry-title">LINE官方帳號跟ORBIT是什麼關係？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>系統裡跟LINE有關的功能其實是三件互相獨立的事，很容易被當成同一件事，先分清楚：</p>
+        <ol>
+          <li><strong>LINE官方帳號（OA）</strong>：貴公司自己申請、自己擁有的帳號（客人在LINE上加好友的那個帳號），跟ORBIT完全無關的資產——就算哪天不用ORBIT了，這個帳號還是貴公司的，好友名單也還在，ORBIT不會、也不能「取代」這個帳號。</li>
+          <li><strong>ORBIT串接這個OA帳號</strong>：把OA帳號後台的「Channel Access Token」貼到ORBIT的「整合應用」頁面，等於授權ORBIT可以用貴公司的名義透過這個OA帳號發訊息、（理論上）收訊息。概念上很像把LINE官方帳號的「遙控器」交給ORBIT代操作，OA帳號本身還是貴公司的，密碼／後台管理權都還在貴公司手上，ORBIT只是拿到一組可以呼叫LINE API的Token。</li>
+          <li><strong>員工／老闆個人用LINE登入ORBIT</strong>：完全不同的另一件事，是「人」登入「ORBIT系統」的方式，跟前面兩點的OA帳號無關。</li>
+        </ol>
+        <p>貴公司的客人在LINE上看到、加好友的，永遠是貴公司自己的LINE官方帳號，不會看到任何「ORBIT」字樣，客人感覺不到背後是ORBIT在運作。設定完Token之後，理論上系統可以在特定情境（結帳完成、候位叫號等）自動代替貴公司用這個OA帳號發訊息給客人——但目前實際上能自動送達的情境非常少，多數還卡在缺功能或缺欄位的階段，不是設定好Token就等於全部自動化都會動起來，這點請務必先理解清楚，避免預期落差。</p>
+        <p>如果OA帳號被停用、或Token重新產生過期，ORBIT這邊的推播／自動回覆功能會跟著失效，需要重新去OA後台複製新的Token貼回ORBIT——這不是ORBIT系統故障，是常見的憑證過期情境，發生時重新設定即可。</p>
+        <div class="limit-box"><strong>目前架構是一個公司對應一組LINE官方帳號</strong>如果貴公司未來想用「客服帳號」「活動帳號」分開經營，或總店＋分店各自一個OA帳號，目前架構不支援同時串接多個，需要另外規劃，屬於待確認/待規劃事項。</div>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+<details class="module" id="mod-M">
+  <summary class="module-head"><span class="letter">M</span> DOCS單據中心 <span class="mtitle-sub">14 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">117</span><h3 class="entry-title">什麼情況該開哪一張單？（DOCS十類單據總覽）</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p>「DOCS單據中心」是ERP.POS裡統一管理所有正式書面單據的地方，10種單據共用同一套機制：流水號、版本追蹤、電子簽章、用印、PDF匯出、公開防偽驗證。側邊欄沒有一個叫「DOCS」的總入口，10種單據各自是「文件表單」區裡獨立的選單項目，要開哪張單就直接點對應的選單。</p>
+        <p><strong>操作路徑：</strong>側邊欄 →（文件表單區）→ 依情境選對應單據</p>
+        <p>什麼情況開什麼單：</p>
+        <ol>
+          <li><strong>採購單</strong>：要跟供應商叫貨時，先開這張記錄要採購的品項與數量。</li>
+          <li><strong>進貨驗收單</strong>：供應商貨到，驗收數量/品質時開，可對應採購單號。</li>
+          <li><strong>報價單</strong>：客戶詢價，要給對方一份正式報價時開。</li>
+          <li><strong>訂購單</strong>：客戶確認要買、成立訂單時開。</li>
+          <li><strong>出貨單</strong>：商品要出貨/配送給客戶時開，附配送資訊。</li>
+          <li><strong>合約</strong>：要跟客戶簽長期服務/採購合約時開，走電子簽章流程。</li>
+          <li><strong>退貨單</strong>：客戶退貨，要留一份書面退貨紀錄時開（注意，見下方限制）。</li>
+          <li><strong>請款單</strong>：服務/貨品已交付，要跟客戶請款時開。</li>
+          <li><strong>收據</strong>：收到客戶款項，要開立收款證明時開。</li>
+          <li><strong>維修保固單</strong>：商品送修，或客戶詢問是否還在保固期時開（維修跟保固合併成一張）。</li>
+        </ol>
+        <p>這10種單據開立/作廢都不會實際影響庫存或財務——都是純記錄用的書面單據。</p>
+        <div class="limit-box"><strong>容易搞混的兩組名稱</strong>DOCS的「退貨單」只是一張書面紀錄，不會自動退庫存、退款——真正會動庫存、觸發退款的是側邊欄另一個獨立的「退貨」功能（僅限有實體庫存的產業別），兩者互不連動。另外，DOCS的「合約」是新韻開給自己客人用的，跟設定頁裡「合約管理」（鎧洋跟ORBIT客戶簽約用的內部工具）也是完全不同的兩套系統，不要混在一起操作。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">118</span><h3 class="entry-title">如何建立報價單？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊欄 → <code>報價單</code> → <code>+ 新增報價單</code></p>
+        <ol>
+          <li>進入「報價單」列表頁，按右上角<code>+ 新增報價單</code>。</li>
+          <li>「客戶資訊」區塊：可用<code>從既有客戶選擇</code>下拉帶入既有客戶資料，或手動填「客戶名稱」「聯絡人」「手機」「電話」「Email」「地址」。</li>
+          <li>「報價資訊」區塊：填「業務代表」（下拉選公司員工，預設帶入自己，也可代同事開單改選別人）、「報價效期」「付款條件」「交貨條件」。</li>
+          <li>「品項明細」區塊：可用<code>選商品帶入</code>下拉挑既有商品自動帶入品名與單價，或手動填「品名」「說明/規格」「數量」「單位」「單價」「折扣」，按<code>+ 新增一列</code>可加更多品項。</li>
+          <li>視需要填「稅額」「其他費用」「備註」，確認「合計」金額無誤後按<code>建立報價單</code>。</li>
+        </ol>
+        <p>新建立的報價單狀態一律是「草稿」，之後要走「送出→核准→完成」的狀態流程（見129號條目）。</p>
+        <div class="limit-box"><strong>目前不會自動轉單</strong>報價單本身不會自動連動到「訂購單」——沒有一鍵轉單的按鈕，實際做法見119號條目。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">119</span><h3 class="entry-title">報價單要怎麼轉成訂購單？</h3><span class="badge badge-管理者">管理者（需店長以上）</span></div>
+      <div class="entry-body">
+        <p>先說結論：<strong>畫面上目前沒有「轉單」按鈕可以按。</strong>後端確實有一支轉單API，可以把報價單內容整包複製成訂購單，並自動記錄「這張訂購單是從哪張報價單轉來的」，但整個前端（報價單詳情頁、訂購單新增頁）都沒有接上任何按鈕或連結去呼叫它，畫面上完全看不到、按不到。</p>
+        <p>這支API本身要求操作者至少是「店長」等級才能呼叫，比一般建立/編輯單據要求的「收銀員」等級高——這是本條目標「管理者」而非一般預期「員工」的原因，但因為畫面沒有入口，這個門檻目前也只是理論上的設計。</p>
+        <p>目前只能手動做：</p>
+        <ol>
+          <li>開啟該張報價單詳情頁，把品項明細、客戶資訊記下來（或另開分頁對照）。</li>
+          <li>到「訂購單 → 新增訂購單」，比照報價單內容手動重新輸入客戶資訊與品項。</li>
+          <li>訂購單的「訂購資訊」區塊有一個「對應報價單號」欄位，手動填入原報價單的單號，作為兩張單之間的人工備註連結（不是系統自動關聯）。</li>
+        </ol>
+        <div class="limit-box"><strong>目前尚未排入開發、需KAYON確認</strong>後端轉單邏輯（權限、複製品項、自動關聯來源文件）都已經寫好，只差前端一顆「轉為訂購單」按鈕就能上線，這是盤點時發現的一個相對低成本的缺口，是否排進下一輪開發還沒有定案，目前先維持手動抄一次的做法。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">120</span><h3 class="entry-title">如何建立合約？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊欄 → <code>合約</code> → <code>+ 新增合約</code></p>
+        <ol>
+          <li>進入「合約」列表頁，按右上角<code>+ 新增合約</code>。</li>
+          <li>「甲方（本公司）」區塊：填「公司名稱」「統一編號」「代表人/聯絡人」「地址」。</li>
+          <li>「乙方（客戶）」區塊：填「公司/個人名稱」「統一編號」「代表人/聯絡人」「手機」「地址」，或用<code>從既有客戶選擇</code>下拉帶入既有客戶資料。</li>
+          <li>「合約條款」區塊：填「合約起始日」「合約結束日」「付款條件」「服務/商品範圍」。</li>
+          <li>「品項明細」區塊填合約涵蓋的項目/金額（有<code>選商品帶入</code>下拉可直接帶入庫存商品），確認合計金額後按<code>建立合約書</code>。</li>
+        </ol>
+        <p>建立後的合約狀態一律是「草稿」，簽署與用印流程見121、122號條目。</p>
+        <div class="limit-box"><strong>目前沒有額外拉高合約的建立門檻</strong>DOCS的10種單據（含合約）建立/編輯共用同一支API，只檢查「收銀員以上」，並沒有針對「合約」這個單據類型另外拉高到店長門檻——也就是說目前一般收銀員帳號技術上也能新增/編輯一張合約書。這是否符合新韻的預期、要不要另外限制到店長以上，目前還沒有定案。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">121</span><h3 class="entry-title">電子簽章怎麼用？能不能寄連結給客戶自己簽？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p>先說清楚：<strong>DOCS目前沒有「寄一個公開連結，讓客戶自己遠端簽署」這個功能</strong>。系統裡確實有一套免登入的公開連結簽署機制，但那是另一套完全獨立的系統——鎧洋自己跟ORBIT客戶（例如新韻）簽約用的內部工具（設定頁「合約管理」），不是新韻開給自己客人用的DOCS合約，兩邊資料表、簽署流程都不共用。</p>
+        <p>DOCS合約實際的簽署方式是：<strong>必須先登入ERP.POS，在合約詳情頁現場簽署</strong>，沒有讓客戶收到網址、自己在家用手機簽的流程。</p>
+        <p><strong>操作路徑：</strong>側邊欄 → <code>合約</code> → 點進一張合約 → <code>簽名</code>頁籤</p>
+        <ol>
+          <li>開啟一張合約的詳情頁，切到<code>簽名</code>頁籤。</li>
+          <li>畫面依合約範本列出要簽署的角色：「甲方代表」「乙方代表」。</li>
+          <li>每個角色下方按<code>開始簽署</code>，會出現簽名畫布。</li>
+          <li>簽署方式二選一：「手寫簽名」直接在畫布上寫字（寫錯按<code>清除重簽</code>），或「選預存簽名」從下拉選單套用已存過的簽名圖檔。</li>
+          <li>按<code>確認簽署</code>送出，完成後畫面顯示「已簽署」與簽署時間。</li>
+        </ol>
+        <p>實務上要讓客戶簽署，通常是店員/業務把平板或電腦交給客戶當面在畫布上簽。每張合約的簽署角色（甲方/乙方）由合約範本固定，不能自訂新增角色。</p>
+        <div class="limit-box"><strong>「寄連結給客戶自己簽」目前是功能缺口，非知識庫能自行補上</strong>如果新韻未來需要「合約寄給客戶在家簽、不用到店簽」這種流程，目前系統沒有這個功能，需要另外排開發，這點還沒有定案。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">122</span><h3 class="entry-title">印章要怎麼用？誰能設定使用權限？</h3><span class="badge badge-管理者">管理者（僅限admin，蓋章本身員工即可操作）</span></div>
+      <div class="entry-body">
+        <p>「印章資產」是預先上傳到系統裡的印章圖檔（公司大小章、發票章、財務章、作廢章、急件章、自訂印章…），存在印章清單裡，之後在任何一張單據的<code>用印</code>頁籤就能挑選套用，用拖曳決定蓋在文件上的位置、縮放、旋轉角度、透明度。</p>
+        <p><strong>權限層級（重要）</strong>：新增一顆印章、以及設定某顆印章開放給哪些角色使用，這兩件事都只有admin（管理員）等級能做，連店長都不行。新增的印章預設只有admin能用，要開放給店長或其他角色，要admin另外去權限設定頁把該角色勾選加進去。至於實際「蓋章」這個動作本身，只要該角色有被admin開放這顆印章的使用權限，收銀員等級以上都能操作。</p>
+        <p><strong>操作路徑（新增印章與設定權限，admin限定）：</strong>設定 → 印章中心（<code>/dashboard/settings/stamps</code>）</p>
+        <ol>
+          <li>admin帳號進入「印章中心」，上傳一張透明背景的印章圖檔（PNG）。</li>
+          <li>選「印章類型」（公司大章／公司小章／發票章／財務章／已付款章／作廢章／急件章／樣品章／自訂印章），填印章名稱後儲存。</li>
+          <li>新增後這顆印章預設只有admin自己看得到、能用。</li>
+          <li>若要開放給店長或其他角色使用，進入該顆印章的權限設定，勾選要開放的角色（admin一律保留在清單裡），儲存後被勾選的角色才會在<code>用印</code>頁籤的下拉選單裡看到這顆印章。</li>
+        </ol>
+        <p><strong>操作路徑（實際蓋章，被開放權限的角色都能做）：</strong>任一張單據詳情頁 → <code>用印</code>頁籤</p>
+        <ol>
+          <li>從下拉選單<code>選擇印章</code>（只會列出自己角色有權限用的印章）。</li>
+          <li>選好印章後圖檔出現在畫布上，用滑鼠拖曳調整位置，用「縮放」「旋轉」「透明度」三個滑桿調整效果。</li>
+          <li>按<code>確認用印</code>送出。</li>
+        </ol>
+        <div class="limit-box"><strong>店長目前無法自己開通印章權限</strong>印章新增跟權限設定綁死admin專屬，連店長都不能自己開放印章使用權限給員工，這個門檻是否符合新韻需求，目前還沒有定案。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">123</span><h3 class="entry-title">單據被改過，怎麼查歷史紀錄？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>任一張單據詳情頁 → <code>版本歷史</code>頁籤</p>
+        <ol>
+          <li>開啟任一張單據（報價單/合約/收據…10種單據通用）的詳情頁。</li>
+          <li>切到<code>版本歷史</code>頁籤，系統列出這張單據從建立到現在的每一個版本（v1、v2、v3…），由新到舊排列。</li>
+          <li>每筆版本紀錄顯示：版本號、變更類型（建立／編輯／狀態變更／作廢／轉單）、變更時間。</li>
+        </ol>
+        <p>系統每次建立單據、編輯內容（僅「草稿」「待處理」狀態可編輯）、狀態變更、或轉單時，都會自動產生一筆新版本，不會覆蓋舊版本。版本紀錄只能新增、不能修改或刪除，資料庫層級用機制擋死，確保「這張單據曾經被改成什麼樣子」永遠查得到。</p>
+        <div class="limit-box"><strong>目前沒有逐欄位的差異對照</strong>版本歷史只顯示「版本號／變更類型／時間」，不會顯示v1跟v2哪個欄位被改了、改成什麼——要看實際內容差異，目前只能各自產生PDF對照，或請工程人員查資料庫。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">124</span><h3 class="entry-title">單據PDF怎麼產生、要怎麼列印？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>任一張單據詳情頁 → <code>文件內容</code>頁籤（預設頁籤）→ <code>產生PDF</code></p>
+        <ol>
+          <li>開啟任一張單據詳情頁，確認在<code>文件內容</code>頁籤。</li>
+          <li>按<code>產生PDF</code>，系統依單據內容、簽名、印章即時組出PDF，並在PDF裡嵌入一個QR碼（掃描可連到公開防偽驗證頁，見125號條目）。</li>
+          <li>產生完成後畫面出現「下載PDF」連結，點擊在新分頁開啟/下載。</li>
+          <li>要列印的話，用瀏覽器開啟PDF後直接用瀏覽器內建列印功能（Ctrl/Cmd+P），系統本身沒有另外的「一鍵送印」按鈕。</li>
+        </ol>
+        <p>每次按<code>產生PDF</code>都會重新產生一份新的PDF（檔名含版本號），舊版本PDF不會被覆蓋。已經產生過PDF的單據，之後再進來會提供重新簽發最新PDF的下載連結，但連結有時效性，過期要重新按<code>產生PDF</code>。</p>
+        <div class="limit-box"><strong>列印本身目前不會留紀錄</strong>後端另外有一支「列印紀錄」API，設計上可以留下「誰在什麼時候印過這份文件」的稽核紀錄，但整個前端找不到任何按鈕會呼叫它——目前列印單據不會被記錄「誰印的、印了幾次」，只有<code>產生PDF</code>這個動作會留稽核紀錄。是否要補一顆「列印」按鈕，目前還沒有定案。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">125</span><h3 class="entry-title">客戶問「這份文件怎麼證明是真的」，要怎麼解釋？</h3><span class="badge badge-管理者">管理者（對客戶說明用，操作本身任何登入者皆可觸發）</span></div>
+      <div class="entry-body">
+        <p>每張DOCS單據每次建立或修改，系統都會把當下的完整內容（單據資料+品項明細）算出一組獨一無二的SHA-256雜湊值，存進資料庫，並在<code>產生PDF</code>時把這組雜湊值編進PDF上的QR碼裡。只要文件內容有任何一個字被改過（不管是系統內編輯，還是有人事後竄改PDF檔案本身），重新計算出來的雜湊值就會跟原本存的對不上，驗證就會失敗。</p>
+        <p><strong>客戶怎麼驗證：</strong></p>
+        <ol>
+          <li>客戶用手機掃描PDF文件上印的QR碼。</li>
+          <li>會導到一個不需要登入的公開驗證頁，任何人都能查，不用有ERP.POS帳號。</li>
+          <li>驗證通過會顯示「此文件驗證通過」，並列出單據編號、版本（含是否為最新版）、建立時間、是否已簽署電子簽章；驗證失敗會顯示「此文件內容與系統紀錄不符，可能已遭竄改或非ORBIT系統產出的文件」。</li>
+        </ol>
+        <p>跟客戶解釋可以說：「這份文件上有一個QR碼，掃了可以直接連到我們系統確認這份文件是不是我們開的正本、內容有沒有被改過。如果被動過手腳，掃出來會顯示驗證失敗，不需要打電話回來核對，掃碼就能自己查。」</p>
+        <div class="limit-box"><strong>驗證頁不會顯示簽名長相</strong>驗證頁只顯示「有沒有簽署」，不會顯示簽署人是誰、簽名長什麼樣，避免公開頁洩漏簽名圖檔本身。舊版本的單據（例如已經改成v2的v1）拿出來掃仍然驗證得過，但頁面會標示「非最新版本」。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">126</span><h3 class="entry-title">請款單怎麼開？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊欄 → <code>請款單</code> → <code>+ 新增請款單</code></p>
+        <ol>
+          <li>進入「請款單」列表頁，按<code>+ 新增請款單</code>。</li>
+          <li>「客戶資訊」區塊：填或選「客戶名稱」「聯絡人」「地址」。</li>
+          <li>「請款資訊」區塊：填「對應合約/訂單編號」（手動填寫的參考文字，非系統自動關聯）、「付款期限」「付款方式」「經辦人員」（下拉選公司員工，預設帶入自己）。</li>
+          <li>「品項明細」填請款項目/金額，確認合計後按<code>建立請款單</code>。</li>
+        </ol>
+        <p>建立後狀態是「草稿」，走「送出→核准→完成」的流程，跟其他單據共用同一套狀態機（見129號條目）。</p>
+        <div class="limit-box"><strong>不會自動連動財務</strong>「對應合約/訂單編號」只是一個文字欄位，不是系統自動帶入或連結既有合約/訂單，需要自己手動輸入單號對照。請款單本身也不會觸發任何自動記帳或財務模組連動，是獨立的書面單據紀錄。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">127</span><h3 class="entry-title">收據什麼時候開？跟電子發票差在哪？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p>DOCS的「收據」跟「電子發票」是兩套完全獨立、互不連動的功能，資料表不同、開立方式也不同：</p>
+        <ol>
+          <li><strong>收據</strong>（側邊欄「收據」）：一般書面收款證明，不是稅務憑證，手動填表建立。</li>
+          <li><strong>電子發票</strong>（側邊欄「電子發票」）：正式稅務發票，走發票號碼、買受人統編/載具、產生、上傳等流程，系統設計上的狀態有「待處理／已產生待上傳／已上傳待回應／開立成功／錯誤／已作廢」這幾種。</li>
+        </ol>
+        <p>兩者不會互相連動——系統不會因為開了收據就自動生成發票，反之亦然，各自獨立建立。</p>
+        <p>收據的使用時機：收到客戶付款（訂金、尾款或全額付清）需要一份「證明收到這筆錢」的書面文件時開立，例如客戶付現金訂金但還沒到開立正式發票的時間點，或只是要一張內部對帳用的收款證明。</p>
+        <p><strong>操作路徑：</strong>側邊欄 → <code>收據</code> → <code>+ 新增收據</code></p>
+        <ol>
+          <li>進入「收據」列表頁，按<code>+ 新增收據</code>。</li>
+          <li>「付款人資訊」區塊：填「付款人/公司名稱」「聯絡人」。</li>
+          <li>「收款資訊」區塊：填「收款日期」「對應單據編號」（手動文字，非自動關聯）、「收款方式」「經手人」（下拉選員工，預設帶入自己）。</li>
+          <li>「品項明細」填收款項目/金額，確認合計後按<code>建立收據</code>。</li>
+        </ol>
+        <div class="limit-box"><strong>收據不能取代正式發票</strong>收據不具法律上的正式稅務憑證效力，若客戶要求開立正式發票（可報稅、可對獎），要另外走「電子發票」模組，兩邊需要各自手動輸入一次資料，不會自動互轉。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">128</span><h3 class="entry-title">維修保固單怎麼開？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>側邊欄 → <code>維修保固單</code> → <code>+ 新增維修保固單</code></p>
+        <ol>
+          <li>進入「維修保固單」列表頁，按<code>+ 新增維修保固單</code>。</li>
+          <li>「客戶資訊」區塊：填「客戶名稱」「聯絡人」「手機」。</li>
+          <li>「維修資訊」區塊：填「受理日期」「預計完成日」「故障描述」「維修人員」（下拉選員工，預設帶入自己）。</li>
+          <li>「保固資訊」區塊：填「購買日期」「保固到期日」「是否在保」「保固條款」。</li>
+          <li>「品項明細」填維修項目/更換零件與費用，確認合計後按<code>建立維修保固單</code>。</li>
+        </ol>
+        <p>維修單跟保固單合併成同一張單據，不用分開開兩張單——同一次送修，維修進度跟保固狀態放在同一份文件上。</p>
+        <div class="limit-box"><strong>「是否在保」不會自動判斷</strong>「是否在保」目前是手動填寫的文字/選項欄位，系統不會依「購買日期」「保固到期日」自動幫忙判斷或警示是否過保，需要自行核對日期。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">129</span><h3 class="entry-title">單據的草稿/送出/核准/作廢是怎麼流轉的？</h3><span class="badge badge-全部">全部（送出／完成：員工可操作；核准／作廢：需店長以上）</span></div>
+      <div class="entry-body">
+        <p>DOCS的10種單據共用同一套狀態流程：</p>
+        <ol>
+          <li><strong>草稿</strong>：剛建立、還沒送出，可自由編輯內容。</li>
+          <li><strong>待處理</strong>：已送出等待核准，仍可編輯內容。</li>
+          <li><strong>已核准</strong>：已核准，不能再編輯內容。</li>
+          <li><strong>已完成</strong>：流程走完，不能再編輯。</li>
+          <li><strong>已作廢</strong>：作廢，不能再變更（終點）。</li>
+          <li><strong>已封存</strong>：封存，不能再變更（終點）。</li>
+        </ol>
+        <p>流程：草稿 →（按<code>送出</code>）→ 待處理 →（按<code>核准</code>）→ 已核准 →（按<code>完成</code>）→ 已完成。任何非終止狀態下都能按<code>作廢</code>（草稿/待處理/已核准/已完成都能作廢），按下會跳出提示要求輸入作廢原因，沒填原因無法送出。</p>
+        <p>每個動作需要的角色：<code>送出</code>與<code>完成</code>只要收銀員以上就能按；<code>核准</code>與<code>作廢</code>要店長以上。</p>
+        <div class="limit-box"><strong>不是嚴格線性流程</strong>系統技術上允許同一張單直接從「草稿」跳到「作廢」，不強制一定要照「送出→核准→完成」的順序才能作廢，只要不是已作廢/已封存狀態，隨時都能作廢。一旦進入「已作廢」或「已封存」，就不能再做任何狀態變更。單據編號不管作廢與否都不會被重複使用或回收。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">130</span><h3 class="entry-title">單據可以刪除嗎？</h3><span class="badge badge-管理者">管理者（作廢動作需店長以上）</span></div>
+      <div class="entry-body">
+        <p>結論：<strong>不能刪除，只能作廢。</strong>DOCS的10種單據在系統設計上完全不提供刪除功能，這是刻意的硬性限制：前端沒有任何「刪除」按鈕，後端API也沒有實作刪除方法，資料庫層級再掛一道觸發器擋住刪除動作，就算工程師想直接操作資料庫刪除都會被擋下並丟出錯誤。</p>
+        <p>要「移除」一張不要的單據，唯一的方式是<strong>作廢</strong>（狀態改成「已作廢」，見129號條目），作廢後：</p>
+        <ol>
+          <li>單據本身不會消失，仍然留在列表裡（狀態顯示「已作廢」）。</li>
+          <li>單據編號永久保留、不會被其他新單據重複使用。</li>
+          <li>作廢時必填的「作廢原因」會被記錄下來，之後在詳情頁最上方會顯示「作廢原因：xxx」。</li>
+          <li>這次作廢動作本身也會產生一筆新的版本紀錄，完整保留「誰在什麼時候把它作廢、為什麼」。</li>
+        </ol>
+        <p>版本歷史紀錄同樣不能刪除或修改——每一筆版本紀錄都是只能新增、不能修改或刪除，確保稽核軌跡完整。</p>
+        <div class="limit-box"><strong>手滑建錯的單也只能作廢</strong>如果是純粹手滑建錯一張單、內容完全不需要，也只能作廢，不能刪掉讓它徹底消失，列表裡會一直看得到這張「已作廢」的單據。</div>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+<details class="module" id="mod-N">
+  <summary class="module-head"><span class="letter">N</span> 公布欄 <span class="mtitle-sub">4 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">131</span><h3 class="entry-title">公司公布欄在哪裡看？如何確認已讀？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p>「公司公布欄」不是側邊欄裡的獨立選單項目，而是直接嵌在頁面最上方：</p>
+        <ol>
+          <li>進入「總覽」（Dashboard首頁）就會看到，是頁面最上面的區塊。</li>
+          <li>「員工考勤」頁面（打卡頁）最上方也有同一個公布欄——這是特別安排的：點餐員（waiter）角色雖然沒有「總覽」頁的權限，但有「員工考勤」的權限，這樣現場人員每天打卡時也一定會看到公告，不用額外開放整個Dashboard首頁給他們。</li>
+        </ol>
+        <p>如何確認已讀：</p>
+        <ol>
+          <li>公布欄列出的每則公告，還沒讀過的會有一個小圓點標記，背景也會比已讀的稍微亮一點。</li>
+          <li>公告卡片右側有一顆按鈕：如果這則公告不需要確認，按鈕文字是 <code>標記已讀</code>；如果這則公告要求已讀確認（管理者發布時可以勾選這個選項），按鈕文字是 <code>已讀並確認</code>。</li>
+          <li>按下按鈕後，該公告就會被記錄成已讀（如果要求確認，也一併記錄確認時間），畫面上會改顯示「已確認」的綠色標記。</li>
+          <li>有「緊急」等級但還沒確認的公告，公布欄下方會出現一條紅色提示「尚有緊急公告需要確認」，提醒還沒處理完。</li>
+        </ol>
+        <div class="limit-box"><strong>顯示與否取決於後台設定</strong>整個公布欄區塊會不會出現，取決於公司帳號有沒有開啟「公司公布欄」這項設定——目前系統裡沒有任何畫面（含設定頁）可以讓客戶自己開關這個功能，只能透過ORBIT後台調整。新韻的公布欄功能目前已開通（2026-07-26實機核對過，Dashboard首頁與員工考勤頁頂部都看得到「訊息與公告」區塊，含waiter帳號）。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">132</span><h3 class="entry-title">管理者：如何發佈公告並追蹤已讀名單？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：</strong>總覽（Dashboard首頁）或「員工考勤」頁 → 公司公布欄區塊 → <code>發布公告</code></p>
+        <ol>
+          <li>在公布欄區塊右上角按 <code>發布公告</code>（只有店長以上的帳號才看得到這顆按鈕）。</li>
+          <li>選公告等級：<code>一般通知</code>／<code>重要事項</code>／<code>緊急通知</code> 三選一。</li>
+          <li>填「公告標題」（最多120字）、「交代事項與說明」內容（最多5000字）。</li>
+          <li>「發布對象」：預設不勾選代表全體員工都收得到；也可以勾選特定角色（管理員／主管／一般員工／現場人員／工務）限定範圍。</li>
+          <li>視需要勾選 <code>釘選</code>（讓這則公告固定顯示在上方）、<code>要求已讀確認</code>（收件人不只要標已讀，還要多按一次確認）。</li>
+          <li>可設定「截止時間」，時間到了這則公告就不再顯示。</li>
+          <li>按 <code>發布公告</code> 送出。</li>
+        </ol>
+        <p>追蹤已讀名單：管理者帳號在公布欄看每則已發布的公告，卡片下方會直接顯示已讀/確認統計「已讀 X/Y · 確認 X/Y」（X是目前已讀/已確認人數，Y是該公告的總收件人數，會依「發布對象」設定的角色範圍計算，不是固定全公司人數）。</p>
+        <p>其他管理動作：</p>
+        <ol>
+          <li><strong>編輯</strong>：按公告卡片右側的鉛筆圖示，可修改標題/內容/等級/發布對象/釘選/已讀確認/截止時間後重新儲存。</li>
+          <li><strong>封存</strong>：按垃圾桶旁的封存圖示，會跳出確認視窗「確定要封存這則公告嗎？封存後不再顯示給員工」，封存後的公告不會再出現在公布欄。</li>
+          <li><strong>留言給同仁（個別對象）</strong>：公布欄上方另外有一個「留言給同仁」區塊，可以挑選特定同仁，送出只有對方看得到的個人訊息——這不算公告，不會出現在公布欄清單，也不計入已讀統計，是完全獨立的1對1私訊功能。</li>
+        </ol>
+        <div class="limit-box"><strong>留言給同仁的限制</strong>收件人清單只列出「已經登入過系統、有綁定帳號」的員工，還沒登入過的員工帳號不會出現在可選名單裡。個人留言嚴格1對1，就連管理者自己也看不到別人收到的個人留言內容，不像公告那樣可以彙整查看已讀名單。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">133</span><h3 class="entry-title">公告可以指定部門/對象嗎？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>結論：可以指定「角色」，不能指定「部門」。</strong>公司公布欄的「發布對象」設定，可選範圍是固定的5種系統角色，不是員工的「部門」欄位：</p>
+        <ol>
+          <li>管理員（admin）</li>
+          <li>主管（manager）</li>
+          <li>一般員工（cashier）</li>
+          <li>現場人員（waiter）</li>
+          <li>工務（supervisor）</li>
+        </ol>
+        <p>發布公告時勾選其中幾種角色，只有對應角色的帳號才看得到這則公告；不勾選任何角色代表發給全體員工（不分角色都看得到）。</p>
+        <p>系統裡員工資料確實有「部門」這個欄位，但目前只在「留言給同仁」的收件人清單上用來輔助顯示（例如「王小明・外場」方便管理者辨識挑選對象），公告本身的「發布對象」設定沒有依部門篩選這個選項——不能設定「只發給外場部門」這種指定法，只能用角色，或者改用「留言給同仁」一個一個點名指定特定的人。</p>
+        <p>如果想模擬「發給某個部門」，目前的替代做法是用「留言給同仁」功能，手動從名單裡逐一勾選該部門的所有同仁，送出個人訊息——但這樣送出的是個人留言，不是正式公告，不會顯示在公布欄，也不會有已讀名單統計，只是一則私訊。</p>
+        <div class="limit-box"><strong>目前尚未確認的需求</strong>公告目前只能依角色（管理員/主管/一般員工/現場人員/工務）篩選發送對象，不能依部門發送。這是否符合新韻的實際需求還未確認；如果需要「發給特定部門」的公告功能（不是一個一個點名的私訊），目前系統沒有這個功能，需要另外評估開發。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">134</span><h3 class="entry-title">系統公告(ORBIT官方)跟公司公布欄差在哪？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p>系統裡確實有兩套完全獨立的公告機制，不是同一個東西：</p>
+        <ol>
+          <li><strong>系統公告（ORBIT官方）</strong>：只有ORBIT管理員（寫死的單一帳號）能發，發布對象是全部使用ERP.POS的客戶，不分租戶，一次發布所有人都看得到。發布入口在側邊欄 <code>系統公告</code>，但一般客戶帳號的側邊欄完全看不到這個入口；一般員工查看的地方是右上角🔔通知鈴鐺，點開分「最新消息」「系統通知」兩個頁籤。公告類型是系統維護／新功能／最新消息／資安公告。只有「已讀」，沒有已讀名單給誰追蹤。</li>
+          <li><strong>公司公布欄</strong>：由新韻自己的店長/管理員帳號發布與管理，只有新韻自己的員工看得到，不會被其他ORBIT客戶看到，也看不到其他客戶的公告。顯示位置是總覽首頁/員工考勤頁上方，直接嵌在頁面裡的一個區塊。公告類型是一般通知／重要事項／緊急通知。有「已讀」也有「確認」兩階段，管理者看得到已讀/確認人數統計。</li>
+        </ol>
+        <p>白話總結：「系統公告」是ORBIT公司（鎧洋）發給所有使用ERP.POS的客戶看的，只有KAYON自己能發；「公司公布欄」才是新韻自己內部要公告/交辦員工事情用的，新韻的店長/管理員可以自己發布、自己管理。</p>
+        <div class="limit-box"><strong>新韻管理者看得到「系統公告」頁面，但不能發布</strong>新韻的管理者帳號進得去側邊欄的「系統公告」頁面，但按「發布公告」會被系統擋下來（後端會檢查登入信箱是否等於ORBIT管理員信箱，不是就回傳權限不足）。這個頁面不是給新韻用來對內公告的地方，新韻真正要用的是「公司公布欄」。</div>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+<details class="module" id="mod-O">
+  <summary class="module-head"><span class="letter">O</span> 系統設定權限 <span class="mtitle-sub">19 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">135</span><h3 class="entry-title">如何核發外勤打卡授權（地理圍欄例外）？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 →「管理者：核發外勤打卡授權」按鈕 → 開啟「核發外勤打卡授權」視窗</strong></p>
+        <ol>
+          <li>在「員工考勤」頁面點<code>管理者：核發外勤打卡授權</code>按鈕，開啟視窗。</li>
+          <li>填寫：<code>員工</code>（必填，下拉選單選要授權的員工）、<code>授權日期</code>（必填，只針對這一天生效）、<code>備註</code>（選填，例如「出差拜訪客戶」，方便之後查證）。</li>
+          <li>點<code>核發授權</code>送出，成功會顯示「已授權，該員工當日打卡不受地點限制」。</li>
+          <li>該員工在授權日期當天打卡，系統不會再檢查GPS/電子圍籬範圍。</li>
+        </ol>
+        <p>這個授權是按「員工＋單一日期」核發的，不是長期生效的設定，每次外勤都要重新核發。跟調整打卡範圍（見140則）不同：那是調整整間店/工地的固定範圍，這裡是針對單一員工單一天開的例外通道，兩者互不影響。</p>
+        <div class="limit-box"><strong>沒有長期例外選項</strong>系統沒有「這個人以後都不用檢查範圍」的設定；授權日期選錯，員工當天仍然打不了卡，建議核發後請員工當場確認能不能打卡成功。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">136</span><h3 class="entry-title">如何審核假單？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 → 待審核清單（假單區塊）</strong></p>
+        <ol>
+          <li>進入「員工考勤」頁面，會看到員工送出、狀態為「待審核」的假單清單，每筆可看到假別、起訖時段、事由。</li>
+          <li>點<code>核准</code>：系統會把這筆假單換算成時數，從該員工對應假別的休假額度扣除（見144則）。</li>
+          <li>點<code>拒絕</code>：假單維持未核准狀態，不會扣額度。</li>
+          <li>如果公司有開啟自動通知，核准/拒絕結果會email通知員工本人。</li>
+        </ol>
+        <p>核准動作同時做兩件事：改假單狀態、扣休假額度——所以一旦核准就不能反悔改回待審核，只能之後手動調整額度或請工程協助。盡量當天處理，假單審核越晚，員工個人的請假紀錄跟額度餘額查詢就會有一段時間顯示「待審核」，容易造成混淆。</p>
+        <div class="limit-box"><strong>審核假單不會回頭修正當天出勤狀態</strong>核准/拒絕假單只影響假單本身的狀態跟額度扣抵，不會連動去改當天的打卡出勤紀錄（早退/缺勤等）——半天假、下午請假等情境的出勤判定也一樣不會因為假單審核而變動，詳見137則的完整說明。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">137</span><h3 class="entry-title">考勤報表上的「早退」是怎麼算出來的？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>先講結論：目前系統沒有「早退（有待核准假單）」這種即時複合判定機制，「早退」本身也不是系統即時運算出來的狀態。</strong></p>
+        <ol>
+          <li>打卡只會在打上班卡時判斷一次「遲到」（超過09:30算遲到），除此之外，系統沒有任何排程或觸發器會在下班打卡、或一天結束後，回頭把某筆紀錄標記為「早退」或「缺勤」。</li>
+          <li>「早退」欄位真正會出現的唯二管道：CSV<code>匯入</code>歷史考勤資料時，來源檔案裡寫了「早退」，系統原封不動存進去；或「每日考勤統計」表本身就是給人工/外部試算表匯入或手動輸入用的歷史彙總數字，同樣不是系統自己算的。</li>
+          <li>假單核准與早退狀態之間沒有任何連動：不存在「核准假單後系統自動把早退清掉」這種自動修正機制，因為根本沒有「早退」這個即時判定在跑。</li>
+        </ol>
+        <p>「員工考勤」頁面上方的一週統計卡片有「早退」欄位（跟「正常出勤」「遲到」「缺勤」並列），這個數字統計的是目前打卡紀錄裡狀態欄位等於「早退」的筆數——但如上所述，這個值目前只有CSV匯入才會寫入，日常打卡不會自動產生。</p>
+        <div class="limit-box"><strong>目前不支援自動判定</strong>「下班打卡自動比對排班判早退」「排程掃描未打卡標記缺勤」「假單核准後回溯修正當天出勤狀態」這三塊邏輯目前完全空白，是否要排入開發規劃尚待確認。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">138</span><h3 class="entry-title">如何新增員工帳號？（含部門/職稱/薪資欄位）</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工 →「新增員工」按鈕 → 填寫表單 →「新增員工」儲存</strong></p>
+        <ol>
+          <li>在「員工」頁點右上<code>新增員工</code>按鈕，開啟表單。</li>
+          <li>填寫欄位（標＊為必填）：<code>姓名＊</code>、<code>電話</code>（格式提示：09xx-xxx-xxx）、<code>Email</code>、<code>上班時間</code>／<code>下班時間</code>（僅供顯示參考，不影響打卡判定）、<code>權限等級</code>（決定這個帳號能用哪些功能，見141則）、<code>部門</code>（選填）、<code>職位</code>（選填，職級如經理／主任／專員）、<code>職務</code>（選填，實際工作內容，不填則顯示權限等級名稱）、<code>計薪方式</code>＋對應金額（月薪或時薪二選一）、<code>打卡據點</code>（選填，指定後該員工打卡以該據點的電子圍籬範圍為準，見140則）。</li>
+          <li>點<code>新增員工</code>完成建檔。</li>
+        </ol>
+        <p>這裡建立的是員工資料檔；員工要能自己登入系統，另需登入帳號（LINE／Google／Email擇一），可請員工走「新人自助註冊」流程。也可以用CSV批次匯入員工名單（欄位含部門／職位／職務／計薪方式／基本薪資／離職日等）。</p>
+        <div class="limit-box"><strong>薪資欄位有權限限制</strong>薪資欄位只有具「編輯員工」權限的管理者看得到，一般員工的清單畫面不顯示薪資欄。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">139</span><h3 class="entry-title">員工離職後，帳號要怎麼處理？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工 → 該員工列的停用操作 → 確認停用</strong></p>
+        <ol>
+          <li>在「員工」頁面找到要辦理離職的員工，點該員工列的停用操作。</li>
+          <li>系統會跳出確認訊息：「確定要將『（姓名）』標記為異動（停用）嗎？停用後不會出現在在職名單與打卡範圍內，但歷史考勤/薪資紀錄會保留，之後可以再恢復。」</li>
+          <li>確認後，系統把該員工標記為停用，並自動記下當天為離職日。</li>
+        </ol>
+        <p>系統刻意不提供「刪除員工」：員工底下掛著考勤、薪資、訂單等歷史紀錄，硬刪除會讓這些資料變成孤兒。停用（標記離職）就是正式的離職做法，歷史資料全部保留，而且是可逆的——之後可以在同一頁把該員工恢復為在職（復職時系統會清掉離職日）。</p>
+        <div class="limit-box"><strong>停用不會自動封鎖登入帳號</strong>停用員工資料檔不會自動封鎖他的登入帳號本身；完整離職流程（含帳號、權限的收尾）需要另外處理，不是這裡的停用動作自動完成的。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">140</span><h3 class="entry-title">如何調整打卡範圍（地點/半徑）？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：設定 →「打卡電子圍籬」區塊</strong></p>
+        <ol>
+          <li>進入「設定」頁，找到「打卡電子圍籬」區塊。</li>
+          <li>打開<code>啟用電子圍籬</code>開關（說明文字：開啟後員工打卡時需在指定範圍內）。</li>
+          <li>填寫：<code>緯度</code>（例：24.839745）、<code>經度</code>（例：120.967551）、<code>允許半徑（公尺）</code>、<code>Wi-Fi SSID</code>（例：OBARAI-5G）。</li>
+          <li>儲存後生效，這是全公司的預設打卡範圍。</li>
+        </ol>
+        <p>這個範圍套用到沒有另外指派據點的員工。如果公司有多個打卡地點（例如工地＋辦公室），用設定頁的「多據點打卡（工地 / 辦公室）」區塊<code>新增據點</code>（各自有緯度/經度/允許半徑），再到員工檔的<code>打卡據點</code>欄位指派——被指派據點的員工，打卡以該據點的範圍為準。員工偶發性外出不用改範圍，用「核發外勤打卡授權」開單日例外即可（見135則），不要為了一個人一天動全公司的圍籬設定。</p>
+        <div class="limit-box"><strong>範圍檢查只在上下班兩段執行</strong>午休打卡不檢查位置（員工午休常會離開範圍去用餐）。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">141</span><h3 class="entry-title">角色權限怎麼分？如何指派？（ORBIT AUTH）</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>系統固定五個角色，由低到高（名稱依產業別顯示不同稱呼，以下為零售業顯示）：</p>
+        <ol>
+          <li><strong>銷售員</strong>（最低）——日常操作：打卡、訂單等基本功能</li>
+          <li><strong>收銀員</strong>——增加結帳付款等櫃檯權限</li>
+          <li><strong>店長</strong>——增加審核、查看全員考勤等管理權限</li>
+          <li><strong>區經理</strong>——更大的管理範圍</li>
+          <li><strong>管理員</strong>（最高）——全部功能，包含設定、操作日誌</li>
+        </ol>
+        <p>指派方式：「員工」頁 → 新增或編輯員工 →<code>權限等級</code>下拉選單選擇角色。每個人另外有一顆<code>權限</code>按鈕，管理者可在角色既有權限之上額外多勾幾項能力給特定員工（例如讓某位銷售員額外查看財務）——規則是只能加、不能減：角色本身已有的項目會預先勾好、反灰、不能取消。</p>
+        <div class="limit-box"><strong>想拿掉某人既有能力，不能用細部權限</strong>細部權限只能加不能減；要「拿掉」能力，得把權限等級改成較低的角色，再把需要的能力逐項加回來。新人自助註冊建立的帳號，權限等級預設是最低的銷售員，之後由管理者視職務調整。權限異動會留在操作日誌（見142則）。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">142</span><h3 class="entry-title">操作日誌在哪裡看？（誰做了什麼）</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：側邊欄「系統」區 → 操作日誌</strong></p>
+        <ol>
+          <li>「操作日誌」頁列出系統內的資料異動紀錄：誰、什麼時間、對哪筆資料做了什麼。</li>
+          <li>動作類型包含：<strong>新增、修改、刪除、簽名、用印、匯出PDF、列印、轉單、作廢</strong>，可用篩選條件縮小範圍，看完點<code>清除篩選</code>還原。</li>
+          <li>紀錄是資料庫層級自動留痕（訂單、商品、打卡紀錄等主要資料表都掛了同一套稽核機制），修改前後的內容會一併記下，不是靠操作人自己回報。</li>
+        </ol>
+        <p>打卡紀錄的手動新增／編輯／刪除（見157、158則）同樣會進操作日誌，刪除紀錄的確認訊息也明講「此動作無法在畫面上復原（但仍會留在操作日誌）」。</p>
+        <div class="limit-box"><strong>庫存異動明細目前查不到</strong>庫存數量的進出異動明細（stock movements）是另一套倉儲專用紀錄，目前沒有查詢畫面，不在操作日誌的涵蓋範圍內——問「誰動了庫存」目前查不到單筆明細。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">143</span><h3 class="entry-title">備份匯出怎麼做？多久做一次？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>目前沒有單一入口的「全站資料匯出／備份」功能。</strong>匯出功能分散在各模組自己的頁面，各自匯各自的：</p>
+        <ol>
+          <li><strong>客戶名單</strong>：會員頁的匯出功能</li>
+          <li><strong>操作日誌</strong>：操作日誌頁</li>
+          <li><strong>出勤／假別資料</strong>：出勤管理相關頁面（打卡原始紀錄、每日考勤統計、假別設定、休假額度都是CSV匯入/匯出格式）</li>
+          <li><strong>單據</strong>：各單據的PDF輸出</li>
+        </ol>
+        <p>系統的正式資料都存在雲端資料庫，日常營運資料的保存不依賴客戶自己手動匯出；上述匯出主要用於報表加工、搬移資料或自留存檔。</p>
+        <div class="limit-box"><strong>目前沒有官方建議頻率，也沒有自動排程匯出</strong>「多久做一次」系統沒有強制規定。如果公司內部有自留備份的習慣，建議固定頻率（例如每月一次）把常用的幾類資料匯出存檔；正式的備份頻率建議與服務承諾條款目前尚未確認，待進一步公告。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">144</span><h3 class="entry-title">假別設定與額度要怎麼調整？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 → 假別管理</strong></p>
+        <p>「假別管理」頁分兩塊：</p>
+        <ol>
+          <li><strong>假別設定</strong>：11種法定假別系統第一次進來會自動帶入（含給假單位、最小申請單位、是否扣薪、是否需證明等規則）。要調整規則走CSV<code>匯入</code>（對應公版HR表單的「假別設定」分頁）；網頁上沒有「新增假別」表單，只有刪除。</li>
+          <li><strong>休假額度與餘額</strong>：顯示每位員工各假別的取得日期、額度、已休、剩餘、狀態。這個表格是唯讀的，要調整額度（例如公司額外多給）同樣走CSV<code>匯入</code>（對應「額度與結算」分頁，原封不動存入，不重算），網頁上沒有單筆手動編輯按鈕。</li>
+        </ol>
+        <p>法定特休（L01）不用手動設，系統依台灣勞基法年資公式自動計算，只有特殊約定（公司多給）才需要用匯入覆蓋。</p>
+        <div class="limit-box"><strong>CSV匯入須注意分頁</strong>Google Sheets一次只會匯出目前開啟的分頁，匯入前先切到正確分頁（「假別設定」或「額度與結算」）再另存，欄位對不到會顯示失敗筆數（多半是員編或假別名稱跟系統內不一致）。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">145</span><h3 class="entry-title">我的合約/訂閱方案在哪裡看？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：側邊欄「系統」區 → 我的合約</strong></p>
+        <p>「我的合約」頁顯示這間公司跟ORBIT的服務合約資訊：</p>
+        <ol>
+          <li><strong>合約期間</strong>：合約月數與付款方式（年繳／月繳／另議）。</li>
+          <li><strong>合約狀態</strong>：已簽署／待簽署。</li>
+          <li><strong>合約期間明細</strong>：起始日、到期日、簽約日。</li>
+          <li><strong>包含功能</strong>：基礎功能（所有方案皆含，例如POS收銀結帳、CRM會員管理、Kitchen廚房出單、Notify推播通知、Analytics基礎報表、Settings系統設定、AI基礎對話），以及這份合約有開通的加值模組清單（例：ERP資源規劃、HR人事出勤、AUTH權限管控、WMS倉儲管理等）。</li>
+          <li>點右下按鈕可開啟完整合約文件；有多份合約時，最新一份顯示在上方，其餘列在「歷史合約」。</li>
+        </ol>
+        <div class="limit-box"><strong>這一頁是唯讀的</strong>要變更方案、加購模組或續約，系統內沒有自助升級按鈕，請直接聯繫ORBIT（hello@obarai.com或側邊欄的LINE客服）。尚未建立合約資料時，頁面會顯示「尚無合約資料」。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">146</span><h3 class="entry-title">系統遇到問題，要怎麼回報？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p>聯絡管道：</p>
+        <ol>
+          <li><strong>Email</strong>：hello@obarai.com</li>
+          <li><strong>LINE客服</strong>：側邊欄下方常駐「LINE客服」連結（服務時間09:30–18:30），點了直接開啟LINE對話視窗。</li>
+        </ol>
+        <p>系統沒有強制的回報表單，直接描述問題即可。以下是建議附上的資訊（建議做法，非系統規定），能大幅加快處理速度：</p>
+        <ol>
+          <li>發生時間（大約幾點幾分）</li>
+          <li>操作步驟（在哪個頁面、按了什麼、預期看到什麼、實際看到什麼）</li>
+          <li>錯誤畫面截圖（畫面上的錯誤訊息文字很關鍵，請完整拍到）</li>
+          <li>裝置類型（手機／平板／電腦，用什麼瀏覽器）</li>
+          <li>哪個帳號操作的（方便從操作日誌對照）</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">156</span><h3 class="entry-title">出勤統計報表在哪裡看？各欄位怎麼解讀？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 → 歷史紀錄與行事曆 →「每日考勤統計」區塊</strong></p>
+        <p>每日考勤統計表格欄位：<strong>員工、日期、應出勤、實際出勤、遲到、早退、請假、加班</strong>（出勤單位小時，遲到/早退單位分鐘）。</p>
+        <p>日常的即時打卡明細在同一頁上方的「打卡原始紀錄」區塊（員工、日期、上下班時間、狀態：正常／遲到／早退／缺勤）。薪資相關的彙總（出勤天、工時、遲到、請假、應付薪資）在「員工」頁的「薪資單」區塊，以當月為單位計算。同一頁還有「公司行事曆」區塊，點<code>同步政府行事曆</code>可自動帶入中華民國政府行事曆的國定假日／補班日，不用手動填，補班日跟公司自訂假日一起管理。</p>
+        <div class="limit-box"><strong>這是歷史彙總，不是即時運算</strong>「每日考勤統計」表格的定位是歷史彙總紀錄，主要透過CSV匯入（對應公版HR表單的「每日考勤統計」分頁），匯入的數字原封不動存入、不重算——適合搬移舊系統只留得下彙總數字、沒有原始打卡明細的歷史資料。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">157</span><h3 class="entry-title">如何幫員工代填打卡紀錄？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 → 歷史紀錄與行事曆 →「打卡原始紀錄」區塊 →「手動新增」按鈕</strong></p>
+        <ol>
+          <li>進入「歷史紀錄與行事曆」頁，「打卡原始紀錄」區塊右上點<code>手動新增</code>。</li>
+          <li>在「手動新增打卡紀錄」視窗選<code>員工</code>與<code>日期</code>，填上班／下班／午休開始／午休結束時間（可只填部分欄位）、狀態與備註。</li>
+          <li>儲存後即建立該員工當天的打卡紀錄，不用等員工自己送補打卡申請。</li>
+        </ol>
+        <p>也可以用CSV批次匯入打卡原始紀錄（同區塊的匯入功能，同一員工同一天重複匯入會覆蓋舊資料）。</p>
+        <div class="limit-box"><strong>跟員工自助申請兩條並存</strong>這條路徑（2026-07-24上線）跟原本的「員工自己送補打卡申請 → 管理者核准」兩條並存：員工會自己操作的走申請流程留完整軌跡；員工不會操作或忘了申請的，管理者直接代填。代填、以及之後的任何編輯／刪除，都會自動進操作日誌（含修改前後內容與操作人）。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">158</span><h3 class="entry-title">如何修改/刪除打錯的打卡紀錄？有無軌跡？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工考勤 → 歷史紀錄與行事曆 →「打卡原始紀錄」區塊 → 每列的「編輯」／「刪除」按鈕</strong></p>
+        <ol>
+          <li>在「打卡原始紀錄」找到要修正的那筆，每列右側有<code>編輯</code>、<code>刪除</code>兩個按鈕。</li>
+          <li><strong>編輯</strong>：開啟「編輯打卡紀錄」視窗（跟手動新增同一個表單），預先帶入現有值，改完儲存。</li>
+          <li><strong>刪除</strong>：有二次確認，訊息明講「確定刪除這筆打卡紀錄？此動作無法在畫面上復原（但仍會留在操作日誌）。」</li>
+        </ol>
+        <p><strong>有無軌跡？有，資料庫層級自動留痕。</strong>打卡紀錄表掛了系統既有的通用稽核機制（跟訂單、商品同一套），任何編輯／刪除都會自動記下修改前後的完整內容與操作人，可在「操作日誌」查到——不依賴操作人自己回報。</p>
+        <div class="limit-box"><strong>跟員工端補打卡申請是兩條並存的路徑</strong>員工自己發現打錯卡（例如午休按成下班），員工端走「補打卡申請」由管理者核准；這裡的編輯／刪除是管理端的直接修正路徑，兩條並存。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">159</span><h3 class="entry-title">如何設定不同班別/職級？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>系統目前沒有「早班／晚班」這種共用的班別範本功能。</strong>相關設定都在「員工」頁的員工檔上，逐人個別設定：</p>
+        <ol>
+          <li><code>上班時間</code>／<code>下班時間</code>：兩個時間欄位，僅供顯示參考，不影響打卡判定邏輯。</li>
+          <li><code>職位</code>（選填）：職級，如經理／主任／專員，自由文字。</li>
+          <li><code>職務</code>（選填）：實際工作內容，如電商平台、B2B、會計；不填則顯示權限等級名稱。</li>
+        </ol>
+        <p>「職位／職務」是顯示與人事管理用途的欄位，跟系統功能權限無關；權限由<code>權限等級</code>（五級角色）決定，見141則。</p>
+        <div class="limit-box"><strong>沒有班別範本，遲到判定不分班別</strong>因為沒有班別範本，晚班員工的遲到判定不會因為「他是晚班」而不同——打卡判定規則全公司一套。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">160</span><h3 class="entry-title">如何重設員工密碼？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p><strong>操作路徑：員工 → 該員工列 →「重設密碼」按鈕</strong></p>
+        <ol>
+          <li>在「員工」頁找到該員工，點<code>重設密碼</code>按鈕。</li>
+          <li>系統直接產生一組新的臨時密碼，<strong>畫面只顯示這一次</strong>（關掉就查不回來，請先複製）。</li>
+          <li>管理者把這組密碼告知員工本人，本人即可用登入信箱＋這組密碼登入。</li>
+        </ol>
+        <p>這是管理者主動救回帳號用的（員工忘記登入方式、自助重設信收不到、不記得當初用哪個信箱註冊）；跟員工自己在登入頁點「忘記密碼？」收重設信是兩條並存的路徑。</p>
+        <div class="limit-box"><strong>只對有登入帳號的員工有效</strong>員工尚未建立登入帳號時按鈕會反灰，滑鼠移上去顯示「此員工尚未建立登入帳號，無法重設密碼」；用LINE／Google登入的帳號本來就沒有密碼概念，也不適用。別跟「設定 → 主管授權密碼（PIN）」搞混，那是POS收銀現場授權折扣／退款用的主管PIN碼，不是登入密碼。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">161</span><h3 class="entry-title">新分店/新據點怎麼增設？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>「新據點」在系統裡有兩種完全不同的意思，請先確認你要的是哪一種：</p>
+        <ol>
+          <li><strong>同一間公司要加一個「打卡地點」（工地、辦公室、外點）</strong>：這是現有功能，自己就能設——<strong>設定 → 多據點打卡（工地 / 辦公室）→</strong><code>新增據點</code>，填據點名稱（例：三號工地、總部辦公室）、緯度／經度／允許半徑，再到員工檔把人指派到據點即可（見140則）。這只是打卡範圍的多點設定，商品、庫存、報表都還是同一間公司一套。</li>
+          <li><strong>要開「新分店」（第二間店，有自己的營運）</strong>：這不是系統裡打勾就有的自助功能。標準合約的服務範圍是單店／單分店；要開第二間店，標準做法是為新店另外簽一份合約。如果需求是「總公司＋多間分店」一起管理，ORBIT可以用客製化報價依實際需求規劃，請直接聯繫hello@obarai.com或LINE客服洽談，會依分店數量與管理需求提供方案。</li>
+        </ol>
+        <div class="limit-box"><strong>多分店走客製化報價，非標準自助功能</strong>標準合約僅涵蓋單店／單公司；多分店/總公司管理需求請聯繫ORBIT個案討論報價，目前系統內沒有自助開通第二間店的功能。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">162</span><h3 class="entry-title">用LINE/Google/Email分別登入，算不算同一個人？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p><strong>不算，會被系統當成兩個不同的人。</strong>三種登入方式（LINE／Google／Email＋密碼）各自獨立建立帳號，系統不會自動比對信箱或電話去合併。同一個人如果先用LINE登入建了帳號、之後又改用Google登入，會產生第二個帳號，兩邊的資料互不相通。</p>
+        <ol>
+          <li><strong>第一次登入用哪種方式，以後就固定用那一種</strong>——這是最重要的一條。</li>
+          <li>建議公司在員工到職時就統一規定登入方式（例如全部用LINE）。</li>
+          <li>如果員工不小心用第二種方式登入、發現「資料都不見了」，通常不是資料遺失，是登進了新帳號——退出後改用原本的方式登入即可找回。真的分不清楚時，請管理者對照「員工」頁的員工檔確認綁定狀況，必要時聯繫ORBIT處理。</li>
+        </ol>
+        <div class="limit-box"><strong>目前沒有自助換綁功能</strong>員工端沒有「把LINE帳號改綁到另一個帳號」的自助入口；管理者可用「重設密碼」功能救回走Email登入的帳號（見160則）。</div>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+<details class="module" id="mod-P">
+  <summary class="module-head"><span class="letter">P</span> 情境SOP <span class="mtitle-sub">6 則</span><span class="chev">▸</span></summary>
+  <div class="module-body">
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">147</span><h3 class="entry-title">新員工到職，該辦哪些手續？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p>到職當天分兩份清單：管理者要做的，跟員工自己要做的。</p>
+        <p><strong>管理者清單（到職前/當天）：</strong></p>
+        <ol>
+          <li>建員工檔：<code>員工</code>→<code>新增員工</code>，填姓名、電話、權限等級、部門/職位/職務、計薪方式。或請員工到職當天自助註冊，再由管理者補齊權限與薪資欄位。</li>
+          <li>決定登入方式並告知員工：LINE／Google／Email 擇一，<strong>以後固定用同一種</strong>（不同方式會被系統當成不同人）。</li>
+          <li>員工在非預設地點上班的，在員工檔指派<code>打卡據點</code>。</li>
+          <li>自助註冊的帳號預設是最低角色（銷售員），依實際職務調高權限等級。</li>
+          <li>當場請員工打一次卡，確認選得到自己的名字、打卡有成功訊息——不要等到月底才發現帳號有問題。</li>
+        </ol>
+        <p><strong>員工清單（到職日）：</strong></p>
+        <ol>
+          <li>用公司指定的方式登入 ORBIT。</li>
+          <li>把 ORBIT 加到手機桌面，允許<strong>定位權限</strong>（打卡要用）。</li>
+          <li>完成第一次打卡，跟主管確認打卡成功。</li>
+          <li>看一下自己的假別與額度。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">148</span><h3 class="entry-title">員工離職，該怎麼處理？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>操作路徑：<code>員工</code>頁，依序完成以下確認與停用。</p>
+        <ol>
+          <li>結清出勤：確認該員工最後一個工作日的打卡完整；有漏的用管理端代填/編輯補正。</li>
+          <li>結清假別：<code>假別管理</code>→<code>休假額度與餘額</code>，確認剩餘額度與應結算金額（依公司規定結算）。</li>
+          <li>結清薪資：<code>員工</code>頁<code>薪資單</code>區塊，確認當月出勤天/工時/應付薪資。</li>
+          <li>停用員工檔：<code>員工</code>頁把該員工標記為<code>異動（停用）</code>——系統會保留全部歷史考勤/薪資紀錄並自動記下離職日，之後如回任可以恢復。</li>
+          <li>檢查權限：若該員工有額外勾過的細部權限或較高權限等級，停用即失效；但如果他知道<strong>主管授權密碼（PIN）</strong>，記得到<code>設定</code>換一組新的 PIN。</li>
+        </ol>
+        <div class="limit-box"><strong>系統設計上沒有「刪除員工」</strong>停用就是正式做法，歷史資料依法保留；離職員工的操作紀錄仍留在操作日誌，事後可查。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">149</span><h3 class="entry-title">每日開店/關店，要檢查什麼？</h3><span class="badge badge-員工">員工</span></div>
+      <div class="entry-body">
+        <div class="limit-box"><strong>目前沒有引導式的開店/關店結算功能</strong>系統沒有現金點驗清單、逐步對帳精靈這類功能。以下是用現有功能組合出來的建議流程，屬於工作習慣建議，不是系統強制步驟。</div>
+        <p><strong>開店（建議流程）：</strong></p>
+        <ol>
+          <li>到店後打上班卡。</li>
+          <li>開啟<code>櫃檯</code>頁確認可以正常進入結帳畫面。</li>
+          <li>有用出單機的，確認出單機正常。</li>
+        </ol>
+        <p><strong>關店（建議流程）：</strong></p>
+        <ol>
+          <li>確認當天訂單都已完成結帳、沒有掛著未處理的單。</li>
+          <li>現金櫃清點，跟<code>報表</code>頁的當日營收數字核對；對不起來要排查差異原因。</li>
+          <li>依序打午休（如未打）、下班卡，完成一天四段打卡。</li>
+        </ol>
+        <p><code>設定</code>→<code>通知設定</code>有<code>日結通知</code>開關（每天營業結束時發送當日營收摘要，可設日結時間）——這是自動摘要通知，不是結算流程。</p>
+        <div class="limit-box"><strong>現金管理規定待確認</strong>門市實際的現金管理規定（零用金金額、點驗方式、由誰負責）屬新韻內部規定，系統管不到，目前尚未確認，之後補上。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">150</span><h3 class="entry-title">月底結算，要跑哪些流程？</h3><span class="badge badge-管理者">管理者</span></div>
+      <div class="entry-body">
+        <p>系統沒有一鍵式的「月結」功能，月底結算是把三個模組各自的確認動作串起來做一遍。</p>
+        <p><strong>一、考勤結算：</strong></p>
+        <ol>
+          <li><code>員工考勤</code>→<code>歷史紀錄與行事曆</code>檢查當月<code>打卡原始紀錄</code>：有漏打/打錯的，用管理端編輯/代填補正，或核完員工的補打卡申請。</li>
+          <li>確認當月假單都已審核完畢，沒有掛著待核准的。</li>
+          <li><code>員工</code>頁<code>薪資單</code>區塊核對每人出勤天/工時/遲到/請假/應付薪資。</li>
+        </ol>
+        <p><strong>二、財務結算：</strong></p>
+        <ol>
+          <li>報表區間選整月、核對營收與毛利、確認數字對得起來。</li>
+        </ol>
+        <p><strong>三、發票結算：</strong></p>
+        <ol>
+          <li>檢查當月電子發票狀態：有沒有開立失敗、上傳失敗的，需作廢重開的在時限內處理。</li>
+        </ol>
+        <div class="limit-box"><strong>結算節奏待確認</strong>新韻的結算日與申報節奏（例如發票是否交由會計師處理、幾號前要完成）屬新韻內部分工，目前尚未確認，之後補上。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">151</span><h3 class="entry-title">停電/斷網，POS要怎麼應變？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <div class="limit-box"><strong>ORBIT 目前不支援離線操作</strong>系統是雲端服務，結帳、訂單、打卡都需要網路連線才能運作；斷網時已開啟的頁面可能還看得到，但任何送出的動作都不會成功。系統沒有「離線暫存、恢復後同步」的機制，斷網時打的單不會自己補上。</div>
+        <p>應變建議（非系統功能，屬現場作業建議）：</p>
+        <ol>
+          <li>先切換網路來源：店內 Wi-Fi 斷了，把收銀用的手機/平板切到行動網路（4G/5G）通常就能繼續操作——ORBIT 是網頁服務，不綁定特定網路。</li>
+          <li>完全斷網時（含停電導致設備都不能用）：改用紙本記錄每筆交易（品項、數量、金額、付款方式、時間），恢復後依紙本逐筆在<code>櫃檯</code>補結、需要開發票的補開。</li>
+          <li>打卡：斷網期間打不了卡的，恢復後由管理者依實際到勤時間代填，或員工自己送補打卡申請。</li>
+        </ol>
+        <div class="limit-box"><strong>手開發票本備援待確認</strong>新韻現場是否要準備手開發票本作為停電備援，涉及稅務作業，目前尚未確認，之後補上。</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="entry-num">152</span><h3 class="entry-title">手機遺失，帳號要怎麼處理？</h3><span class="badge badge-全部">全部</span></div>
+      <div class="entry-body">
+        <p><strong>員工手機遺失：</strong></p>
+        <ol>
+          <li>先鎖登入來源：ORBIT 的登入依附在 LINE／Google／Email 帳號上，第一步是去該平台把遺失手機上的登入登出／停權（LINE 用「換機」或到官方帳號設定登出其他裝置；Google 到帳戶安全頁把該裝置登出；Email 登入的就改密碼）。</li>
+          <li>通知管理者。管理者視情況處理：走 Email 登入的員工用<code>重設密碼</code>發一組新臨時密碼，舊密碼即失效；疑慮較大時直接把該員工檔<code>停用</code>，確認拿回帳號後再恢復——停用是可逆的，不會弄丟資料。</li>
+          <li>檢查有沒有異常操作：管理者到<code>操作日誌</code>看遺失期間該帳號有無異常動作。</li>
+        </ol>
+        <p><strong>管理者手機遺失：</strong>除上述步驟外，額外做：</p>
+        <ol>
+          <li>到<code>設定</code>更換<strong>主管授權密碼（PIN）</strong>——這組 PIN 用來授權折扣/退款，知道的人拿到手機就能用。</li>
+          <li>檢查<code>設定</code>內的其他敏感設定有無被動過（操作日誌可對照）。</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+      <!-- PART1_END -->
+
+      <h2 class="part-title" id="part2"><span class="num">二</span>業務成長情境</h2>
+      <p class="part-desc">公司規模、通路或組織架構之後如果有變化，以下是常見情境對照：哪些用現有功能就能自己處理，哪些屬於合約範圍外、需要另外討論報價。分類依據是雙方已簽署的《ORBIT Enterprise Contract Suite》主契約與SOW範圍條款，不是猜測。</p>
+
+      <div class="path-grid">
+
+        <div class="path-card">
+          <span class="path-tag">現有功能可直接用</span>
+          <h3>員工人數成長、需要更細的角色分工</h3>
+          <p>系統本身支援五級角色（銷售員／收銀員／店長／區經理／管理員），管理者還能在角色既有權限之上，逐項加開特定能力給個別員工。團隊從幾個人擴編到幾十人，不需要額外開發，直接在「員工」頁調整權限等級與細部權限即可。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">現有功能可直接用</span>
+          <h3>同一間店要多開一個打卡地點（例如加一個倉庫/工地）</h3>
+          <p>設定頁「多據點打卡」可以自己新增據點（填地址座標與允許半徑），再把員工指派過去即可，不用等開發。但這只是打卡範圍的多點設定——商品、庫存、報表仍然是同一間公司一套資料，跟下面「開分店」是兩件事。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">需另行簽約／客製報價</span>
+          <h3>開第二間店（獨立營運的分店）</h3>
+          <p>標準合約的服務範圍是單店／單公司。要開一間有自己營運資料的新分店，不是系統裡打勾就有的自助功能，標準做法是為新店另外簽一份合約；如果是「總公司＋多間分店」一起管理的需求，ORBIT會依實際分店數量與管理需求提供客製報價，直接聯繫 hello@obarai.com 或 LINE 客服洽談即可。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">合約範圍外，需另行報價</span>
+          <h3>要做電商官網、串金流／物流／政府開票平台</h3>
+          <p>依雙方SOW明文，「SOW未列之新模組、報表、API、電商／物流／金流／政府平台串接」不包含在目前的專案範圍內。如果未來有線上訂購、金流金融）串接、物流串接或其他政府平台對接的需求，屬於全新模組，需要另外提出需求、走報價與SOW流程，不會因為現有系統有相關雛形（例如DOCS的收據/發票）就自動視為已包含。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">已有雛形，功能仍在補</span>
+          <h3>要讓LINE官方帳號真正做到「客人傳訊息會自動回、家長能綁定通知」</h3>
+          <p>目前串接LINE官方帳號只完成「發送」方向（推播），「接收」方向（顧客訊息、家長綁定）因為系統目前缺少一個叫Channel Secret的設定欄位，Webhook請求會被擋下，這部分功能程式邏輯已經寫好、只差這個欄位補上，但目前沒有排定時程。如果這對貴公司是關鍵需求，建議跟KAYON明確提出，排進下一輪開發討論。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">可加購</span>
+          <h3>AI功能（BI Planner業務預測、AI客服等）用量變大</h3>
+          <p>ORBIT AI+ 是獨立計價的加值服務，跟系統本身的年度授權分開算，方案有 AI+150／300／600／1000 幾個額度級距可選，用量成長時可以直接加購額度，不會影響到ERP/POS核心功能的正常使用（用完AI額度只會停用AI相關功能，不影響收銀、打卡等日常操作）。</p>
+        </div>
+
+        <div class="path-card">
+          <span class="path-tag">可討論強化</span>
+          <h3>未來要走更嚴格的稽核／合規要求（例如客戶要求資安稽核）</h3>
+          <p>系統現有「操作日誌」已對訂單、商品、打卡等主要資料留有異動軌跡；備份的頻率、保留範圍依合約SLA與雲端服務商能力執行，用途是營運復原，不等於任意時間點都能完整回溯。如果未來有更嚴格的稽核／歷史回溯／專屬備份需求（例如要走ISO 27001驗證），這部分需要另外評估規劃，不是現有備份機制的預設範圍。</p>
+        </div>
+
+      </div>
+
+      <h2 class="part-title" id="part3"><span class="num">三</span>後援與支援</h2>
+      <p class="part-desc">遇到問題找誰、多久會回應，以下內容依雙方已簽署的《ORBIT 服務等級協議（SLA）》附件四整理，不是口頭承諾。SLA本身的定性是「乙方以合理商業努力達成之服務目標」，不是保證修復時間或100%可用率。</p>
+
+      <div class="contact-strip">
+        <a href="mailto:hello@obarai.com">✉️ hello@obarai.com</a>
+        <a href="#">💬 側邊欄「LINE客服」</a>
+      </div>
+      <p class="part-desc" style="margin-top:-8px;">標準支援服務時間：<strong>週一至週五 09:30–18:00（台北時間）</strong>，國定假日及政府公告停止上班日除外；非服務時間內發生的事件，回應時間原則自下一個服務時段起算。正式的P1重大事件通報，請同時用Email與LINE/工單留下可聯絡的人，比較不會漏接。</p>
+
+      <p><strong>事件依影響程度分四級，各級的回應時間目標如下：</strong></p>
+      <div class="table-wrap">
+        <table class="sla-table">
+          <thead>
+            <tr><th>等級</th><th>判定標準（例示）</th><th>首次回應目標</th><th>初步處理目標</th><th>狀態更新頻率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>P1 緊急</td><td>正式環境核心服務全面不可用，例如整體無法登入、出貨與庫存全面停止</td><td>2 小時內</td><td>4 小時內完成初步研判，優先止損或提出替代方案</td><td>每 4 小時或有重大進展時</td></tr>
+            <tr><td>P2 高</td><td>核心模組部分不可用、多數使用者受重大影響，例如出貨/庫存/退貨嚴重異常</td><td>4 小時內</td><td>1 個工作日內完成初步研判或提出處理計畫</td><td>每 1 個工作日</td></tr>
+            <tr><td>P3 中</td><td>非核心功能異常、單一帳號或局部影響，通常有替代操作方式</td><td>1 個工作日內</td><td>3 個工作日內完成初步研判</td><td>每 3 個工作日或版本排程時</td></tr>
+            <tr><td>P4 低</td><td>操作諮詢、介面文字、功能建議，不影響營運</td><td>2 個工作日內</td><td>納入諮詢回覆、文件或產品評估</td><td>有結論或排程時</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="limit-box"><strong>「回應」不等於「修復完成」</strong>「回應」指確認收到、建立事件編號、初步分級與所需資料，不是問題已經解決。實際修復時間會受問題能不能重現、資料保全、複雜度、第三方服務依賴、以及貴公司配合提供資訊的速度影響，SLA不承諾固定的修復期限，但會持續合理努力處理。回報問題時建議附上：發生時間、操作步驟、預期與實際結果、錯誤畫面截圖、裝置與瀏覽器、操作帳號——這些資訊越完整，判定等級與處理速度越快。</div>
+
+      <div class="limit-box"><strong>不算SLA違反的情況（合約明列）</strong>不可抗力；貴公司自己的網路/設備/瀏覽器/人員操作問題；未經授權的第三人修改資料或系統；來源資料本身錯誤；貴公司未依期限提供必要資訊；第三方服務（例如LINE平台本身）的全面事件；已提供合理替代方式的輕微問題；新需求或功能變更（這些不算「故障」，是新工作，會另外走報價流程，見上方「業務成長情境」）。計畫性維護原則會提前至少3個工作日通知。</div>
+
+      <footer class="page-foot">
+        <span>ORBIT 系統操作手冊 · 新韻傳音有限公司專屬版</span>
+        <span>內容與實際畫面不符時，請回報 hello@obarai.com，我們會盡快核對更新</span>
+      </footer>
+
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var search = document.getElementById('search');
+  var count = document.getElementById('search-count');
+  var entries = null;
+  function collect(){
+    entries = Array.prototype.slice.call(document.querySelectorAll('.entry'));
+  }
+  search.addEventListener('input', function(){
+    if(!entries) collect();
+    var q = search.value.trim().toLowerCase();
+    if(!q){
+      entries.forEach(function(e){ e.classList.remove('hidden'); });
+      document.querySelectorAll('details.module').forEach(function(d){ d.classList.remove('hidden'); });
+      count.style.display = 'none';
+      return;
+    }
+    var shown = 0;
+    var modulesWithHit = {};
+    entries.forEach(function(e){
+      var text = e.textContent.toLowerCase();
+      var hit = text.indexOf(q) !== -1;
+      e.classList.toggle('hidden', !hit);
+      if(hit){
+        shown++;
+        var mod = e.closest('details.module');
+        if(mod){ mod.setAttribute('open',''); modulesWithHit[mod.id] = true; }
+      }
+    });
+    document.querySelectorAll('details.module').forEach(function(d){
+      d.classList.toggle('hidden', !modulesWithHit[d.id]);
+    });
+    count.style.display = 'block';
+    count.textContent = '符合「' + search.value + '」的項目：' + shown + ' 則';
+  });
+})();
+</script>
+</body>
+</html>
