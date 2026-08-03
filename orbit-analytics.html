@@ -98,7 +98,16 @@
 </div>
 
 <script>
+// 這個頁面部署在GitHub Pages(靜態網站，無server端可執行程式)，PIN不可能
+// 對瀏覽器完全隱藏——view-source永遠看得到。真正的防線移到GAS那端：
+// GAS doGet()對action=analytics要求帶對的pin參數才回資料，沒有pin或pin
+// 不對一律回空——即使有人繞過這個網頁、直接對GAS網址打(例如從tracker.js
+// 也載入同一個網址反推)，沒有這個PIN一樣拿不到資料。GAS原始碼本身不對外
+// 公開(只有部署後的網址是黑盒)，所以PIN寫在GAS腳本裡是安全的，寫在這裡
+// (前端JS)才是曝險——這裡留著只是因為使用者要輸入東西來對；GAS端修改
+// 需要KAYON手動到script.google.com貼程式碼，這裡改不到。
 var currentPin = '';
+var GAS = 'https://script.google.com/macros/s/AKfycbzSPemOnjLTbzh9ZIjRTZEcDPcjT6UN_saCEBm-qi120zMYzhtFwWmOpwO5YSlaeBsg/exec';
 
 function checkPin() {
   var input = document.getElementById('pin');
@@ -115,16 +124,10 @@ if (savedPin) {
 }
 
 function loadData(fromLogin) {
-  fetch('/api/analytics', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pin: currentPin })
-  })
-    .then(function(r) {
-      if (r.status === 401) { throw new Error('bad_pin'); }
-      return r.json();
-    })
+  fetch(GAS + '?action=analytics&pin=' + encodeURIComponent(currentPin))
+    .then(function(r) { return r.json(); })
     .then(function(d) {
+      if (d.error === 'bad_pin') { throw new Error('bad_pin'); }
       if (fromLogin) {
         sessionStorage.setItem('ob_analytics_pin', currentPin);
         document.getElementById('lock').style.display = 'none';
