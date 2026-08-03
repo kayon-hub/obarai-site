@@ -98,33 +98,38 @@
 </div>
 
 <script>
-var PIN = '61210989';
-var GAS = 'https://script.google.com/macros/s/AKfycbzSPemOnjLTbzh9ZIjRTZEcDPcjT6UN_saCEBm-qi120zMYzhtFwWmOpwO5YSlaeBsg/exec';
+var currentPin = '';
 
 function checkPin() {
   var input = document.getElementById('pin');
-  if (input.value === PIN) {
-    document.getElementById('lock').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    sessionStorage.setItem('ob_analytics', '1');
-    loadData();
-  } else {
-    input.classList.add('err');
-    input.value = '';
-    setTimeout(function() { input.classList.remove('err'); }, 500);
-  }
+  currentPin = input.value;
+  loadData(true);
 }
 
-if (sessionStorage.getItem('ob_analytics') === '1') {
+var savedPin = sessionStorage.getItem('ob_analytics_pin');
+if (savedPin) {
+  currentPin = savedPin;
   document.getElementById('lock').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  loadData();
+  loadData(false);
 }
 
-function loadData() {
-  fetch(GAS + '?action=analytics')
-    .then(function(r) { return r.json(); })
+function loadData(fromLogin) {
+  fetch('/api/analytics', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pin: currentPin })
+  })
+    .then(function(r) {
+      if (r.status === 401) { throw new Error('bad_pin'); }
+      return r.json();
+    })
     .then(function(d) {
+      if (fromLogin) {
+        sessionStorage.setItem('ob_analytics_pin', currentPin);
+        document.getElementById('lock').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+      }
       if (!d.rows || d.rows.length === 0) {
         document.getElementById('s-today').textContent = '0';
         document.getElementById('s-week').textContent = '0';
@@ -138,7 +143,17 @@ function loadData() {
       }
       processData(d.rows);
     })
-    .catch(function() {
+    .catch(function(e) {
+      if (e.message === 'bad_pin') {
+        sessionStorage.removeItem('ob_analytics_pin');
+        document.getElementById('lock').style.display = 'flex';
+        document.getElementById('app').style.display = 'none';
+        var input = document.getElementById('pin');
+        input.classList.add('err');
+        input.value = '';
+        setTimeout(function() { input.classList.remove('err'); }, 500);
+        return;
+      }
       document.getElementById('page-table').innerHTML = '<div class="empty">無法載入數據，請確認 GAS 已更新部署</div>';
     });
 }
