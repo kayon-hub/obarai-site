@@ -6,5 +6,16 @@ Allow: /terms.html
 Allow: /privacy.html
 Allow: /refund.html
 Allow: /consultation.html
+Allow: /erp
+Allow: /pos
+Allow: /crm
+Allow: /wms
+Allow: /hr
+Allow: /ai
+Allow: /manufacturing
+Allow: /education
+Allow: /restaurant
+Allow: /retail
+Allow: /accounting
 
 Sitemap: https://www.obarai.com/sitemap.xml
