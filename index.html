@@ -63,14 +63,21 @@
         "publisher": { "@id": "https://www.obarai.com/#organization" }
       },
       {
-        "@type": "SoftwareApplication",
+        "@type": "Service",
         "@id": "https://www.obarai.com/#orbit",
         "name": "ORBIT",
         "alternateName": "ORBIT ERP POS",
         "url": "https://www.obarai.com/",
-        "applicationCategory": "BusinessApplication",
-        "applicationSubCategory": "ERP、POS、CRM 與企業營運管理系統",
-        "operatingSystem": "Web, iOS, Android",
+        "serviceType": "ERP、POS、CRM 與企業營運管理系統導入服務",
+        "provider": { "@id": "https://www.obarai.com/#organization" },
+        "areaServed": {
+          "@type": "Country",
+          "name": "台灣"
+        },
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "台灣中小企業"
+        },
         "inLanguage": "zh-TW",
         "description": "整合 ERP、POS、CRM、進銷存、倉儲、人事考勤、預約、電子單據、旅宿、補教的模組化企業管理平台，內建 AI 自動化導入——用企業自己的營運數據訓練專屬 AI。",
         "featureList": [
@@ -83,13 +90,7 @@
           "電子單據與簽章",
           "補教、旅宿與多門市產業模組",
           "AI 自動化導入與專屬模型訓練"
-        ],
-        "offers": {
-          "@type": "Offer",
-          "url": "https://plans.obarai.com/pricing.html",
-          "availability": "https://schema.org/InStock"
-        },
-        "publisher": { "@id": "https://www.obarai.com/#organization" }
+        ]
       }
     ]
   }
