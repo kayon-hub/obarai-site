@@ -3,9 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORBIT 方案定價 — 選方案・挑模組・洽詢報價</title>
-  <meta name="description" content="ORBIT 三種方案 START／PLUS／PRO，每個方案自選模組，依需求規模客製報價。">
+  <title>ORBIT 方案定價 — PLUS NT$1,988/月起・PRO NT$3,988/月起</title>
+  <meta name="description" content="ORBIT 方案定價：PLUS NT$1,988/月起、PRO NT$3,988/月起，均含 POS + CRM + AI 基礎，自選模組、線上訂閱付款即開通；START 與企業客製洽詢報價。">
   <link rel="canonical" href="https://www.obarai.com/pricing.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": "https://www.obarai.com/pricing.html#plus",
+        "name": "ORBIT PLUS",
+        "description": "ORBIT 訂閱方案 PLUS：3 個帳號、1 店，含 POS + CRM + AI 基礎，從 8 個模組中自選 5 個。",
+        "brand": { "@type": "Brand", "name": "ORBIT" },
+        "url": "https://www.obarai.com/pricing.html",
+        "offers": {
+          "@type": "Offer",
+          "price": "1988",
+          "priceCurrency": "TWD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://plans.obarai.com/pricing.html",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "1988",
+            "priceCurrency": "TWD",
+            "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitCode": "MON" }
+          }
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://www.obarai.com/pricing.html#pro",
+        "name": "ORBIT PRO",
+        "description": "ORBIT 訂閱方案 PRO：5 個帳號、1 店，含 POS + CRM + AI 基礎與全部 8 個模組。",
+        "brand": { "@type": "Brand", "name": "ORBIT" },
+        "url": "https://www.obarai.com/pricing.html",
+        "offers": {
+          "@type": "Offer",
+          "price": "3988",
+          "priceCurrency": "TWD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://plans.obarai.com/pricing.html",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "3988",
+            "priceCurrency": "TWD",
+            "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitCode": "MON" }
+          }
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -242,7 +291,7 @@
         <!-- Section 1: Plan -->
         <div class="plan-section">
           <h2>選擇方案</h2>
-          <p class="section-hint">所有方案均含 <strong>POS + CRM + AI 基礎</strong>，實際費用依帳號數、模組與使用規模客製報價，採年約制。</p>
+          <p class="section-hint">所有方案均含 <strong>POS + CRM + AI 基礎</strong>。標示為月費單價，線上訂購採 <strong>12 個月年約、一次付清</strong>，另收系統開通費 NT$888（一次性），付款後即開通，<strong>14 天內不滿意可全額退款</strong>；START 與企業客製採洽詢報價。也可直接前往 <a href="https://plans.obarai.com/pricing.html" style="color:var(--gold)">線上訂閱 →</a></p>
           <div class="plan-cards">
 
             <div class="plan-card">
@@ -264,7 +313,7 @@
             </div>
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-plus" value="plus" data-slots="5" data-label="ORBIT PLUS" data-accounts="3" data-ai="進階額度">
+              <input type="radio" name="plan" id="p-plus" value="plus" data-price="1988" data-slots="5" data-label="ORBIT PLUS" data-accounts="3" data-ai="進階額度">
               <label for="p-plus">
                 <div class="radio-dot"></div>
                 <div class="label-left">
@@ -277,12 +326,12 @@
                   </div>
                   <div class="plan-includes">包含：POS · CRM · AI 基礎</div>
                 </div>
-                <div class="plan-price" style="font-size:13px;">洽詢報價</div>
+                <div class="plan-price">NT$1,988 <small>/月起</small></div>
               </label>
             </div>
 
             <div class="plan-card">
-              <input type="radio" name="plan" id="p-pro" value="pro" data-slots="8" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
+              <input type="radio" name="plan" id="p-pro" value="pro" data-price="3988" data-slots="8" data-label="ORBIT PRO" data-accounts="5" data-ai="專業額度">
               <label for="p-pro">
                 <div class="radio-dot"></div>
                 <div class="label-left">
@@ -295,7 +344,7 @@
                   </div>
                   <div class="plan-includes">包含：POS · CRM · AI 基礎 + 全部 8 個模組</div>
                 </div>
-                <div class="plan-price" style="font-size:13px;">洽詢報價</div>
+                <div class="plan-price">NT$3,988 <small>/月起</small></div>
               </label>
             </div>
 
