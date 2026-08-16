@@ -1,0 +1,103 @@
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 自動化流程 12 個範例：零售、餐飲、補教、事務所可以先自動化什麼｜ORBIT AI｜OBARAI</title>
+<meta name="description" content="AI 自動化流程不是概念，是「觸發 → AI 判斷 → 動作」的具體流程。這篇列出零售、餐飲、補教、會計事務所各 3 個可以先做的 AI 自動化流程範例，每一條都建立在 ORBIT ERP、POS、CRM 既有資料之上，並說明怎麼判斷哪一條先做。">
+<meta name="keywords" content="AI自動化流程,AI流程自動化,AI自動化範例,企業AI導入,AI營運自動化,補貨建議,LINE自動推播,n8n,ORBIT AI,OBARAI">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.obarai.com/ai/ai-automation-workflow-examples/">
+<link rel="icon" href="/images/favicon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="OBARAI INTELLIGENCE"><meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="AI 自動化流程 12 個範例：零售、餐飲、補教、事務所可以先自動化什麼">
+<meta property="og:description" content="每一條都是「觸發 → AI 判斷 → 動作」的具體流程，建立在 ORBIT 既有資料之上，並說明怎麼判斷哪一條先做。">
+<meta property="og:url" content="https://www.obarai.com/ai/ai-automation-workflow-examples/"><meta property="og:image" content="https://www.obarai.com/images/og-cover.png">
+<meta property="article:published_time" content="2026-08-16"><meta property="article:section" content="企業 AI 導入">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI 自動化流程 12 個範例：零售、餐飲、補教、事務所可以先自動化什麼"><meta name="twitter:description" content="每一條都是「觸發 → AI 判斷 → 動作」的具體流程，建立在 ORBIT 既有資料之上，並說明怎麼判斷哪一條先做。"><meta name="twitter:image" content="https://www.obarai.com/images/og-cover.png">
+<link rel="stylesheet" href="/solutions.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.obarai.com/ai/ai-automation-workflow-examples/#article","headline":"AI 自動化流程 12 個範例：零售、餐飲、補教、事務所可以先自動化什麼","description":"每一條都是「觸發 → AI 判斷 → 動作」的具體流程，建立在 ORBIT 既有資料之上，並說明怎麼判斷哪一條先做。","inLanguage":"zh-TW","datePublished":"2026-08-16","dateModified":"2026-08-16","author":{"@id":"https://www.obarai.com/#organization"},"publisher":{"@id":"https://www.obarai.com/#organization"},"mainEntityOfPage":"https://www.obarai.com/ai/ai-automation-workflow-examples/","image":"https://www.obarai.com/images/og-cover.png","about":{"@id":"https://www.obarai.com/ai/#service"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORBIT","item":"https://www.obarai.com/"},{"@type":"ListItem","position":2,"name":"企業 AI 導入","item":"https://www.obarai.com/ai/"},{"@type":"ListItem","position":3,"name":"AI 自動化流程 12 個範例"}]}]}</script>
+</head><body>
+<header><nav><a class="brand" href="/">OBARAI</a><div class="navlinks"><a href="/erp/">ERP</a><a href="/pos/">POS</a><a href="/crm/">CRM</a><a href="/wms/">WMS</a><a href="/ai/">AI 導入</a><a href="/industries.html">產業方案</a></div></nav></header>
+<main class="article">
+
+<section class="hero article-hero">
+<div class="crumbs"><a href="/">ORBIT</a> › <a href="/ai/">企業 AI 導入</a> › AI 自動化流程 12 個範例</div>
+<div class="eyebrow" style="margin-top:22px">Automation Examples</div>
+<h1>AI 自動化流程 12 個範例：<br>零售、餐飲、補教、事務所可以先自動化什麼</h1>
+<p>「AI 自動化流程」聽起來很大，拆開來其實只有三段：<strong>觸發</strong>（什麼情況發生）→ <strong>AI 判斷</strong>（要不要動、怎麼動）→ <strong>動作</strong>（通知誰、產生什麼）。下面 12 條範例全部照這個格式寫，方便你對照自己店裡每天在做的事。</p>
+<p class="byline">OBARAI INTELLIGENCE · 2026-08-16 · 閱讀約 7 分鐘</p>
+</section>
+
+<section>
+<h2>先說前提：資料要在同一個地方</h2>
+<p>每一條 AI 自動化流程都需要讀資料——庫存、銷售、客戶、出勤。如果這些資料分散在 POS 機、Excel、LINE 群組和紙本，AI 就沒有東西可以判斷。這也是為什麼下面的範例全部建立在 ORBIT 既有模組的資料之上：<a href="/pos/">POS</a> 的銷售、<a href="/wms/">WMS</a> 的庫存、<a href="/crm/">CRM</a> 的會員、<a href="/hr/">HR</a> 的出勤，資料本來就集中，AI 隨系統一起導入，不需要另外搬資料、另外串系統。</p>
+<p>還沒開始的話，先讀 <a href="/ai/sme-ai-adoption-guide/">中小企業 AI 導入怎麼開始</a>。</p>
+</section>
+
+<section>
+<h2>零售與品牌通路</h2>
+<h3>1. 低庫存補貨建議與通知</h3>
+<p><strong>觸發：</strong>某品項庫存水位低於安全庫存。<strong>AI 判斷：</strong>依近期銷售趨勢與到貨時間，算出建議補貨量與時點。<strong>動作：</strong>產生補貨建議清單、通知採購負責人。這是最多零售客戶的第一條流程——規則清楚、頻率高、做錯代價低。</p>
+<h3>2. 營收異常自動摘要</h3>
+<p><strong>觸發：</strong>某門市、某時段的營收明顯偏離平常型態。<strong>AI 判斷：</strong>是節慶效應、缺貨、還是真的出了狀況？把相關的銷售、庫存、班表資料拉在一起。<strong>動作：</strong>一段人看得懂的摘要推給店長，而不是一張報表。</p>
+<h3>3. 會員回購時機推播</h3>
+<p><strong>觸發：</strong>會員距離上次消費超過該客群的平均回購週期。<strong>AI 判斷：</strong>依消費紀錄與分眾標籤決定要不要提醒、推什麼。<strong>動作：</strong>自動推播 LINE 訊息；生日禮、等級升降等觸發式流程同理。</p>
+</section>
+
+<section>
+<h2>餐飲與接待業</h2>
+<h3>4. 時段營收預測與人力配置建議</h3>
+<p><strong>觸發：</strong>排下週班表前。<strong>AI 判斷：</strong>依歷史時段營收與近期趨勢預測各時段客量。<strong>動作：</strong>給出各時段的人力配置建議，店長確認後排班。</p>
+<h3>5. 食材安全庫存預警</h3>
+<p><strong>觸發：</strong>銷售連動扣減原料後，某食材接近安全庫存。<strong>AI 判斷：</strong>對照近期銷量與備料週期。<strong>動作：</strong>提前通知備料，而不是當天發現不夠。</p>
+<h3>6. 訂位提醒與候位轉點餐</h3>
+<p><strong>觸發：</strong>顧客線上訂位或現場候位。<strong>AI 判斷：</strong>依桌況與候位時間安排通知節奏。<strong>動作：</strong>LINE 自動發送訂位確認與提醒；候位時間直接讓客人看菜單、預先點餐，入座即出餐。詳見 <a href="/restaurant/">餐飲方案</a>。</p>
+</section>
+
+<section>
+<h2>補習班與教育機構</h2>
+<h3>7. 到班／未到班通知</h3>
+<p><strong>觸發：</strong>老師課堂點名完成。<strong>AI 判斷：</strong>對照應到名單，找出未到與遲到。<strong>動作：</strong>依設定透過 LINE 通知家長到班或缺席狀態。</p>
+<h3>8. 缺席追蹤與關懷提醒</h3>
+<p><strong>觸發：</strong>某學生連續缺席或缺席頻率上升。<strong>AI 判斷：</strong>整理該生近期出缺勤與課程狀況。<strong>動作：</strong>提醒班導或行政跟進，避免流失後才發現。</p>
+<h3>9. 繳費狀態與到期名單自動整理</h3>
+<p><strong>觸發：</strong>每期收費週期到期前。<strong>AI 判斷：</strong>對照學生入班、堂數與繳費紀錄。<strong>動作：</strong>整理出應繳與逾期名單，行政不用再翻試算表。詳見 <a href="/education/">補教方案</a>。</p>
+</section>
+
+<section>
+<h2>會計師與記帳士事務所</h2>
+<h3>10. 申報包 AI 摘要</h3>
+<p><strong>觸發：</strong>客戶申報資料收齊。<strong>AI 判斷：</strong>整理本期重點、與上期差異。<strong>動作：</strong>產生一段給會計師快速複核的摘要。</p>
+<h3>11. 缺件提醒草稿自動生成</h3>
+<p><strong>觸發：</strong>某客戶本期資料未齊。<strong>AI 判斷：</strong>缺哪些、缺多久、上次怎麼提醒的。<strong>動作：</strong>自動生成提醒草稿，人確認後送出；配合客戶補件入口讓客戶自己上傳。</p>
+<h3>12. LINE automation 與 n8n 串接既有工具</h3>
+<p><strong>觸發：</strong>上面任何一條流程的判斷結果。<strong>AI 判斷：</strong>要通知誰、開什麼任務。<strong>動作：</strong>透過 Webhook、LINE automation 與 n8n 工作流接上事務所既有的工具與作業。詳見 <a href="/accounting/">Ledger OS 會計方案</a>。</p>
+</section>
+
+<section>
+<h2>怎麼判斷哪一條先做</h2>
+<p>把你的候選流程放進這三個問題：</p>
+<ol>
+<li><strong>頻率</strong>：每天或每週都在做嗎？頻率越高，自動化省下的時間越可觀。</li>
+<li><strong>規則</strong>：判斷條件說得出口嗎？說得出口的先做，說不出口的先從「洞察」開始，讓 AI 幫你看出型態。</li>
+<li><strong>代價</strong>：做錯了會怎樣？提醒、建議類先做；直接動錢、動合約的後做，或先讓 AI 給建議、人按確認。</li>
+</ol>
+<div class="callout"><p>三個問題都答得漂亮的那一條，就是你的第一條 AI 自動化流程。做起來、看到結果、建立信任，再擴到下一條——這就是 <a href="/ai/what-is-ai-enterprise/">AI 企業化</a>的實際路徑。</p></div>
+</section>
+
+<section>
+<div class="eyebrow">Next Step</div>
+<h2>挑一條，我們幫你接起來</h2>
+<p>告訴我們你想先自動化的那一條流程，OBARAI 顧問會盤點資料現況，規劃 AI 導入順序與模組組合。</p>
+<div class="actions"><a class="btn primary" href="/consultation.html">預約 AI 導入諮詢</a><a class="btn" href="/ai/">回到企業 AI 導入專頁</a></div>
+</section>
+
+<section>
+<h2>延伸閱讀</h2>
+<div class="more">
+<a href="/ai/sme-ai-adoption-guide/"><strong>中小企業 AI 導入怎麼開始？</strong><span>費用、時程、資料準備一次說清楚</span></a>
+<a href="/ai/what-is-ai-enterprise/"><strong>什麼是 AI 企業化？</strong><span>和買 AI 工具、找 AI 顧問差在哪</span></a>
+<a href="/ai/"><strong>企業 AI 導入與 AI 自動化流程</strong><span>ORBIT AI 專頁：三層深度、四步驟、FAQ</span></a>
+</div>
+</section>
+
+</main>
+<footer>© 2026 OBARAI INTELLIGENCE · ORBIT 企業智慧營運平台 · 企業 AI 導入與 AI 自動化流程</footer>
+</body></html>
