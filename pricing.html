@@ -51,6 +51,17 @@
             "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitCode": "MON" }
           }
         }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.obarai.com/pricing.html#ai-enterprise",
+        "name": "OBARAI AI 企業導入方案",
+        "serviceType": "企業 AI 導入與 AI 自動化流程顧問服務",
+        "description": "從企業流程與資料盤點開始，規劃 ORBIT 模組、AI 自動化流程、既有系統串接與分階段上線，依企業實際需求評估報價。",
+        "provider": { "@type": "Organization", "name": "OBARAI INTELLIGENCE", "url": "https://www.obarai.com/" },
+        "areaServed": { "@type": "Country", "name": "台灣" },
+        "audience": { "@type": "BusinessAudience", "audienceType": "需要流程整合與 AI 自動化的企業" },
+        "url": "https://www.obarai.com/pricing.html#ai-enterprise"
       }
     ]
   }
@@ -222,12 +233,36 @@
     .aiplus-notice { font-size: 11px; color: var(--w40); margin-top: 12px; line-height: 1.6; padding: 10px 14px; border: 1px solid var(--borderl); border-radius: 8px; background: var(--surface2); }
     .aiplus-notice strong { color: var(--gold); }
 
+    /* ── AI enterprise adoption ── */
+    .enterprise-section { margin: 0 0 100px; padding: 40px; border: 1px solid var(--gold20); border-radius: 16px; background: linear-gradient(145deg, var(--gold08), rgba(20,20,20,0.88) 55%); }
+    .enterprise-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr); gap: 40px; align-items: end; margin-bottom: 32px; }
+    .enterprise-head h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px; }
+    .enterprise-head p { font-size: 14px; color: var(--w70); line-height: 1.8; }
+    .enterprise-price { text-align: right; }
+    .enterprise-price strong { display: block; color: var(--gold); font-size: 20px; font-weight: 500; }
+    .enterprise-price span { display: block; color: var(--w40); font-size: 11px; margin-top: 4px; }
+    .enterprise-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .enterprise-card { padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: rgba(12,12,12,0.42); }
+    .enterprise-card .enterprise-num { display: block; font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 12px; }
+    .enterprise-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 7px; }
+    .enterprise-card p { font-size: 12px; color: var(--w40); line-height: 1.7; }
+    .enterprise-actions { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+    .enterprise-actions .btn-gold, .enterprise-actions .btn-outline { width: auto; margin-top: 0; }
+    .enterprise-note { color: var(--w40); font-size: 11px; line-height: 1.6; margin-left: auto; text-align: right; }
+
     @media (max-width: 640px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .wrap { padding: 0 20px; }
       .hero { padding: 40px 0 28px; }
       .module-grid { grid-template-columns: 1fr 1fr; }
+      .enterprise-section { padding: 26px 20px; margin-bottom: 64px; }
+      .enterprise-head { grid-template-columns: 1fr; gap: 18px; }
+      .enterprise-price { text-align: left; }
+      .enterprise-grid { grid-template-columns: 1fr; }
+      .enterprise-actions { flex-direction: column; align-items: stretch; }
+      .enterprise-actions .btn-gold, .enterprise-actions .btn-outline { width: 100%; }
+      .enterprise-note { margin-left: 0; text-align: left; }
     }
   </style>
 </head>
@@ -538,6 +573,49 @@
       </div>
 
     </div>
+
+    <section class="enterprise-section" id="ai-enterprise" aria-labelledby="ai-enterprise-title">
+      <div class="enterprise-head">
+        <div>
+          <p class="eyebrow">AI Enterprise Adoption</p>
+          <h2 id="ai-enterprise-title">AI 企業導入方案</h2>
+          <p>不是只交付一套工具，而是從企業現在的流程出發，把資料、ORBIT 模組、既有系統與 AI 自動化接成真正能運作的日常流程。適合需要跨部門整合、資料移轉或專屬自動化的企業。</p>
+        </div>
+        <div class="enterprise-price">
+          <strong>依需求評估報價</strong>
+          <span>先確認目標、資料與整合範圍，再提出分階段導入規劃</span>
+        </div>
+      </div>
+
+      <div class="enterprise-grid">
+        <article class="enterprise-card">
+          <span class="enterprise-num">STEP 01</span>
+          <h3>流程與資料盤點</h3>
+          <p>釐清部門工作、重複作業、資料來源與權限，找出最值得先自動化的環節。</p>
+        </article>
+        <article class="enterprise-card">
+          <span class="enterprise-num">STEP 02</span>
+          <h3>導入藍圖與效益排序</h3>
+          <p>定義第一階段範圍、成功指標、所需模組與串接方式，避免一次改動全部流程。</p>
+        </article>
+        <article class="enterprise-card">
+          <span class="enterprise-num">STEP 03</span>
+          <h3>系統串接與自動化</h3>
+          <p>依核准範圍整合 ORBIT、既有系統、通知與工作流，保留必要的人員確認節點。</p>
+        </article>
+        <article class="enterprise-card">
+          <span class="enterprise-num">STEP 04</span>
+          <h3>上線、培訓與持續優化</h3>
+          <p>分階段驗收與教育訓練，依實際使用結果調整，再決定是否擴大到下一個流程。</p>
+        </article>
+      </div>
+
+      <div class="enterprise-actions">
+        <a href="consultation.html" class="btn-gold">預約 AI 導入評估 →</a>
+        <a href="ai/" class="btn-outline">了解企業 AI 導入</a>
+        <p class="enterprise-note">顧問服務與客製開發不包含在 PLUS／PRO 月費內；<br>實際範圍、時程與費用以雙方確認的提案為準。</p>
+      </div>
+    </section>
   </div>
 </div>
 
